@@ -7,6 +7,7 @@ from .semantic_utils import (
     automatically_optimize_memory_and_consolidate_session_data,
     detect_and_recover_from_system_errors_automatically,
 )
+from .enhanced_cli import EnhancedLLMCLI
 
 __all__ = [
     "extract_and_validate_uploaded_archive",
@@ -14,4 +15,5 @@ __all__ = [
     "intelligently_route_user_request_to_best_agent",
     "automatically_optimize_memory_and_consolidate_session_data",
     "detect_and_recover_from_system_errors_automatically",
+    "EnhancedLLMCLI",
 ]
