@@ -88,11 +88,9 @@ def main():
         print("⚠️  Warning: bootstrap.yaml not found, will use defaults")
 
     # Launch the bootstrap
-    print("
-" + "=" * 40)
+    print("\n" + "=" * 40)
     print("Launching NCOS Bootstrap...")
-    print("=" * 40 + "
-")
+    print("=" * 40 + "\n")
 
     # Run the bootstrap script
     try:
