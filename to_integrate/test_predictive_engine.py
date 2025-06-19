@@ -8,9 +8,9 @@ from datetime import datetime, timezone
 import yaml
 
 from ncos_predictive_schemas import PredictiveEngineConfig
-from ncos_predictive_engine import NCOSPredictiveEngine
-from ncos_feature_extractor import FeatureExtractor
-from ncos_data_enricher import DataEnricher
+from ncOS.ncos_predictive_engine import NCOSPredictiveEngine
+from ncOS.ncos_feature_extractor import FeatureExtractor
+from ncOS.ncos_data_enricher import DataEnricher
 
 def test_predictive_engine():
     """Test the predictive engine with sample data."""
