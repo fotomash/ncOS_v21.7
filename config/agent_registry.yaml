@@ -64,6 +64,21 @@ agents:
     module: "session_state_manager"
     class: "SessionStateManager"
     description: "Session state persistence and recovery"
+  market_manipulation_agent:
+    module: "ncos_market_manipulation_agent"
+    class: "MarketManipulationAgent"
+    config_file: "config/xauusd_manipulation_config.yaml"
+    enabled: true
+  risk_monitor_agent:
+    module: "ncos_risk_monitor_agent"
+    class: "RiskMonitorAgent"
+    config_file: "config/xauusd_manipulation_config.yaml"
+    config_section: "risk_monitor_config"
+    enabled: true
+  compliance_agent:
+    module: "ncos_compliance_agent"
+    class: "ComplianceAgent"
+    enabled: true
 strategy_agents:
   micro_wyckoff_event:
     class: MicroWyckoffEventAgent

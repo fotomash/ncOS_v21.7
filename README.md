@@ -55,3 +55,17 @@ This package contains all components needed to run NCOS v21.
 - All agents are production-ready with circuit breakers
 - Logs are written to JSON format in the logs directory
 - `start_ncos.sh` and `status_ncos.sh` are created by `scripts/deploy.sh`; run the deployment before using them
+
+---
+### Market Manipulation Detection Module
+
+This module provides real-time detection of market manipulation patterns, focusing on spread manipulation and quote stuffing for XAUUSD.
+
+**Core Components:**
+- **MarketManipulationAgent:** Ingests real-time tick data and applies configurable rules to detect anomalies.
+- **RiskMonitorAgent:** Subscribes to detection events and executes predefined risk management actions based on severity.
+- **ComplianceAgent:** Provides automated logging of all detected events for regulatory and audit purposes.
+
+**Configuration:**
+- The module's behavior is controlled by `config/xauusd_manipulation_config.yaml`.
+- Enable or disable agents in `config/agent_registry.yaml`.

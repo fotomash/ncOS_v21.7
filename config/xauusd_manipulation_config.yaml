@@ -1,0 +1,21 @@
+manipulation_thresholds:
+  spread_manipulation:
+    normal_spread: 0.26
+    alert_threshold: 0.52
+    critical_threshold: 1.0
+
+  quote_stuffing:
+    normal_tick_rate: 60
+    alert_threshold: 180
+    critical_threshold: 300
+
+risk_monitor_config:
+  response_actions:
+    low: "log_event"
+    medium: "alert_trader"
+    high: "reduce_position"
+    critical: "emergency_exit"
+  severity_levels:
+    medium_level: 4
+    high_level: 7
+    critical_level: 9
