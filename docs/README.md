@@ -1,0 +1,24 @@
+# NCOS v21 Production System
+
+## Overview
+NCOS (Neural Computation Operating System) v21 is a production-ready financial data processing and trading system featuring 13 specialized agents working in a coordinated mesh architecture.
+
+## Quick Start
+1. Extract the package: tar -xzf ncos_v21_production_candidate.tar.gz
+2. Run deployment: ./scripts/deploy.sh
+3. Start system: ./start_ncos.sh
+
+## Components
+- 13 Core Agents (see agent_registry.yaml)
+- Single-session architecture
+- Lightweight vector memory
+- Dual execution strategies (MAZ2/TMC)
+- Comprehensive risk management
+
+## Testing
+- Unit tests: python -m unittest tests.test_ncos_agents
+- Integration tests: python tests/integration_tests.py
+- Stress tests: python scripts/stress_test_framework.py
+
+## Support
+For issues or questions, refer to the documentation in the docs/ directory.

@@ -1,0 +1,61 @@
+{
+  "timestamp": "2025-06-19T16:14:20.564643",
+  "system_state": {
+    "status": "partial",
+    "start_time": "2025-06-19 16:14:20.555965",
+    "agents_loaded": 0,
+    "agents_initialized": 0,
+    "errors": [
+      "Agent load error (CoreSystemAgent): Cannot find module core_system_agent",
+      "Agent load error (VectorMemoryBoot): Cannot find module vector_memory_boot",
+      "Agent load error (ParquetIngestor): Cannot find module parquet_ingestor",
+      "Agent load error (MarketDataCaptain): Cannot find module market_data_captain",
+      "Agent load error (TechnicalAnalyst): Cannot find module technical_analyst",
+      "Agent load error (SMCRouter): Cannot find module smc_router",
+      "Agent load error (MAZ2Executor): Cannot find module maz2_executor",
+      "Agent load error (TMCExecutor): Cannot find module tmc_executor",
+      "Agent load error (RiskGuardian): Cannot find module risk_guardian",
+      "Agent load error (PortfolioManager): Cannot find module portfolio_manager",
+      "Agent load error (BroadcastRelay): Cannot find module broadcast_relay",
+      "Agent load error (ReportGenerator): Cannot find module report_generator",
+      "Agent load error (SessionStateManager): Cannot find module session_state_manager"
+    ]
+  },
+  "agents_loaded": [],
+  "initialization_order": [
+    "CoreSystemAgent",
+    "VectorMemoryBoot",
+    "ParquetIngestor",
+    "MarketDataCaptain",
+    "TechnicalAnalyst",
+    "SMCRouter",
+    "MAZ2Executor",
+    "TMCExecutor",
+    "RiskGuardian",
+    "PortfolioManager",
+    "BroadcastRelay",
+    "ReportGenerator",
+    "SessionStateManager"
+  ],
+  "mesh_connections": {},
+  "configuration": {
+    "bootstrap": {
+      "version": "21.0",
+      "system": {
+        "name": "NCOS",
+        "mode": "production",
+        "single_session": true
+      },
+      "initialization": {
+        "parallel": false,
+        "timeout": 300,
+        "retry_attempts": 3
+      },
+      "mesh": {
+        "enable_broadcast": true,
+        "heartbeat_interval": 60
+      }
+    },
+    "agent_count": 13
+  }
+}
