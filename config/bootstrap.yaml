@@ -19,6 +19,12 @@ agents:
     - "BroadcastRelay"
     - "ReportGenerator"
     - "SessionStateManager"
+    - "smc_liquidity_trap"
+    - "wyckoff_phase_cycle"
+    - "session_sweep_reversal"
+    - "micro_wyckoff_event"
+    - "orderflow_anomaly"
+    - "protection_reentry"
 
   configurations:
     CoreSystemAgent:
