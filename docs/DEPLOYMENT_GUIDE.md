@@ -19,7 +19,7 @@
    ```
 
 3. **Configure System**
-   Edit configs/bootstrap.yaml as needed
+   Edit config/bootstrap.yaml as needed
 
 4. **Start System**
    ```bash
