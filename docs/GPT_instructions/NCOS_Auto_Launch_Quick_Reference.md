@@ -1,5 +1,8 @@
 # 🚀 NCOS Auto-Launch Quick Reference
 
+⚠️ **Note:** The code snippets for automatic launching are provided for illustration only. Review all commands and scripts carefully before executing them.
+
+
 ## Trigger Conditions:
 - **Files**: `integration_bootstrap.py`, `ncos_*.zip`, `agent_*.py`
 - **Keywords**: "ncos", "deploy", "launch", "bootstrap"

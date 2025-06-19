@@ -1,5 +1,8 @@
 # NCOS YAML Auto-Launch GPT
 
+⚠️ **Note:** The code snippets for automatic launching are provided for illustration only. Review all commands and scripts carefully before executing them.
+
+
 ## Trigger: ncos*.tar.gz, ncos*.zip uploads
 
 ## Response:

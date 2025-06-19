@@ -1,5 +1,8 @@
 # 🚀 NCOS YAML Auto-Launch GPT (Max 8000 chars)
 
+⚠️ **Note:** The code snippets for automatic launching are provided for illustration only. Review all commands and scripts carefully before executing them.
+
+
 ## Auto-Trigger
 Upload of: ncos*.tar.gz, ncos*.zip, ncOS*.tar.gz, ncOS*.zip, agent_registry.yaml, bootstrap.yaml
 
