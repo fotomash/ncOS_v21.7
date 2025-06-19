@@ -72,6 +72,29 @@ This module provides real-time detection of market manipulation patterns, focusi
 - The module's behavior is controlled by `config/xauusd_manipulation_config.yaml`.
 - Enable or disable agents in `config/agent_registry.yaml`.
 
+## Semantic Utility Functions
+
+The `ncOS.semantic_utils` module provides helper functions for common runtime tasks:
+
+- **extract_and_validate_uploaded_archive** - Extracts an uploaded archive and validates its format.
+- **summarize_workspace_memory** - Produces a quick summary of processed files, active agents and memory usage.
+- **intelligently_route_user_request_to_best_agent** - Selects the most suitable agent for a request based on type or intent.
+- **automatically_optimize_memory_and_consolidate_session_data** - Trims session data and clamps memory usage to configured limits.
+- **detect_and_recover_from_system_errors_automatically** - Attempts basic recovery steps for common system errors.
+
+Example usage:
+
+```python
+import asyncio
+from types import SimpleNamespace
+from ncOS.semantic_utils import summarize_workspace_memory
+
+state = SimpleNamespace(memory_usage_mb=128.5, processed_files=["log.txt"], active_agents=["risk"])
+
+summary = asyncio.run(summarize_workspace_memory(state))
+print(summary)
+```
+
 ## Contributing
 
 For guidelines on submitting issues and pull requests, see [CONTRIBUTING.md](CONTRIBUTING.md).
