@@ -29,9 +29,14 @@ This package contains all components needed to run NCOS v21.
 ## Directory Structure
 
 - `agents/` - All 13 agent implementations
-- `config/` - Bootstrap and registry configurations  
+- `config/` - Bootstrap and registry configurations
 - `scripts/` - Integration bootstrap script
 - `deploy.sh` - Quick deployment script
+
+## Configuration
+
+All runtime configuration is loaded exclusively from the `config/` directory.
+Edit the files in this folder to customize NCOS behavior.
 
 ## Agents Included
 
