@@ -196,3 +196,21 @@ strategy_agents:
     - phase_transition_detected
     - accumulation_signal
     type: wyckoff_analysis
+  divergence_strategy_agent:
+    class: DivergenceStrategyAgent
+    module: ncos_divergence_strategy_agent
+    enabled: true
+    config:
+      account_balance: 100000
+      risk_conviction_score: 4
+      risk_reward_ratio: 1.5
+      max_history_size: 50
+      risk_engine_config:
+        sl_blend_logic: atr_priority
+        min_lot_step: 0.01
+        max_lot_size: 20.0
+        max_risk_percent: 1.0
+        vol_adjustment_explosive: 0.75
+      atr_config:
+        period: 14
+        multiplier: 2.0
