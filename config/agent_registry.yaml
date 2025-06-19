@@ -222,3 +222,28 @@ strategy_agents:
       atr_config:
         period: 14
         multiplier: 2.0
+      predictive_engine_config:
+        data_enricher:
+          enabled: true
+        feature_extractor:
+          enabled: true
+        predictive_scorer:
+          enabled: true
+          factor_weights:
+            htf_bias_alignment: 0.2
+            idm_detected_clarity: 0.1
+            sweep_validation_strength: 0.15
+            choch_confirmation_score: 0.15
+            poi_validation_score: 0.2
+            tick_density_score: 0.1
+            spread_stability_score: 0.1
+          grade_thresholds:
+            A: 0.85
+            B: 0.7
+            C: 0.55
+      min_grade_to_trade: "B"
+      grade_risk_multipliers:
+        A: 1.2
+        B: 1.0
+        C: 0.7
+        D: 0.0
