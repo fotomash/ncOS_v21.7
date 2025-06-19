@@ -1,0 +1,3 @@
+strategy:
+  name: "Orderflow Anomaly"
+  description: "Placeholder config for orderflow anomaly strategy."

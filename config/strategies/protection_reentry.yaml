@@ -1,0 +1,3 @@
+strategy:
+  name: "Protection Reentry"
+  description: "Placeholder config for protection reentry strategy."

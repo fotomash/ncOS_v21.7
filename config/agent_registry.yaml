@@ -90,7 +90,7 @@ agents:
 strategy_agents:
   micro_wyckoff_event:
     class: MicroWyckoffEventAgent
-    config_file: configs/strategies/micro_wyckoff_event.yaml
+    config_file: config/strategies/micro_wyckoff_event.yaml
     dependencies:
     - master_orchestrator
     - risk_guardian
@@ -109,7 +109,7 @@ strategy_agents:
     type: tick_analysis
   orderflow_anomaly:
     class: OrderflowAnomalyAgent
-    config_file: configs/strategies/orderflow_anomaly.yaml
+    config_file: config/strategies/orderflow_anomaly.yaml
     dependencies:
     - master_orchestrator
     - liquidity_sniper
@@ -128,7 +128,7 @@ strategy_agents:
     type: orderflow_analysis
   protection_reentry:
     class: ProtectionReentryAgent
-    config_file: configs/strategies/protection_reentry.yaml
+    config_file: config/strategies/protection_reentry.yaml
     dependencies:
     - risk_guardian
     - session_state_manager
@@ -147,7 +147,7 @@ strategy_agents:
     type: risk_management
   session_sweep_reversal:
     class: SessionSweepReversalAgent
-    config_file: configs/strategies/session_sweep_reversal.yaml
+    config_file: config/strategies/session_sweep_reversal.yaml
     dependencies:
     - master_orchestrator
     - entry_executor_smc
@@ -166,7 +166,7 @@ strategy_agents:
     type: session_trading
   smc_liquidity_trap:
     class: SMCLiquidityTrapAgent
-    config_file: configs/strategies/smc_liquidity_trap.yaml
+    config_file: config/strategies/smc_liquidity_trap.yaml
     dependencies:
     - master_orchestrator
     - liquidity_sniper
@@ -186,7 +186,7 @@ strategy_agents:
     type: smc_execution
   wyckoff_phase_cycle:
     class: WyckoffPhaseCycleAgent
-    config_file: configs/strategies/wyckoff_phase_cycle.yaml
+    config_file: config/strategies/wyckoff_phase_cycle.yaml
     dependencies:
     - master_orchestrator
     - session_state_manager
