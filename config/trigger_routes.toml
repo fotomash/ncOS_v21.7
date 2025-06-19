@@ -65,3 +65,16 @@ strategy_triggers:
     route_to:
     - micro_wyckoff_event
     - entry_executor_smc
+  data.tick.xauusd:
+    actions: []
+    conditions: []
+    priority: 5
+    route_to:
+    - market_manipulation_agent
+  analysis.manipulation.spread_detected:
+    actions: []
+    conditions: []
+    priority: 5
+    route_to:
+    - risk_monitor_agent
+    - compliance_agent
