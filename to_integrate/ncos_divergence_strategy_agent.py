@@ -11,10 +11,10 @@ from typing import Dict, Any, Optional, List
 
 from ncos_base_agent import NCOSBaseAgent
 from ncos_risk_engine import calculate_sl_and_risk
-from ncos_predictive_engine import NCOSPredictiveEngine
+from ncOS.ncos_predictive_engine import NCOSPredictiveEngine
 from ncos_predictive_schemas import PredictiveEngineConfig
-from ncos_feature_extractor import FeatureExtractor
-from ncos_data_enricher import DataEnricher
+from ncOS.ncos_feature_extractor import FeatureExtractor
+from ncOS.ncos_data_enricher import DataEnricher
 
 logger = logging.getLogger(__name__)
 

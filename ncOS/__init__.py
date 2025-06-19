@@ -8,6 +8,9 @@ from .semantic_utils import (
     detect_and_recover_from_system_errors_automatically,
 )
 from .enhanced_cli import EnhancedLLMCLI
+from .ncos_predictive_engine import NCOSPredictiveEngine
+from .ncos_feature_extractor import FeatureExtractor
+from .ncos_data_enricher import DataEnricher
 
 __all__ = [
     "extract_and_validate_uploaded_archive",
@@ -16,4 +19,7 @@ __all__ = [
     "automatically_optimize_memory_and_consolidate_session_data",
     "detect_and_recover_from_system_errors_automatically",
     "EnhancedLLMCLI",
+    "NCOSPredictiveEngine",
+    "FeatureExtractor",
+    "DataEnricher",
 ]
