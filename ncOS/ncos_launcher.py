@@ -83,13 +83,19 @@ def verify_schema_mapping():
     """Verify each agent has a corresponding config file."""
     registry_path = Path('config') / 'agent_registry.yaml'
     if not registry_path.exists():
+        print("⚠️  Warning: agent_registry.yaml not found, cannot verify schema mapping")
         return
     with open(registry_path, 'r') as f:
         registry = yaml.safe_load(f) or {}
+    missing = []
     for agent in registry.get('agents', {}):
         cfg_path = Path('config') / f"{agent.lower()}_config.yaml"
         if not cfg_path.exists():
-            pass
+            print(f"⚠️  Warning: Config file for '{agent}' not found at {cfg_path}")
+            missing.append(agent)
+
+    if missing:
+        print(f"❌ Error: {len(missing)} configuration file(s) missing for registered agents")
 
 def parse_args():
     parser = argparse.ArgumentParser(description="NCOS Launcher")
