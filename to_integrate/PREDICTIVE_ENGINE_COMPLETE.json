@@ -50,10 +50,10 @@
     "grade_analysis_dashboard.py",
     "validate_predictive.py",
     "test_predictive_engine.py",
-    "quick_start_predictive.py",
+    "scripts/quick_start_predictive.py",
     "PREDICTIVE_ENGINE_GUIDE.md",
     "config/predictive_engine_config.yaml",
     "config/agents.yaml (updated)"
   ],
-  "quick_start": "Run 'python quick_start_predictive.py' to begin"
+  "quick_start": "Run 'python scripts/quick_start_predictive.py' to begin"
 }
