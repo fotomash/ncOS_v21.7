@@ -69,3 +69,8 @@ This module provides real-time detection of market manipulation patterns, focusi
 **Configuration:**
 - The module's behavior is controlled by `config/xauusd_manipulation_config.yaml`.
 - Enable or disable agents in `config/agent_registry.yaml`.
+
+## Contributing
+
+For guidelines on submitting issues and pull requests, see [CONTRIBUTING.md](CONTRIBUTING.md).
+
