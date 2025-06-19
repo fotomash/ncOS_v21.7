@@ -1,0 +1,98 @@
+comprehensive_trigger_system:
+  asset_detection_request:
+    actions:
+    - analyze_asset_patterns
+    - classify_assets
+    - update_knowledge_base
+    conditions:
+    - asset_data_available
+    - detection_model_ready
+    priority: 5
+    route_to:
+    - knowledge_intelligence
+    - vector_data_processor
+  knowledge_query:
+    actions:
+    - search_knowledge_base
+    - retrieve_relevant_info
+    - contextualize_response
+    conditions:
+    - query_received
+    - knowledge_base_accessible
+    priority: 6
+    route_to:
+    - knowledge_intelligence
+    - session_state_manager
+  market_data_update:
+    actions:
+    - process_vector_data
+    - update_market_context
+    - trigger_strategy_analysis
+    conditions:
+    - new_market_data_available
+    - data_quality_validated
+    priority: 1
+    route_to:
+    - vector_data_processor
+    - smc_master_agent
+    - liquidity_sniper
+  menu_request:
+    actions:
+    - generate_dynamic_menu
+    - present_options
+    - handle_selection
+    conditions:
+    - menu_context_available
+    - user_permissions_validated
+    priority: 8
+    route_to:
+    - interaction_manager
+    - zanflow_orchestrator
+  prompt_engineering_needed:
+    actions:
+    - generate_prompt
+    - apply_engineering_rules
+    - optimize_response
+    conditions:
+    - prompt_template_required
+    - context_available
+    priority: 4
+    route_to:
+    - zanflow_orchestrator
+    - interaction_manager
+  user_interaction:
+    actions:
+    - process_user_input
+    - generate_response
+    - update_conversation_state
+    conditions:
+    - user_input_received
+    - interaction_context_available
+    priority: 7
+    route_to:
+    - interaction_manager
+    - session_state_manager
+  vector_search_request:
+    actions:
+    - execute_vector_search
+    - return_similar_patterns
+    - update_knowledge_context
+    conditions:
+    - search_query_received
+    - vector_index_ready
+    priority: 2
+    route_to:
+    - vector_data_processor
+    - knowledge_intelligence
+  workflow_request:
+    actions:
+    - initialize_workflow
+    - execute_logical_blocks
+    - manage_flow_state
+    conditions:
+    - workflow_definition_available
+    - execution_context_ready
+    priority: 3
+    route_to:
+    - zanflow_orchestrator
+    - master_orchestrator

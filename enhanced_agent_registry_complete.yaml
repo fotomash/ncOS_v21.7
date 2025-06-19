@@ -1,0 +1,91 @@
+enhanced_ncos_agents:
+  interaction_manager:
+    capabilities:
+    - dynamic_menus
+    - conversation_flow
+    - response_generation
+    - user_guidance
+    class: InteractionManagerAgent
+    config_file: configs/interface/interaction.yaml
+    dependencies:
+    - master_orchestrator
+    - session_state_manager
+    enabled: true
+    module: ncos.agents.interface.interaction_manager
+    priority: 6
+    triggers:
+    - user_interaction
+    - menu_request
+    - conversation_start
+    type: user_interaction
+  knowledge_intelligence:
+    capabilities:
+    - asset_detection
+    - knowledge_retrieval
+    - context_analysis
+    - intelligent_search
+    class: KnowledgeIntelligenceAgent
+    config_file: configs/intelligence/knowledge.yaml
+    dependencies:
+    - master_orchestrator
+    - vector_data_processor
+    enabled: true
+    module: ncos.agents.intelligence.knowledge_agent
+    priority: 5
+    triggers:
+    - asset_detection_request
+    - knowledge_query
+    type: knowledge_management
+  master_orchestrator:
+    class: MasterOrchestrator
+    enabled: true
+    enhancements:
+    - zanflow_integration
+    - vector_data_access
+    - knowledge_base_connection
+    module: ncos.agents.master_orchestrator
+    priority: 1
+    type: coordination
+  session_state_manager:
+    class: SessionStateManager
+    enabled: true
+    enhancements:
+    - conversation_flow
+    - enhanced_persistence
+    - interaction_tracking
+    module: ncos.agents.session_state_manager
+    priority: 2
+    type: state_management
+  vector_data_processor:
+    capabilities:
+    - real_time_vector_processing
+    - market_data_optimization
+    - native_search
+    class: VectorDataProcessorAgent
+    config_file: configs/data/vector_processor.yaml
+    dependencies:
+    - master_orchestrator
+    enabled: true
+    module: ncos.agents.data.vector_processor
+    priority: 4
+    triggers:
+    - market_data_update
+    - vector_search_request
+    type: data_processing
+  zanflow_orchestrator:
+    capabilities:
+    - prompt_engineering
+    - logical_blocks
+    - structural_flow
+    - menu_system
+    class: ZanflowOrchestratorAgent
+    config_file: configs/zanflow/orchestrator.yaml
+    dependencies:
+    - master_orchestrator
+    enabled: true
+    module: ncos.agents.workflows.zanflow_orchestrator
+    priority: 3
+    triggers:
+    - workflow_request
+    - prompt_engineering_needed
+    type: workflow_management

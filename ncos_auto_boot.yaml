@@ -1,0 +1,54 @@
+
+ncos_auto_boot:
+  mode: auto               # auto | semi | manual
+  verbosity: normal        # quiet | normal | verbose
+  sandbox_test: true       # always validate before live
+  auto_integrate_strategies: true
+  auto_route_csv_to: /mnt/data/BAR_DATA/
+  strategy_registry_path: /mnt/data/STRATEGY_REGISTRY/
+  config_registry_path: /mnt/data/BOOTSTRAP_CONFIG/
+  session_logging_path: /mnt/data/SESSION_LOGS/
+
+  accepted_file_types:
+    - .zip
+    - .tar.gz
+    - .tar
+    - .csv
+    - .json
+    - .yaml
+    - .toml
+
+  file_routing_rules:
+    - match: "*_bars_*.csv"
+      action: move
+      destination: /mnt/data/BAR_DATA/
+
+    - match: "*strategy*.json"
+      action: copy
+      destination: /mnt/data/STRATEGY_REGISTRY/
+
+    - match: "*config*.yaml"
+      action: copy
+      destination: /mnt/data/BOOTSTRAP_CONFIG/
+
+    - match: "*manifest*.json"
+      action: validate_and_link
+      destination: /mnt/data/STRATEGY_REGISTRY/
+
+    - match: "*agent*.py"
+      action: activate_agent_module
+
+  default_session_params:
+    max_positions: 3
+    risk_per_trade: 0.02
+    kill_zones:
+      - London: "07:00-10:00"
+      - NY: "13:00-16:00"
+    timeframes:
+      - HTF: ["1H", "4H", "1D"]
+      - LTF: ["M1", "15T"]
+
+  boot_flags:
+    ignore_missing_agents: false
+    override_existing_strategies: false
+    require_manifest_link: true
