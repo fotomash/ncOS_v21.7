@@ -1,0 +1,86 @@
+# NCOS v21.7.1 Phoenix Mesh - Requirements
+# Neural Cognitive Operating System Dependencies
+
+# Core Dependencies
+python>=3.9.0
+pydantic>=2.0.0
+pyyaml>=6.0
+aiohttp>=3.8.0
+asyncio-mqtt>=0.11.0
+redis>=4.5.0
+psycopg2-binary>=2.9.0
+sqlalchemy>=2.0.0
+
+# Vector Processing
+faiss-cpu>=1.7.4
+numpy>=1.24.0
+scipy>=1.10.0
+scikit-learn>=1.3.0
+
+# Trading and Market Data
+pandas>=2.0.0
+ta-lib>=0.4.25
+ccxt>=4.0.0
+yfinance>=0.2.0
+websocket-client>=1.6.0
+
+# Machine Learning
+torch>=2.0.0
+transformers>=4.30.0
+sentence-transformers>=2.2.0
+
+# Data Processing
+polars>=0.18.0
+pyarrow>=12.0.0
+duckdb>=0.8.0
+
+# Async and Concurrency
+asyncio>=3.4.3
+aiofiles>=23.0.0
+uvloop>=0.17.0
+
+# Configuration and Validation
+toml>=0.10.2
+jsonschema>=4.17.0
+marshmallow>=3.19.0
+
+# Logging and Monitoring
+structlog>=23.1.0
+prometheus-client>=0.16.0
+grafana-api>=1.0.3
+
+# Testing
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+pytest-cov>=4.1.0
+pytest-mock>=3.11.0
+
+# Development Tools
+black>=23.0.0
+flake8>=6.0.0
+mypy>=1.4.0
+pre-commit>=3.3.0
+
+# Documentation
+mkdocs>=1.4.0
+mkdocs-material>=9.1.0
+mkdocs-mermaid2-plugin>=1.1.0
+
+# Deployment
+docker>=6.1.0
+kubernetes>=27.2.0
+helm>=3.12.0
+
+# Optional: GPU Support (uncomment if using GPU)
+# torch>=2.0.0+cu118
+# faiss-gpu>=1.7.4
+
+# Optional: Advanced Analytics (uncomment if needed)
+# plotly>=5.15.0
+# dash>=2.11.0
+# streamlit>=1.24.0
+
+# Optional: Additional Brokers (uncomment as needed)
+# ib-insync>=0.9.86
+# alpaca-trade-api>=3.0.0
+# binance-connector>=3.2.0
