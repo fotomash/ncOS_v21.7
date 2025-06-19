@@ -1,0 +1,15 @@
+predictive_scorer:
+  enabled: true
+  factor_weights:
+    htf_bias_alignment: 0.20      # Trend alignment importance
+    idm_detected_clarity: 0.10    # Pattern clarity weight
+    sweep_validation_strength: 0.15
+    choch_confirmation_score: 0.15
+    poi_validation_score: 0.20    # Key level importance
+    tick_density_score: 0.10
+    spread_stability_score: 0.10
+
+  grade_thresholds:
+    A: 0.85  # Top tier setups
+    B: 0.70  # Quality setups
+    C: 0.55  # Marginal setups
