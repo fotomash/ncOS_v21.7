@@ -130,7 +130,7 @@ setup_configurations() {
     echo -e "${YELLOW}Setting up configurations...${NC}"
 
     # Copy configuration files
-    cp "$DEPLOYMENT_DIR"/configs/*.yaml "$CONFIG_DIR/" 2>/dev/null || true
+    cp "$DEPLOYMENT_DIR"/config/*.yaml "$CONFIG_DIR/" 2>/dev/null || true
 
     # Create default bootstrap.yaml if not exists
     if [ ! -f "$CONFIG_DIR/bootstrap.yaml" ]; then

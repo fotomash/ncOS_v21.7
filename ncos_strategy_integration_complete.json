@@ -134,9 +134,9 @@
     "step_2_config_integration": {
       "description": "Integrate strategy configs into NCOS system",
       "files_to_update": [
-        "configs/agent_registry.yaml",
-        "configs/strategy_profiles.json",
-        "configs/trigger_routes.toml"
+        "config/agent_registry.yaml",
+        "config/strategy_profiles.json",
+        "config/trigger_routes.toml"
       ]
     },
     "step_3_orchestrator_integration": {
