@@ -48,6 +48,8 @@ This package contains all components needed to run NCOS v21.
 11. SMCRouter - Smart routing
 12. MAZ2Executor - MAZ2 execution
 13. TMCExecutor - TMC execution
+14. LiquiditySniperAgent - Liquidity sweep detection
+15. EntryExecutorSMCAgent - Executes precision entries
 
 ## Notes
 
