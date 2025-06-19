@@ -3,7 +3,7 @@
 
 import logging
 from datetime import datetime
-from typing import Any, Dict, Optional, Tuple
+from typing import Any, Dict, Optional, Tuple, List
 
 import numpy as np
 import pandas as pd
@@ -39,6 +39,17 @@ try:
 except Exception:  # pragma: no cover - optional
     TALIB_AVAILABLE = False
     logger.warning("[RiskEngine] TA-Lib not found. Using pandas for ATR calculation.")
+
+# --- Cross-Domain Risk Analyzer ---------------------------------------------
+try:
+    from cross_domain_risk_analyzer import CrossDomainRiskAnalyzer, RiskFactor
+    CROSS_DOMAIN_AVAILABLE = True
+    _cross_domain_analyzer = CrossDomainRiskAnalyzer()
+    logger.info("[RiskEngine] CrossDomainRiskAnalyzer initialized.")
+except Exception as exc:  # pragma: no cover - optional
+    CROSS_DOMAIN_AVAILABLE = False
+    _cross_domain_analyzer = None
+    logger.warning("[RiskEngine] CrossDomainRiskAnalyzer unavailable: %s", exc)
 
 
 # --- Dummy Fallbacks --------------------------------------------------------
@@ -336,3 +347,42 @@ def calculate_sl_and_risk(
         logger.error("[RiskEngine] %s", output["error"], exc_info=True)
 
     return output
+
+
+# ---------------------------------------------------------------------------
+def add_cross_domain_risk_factor(factor: RiskFactor) -> None:
+    """Record a risk factor for cross-domain analysis."""
+    if CROSS_DOMAIN_AVAILABLE and _cross_domain_analyzer:
+        _cross_domain_analyzer.add_risk_factor(factor)
+
+
+def get_unified_risk_score() -> Dict[str, Any]:
+    """Return unified risk metrics from the cross-domain analyzer."""
+    if not CROSS_DOMAIN_AVAILABLE or not _cross_domain_analyzer:
+        return {
+            "overall_risk": 0.0,
+            "domain_risks": {},
+            "high_correlations": 0,
+            "mitigation_available": 0,
+            "risk_trend": "stable",
+        }
+
+    result = _cross_domain_analyzer.get_unified_risk_score()
+    _cross_domain_analyzer.risk_history.append(result["overall_risk"])
+    return result
+
+
+def get_mitigation_recommendations() -> List[Dict[str, Any]]:
+    """Return mitigation recommendations from the cross-domain analyzer."""
+    if CROSS_DOMAIN_AVAILABLE and _cross_domain_analyzer:
+        return _cross_domain_analyzer.get_mitigation_recommendations()
+    return []
+
+
+__all__ = [
+    "calculate_sl_and_risk",
+    "add_cross_domain_risk_factor",
+    "get_unified_risk_score",
+    "get_mitigation_recommendations",
+    "RiskFactor",
+]
