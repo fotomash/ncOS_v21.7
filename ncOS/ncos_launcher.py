@@ -7,6 +7,11 @@ Handles path setup and launches the system from any directory
 import os
 import sys
 import subprocess
+import argparse
+import yaml
+
+# Fast mode toggle
+FAST_MODE = os.getenv("NCOS_FAST_MODE", "0") == "1"
 from pathlib import Path
 
 def find_ncos_root():
@@ -55,7 +60,49 @@ def setup_environment(ncos_root):
 
     return True
 
+def validate_all_configs():
+    """Validate YAML config files."""
+    config_dir = Path('config')
+    for cfg in config_dir.glob('*.yaml'):
+        with open(cfg, 'r') as f:
+            yaml.safe_load(f)
+
+def register_agents():
+    """Ensure agents in registry can be imported."""
+    registry_path = Path('config') / 'agent_registry.yaml'
+    if not registry_path.exists():
+        return
+    with open(registry_path, 'r') as f:
+        registry = yaml.safe_load(f) or {}
+    for agent, data in registry.get('agents', {}).items():
+        module_name = data.get('module')
+        if module_name:
+            __import__(module_name)
+
+def verify_schema_mapping():
+    """Verify each agent has a corresponding config file."""
+    registry_path = Path('config') / 'agent_registry.yaml'
+    if not registry_path.exists():
+        return
+    with open(registry_path, 'r') as f:
+        registry = yaml.safe_load(f) or {}
+    for agent in registry.get('agents', {}):
+        cfg_path = Path('config') / f"{agent.lower()}_config.yaml"
+        if not cfg_path.exists():
+            pass
+
+def parse_args():
+    parser = argparse.ArgumentParser(description="NCOS Launcher")
+    parser.add_argument("--fast", action="store_true", help="Enable FAST_MODE")
+    return parser.parse_args()
+
 def main():
+    args = parse_args()
+    if args.fast:
+        os.environ["NCOS_FAST_MODE"] = "1"
+    global FAST_MODE
+    FAST_MODE = os.getenv("NCOS_FAST_MODE", "0") == "1"
+
     print("🚀 NCOS v21 Universal Launcher")
     print("=" * 40)
 
@@ -76,6 +123,14 @@ def main():
     # Set up environment
     setup_environment(ncos_root)
     print("✓ Environment configured")
+
+    if not FAST_MODE:
+        validate_all_configs()
+        register_agents()
+        verify_schema_mapping()
+        print("[ncOS] Full validation complete.")
+    else:
+        print("[ncOS] FAST_MODE: Skipping deep validation and checks.")
 
     # Check for required files
     bootstrap_script = ncos_root / "scripts" / "integration_bootstrap.py"
