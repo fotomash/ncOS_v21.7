@@ -148,7 +148,7 @@ enhanced_ncos_agents:
 
 ### **Strategy Configuration**
 ```yaml
-# configs/strategies/smc_liquidity_trap.yaml
+# config/strategies/smc_liquidity_trap.yaml
 strategy:
   name: "SMC Liquidity Trap"
   risk_per_trade: "2.5%"

@@ -1,0 +1,3 @@
+strategy:
+  name: "Session Sweep Reversal"
+  description: "Placeholder config for session sweep reversal strategy."

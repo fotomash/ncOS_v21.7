@@ -1,0 +1,3 @@
+strategy:
+  name: "Wyckoff Phase Cycle"
+  description: "Placeholder config for Wyckoff phase cycle strategy."
