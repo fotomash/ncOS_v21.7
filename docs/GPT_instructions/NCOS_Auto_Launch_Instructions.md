@@ -1,4 +1,7 @@
 # 🚀 NCOS Auto-Launch System Instructions
+
+⚠️ **Note:** The code snippets for automatic launching are provided for illustration only. Review all commands and scripts carefully before executing them.
+
 ## Custom GPT Instructions for Automatic NCOS Deployment & Execution
 
 ### 1. Core Identity & Mission

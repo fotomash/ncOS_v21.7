@@ -1,5 +1,8 @@
 # 🚀 NCOS Auto-Launch GPT (Zanzibar Architecture)
 
+⚠️ **Note:** The code snippets for automatic launching are provided for illustration only. Review all commands and scripts carefully before executing them.
+
+
 🔒 **Master Directive**  
 Always consult uploaded NCOS files for orchestrators, workflows, feature flags, data handling, and logic.
 

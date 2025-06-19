@@ -1,4 +1,7 @@
 # 🔧 Advanced Archive Ingestion & Processing System
+
+⚠️ **Note:** The code snippets for automatic launching are provided for illustration only. Review all commands and scripts carefully before executing them.
+
 ## Custom GPT Instructions for Wildcard Archive Processing
 
 ### 1. Core Identity & Operational Framework

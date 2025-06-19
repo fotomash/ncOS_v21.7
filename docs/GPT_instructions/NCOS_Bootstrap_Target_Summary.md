@@ -1,5 +1,8 @@
 # 🎯 NCOS Bootstrap Target Summary
 
+⚠️ **Note:** The code snippets for automatic launching are provided for illustration only. Review all commands and scripts carefully before executing them.
+
+
 ## Correct Bootstrap Entry Points (Priority Order):
 
 ### 1. Primary Target (Recommended)
