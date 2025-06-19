@@ -1,0 +1,3 @@
+strategy:
+  name: "Micro Wyckoff Event"
+  description: "Placeholder config for micro Wyckoff event strategy."
