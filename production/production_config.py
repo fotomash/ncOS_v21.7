@@ -159,6 +159,12 @@ features:
   structured_logging: true
 """
 
-# Save the production config template
-with open('production_config.yaml', 'w') as f:
-    f.write(PRODUCTION_CONFIG_YAML)
+def save_default_config(path: str = "production_config.yaml") -> None:
+    """Write the default production configuration to ``path``.
+
+    Files are only created when this function is explicitly called.
+    """
+
+    with open(path, "w") as f:
+        f.write(PRODUCTION_CONFIG_YAML)
+
