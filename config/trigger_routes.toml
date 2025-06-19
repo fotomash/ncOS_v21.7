@@ -65,6 +65,66 @@ strategy_triggers:
     route_to:
     - micro_wyckoff_event
     - entry_executor_smc
+  volume_spike:
+    actions:
+    - analyze_volume_spike
+    - adjust_risk_parameters
+    conditions:
+    - high_volume_detected
+    - orderbook_imbalance
+    priority: 6
+    route_to:
+    - orderflow_anomaly
+  reentry_opportunity:
+    actions:
+    - evaluate_reentry
+    - update_risk_profile
+    conditions:
+    - position_available
+    - reentry_criteria_met
+    priority: 5
+    route_to:
+    - protection_reentry
+  sweep_reversal_signal:
+    actions:
+    - analyze_reversal_signal
+    - confirm_session_state
+    conditions:
+    - sweep_detected
+    - session_context_valid
+    priority: 9
+    route_to:
+    - session_sweep_reversal
+  engineered_liquidity_signal:
+    actions:
+    - analyze_trap_setup
+    - validate_risk_parameters
+    conditions:
+    - smc_signal_strength > 0.7
+    - liquidity_pool_identified
+    priority: 8
+    route_to:
+    - smc_liquidity_trap
+  accumulation_signal:
+    actions:
+    - analyze_phase_transition
+    - update_market_context
+    conditions:
+    - accumulation_phase
+    - volume_confirmation
+    priority: 7
+    route_to:
+    - wyckoff_phase_cycle
+  micro_wyckoff_signal:
+    actions:
+    - evaluate_tick_event
+    - prepare_precision_entry
+    conditions:
+    - tick_score > threshold
+    - micro_structure_valid
+    priority: 10
+    route_to:
+    - micro_wyckoff_event
   data.tick.xauusd:
     actions: []
     conditions: []
