@@ -31,7 +31,7 @@ This package contains all components needed to run NCOS v21.
 - `agents/` - All 13 agent implementations
 - `config/` - Bootstrap and registry configurations  
 - `scripts/` - Integration bootstrap script
-- `deploy.sh` - Quick deployment script
+- `scripts/deploy.sh` - Quick deployment script
 
 ## Agents Included
 
