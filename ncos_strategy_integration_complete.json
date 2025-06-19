@@ -128,7 +128,7 @@
   "integration_implementation": {
     "step_1_agent_creation": {
       "description": "Create NCOS agent classes for each strategy",
-      "target_directory": "ncos/agents/strategies/",
+      "target_directory": "agents/",
       "template": "BaseStrategyAgent with NCOS interface"
     },
     "step_2_config_integration": {

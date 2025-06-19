@@ -7,7 +7,7 @@ strategy_agents:
     - risk_guardian
     enabled: true
     max_positions: 1
-    module: ncos.agents.strategies.micro_wyckoff_event
+    module: agents.micro_wyckoff_event
     priority: 10
     risk_per_trade: 0.01
     risk_profile: precision
@@ -26,7 +26,7 @@ strategy_agents:
     - liquidity_sniper
     enabled: true
     max_positions: 1
-    module: ncos.agents.strategies.orderflow_anomaly
+    module: agents.orderflow_anomaly
     priority: 11
     risk_per_trade: 0.015
     risk_profile: defensive
@@ -45,7 +45,7 @@ strategy_agents:
     - session_state_manager
     enabled: true
     max_positions: 3
-    module: ncos.agents.strategies.protection_reentry
+    module: agents.protection_reentry
     priority: 12
     risk_per_trade: 0.01
     risk_profile: protective
@@ -64,7 +64,7 @@ strategy_agents:
     - entry_executor_smc
     enabled: true
     max_positions: 2
-    module: ncos.agents.strategies.session_sweep_reversal
+    module: agents.session_sweep_reversal
     priority: 9
     risk_per_trade: 0.02
     risk_profile: moderate
@@ -84,7 +84,7 @@ strategy_agents:
     - risk_guardian
     enabled: true
     max_positions: 2
-    module: ncos.agents.strategies.smc_liquidity_trap
+    module: agents.smc_liquidity_trap
     priority: 7
     risk_per_trade: 0.025
     risk_profile: aggressive
@@ -103,7 +103,7 @@ strategy_agents:
     - session_state_manager
     enabled: true
     max_positions: 1
-    module: ncos.agents.strategies.wyckoff_phase_cycle
+    module: agents.wyckoff_phase_cycle
     priority: 8
     risk_per_trade: 0.015
     risk_profile: conservative
