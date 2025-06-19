@@ -34,5 +34,18 @@
     "scalability": "horizontal",
     "availability": "high",
     "monitoring": "comprehensive"
-  }
+  },
+  "auto_launch": true,
+  "prompt_on_launch": false,
+  "session_mode": "auto",
+  "default_assets": [
+    "GBPUSD",
+    "XAUUSD",
+    "DXY"
+  ],
+  "max_risk_per_trade": 0.02,
+  "max_concurrent_positions": 3,
+  "strategy": "SMC",
+  "live_trading": false,
+  "notify_on_boot": true
 }
