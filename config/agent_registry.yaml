@@ -79,6 +79,14 @@ agents:
     module: "ncos_compliance_agent"
     class: "ComplianceAgent"
     enabled: true
+  liquidity_sniper:
+    module: "liquidity_sniper"
+    class: "LiquiditySniperAgent"
+    enabled: true
+  entry_executor_smc:
+    module: "entry_executor_smc"
+    class: "EntryExecutorSMCAgent"
+    enabled: true
 strategy_agents:
   micro_wyckoff_event:
     class: MicroWyckoffEventAgent
