@@ -4,14 +4,14 @@ This package contains all components needed to run NCOS v21.
 
 ## Quick Start
 
-1. Navigate to this directory:
+1. Navigate to the repository directory:
    ```bash
-   cd ncos_v21_complete
+   cd ncOS_v21.7
    ```
 
 2. Run the deployment:
    ```bash
-   ./deploy.sh
+   ./scripts/deploy.sh
    ```
 
 ## Manual Start
@@ -54,3 +54,4 @@ This package contains all components needed to run NCOS v21.
 - ParquetIngestor runs in stub mode if pandas/pyarrow not installed
 - All agents are production-ready with circuit breakers
 - Logs are written to JSON format in the logs directory
+- `start_ncos.sh` and `status_ncos.sh` are created by `scripts/deploy.sh`; run the deployment before using them
