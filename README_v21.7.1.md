@@ -52,7 +52,7 @@ Knowledge Base → Intelligence → Workflow → Triggers → State Manager
 ## 🚀 **Quick Start**
 
 ### **Prerequisites**
-- Python 3.9+
+ - Python 3.10+
 - Redis (for L1 memory)
 - PostgreSQL with pgvector (for L3 memory)
 - FAISS (for L2 vector similarity)

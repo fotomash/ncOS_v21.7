@@ -1,7 +1,7 @@
 # NCOS v21 Deployment Guide
 
 ## Prerequisites
-- Python 3.8+
+ - Python 3.10+
 - 4GB RAM minimum (8GB recommended)
 - 10GB disk space
 
