@@ -8,7 +8,7 @@
     "scripts": 3
   },
   "requirements": {
-    "python": ">=3.8",
+    "python": ">=3.10",
     "memory": "4GB",
     "disk": "10GB"
   }

@@ -25,7 +25,7 @@ python ncos_v21_7_1_integration_test_suite.py
 ```
 
 ### System Requirements
-- Python 3.8+
+ - Python 3.10+
 - pandas, numpy, scikit-learn
 - 8GB RAM minimum (16GB recommended)
 - 2GB storage for vector operations
