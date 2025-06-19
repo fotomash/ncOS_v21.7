@@ -11,6 +11,12 @@ from datetime import datetime
 from typing import Dict, List, Any, Optional
 import threading
 import queue
+import sys
+from pathlib import Path
+
+# Ensure project root is on the import path so integration
+# tests can import modules that live alongside this directory.
+sys.path.append(str(Path(__file__).resolve().parents[1]))
 
 # Mock implementations for integration testing
 class MockMarketDataProvider:
