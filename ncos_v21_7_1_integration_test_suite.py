@@ -11,6 +11,12 @@ from datetime import datetime
 import json
 import traceback
 from pathlib import Path
+import sys
+
+# Ensure the project root is available on the import path so this
+# standalone test suite can import project modules when executed from
+# any location.
+sys.path.append(str(Path(__file__).resolve().parent))
 
 class NCOSIntegrationTestSuite:
     """Comprehensive integration testing suite"""
