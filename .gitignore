@@ -1,0 +1,22 @@
+# Log files
+*.log
+logs/
+
+# JSON/YAML reports and configuration files
+scripts/bootstrap_report.json
+production_config.yaml
+
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+venv/
+.venv/
+env/
+.env/
+
+# Temporary files
+*.tmp
+*.swp
+*~
