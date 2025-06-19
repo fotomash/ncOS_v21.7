@@ -4,7 +4,7 @@ This package contains all components needed to run NCOS v21.
 
 ## Quick Start
 
-1. Navigate to the repository directory:
+1. Navigate to the repository directory (replace the path with your clone location):
    ```bash
    cd ncOS_v21.7
    ```

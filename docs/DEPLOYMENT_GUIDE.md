@@ -10,7 +10,7 @@
 1. **Extract Package**
    ```bash
    tar -xzf ncos_v21_production_candidate.tar.gz
-   cd ncos_v21_deployment
+   cd ncOS_v21.7
    ```
 
 2. **Run Deployment Script**
