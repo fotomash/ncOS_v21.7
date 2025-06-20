@@ -167,3 +167,7 @@ python add_structure.py --input data/ohlcv.csv --output data/ohlcv_with_structur
 After execution, the output CSV will include the three columns above alongside
 your original OHLCV data.
 
+## Trading Disclaimer
+
+**Trading Disclaimer**: This system is for educational and research purposes. Trading involves risk of financial loss. Past performance does not guarantee future results. Always test thoroughly before live trading.
+
