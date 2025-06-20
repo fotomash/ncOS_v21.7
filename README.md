@@ -23,8 +23,22 @@ This package contains all components needed to run NCOS v21.
 
 2. Run bootstrap:
    ```bash
-   cd scripts && python integration_bootstrap.py
-   ```
+cd scripts && python integration_bootstrap.py
+```
+
+## Running Tests
+
+Install the project dependencies before executing the test suite:
+
+```bash
+pip install -r requirements.txt
+```
+
+Then run the tests using `pytest`:
+
+```bash
+pytest
+```
 
 ## Directory Structure
 
