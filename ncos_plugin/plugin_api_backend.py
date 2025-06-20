@@ -27,17 +27,32 @@ BASE_DIR = Path(__file__).parent
 # Twelve Data API key should be provided via environment variable
 TWELVE_DATA_API_KEY = os.environ.get("TWELVE_DATA_API_KEY")
 
+if not TWELVE_DATA_API_KEY:
+    # Log a warning so the service operator knows why this endpoint fails
+    import logging
+    logging.getLogger(__name__).warning(
+        "TWELVE_DATA_API_KEY is not set; /twelvedata/quote will return an error"
+    )
+
 def get_twelvedata_price(symbol: str):
-    url = f"https://api.twelvedata.com/price?symbol={symbol}&apikey={TWELVE_DATA_API_KEY}"
+    if not TWELVE_DATA_API_KEY:
+        raise HTTPException(
+            status_code=500,
+            detail="TWELVE_DATA_API_KEY environment variable not set",
+        )
+
+    url = (
+        f"https://api.twelvedata.com/price?symbol={symbol}&apikey={TWELVE_DATA_API_KEY}"
+    )
     response = requests.get(url)
     data = response.json()
     if "price" in data:
-        return {
-            "symbol": symbol,
-            "price": float(data["price"])
-        }
+        return {"symbol": symbol, "price": float(data["price"])}
     else:
-        raise HTTPException(status_code=500, detail=f"Twelve Data error: {data.get('message', 'Unknown error')}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Twelve Data error: {data.get('message', 'Unknown error')}",
+        )
 # ---- YFinance Endpoints ----
 def get_stock_data(ticker: str):
     try:

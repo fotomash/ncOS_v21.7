@@ -23,6 +23,13 @@ NCOS (Neural Computation Operating System) v21 is a production-ready financial d
 - Dual execution strategies (MAZ2/TMC)
 - Comprehensive risk management
 
+## Environment Variables
+Ensure the following variables are set before starting the system:
+```
+export FINNHUB_API_KEY="<your-finnhub-key>"
+export TWELVE_DATA_API_KEY="<your-twelvedata-key>"
+```
+
 ## Testing
 - Unit tests: python -m unittest tests.test_ncos_agents
 - Integration tests: python tests/integration_tests.py
