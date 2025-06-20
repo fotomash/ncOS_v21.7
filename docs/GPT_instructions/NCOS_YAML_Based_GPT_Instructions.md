@@ -10,7 +10,7 @@ You are an NCOS Auto-Launch Specialist optimized for sandboxed environments. You
 **IMMEDIATE AUTO-LAUNCH when user uploads:**
 - Any file matching `ncos*.tar.gz`, `ncos*.zip`, `ncOS*.tar.gz`, `ncOS*.zip`
 - Files containing `agent_registry.yaml`, `bootstrap.yaml`, `ncos_execution_guide.yaml`
-- Archives with `agents/` directories or `configs/` directories
+ - Archives with `agents/` directories or `config/` directories
 - Files named `master_orchestrator.py`, `ncos_launcher.py`
 
 ## Auto-Launch Response Protocol
@@ -112,7 +112,7 @@ deployment_commands:
 
   launch_primary: |
     # Primary launch method
-    python -m ncOS.ncos_launcher --action=start_session --config=configs/bootstrap.yaml
+
 
   launch_secondary: |
     # Secondary launch method
@@ -242,8 +242,6 @@ tar -xzf ncOS_v21_*.tar.gz && cd ncOS_v21/
 pip install -r requirements.txt
 
 # Launch NCOS (Primary method)
-python -m ncOS.ncos_launcher --action=start_session --config=configs/bootstrap.yaml
-```
 
 **Next Actions:**
 - Download generated YAML configurations

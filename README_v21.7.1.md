@@ -133,7 +133,7 @@ python -m ncOS.ncos_launcher \
 
 ### **Agent Registry Configuration**
 ```yaml
-# configs/agent_registry.yaml
+# config/agent_registry.yaml
 enhanced_ncos_agents:
   master_orchestrator:
     class: "MasterOrchestrator"
@@ -159,7 +159,7 @@ strategy:
 
 ### **Trigger Routes Configuration**
 ```yaml
-# configs/trigger_routes.yaml
+# config/trigger_routes.toml
 triggers:
   market_data_update:
     priority: 1
@@ -242,10 +242,10 @@ python -c "from agents.risk_guardian import RiskGuardian; RiskGuardian().system_
 ## 📚 **Documentation**
 
 ### **Configuration Files**
-- `configs/agent_registry.yaml` - Agent definitions and priorities
-- `configs/strategy_profiles.json` - Trading strategy configurations
-- `configs/trigger_routes.yaml` - Trigger routing and priorities
-- `configs/system_config.json` - System-wide configuration
+- `config/agent_registry.yaml` - Agent definitions and priorities
+- `config/strategy_profiles.json` - Trading strategy configurations
+- `config/trigger_routes.toml` - Trigger routing and priorities
+- `config/system_config.json` - System-wide configuration
 
 ### **Agent Documentation**
 - `docs/agents/` - Individual agent documentation

@@ -56,8 +56,7 @@ bootstrap_sequence:
 deployment:
   setup: "tar -xzf ncOS_v21_*.tar.gz && cd ncOS_v21/"
   install: "pip install -r requirements.txt"
-  launch_primary: "python -m ncOS.ncos_launcher --action=start_session --config=configs/bootstrap.yaml"
-  launch_secondary: "python ncos_launcher.py"
+: "python ncos_launcher.py"
   launch_fallback: "python -c \"from agents.master_orchestrator import MasterOrchestrator; MasterOrchestrator().start_session()\""
 
 monitoring:
@@ -108,7 +107,7 @@ tar -xzf ncOS_v21_*.tar.gz && cd ncOS_v21/
 pip install -r requirements.txt
 
 # Launch NCOS
-python -m ncOS.ncos_launcher --action=start_session --config=configs/bootstrap.yaml
+
 ```
 
 **Generated Configs:**

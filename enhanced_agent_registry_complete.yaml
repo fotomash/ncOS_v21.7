@@ -6,7 +6,7 @@ enhanced_ncos_agents:
     - response_generation
     - user_guidance
     class: InteractionManagerAgent
-    config_file: configs/interface/interaction.yaml
+    config_file: config/interface/interaction.yaml
     dependencies:
     - master_orchestrator
     - session_state_manager
@@ -25,7 +25,7 @@ enhanced_ncos_agents:
     - context_analysis
     - intelligent_search
     class: KnowledgeIntelligenceAgent
-    config_file: configs/intelligence/knowledge.yaml
+    config_file: config/intelligence/knowledge.yaml
     dependencies:
     - master_orchestrator
     - vector_data_processor
@@ -62,7 +62,7 @@ enhanced_ncos_agents:
     - market_data_optimization
     - native_search
     class: VectorDataProcessorAgent
-    config_file: configs/data/vector_processor.yaml
+    config_file: config/data/vector_processor.yaml
     dependencies:
     - master_orchestrator
     enabled: true
@@ -79,7 +79,7 @@ enhanced_ncos_agents:
     - structural_flow
     - menu_system
     class: ZanflowOrchestratorAgent
-    config_file: configs/zanflow/orchestrator.yaml
+    config_file: config/zanflow/orchestrator.yaml
     dependencies:
     - master_orchestrator
     enabled: true

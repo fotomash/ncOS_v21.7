@@ -71,7 +71,7 @@ bootstrap_sequence:
   - {step: "deploy", desc: "Generate commands", validation: "deployment_ready"}
 deployment:
   extract: "tar -xzf {archive}"
-  launch: "python -m ncOS.ncos_launcher --action=start_session --config=configs/bootstrap.yaml"
+
   health: "python -c \"from agents.master_orchestrator import MasterOrchestrator; print('✅ Ready')\"" 
 '''
 
