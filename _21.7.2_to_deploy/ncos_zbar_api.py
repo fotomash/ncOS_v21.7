@@ -194,6 +194,16 @@ async def execute_zbar_multi(request: ZBARRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"ZBAR execution failed: {str(e)}")
 
+
+@app.post("/journal/append")
+async def append_journal(entry: JournalEntry):
+    """Append a new entry to the trade journal"""
+    try:
+        journal_manager.log_entry(entry)
+        return {"status": "success", "message": "Entry logged"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to append entry: {str(e)}")
+
 @app.get("/journal/query")
 async def query_journal(
     symbol: Optional[str] = None,
@@ -265,6 +275,7 @@ async def root():
         "version": "5.0",
         "endpoints": [
             "/strategy/zbar/execute_multi",
+            "/journal/append",
             "/journal/query",
             "/journal/stats"
         ]
