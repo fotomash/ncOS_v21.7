@@ -113,3 +113,21 @@ python scripts/quick_start_predictive.py
 
 For guidelines on submitting issues and pull requests, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
+## Running `add_structure.py`
+
+The optional `add_structure.py` script enriches OHLCV CSV files with three new
+columns that describe market structure:
+
+- `fractal_high` – marks rows where a high fractal occurs
+- `fractal_low` – marks rows where a low fractal occurs
+- `structure` – the resulting market bias (bullish, bearish or neutral)
+
+Invoke the script with the path to your input data and an output location:
+
+```bash
+python add_structure.py --input data/ohlcv.csv --output data/ohlcv_with_structure.csv
+```
+
+After execution, the output CSV will include the three columns above alongside
+your original OHLCV data.
+
