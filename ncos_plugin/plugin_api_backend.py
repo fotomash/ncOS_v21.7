@@ -11,7 +11,7 @@ from fastapi import Query
 # Import your custom Finnhub client
 from ncos_plugin.finnhub_data_fetcher import finnhub_client
 
-app = FastAPI(title="NCOS Live Market Data API", version="21.7.1")
+app = FastAPI(title="NCOS Live Market Data API", version="21.7.2")
 
 app.add_middleware(
     CORSMiddleware,
