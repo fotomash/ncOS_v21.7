@@ -3,7 +3,7 @@ import yaml
 from typing import Dict, Any, Optional
 from datetime import datetime
 
-from ..config.gpt_instructions import (
+from config.gpt_instructions import (
     get_agent_instructions,
     get_auto_progression_config,
 )

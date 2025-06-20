@@ -4,7 +4,7 @@ This document provides a high level summary of how the ZBAR trading intelligence
 
 ## Pipeline
 
-The system exposes a REST API (see `_21.7.2_verify/ZBAR_API_DEPLOYMENT.md`) that accepts client requests. Incoming data flows through the API to the orchestrator layer, which then triggers ZBAR analysis and the ISPTS strategy pipeline. Results are logged in the JournalDB for later querying.
+The system exposes a REST API (see `docs/ZBAR_API_DEPLOYMENT.md`) that accepts client requests. Incoming data flows through the API to the orchestrator layer, which then triggers ZBAR analysis and the ISPTS strategy pipeline. Results are logged in the JournalDB for later querying.
 
 ```mermaid
 sequenceDiagram
@@ -34,7 +34,7 @@ GET  /journal/query   – filter entries (symbol, strategy, session, trace_id)
 GET  /journal/stats   – summary statistics
 ```
 
-Refer to the detailed interface description in `_21.7.2_verify/NCOS_Voice_Journal_Documentation.md` for more information on these endpoints.
+Refer to the detailed interface description in `docs/NCOS_Voice_Journal_Documentation.md` for more information on these endpoints.
 
 ## Typical Workflow
 
@@ -54,5 +54,5 @@ This workflow enables a repeatable and auditable process for running market anal
 
 For deployment instructions and additional examples see:
 
-- `_21.7.2_verify/ZBAR_API_DEPLOYMENT.md` – API installation and usage
+- `docs/ZBAR_API_DEPLOYMENT.md` – API installation and usage
 - `docs/QUICK_START_Voice_Journal_v21.7.2.md` – using the voice interface with the journal system
