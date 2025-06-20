@@ -1,59 +1,77 @@
-"actions": [
-  {
-    "name": "get_stock_quote",
-    "description": "Get the latest stock quote for a given ticker symbol.",
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "ticker": {
-          "type": "string",
-          "description": "The stock ticker symbol, like AAPL or MSFT."
-        }
-      },
-      "required": ["ticker"]
-    },
-    "api": {
-      "url": "https://ncos-v21-7.onrender.com/stock/quote",
-      "method": "GET",
-      "query_params": ["ticker"]
-    }
+{
+  "schema_version": "v1",
+  "name_for_human": "NCOS Live Market Data",
+  "name_for_model": "ncos_market_data_fetcher",
+  "description_for_human": "Fetch real-time market data (stocks, crypto, forex).",
+  "description_for_model": "Fetch live market data for stocks, crypto, and forex.",
+  "auth": {
+    "type": "none"
   },
-  {
-    "name": "get_crypto_quote",
-    "description": "Get the latest price and market cap for a given cryptocurrency symbol.",
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "symbol": {
-          "type": "string",
-          "description": "The crypto symbol, like BTC-USD or ETH-USD."
-        }
-      },
-      "required": ["symbol"]
-    },
-    "api": {
-      "url": "https://ncos-v21-7.onrender.com/crypto/quote",
-      "method": "GET",
-      "query_params": ["symbol"]
-    }
+  "api": {
+    "type": "openapi",
+    "url": "https://ncos-v21-7.onrender.com/openapi.json",
+    "is_user_authenticated": false
   },
-  {
-    "name": "get_forex_quote",
-    "description": "Get the latest forex rate for a given currency pair.",
-    "parameters": {
-      "type": "object",
-      "properties": {
-        "pair": {
-          "type": "string",
-          "description": "The forex pair, like EURUSD=X or GBPUSD=X."
-        }
+  "actions": [
+    {
+      "name": "get_stock_quote",
+      "description": "Get the latest stock quote for a given ticker symbol.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "ticker": {
+            "type": "string",
+            "description": "The stock ticker symbol, like AAPL or MSFT."
+          }
+        },
+        "required": ["ticker"]
       },
-      "required": ["pair"]
+      "api": {
+        "url": "https://ncos-v21-7.onrender.com/stock/quote",
+        "method": "GET",
+        "query_params": ["ticker"]
+      }
     },
-    "api": {
-      "url": "https://ncos-v21-7.onrender.com/forex/quote",
-      "method": "GET",
-      "query_params": ["pair"]
+    {
+      "name": "get_crypto_quote",
+      "description": "Get the latest price and market cap for a given cryptocurrency symbol.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "description": "The crypto symbol, like BTC-USD or ETH-USD."
+          }
+        },
+        "required": ["symbol"]
+      },
+      "api": {
+        "url": "https://ncos-v21-7.onrender.com/crypto/quote",
+        "method": "GET",
+        "query_params": ["symbol"]
+      }
+    },
+    {
+      "name": "get_forex_quote",
+      "description": "Get the latest forex rate for a given currency pair.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "pair": {
+            "type": "string",
+            "description": "The forex pair, like EURUSD=X or GBPUSD=X."
+          }
+        },
+        "required": ["pair"]
+      },
+      "api": {
+        "url": "https://ncos-v21-7.onrender.com/forex/quote",
+        "method": "GET",
+        "query_params": ["pair"]
+      }
     }
-  }
-]
+  ],
+  "logo_url": "https://ncos-v21-7.onrender.com/logo.png",
+  "contact_email": "support@ncos.dev",
+  "legal_info_url": "http://ncos.dev/legal"
+}
