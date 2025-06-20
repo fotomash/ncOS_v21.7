@@ -20,7 +20,7 @@ VERSION = "21.7.1"
 DESCRIPTION = "Neural Cognitive Operating System - Complete AI Trading Ecosystem"
 
 setup(
-    name="ncos-phoenix-mesh",
+    name="ncOS",
     version=VERSION,
     author="NCOS Team",
     author_email="team@ncos.ai",
@@ -81,15 +81,15 @@ setup(
     },
     entry_points={
         "console_scripts": [
-            "ncos=ncos.cli:main",
-            "ncos-launch=ncos.agents.master_orchestrator:main",
-            "ncos-validate=ncos.utils.validation:main",
-            "ncos-monitor=ncos.monitoring.dashboard:main",
+            "ncos=ncOS.enhanced_cli:main",
+            "ncos-launch=ncOS.agents.master_orchestrator:main",
+            "ncos-validate=ncOS.utils.validation:main",
+            "ncos-monitor=ncOS.monitoring.dashboard:main",
         ],
     },
     include_package_data=True,
     package_data={
-        "ncos": [
+        "ncOS": [
             "configs/*.yaml",
             "configs/*.json",
             "configs/*.toml",
