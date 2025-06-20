@@ -18,6 +18,7 @@ import pandas as pd
 # Import our new engines
 from smc_analysis_engine import ncOScoreSMCEngine
 from enhanced_vector_engine import ncOScoreVectorEngine, BrownVectorStoreIntegration
+from vector_store import VectorStore
 from liquidity_analysis_engine import ncOScoreLiquidityEngine
 from memory_manager import EnhancedMemoryManager
 
@@ -86,6 +87,8 @@ class ncOScoreEnhancedOrchestrator:
         self.vector_engine = None
         self.liquidity_engine = None
         self.brown_vector_store = None
+        self.vector_store = None
+        self._vector_store_task = None
 
     def _load_config(self, config_path: Optional[str]) -> Dict:
         """Load enhanced configuration"""
@@ -171,12 +174,14 @@ class ncOScoreEnhancedOrchestrator:
             self.smc_engine = ncOScoreSMCEngine(self.session_state)
             self.logger.info("✅ SMC Analysis Engine initialized")
 
-            # Initialize Vector Engine
+            # Initialize Vector Store and Engine
+            store_path = MountPoint.resolve(self.session_state.mount_points["session"]) / "vector_store.json"
+            self.vector_store = VectorStore(store_path)
             self.vector_engine = ncOScoreVectorEngine(
                 dimensions=1536,
-                memory_manager=self.memory_manager
-            )
+
             self.logger.info("✅ Vector Engine initialized")
+            self._vector_store_task = asyncio.create_task(self._autosave_vector_store())
 
             # Initialize Brown Vector Store
             self.brown_vector_store = BrownVectorStoreIntegration(self.vector_engine)
@@ -496,6 +501,17 @@ class ncOScoreEnhancedOrchestrator:
             "trading": trading_status,
             "engines": engine_status
         }
+
+    async def _autosave_vector_store(self, interval: int = 300) -> None:
+        """Periodically save the vector store to disk."""
+        while True:
+            await asyncio.sleep(interval)
+            if self.vector_store:
+                try:
+                    self.vector_store.save()
+                    self.logger.info("💾 Vector store autosaved")
+                except Exception as e:  # pragma: no cover - safeguard
+                    self.logger.error(f"Vector store autosave failed: {e}")
 
     # Additional helper methods for file detection
     def _detect_file_type(self, file_path: str) -> str:
