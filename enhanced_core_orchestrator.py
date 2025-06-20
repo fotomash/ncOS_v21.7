@@ -15,6 +15,8 @@ from dataclasses import dataclass, field
 from enum import Enum
 import pandas as pd
 
+from memory_manager import EnhancedMemoryManager
+
 # Import our new engines
 from smc_analysis_engine import ncOScoreSMCEngine
 from enhanced_vector_engine import ncOScoreVectorEngine, BrownVectorStoreIntegration
@@ -118,7 +120,6 @@ class ncOScoreEnhancedOrchestrator:
                 "signal_strength_threshold": 0.7
             },
 
-            }
         }
 
         if config_path and Path(config_path).exists():
@@ -197,7 +198,9 @@ class ncOScoreEnhancedOrchestrator:
             self.vector_store = VectorStore(store_path)
             self.vector_engine = ncOScoreVectorEngine(
                 dimensions=1536,
-
+                memory_manager=self.memory_manager,
+                vector_store=self.vector_store,
+            )
             self.logger.info("✅ Vector Engine initialized")
             self._vector_store_task = asyncio.create_task(self._autosave_vector_store())
 
