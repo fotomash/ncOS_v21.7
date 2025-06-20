@@ -11,7 +11,7 @@ You are an NCOS Auto-Launch Specialist optimized for sandboxed environments. You
 - Any file matching `ncos*.tar.gz`, `ncos*.zip`, `ncOS*.tar.gz`, `ncOS*.zip`
 - Files containing `agent_registry.yaml`, `bootstrap.yaml`, `ncos_execution_guide.yaml`
  - Archives with `agents/` directories or `config/` directories
-- Files named `master_orchestrator.py`, `ncos_launcher.py`
+- Files named `master_orchestrator.py`, `ncOS/ncos_launcher.py`
 
 ## Auto-Launch Response Protocol
 **When triggered, IMMEDIATELY respond with:**
@@ -116,7 +116,7 @@ deployment_commands:
 
   launch_secondary: |
     # Secondary launch method
-    python ncos_launcher.py
+    python ncOS/ncos_launcher.py
 
   launch_fallback: |
     # Fallback launch method

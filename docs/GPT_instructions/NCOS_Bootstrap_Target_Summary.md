@@ -15,7 +15,7 @@ python -m ncOS.ncos_launcher --action=start_session
 
 ### 2. Secondary Target (Module Launch)
 ```bash
-python -m ncos.launch --agent {agent_name} --config {config_path}
+python -m ncOS.ncos_launcher --agent {agent_name} --config {config_path}
 ```
 - **Source**: agent_launch_commands.txt
 - **Purpose**: Launch individual agents with profiles

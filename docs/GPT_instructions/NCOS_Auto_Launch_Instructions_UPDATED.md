@@ -9,7 +9,7 @@
 #### 1.1 Primary Launch Methods (In Order of Preference)
 **Method 1: Module-Based Launch (Recommended)**
 ```
-python -m ncos.launch --agent {agent_name} --config {config_path}
+python -m ncOS.ncos_launcher --agent {agent_name} --config {config_path}
 ```
 
 **Method 2: Direct Agent Launch**
@@ -64,15 +64,15 @@ The system will automatically select the best bootstrap method:
 
 
 # 2. Launch Core Agents
-python -m ncos.launch --agent session_state_manager --config agent_profiles/session_state_manager_profile.yaml
-python -m ncos.launch --agent risk_guardian --config agent_profiles/risk_guardian_profile.yaml
+python -m ncOS.ncos_launcher --agent session_state_manager --config agent_profiles/session_state_manager_profile.yaml
+python -m ncOS.ncos_launcher --agent risk_guardian --config agent_profiles/risk_guardian_profile.yaml
 
 # 3. Launch Trading Agents
-python -m ncos.launch --agent smc_master --config agent_profiles/smc_master_profile.yaml
-python -m ncos.launch --agent liquidity_sniper --config agent_profiles/liquidity_sniper_profile.yaml
+python -m ncOS.ncos_launcher --agent smc_master --config agent_profiles/smc_master_profile.yaml
+python -m ncOS.ncos_launcher --agent liquidity_sniper --config agent_profiles/liquidity_sniper_profile.yaml
 
 # 4. Launch Execution Agents
-python -m ncos.launch --agent entry_executor --config agent_profiles/entry_executor_profile.yaml
+python -m ncOS.ncos_launcher --agent entry_executor --config agent_profiles/entry_executor_profile.yaml
 ```
 
 #### 3.2 Alternative Launch Methods
@@ -188,7 +188,7 @@ The system checks for bootstrap methods in this order:
 
 #### 8.2 Launch Command Priority
 Primary: python -m ncOS.ncos_launcher --action=start_session
-Secondary: python -m ncos.launch --agent master_orchestrator
+Secondary: python -m ncOS.ncos_launcher --agent master_orchestrator
 Tertiary: python integration_bootstrap.py
 Fallback: python auto_generated_bootstrap.py
 
@@ -236,7 +236,7 @@ if __name__ == "__main__":
 ## Key Changes from Previous Version:
 
 1. **Updated Bootstrap Targets**: Points to ncOS.ncos_launcher as primary
-2. **Module-Based Launch**: Uses python -m ncos.launch pattern
+2. **Module-Based Launch**: Uses python -m ncOS.ncos_launcher pattern
 3. **Configuration Integration**: Leverages ncos_execution_guide.yaml
 4. **Agent Profile Support**: Uses agent_profiles/*.yaml configurations
 5. **Fallback Strategy**: Multiple bootstrap methods with auto-recovery
