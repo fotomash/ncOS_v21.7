@@ -3,6 +3,7 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import List, Dict, Any, Optional
 from datetime import datetime
+import os
 import pandas as pd
 import json
 import uuid
@@ -112,7 +113,19 @@ class ZBARAgent:
 
 # --- Journal Manager ---
 class JournalManager:
-    def __init__(self, journal_path: str = "trade_journal.jsonl"):
+    def __init__(self, journal_path: Optional[str] = None):
+        """Manage trade journal entries.
+
+        Parameters
+        ----------
+        journal_path : str, optional
+            Path to the journal file. If not provided, the value from the
+            ``JOURNAL_PATH`` environment variable is used. If that is also not
+            set, ``"trade_journal.jsonl"`` is used by default.
+        """
+
+        if journal_path is None:
+            journal_path = os.environ.get("JOURNAL_PATH", "trade_journal.jsonl")
         self.journal_path = Path(journal_path)
 
     def log_entry(self, entry: JournalEntry):
@@ -139,6 +152,7 @@ class JournalManager:
 
 # Initialize components
 zbar_agent = ZBARAgent()
+# Journal path can be overridden via the JOURNAL_PATH environment variable
 journal_manager = JournalManager()
 
 # --- API Endpoints ---

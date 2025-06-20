@@ -215,7 +215,7 @@ api:
   port: 8001
 
 journal:
-  path: "logs/trade_journal.jsonl"
+  path: "logs/trade_journal.jsonl"  # can be overridden with JOURNAL_PATH
   backup_path: "logs/backup/"
 
 voice:
@@ -279,7 +279,7 @@ def initialize_system():
         print(f"✓ Created directory: {dir_path}")
 
     # Create initial journal file
-    journal_path = Path("logs/trade_journal.jsonl")
+    journal_path = Path(os.environ.get("JOURNAL_PATH", "logs/trade_journal.jsonl"))
     if not journal_path.exists():
         journal_path.touch()
         print("✓ Created trade journal file")
@@ -463,13 +463,17 @@ Configure journal behavior in `system_config.yaml`:
 
 ```yaml
 journal:
-  path: "logs/trade_journal.jsonl"
+  path: "logs/trade_journal.jsonl"  # overridable via JOURNAL_PATH
   backup_enabled: true
   backup_interval: 3600  # seconds
   max_size_mb: 100
   rotation_enabled: true
   retention_days: 90
 ```
+
+You can also override the journal file location by setting the `JOURNAL_PATH`
+environment variable or by passing a custom path to `JournalManager` when
+initializing the API.
 
 ### ZBAR Integration Configuration
 
@@ -670,14 +674,14 @@ python ncos_zbar_api.py
 **Problem**: Dashboard shows "No entries found"  
 **Solution**:
 ```bash
-# Check journal file exists
-ls -la logs/trade_journal.jsonl
+# Check journal file exists (or path set via JOURNAL_PATH)
+ls -la ${JOURNAL_PATH:-logs/trade_journal.jsonl}
 
 # Create if missing
-touch logs/trade_journal.jsonl
+touch ${JOURNAL_PATH:-logs/trade_journal.jsonl}
 
 # Check permissions
-chmod 644 logs/trade_journal.jsonl
+chmod 644 ${JOURNAL_PATH:-logs/trade_journal.jsonl}
 ```
 
 #### 4. Streamlit Dashboard Errors
@@ -753,7 +757,7 @@ Always include:
 # Automated backup script
 #!/bin/bash
 BACKUP_DIR="logs/backup"
-JOURNAL="logs/trade_journal.jsonl"
+JOURNAL="${JOURNAL_PATH:-logs/trade_journal.jsonl}"
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
 
 cp $JOURNAL $BACKUP_DIR/journal_$TIMESTAMP.jsonl
@@ -893,7 +897,7 @@ For support or contributions, please refer to the project repository.
 🔧 Configuration Files:
 - config/system_config.yaml            → Main configuration
 - config/zbar_config.yaml              → ZBAR settings
-- logs/trade_journal.jsonl             → Journal storage
+ - logs/trade_journal.jsonl (overridable via JOURNAL_PATH)             → Journal storage
 ```
 
 ---
