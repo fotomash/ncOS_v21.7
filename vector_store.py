@@ -3,9 +3,12 @@
 from __future__ import annotations
 
 import json
+import logging
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Any
+
+logger = logging.getLogger(__name__)
 
 
 class VectorStore:
@@ -46,7 +49,7 @@ class VectorStore:
                 self.vectors = data.get("vectors", {})
                 self.stats.update(data.get("stats", {}))
             except Exception as exc:  # pragma: no cover - safeguard
-                print(f"Error loading vector store: {exc}")
+                logger.error("Error loading vector store: %s", exc, exc_info=True)
         self.stats["total_vectors"] = len(self.vectors)
         self.stats["last_loaded"] = datetime.now().isoformat()
 
@@ -58,4 +61,4 @@ class VectorStore:
                 json.dump(data, f, indent=2)
             self.stats["last_saved"] = datetime.now().isoformat()
         except Exception as exc:  # pragma: no cover - safeguard
-            print(f"Error saving vector store: {exc}")
+            logger.error("Error saving vector store: %s", exc, exc_info=True)
