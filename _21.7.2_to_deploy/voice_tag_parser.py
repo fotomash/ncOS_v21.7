@@ -94,7 +94,7 @@ class VoiceTagParser:
                 return self.aliases.get(symbol, symbol.upper())
 
         # Regex for common forex pairs
-        forex_pattern = r'([A-Z]{3}[A-Z]{3}|[A-Z]{3}/[A-Z]{3})'
+        forex_pattern = r"([A-Z]{3}[A-Z]{3}|[A-Z]{3}/[A-Z]{3})"
         match = re.search(forex_pattern, text.upper())
         if match:
             return match.group(1).replace("/", "")
