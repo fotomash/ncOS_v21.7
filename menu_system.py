@@ -10,18 +10,36 @@ from typing import Any, Dict
 import yaml
 
 
-class EnhancedMenuSystem:
-    """Generate a structured menu with agent status information."""
+class MenuSystem:
+    """Base menu system for generating and formatting menus."""
 
     def __init__(self, orchestrator: Any) -> None:
         self.orchestrator = orchestrator
 
     def generate_menu(self) -> Dict[str, Any]:
-        """Return menu dict with categories and agent status."""
-        if hasattr(self.orchestrator, "generate_enhanced_menu"):
-            menu = self.orchestrator.generate_enhanced_menu()
+        """Return a basic menu dictionary."""
+        if hasattr(self.orchestrator, "generate_menu"):
+            menu = self.orchestrator.generate_menu()
         else:
             menu = {"title": "ncOS Menu", "categories": {}}
+        return menu
+
+    def format_menu(self, menu: Dict[str, Any]) -> str:
+        """Return YAML-formatted menu."""
+        return yaml.dump(menu, sort_keys=False)
+
+
+class EnhancedMenuSystem(MenuSystem):
+    """Generate a structured menu with agent status information."""
+
+    def __init__(self, orchestrator: Any) -> None:
+        super().__init__(orchestrator)
+
+    def generate_menu(self) -> Dict[str, Any]:
+        """Return menu dict with categories and agent status."""
+        menu = super().generate_menu()
+        if hasattr(self.orchestrator, "generate_enhanced_menu"):
+            menu = self.orchestrator.generate_enhanced_menu()
 
         agent_status: Dict[str, str] = {}
         agents = getattr(self.orchestrator, "agents", {})
@@ -44,4 +62,4 @@ class EnhancedMenuSystem:
         return yaml.dump(menu, sort_keys=False)
 
 
-__all__ = ["EnhancedMenuSystem"]
+__all__ = ["MenuSystem", "EnhancedMenuSystem"]
