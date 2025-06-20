@@ -81,16 +81,19 @@ setup(
     },
     entry_points={
         "console_scripts": [
+            "ncos=ncOS.ncos_launcher:main",
+            "ncos-cli=ncOS.enhanced_cli:main",
+            "add-structure=scripts.add_structure:main",
         ],
     },
     include_package_data=True,
     package_data={
         "ncOS": [
-            "configs/*.yaml",
-            "configs/*.json",
-            "configs/*.toml",
-            "configs/**/*.yaml",
-            "configs/**/*.json",
+            "config/*.yaml",
+            "config/*.json",
+            "config/*.toml",
+            "config/**/*.yaml",
+            "config/**/*.json",
             "templates/*.yaml",
             "templates/*.json",
             "schemas/*.json",
