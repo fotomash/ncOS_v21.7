@@ -20,6 +20,7 @@ from smc_analysis_engine import ncOScoreSMCEngine
 from enhanced_vector_engine import ncOScoreVectorEngine, BrownVectorStoreIntegration
 from vector_store import VectorStore
 from liquidity_analysis_engine import ncOScoreLiquidityEngine
+from memory_manager import EnhancedMemoryManager
 
 class MountPoint(Enum):
     """Unified mount point definitions"""
@@ -75,6 +76,11 @@ class ncOScoreEnhancedOrchestrator:
         self.agents = {}
         self.config = self._load_config(config_path)
         self.logger = self._setup_logging()
+        mem_cfg = self.config.get("memory", {})
+        self.memory_manager = EnhancedMemoryManager(
+            ttl_seconds=mem_cfg.get("context_ttl_seconds", 3600),
+            default_window=mem_cfg.get("context_window", 5),
+        )
 
         # Initialize enhanced engines
         self.smc_engine = None
@@ -102,7 +108,9 @@ class ncOScoreEnhancedOrchestrator:
                 "backend": "in_memory",
                 "max_size_mb": 1024,  # Increased for trading data
                 "compression": True,
-                "gc_enabled": True
+                "gc_enabled": True,
+                "context_ttl_seconds": 3600,
+                "context_window": 5
             },
             "trading": {
                 "supported_timeframes": ["M5", "M15", "H1", "H4", "D1"],
@@ -171,9 +179,7 @@ class ncOScoreEnhancedOrchestrator:
             self.vector_store = VectorStore(store_path)
             self.vector_engine = ncOScoreVectorEngine(
                 dimensions=1536,
-                memory_manager=self.session_state,
-                vector_store=self.vector_store,
-            )
+
             self.logger.info("✅ Vector Engine initialized")
             self._vector_store_task = asyncio.create_task(self._autosave_vector_store())
 
@@ -537,9 +543,24 @@ class ncOScoreEnhancedOrchestrator:
         """Process generic files"""
         return {
             "status": "success",
-            "type": "generic", 
+            "type": "generic",
             "file": file_path,
             "processor": "generic_handler",
             "features": ["content_analysis", "metadata_extraction"],
             "next_actions": ["analyze", "convert", "process"]
         }
+
+    # ------------------------------------------------------------------
+    async def store_memory(self, namespace: str, data: Any, metadata: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+        """Expose memory storage for agents."""
+        entry = self.memory_manager.store_memory(namespace, data, metadata)
+        return {
+            "namespace": namespace,
+            "timestamp": entry.timestamp.isoformat(),
+            "metadata": entry.metadata,
+        }
+
+    async def get_memory(self, namespace: str, window_size: Optional[int] = None) -> List[Any]:
+        """Retrieve a context window for ``namespace``."""
+        entries = self.memory_manager.get_context_window(namespace, window_size)
+        return [e.data for e in entries]
