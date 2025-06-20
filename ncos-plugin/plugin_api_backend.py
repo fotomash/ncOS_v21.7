@@ -1,10 +1,10 @@
-
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 import yfinance as yf
 from datetime import datetime
 import json
+from pathlib import Path
 
 app = FastAPI(title="NCOS Live Market Data API", version="21.7.1")
 
@@ -15,6 +15,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+BASE_DIR = Path(__file__).parent  # current directory: ncos-plugin/
 
 def get_stock_data(ticker: str):
     try:
@@ -74,14 +76,14 @@ def forex_quote(pair: str = Query(...)):
 
 @app.get("/openapi.json")
 def openapi():
-    with open("ncos-plugin/ncos_openapi.json") as f:
+    with open(BASE_DIR / "ncos_openapi.json") as f:
         return JSONResponse(content=json.load(f))
 
 @app.get("/ai-plugin.json")
 def plugin_manifest():
-    with open("ncos-plugin/ncos_ai_plugin.json") as f:
+    with open(BASE_DIR / "ncos_ai_plugin.json") as f:
         return JSONResponse(content=json.load(f))
 
 @app.get("/logo.png")
 def logo():
-    return FileResponse("ncos-plugin/logo.png")
+    return FileResponse(BASE_DIR / "logo.png")
