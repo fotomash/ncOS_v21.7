@@ -1,5 +1,12 @@
-"""Cross-Domain Risk Analyzer for Bootstrap v14
-Analyzes and correlates risks across deployment and trading domains
+"""Cross-Domain Risk Analyzer for Bootstrap v14.
+
+Analyzes and correlates risks across deployment and trading domains.
+
+Parameters
+----------
+history_limit : int, optional
+    Maximum number of risk scores to keep in ``risk_history``. Defaults to
+    ``100``.
 """
 
 from __future__ import annotations
@@ -31,7 +38,8 @@ class RiskCorrelation:
 class CrossDomainRiskAnalyzer:
     """Analyze and correlate risks across multiple operational domains."""
 
-    def __init__(self) -> None:
+    def __init__(self, history_limit: int = 100) -> None:
+        self.history_limit = history_limit
         self.risk_factors: Dict[str, List[RiskFactor]] = {
             "deployment": [],
             "trading": [],
@@ -119,9 +127,13 @@ class CrossDomainRiskAnalyzer:
 
         overall_risk = float(np.mean(list(domain_scores.values()))) * correlation_multiplier
         overall_risk = min(overall_risk, 1.0)
+        rounded_risk = round(overall_risk, 3)
+        self.risk_history.append(rounded_risk)
+        if len(self.risk_history) > self.history_limit:
+            self.risk_history[:] = self.risk_history[-self.history_limit:]
 
         return {
-            "overall_risk": round(overall_risk, 3),
+            "overall_risk": rounded_risk,
             "domain_risks": domain_scores,
             "high_correlations": len([c for c in self.correlations if c.correlation_strength > 0.7]),
             "mitigation_available": sum(

@@ -367,9 +367,7 @@ def get_unified_risk_score() -> Dict[str, Any]:
             "risk_trend": "stable",
         }
 
-    result = _cross_domain_analyzer.get_unified_risk_score()
-    _cross_domain_analyzer.risk_history.append(result["overall_risk"])
-    return result
+    return _cross_domain_analyzer.get_unified_risk_score()
 
 
 def get_mitigation_recommendations() -> List[Dict[str, Any]]:
