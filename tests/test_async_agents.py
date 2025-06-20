@@ -2,6 +2,7 @@ import asyncio
 
 from agents.liquidity_sniper import LiquiditySniperAgent
 from agents.entry_executor_smc import EntryExecutorSMCAgent
+from drift_detection_agent import DriftDetectionAgent
 
 
 class DummyOrchestrator:
@@ -24,3 +25,11 @@ def test_entry_executor_trigger():
     agent = EntryExecutorSMCAgent(orch, {})
     asyncio.run(agent.handle_trigger("precision_entry", {"symbol": "TEST"}, {}))
     assert orch.calls == [("execution.entry.submitted", {"symbol": "TEST"}, {})]
+
+
+def test_drift_detection_trigger():
+    orch = DummyOrchestrator()
+    agent = DriftDetectionAgent(orch, {"drift_threshold": 0.5, "history_size": 2})
+    asyncio.run(agent.handle_trigger("embedding.generated", {"embedding": [0.0, 0.0]}, {}))
+    asyncio.run(agent.handle_trigger("embedding.generated", {"embedding": [1.0, 0.0]}, {}))
+    assert orch.calls == [("drift.detected", {"drift": 1.0, "source": None}, {})]

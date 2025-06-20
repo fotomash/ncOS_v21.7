@@ -19,6 +19,7 @@ import pandas as pd
 from smc_analysis_engine import ncOScoreSMCEngine
 from enhanced_vector_engine import ncOScoreVectorEngine, BrownVectorStoreIntegration
 from liquidity_analysis_engine import ncOScoreLiquidityEngine
+from drift_detection_agent import DriftDetectionAgent
 
 class MountPoint(Enum):
     """Unified mount point definitions"""
@@ -80,6 +81,7 @@ class ncOScoreEnhancedOrchestrator:
         self.vector_engine = None
         self.liquidity_engine = None
         self.brown_vector_store = None
+        self.drift_agent = None
 
     def _load_config(self, config_path: Optional[str]) -> Dict:
         """Load enhanced configuration"""
@@ -106,6 +108,10 @@ class ncOScoreEnhancedOrchestrator:
                 "default_timeframe": "H1",
                 "confluence_threshold": 0.6,
                 "signal_strength_threshold": 0.7
+            },
+            "drift_detection": {
+                "drift_threshold": 1.0,
+                "history_size": 20
             }
         }
 
@@ -144,7 +150,8 @@ class ncOScoreEnhancedOrchestrator:
             "smc_analyzer": "Smart Money Concepts analysis",
             "vector_processor": "Vector operations and similarity search",
             "liquidity_analyzer": "Liquidity analysis and sweep detection",
-            "confluence_calculator": "Multi-timeframe confluence scoring"
+            "confluence_calculator": "Multi-timeframe confluence scoring",
+            "drift_detector": "Embedding drift detection"
         }
 
         for agent_id, description in enhanced_agents.items():
@@ -174,6 +181,11 @@ class ncOScoreEnhancedOrchestrator:
             self.brown_vector_store = BrownVectorStoreIntegration(self.vector_engine)
             self.logger.info("✅ Brown Vector Store initialized")
 
+            # Initialize Drift Detection Agent
+            drift_cfg = self.config.get("drift_detection", {})
+            self.drift_agent = DriftDetectionAgent(self, drift_cfg)
+            self.logger.info("✅ Drift Detection Agent initialized")
+
             # Initialize Liquidity Engine
             self.liquidity_engine = ncOScoreLiquidityEngine(self.session_state)
             self.logger.info("✅ Liquidity Analysis Engine initialized")
@@ -192,7 +204,8 @@ class ncOScoreEnhancedOrchestrator:
             "smc_engine_ready": self.smc_engine is not None,
             "vector_engine_ready": self.vector_engine is not None,
             "liquidity_engine_ready": self.liquidity_engine is not None,
-            "brown_store_ready": self.brown_vector_store is not None
+            "brown_store_ready": self.brown_vector_store is not None,
+            "drift_agent_ready": self.drift_agent is not None
         }
 
         failed = [k for k, v in validations.items() if not v]
@@ -251,6 +264,17 @@ class ncOScoreEnhancedOrchestrator:
             if self.vector_engine:
                 vector_result = await self.vector_engine.embed_market_data(df, f"market_data_{file_key}")
                 analysis_results["vector_analysis"] = vector_result
+
+                # Forward embedding to drift detector
+                if self.drift_agent and vector_result.get("embedding") is not None:
+                    await self.drift_agent.handle_trigger(
+                        "embedding.generated",
+                        {
+                            "embedding": vector_result["embedding"],
+                            "key": f"market_data_{file_key}",
+                        },
+                        {},
+                    )
 
                 # Pattern matching
                 pattern_result = await self.vector_engine.pattern_matching(df, "market_structure")

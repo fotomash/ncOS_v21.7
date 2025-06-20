@@ -14,8 +14,9 @@ class ncOScoreVectorEngine:
         self.vectors: Dict[str, List[float]] = {}
 
     async def embed_market_data(self, df: Any, key: str) -> Dict[str, Any]:  # pragma: no cover - stub
-        self.vectors[key] = [0.0] * self.dimensions
-        return {"vector_id": key, "status": "success"}
+        vector = [0.0] * self.dimensions
+        self.vectors[key] = vector
+        return {"vector_id": key, "embedding": vector, "status": "success"}
 
     async def pattern_matching(self, df: Any, pattern: str) -> Dict[str, Any]:  # pragma: no cover - stub
         return {"status": "success", "similar_patterns": []}
