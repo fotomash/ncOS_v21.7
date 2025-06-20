@@ -12,6 +12,7 @@ We welcome community participation through issues and pull requests. Please read
 
 - Fork the repository and create a topic branch for your change.
 - Write tests for any new features or bug fixes when applicable.
+- Install test dependencies with `pip install -r requirements-dev.txt`.
 - Ensure `pytest` runs successfully before submitting.
 - Describe your changes in the pull request and reference any related issues.
 
