@@ -95,6 +95,20 @@ summary = asyncio.run(summarize_workspace_memory(state))
 print(summary)
 ```
 
+## Predictive Engine
+
+NCOS includes an optional predictive engine that scores every trade setup using
+a seven-factor model. Setups are graded from **A** to **D**, enabling the system
+to filter low-quality trades and adjust risk dynamically. Detailed
+documentation can be found in
+[PREDICTIVE_ENGINE_GUIDE.md](to_integrate/PREDICTIVE_ENGINE_GUIDE.md).
+
+To validate your environment and run a quick backtest, execute:
+
+```bash
+python scripts/quick_start_predictive.py
+```
+
 ## Contributing
 
 For guidelines on submitting issues and pull requests, see [CONTRIBUTING.md](CONTRIBUTING.md).
