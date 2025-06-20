@@ -1,0 +1,149 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "NCOS Live Market Data API",
+    "version": "21.7.1",
+    "description": "Provides live market data for stocks, crypto, and forex, powered by the NCOS system."
+  },
+  "paths": {
+    "/stock/quote": {
+      "get": {
+        "operationId": "getStockQuote",
+        "summary": "Get a real-time stock quote",
+        "parameters": [
+          {
+            "name": "ticker",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The stock ticker symbol (e.g., 'AAPL')."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with stock data.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StockResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/crypto/quote": {
+      "get": {
+        "operationId": "getCryptoQuote",
+        "summary": "Get a real-time cryptocurrency price",
+        "parameters": [
+          {
+            "name": "symbol",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The crypto symbol (e.g., 'BTC-USD')."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with crypto data.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CryptoResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/forex/quote": {
+      "get": {
+        "operationId": "getForexQuote",
+        "summary": "Get a real-time forex exchange rate",
+        "parameters": [
+          {
+            "name": "pair",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The currency pair (e.g., 'EURUSD=X')."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with forex data.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ForexResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "StockResponse": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          },
+          "change_percent": {
+            "type": "number"
+          },
+          "timestamp": {
+            "type": "string"
+          }
+        }
+      },
+      "CryptoResponse": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          },
+          "change_percent": {
+            "type": "number"
+          },
+          "market_cap": {
+            "type": "number"
+          }
+        }
+      },
+      "ForexResponse": {
+        "type": "object",
+        "properties": {
+          "pair": {
+            "type": "string"
+          },
+          "rate": {
+            "type": "number"
+          },
+          "timestamp": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

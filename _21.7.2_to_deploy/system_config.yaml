@@ -1,0 +1,23 @@
+# NCOS System Configuration
+api:
+  host: "0.0.0.0"
+  port: 8001
+
+journal:
+  path: "logs/trade_journal.jsonl"
+  backup_path: "logs/backup/"
+  max_size_mb: 100
+
+voice:
+  confidence_threshold: 0.7
+  default_symbol: "XAUUSD"
+  default_timeframe: "H4"
+
+zbar:
+  config_path: "config/zbar_config.yaml"
+  auto_analyze: false
+
+dashboard:
+  port: 8501
+  refresh_interval: 5
+  theme: "dark"
