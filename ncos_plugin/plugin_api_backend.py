@@ -9,7 +9,6 @@ from pathlib import Path
 import json
 import os
 import requests
-from fastapi import Query
 
 # Import your custom Finnhub client
 from ncos_plugin.finnhub_data_fetcher import finnhub_client
