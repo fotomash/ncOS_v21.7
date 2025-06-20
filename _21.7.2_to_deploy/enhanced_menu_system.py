@@ -4,6 +4,7 @@ ncOS Unified v5.0 - Enhanced Menu with Voice Integration
 Extends existing menu_system.py with voice command support
 """
 
+from typing import Dict, List, Any
 from menu_system import MenuSystem
 from voice_tag_parser import VoiceTagParser, VoiceTag
 
