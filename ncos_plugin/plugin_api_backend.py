@@ -5,6 +5,8 @@ import yfinance as yf
 from datetime import datetime
 from pathlib import Path
 import json
+import requests
+from fastapi import Query
 
 # Import your custom Finnhub client
 from ncos_plugin.finnhub_data_fetcher import finnhub_client
@@ -21,6 +23,19 @@ app.add_middleware(
 
 BASE_DIR = Path(__file__).parent
 
+TWELVE_DATA_API_KEY = "6a29ddba6b9c4a91b969704fcc1b325f"  # or use os.environ.get("TWELVE_DATA_API_KEY")
+
+def get_twelvedata_price(symbol: str):
+    url = f"https://api.twelvedata.com/price?symbol={symbol}&apikey={TWELVE_DATA_API_KEY}"
+    response = requests.get(url)
+    data = response.json()
+    if "price" in data:
+        return {
+            "symbol": symbol,
+            "price": float(data["price"])
+        }
+    else:
+        raise HTTPException(status_code=500, detail=f"Twelve Data error: {data.get('message', 'Unknown error')}")
 # ---- YFinance Endpoints ----
 def get_stock_data(ticker: str):
     try:
@@ -108,3 +123,7 @@ def plugin_manifest():
 @app.get("/logo.png")
 def logo():
     return FileResponse(BASE_DIR / "logo.png")
+
+@app.get("/twelvedata/quote")
+def twelvedata_quote(symbol: str = Query(..., description="Symbol, e.g. 'EUR/USD', 'XAU/USD', 'BTC/USD'")):
+    return get_twelvedata_price(symbol)
