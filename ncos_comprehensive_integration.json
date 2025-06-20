@@ -137,54 +137,6 @@
       "knowledge_base_access": "Connect to intelligent knowledge system",
       "enhanced_ui": "Support dynamic menu and conversation systems"
     },
-    "new_specialized_agents": {
-      "vector_data_processor": {
-        "class": "VectorDataProcessorAgent",
-        "module": "agents.data.vector_processor",
-        "priority": 4,
-        "type": "data_processing",
-        "source": "market_data_vector_native_bundle",
-        "capabilities": [
-          "real_time_vector_processing",
-          "market_data_optimization"
-        ]
-      },
-      "zanflow_orchestrator": {
-        "class": "ZanflowOrchestratorAgent",
-        "module": "agents.workflows.zanflow_orchestrator",
-        "priority": 3,
-        "type": "workflow_management",
-        "source": "zanflow_system_files",
-        "capabilities": [
-          "prompt_engineering",
-          "logical_block_processing",
-          "structural_flow"
-        ]
-      },
-      "knowledge_intelligence": {
-        "class": "KnowledgeIntelligenceAgent",
-        "module": "agents.intelligence.knowledge_agent",
-        "priority": 5,
-        "type": "knowledge_management",
-        "source": "knowledge_base.json + asset_detection.json",
-        "capabilities": [
-          "asset_detection",
-          "knowledge_retrieval",
-          "context_analysis"
-        ]
-      },
-      "interaction_manager": {
-        "class": "InteractionManagerAgent",
-        "module": "agents.interface.interaction_manager",
-        "priority": 6,
-        "type": "user_interaction",
-        "source": "menu_responses.json + conversation_starters.json",
-        "capabilities": [
-          "dynamic_menus",
-          "conversation_flow",
-          "response_generation"
-        ]
-      }
-    }
+    "new_specialized_agents": {}
   }
 }
