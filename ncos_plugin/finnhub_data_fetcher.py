@@ -32,7 +32,7 @@ M1_SAVE_DIR.mkdir(parents=True, exist_ok=True) # Ensure directory exists
 try:
     if not FINNHUB_API_KEY or len(FINNHUB_API_KEY) < 20:  # Basic check for placeholder/invalid key
         logger.warning(
-            "Invalid or missing Finnhub API Key ('%s'). Finnhub client not initialized.",
+            "Invalid or missing FINNHUB_API_KEY ('%s'). Finnhub client not initialized.",
             FINNHUB_API_KEY,
         )
     else:
@@ -71,7 +71,11 @@ def _resolve_symbol_type(symbol: str) -> str:
 def _fetch_raw_candles(symbol: str, resolution: str, start_unix: int, end_unix: int) -> dict:
     """ Fetches raw candle data from appropriate Finnhub endpoint. """
     if not finnhub_client:
-        return {'status': 'error', 'source': 'finnhub', 'message': 'Finnhub client not initialized'}
+        return {
+            'status': 'error',
+            'source': 'finnhub',
+            'message': 'Finnhub client not initialized (missing FINNHUB_API_KEY)'
+        }
 
     sym_type = _resolve_symbol_type(symbol)
     logger.info(
