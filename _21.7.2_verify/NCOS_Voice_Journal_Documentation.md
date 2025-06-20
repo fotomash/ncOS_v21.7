@@ -140,9 +140,9 @@ ncos-voice-journal/
 │   └── ncos_voice_unified.py
 ├── api/
 │   ├── voice_api_routes.py
-│   └── journal_api.py
+│   └── ncos_zbar_api.py
 ├── dashboard/
-│   └── zbar_journal_dashboard.py
+│   └── voice_command_dashboard.py
 ├── config/
 │   ├── zbar_config.yaml
 │   └── system_config.yaml
@@ -185,7 +185,7 @@ menu = VoiceEnabledMenuSystem(config)
 menu.execute_voice_action("voice_mark_setup", {})
 ```
 
-### 4. Journal API (`journal_api.py`)
+### 4. Journal API (`ncos_zbar_api.py`)
 
 RESTful endpoints for journal operations:
 
@@ -193,11 +193,10 @@ RESTful endpoints for journal operations:
 # API endpoints
 POST   /journal/append      # Add new entry
 GET    /journal/query       # Query entries
-GET    /journal/recap       # Session recap
-DELETE /journal/entry/{id}  # Remove entry
+GET    /journal/stats       # Journal statistics
 ```
 
-### 5. Streamlit Dashboard (`zbar_journal_dashboard.py`)
+### 5. Streamlit Dashboard (`voice_command_dashboard.py`)
 
 Interactive UI for journal viewing and strategy re-runs.
 
@@ -307,8 +306,8 @@ def initialize_system():
 
     print("\n✅ System initialization complete!")
     print("\nNext steps:")
-    print("1. Start the API server: python api/main.py")
-    print("2. Launch dashboard: streamlit run dashboard/zbar_journal_dashboard.py")
+    print("1. Start the API server: python ncos_zbar_api.py")
+    print("2. Launch dashboard: streamlit run voice_command_dashboard.py")
     print("3. Run voice interface: python core/ncos_voice_unified.py")
 
 if __name__ == "__main__":
@@ -317,7 +316,7 @@ if __name__ == "__main__":
 
 ### Step 3: Create Main API Server
 
-Create `api/main.py`:
+Create `ncos_zbar_api.py`:
 
 ```python
 #!/usr/bin/env python3
@@ -407,7 +406,7 @@ pip install -r requirements.txt -q
 
 # Start API server in background
 echo "Starting API server..."
-python api/main.py &
+python ncos_zbar_api.py &
 API_PID=$!
 
 # Wait for API to start
@@ -415,7 +414,7 @@ sleep 3
 
 # Start Streamlit dashboard
 echo "Starting dashboard..."
-streamlit run dashboard/zbar_journal_dashboard.py &
+streamlit run voice_command_dashboard.py &
 DASHBOARD_PID=$!
 
 # Start voice interface
@@ -552,17 +551,17 @@ Query journal entries with filters.
 - `end_date`: End date (ISO format)
 - `limit`: Maximum results (default: 100)
 
-#### GET /journal/recap/{session_id}
-Get session recap with summary statistics.
+#### GET /journal/stats
+Get overall journal statistics.
 
 **Response:**
 ```json
 {
-  "session_id": "london_2025",
-  "trade_count": 5,
-  "symbols": ["XAUUSD", "EURUSD"],
-  "avg_maturity": 0.82,
-  "entries": [...]
+  "total_trades": 5,
+  "passed_trades": 3,
+  "failed_trades": 2,
+  "average_maturity_score": 0.82,
+  "symbol_distribution": {"XAUUSD": 3, "EURUSD": 2}
 }
 ```
 
@@ -662,7 +661,7 @@ curl http://localhost:8001/health
 lsof -i :8001
 
 # Restart API server
-python api/main.py
+python ncos_zbar_api.py
 ```
 
 #### 3. Journal File Not Found
@@ -788,7 +787,7 @@ self.action_patterns.extend([
 Send journal entries to external systems:
 
 ```python
-# In journal_api.py
+# In ncos_zbar_api.py
 @router.post("/journal/webhook")
 async def setup_webhook(webhook_url: str):
     """Configure webhook for new entries"""
@@ -880,7 +879,7 @@ For support or contributions, please refer to the project repository.
 
 🚀 Launch Commands:
 - ./launch.sh                          → Start everything
-- python api/main.py                   → API only
+- python ncos_zbar_api.py              → API only
 - streamlit run dashboard/...          → Dashboard only
 - python core/ncos_voice_unified.py    → Voice interface
 
@@ -888,7 +887,7 @@ For support or contributions, please refer to the project repository.
 - POST   /voice/command                → Process voice command
 - POST   /journal/append               → Add entry
 - GET    /journal/query                → Search entries
-- GET    /journal/recap/{session}      → Session summary
+- GET    /journal/stats                → Journal statistics
 
 🔧 Configuration Files:
 - config/system_config.yaml            → Main configuration
