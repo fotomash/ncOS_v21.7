@@ -1,7 +1,7 @@
 
 system:
   name: "NCOS"
-  version: "v21.0.0"
+  version: "v21.7.1"
   environment: "production"
 
 agents:

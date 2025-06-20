@@ -1,6 +1,6 @@
 #!/bin/bash
-# NCOS v21 Production Deployment Script
-# Automated setup and deployment for NCOS v21 environment
+# NCOS v21.7.1 Production Deployment Script
+# Automated setup and deployment for NCOS v21.7.1 environment
 
 set -e  # Exit on error
 
@@ -11,7 +11,7 @@ YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
 # Configuration
-NCOS_VERSION="21.0"
+NCOS_VERSION="21.7.1"
 DEPLOYMENT_DIR="./ncos_v21_deployment"
 LOG_DIR="$DEPLOYMENT_DIR/logs"
 DATA_DIR="$DEPLOYMENT_DIR/data"
@@ -19,7 +19,7 @@ CONFIG_DIR="$DEPLOYMENT_DIR/config"
 STATE_DIR="$DEPLOYMENT_DIR/state"
 
 echo -e "${GREEN}======================================"
-echo "NCOS v21 Production Deployment Script"
+echo "NCOS v21.7.1 Production Deployment Script"
 echo "======================================${NC}"
 echo "Version: $NCOS_VERSION"
 echo "Deployment Directory: $DEPLOYMENT_DIR"
@@ -135,7 +135,7 @@ setup_configurations() {
     # Create default bootstrap.yaml if not exists
     if [ ! -f "$CONFIG_DIR/bootstrap.yaml" ]; then
         cat > "$CONFIG_DIR/bootstrap.yaml" << EOF
-version: '21.0'
+version: '21.7.1'
 system:
   name: 'NCOS'
   mode: 'production'
@@ -246,7 +246,7 @@ create_control_scripts() {
     # Start script
     cat > "$DEPLOYMENT_DIR/start_ncos.sh" << EOF
 #!/bin/bash
-echo "Starting NCOS v21..."
+echo "Starting NCOS v21.7.1..."
 cd "$DEPLOYMENT_DIR"
 source venv/bin/activate
 export PYTHONPATH="$DEPLOYMENT_DIR/agents:$PYTHONPATH"
@@ -258,7 +258,7 @@ EOF
     # Stop script
     cat > "$DEPLOYMENT_DIR/stop_ncos.sh" << EOF
 #!/bin/bash
-echo "Stopping NCOS v21..."
+echo "Stopping NCOS v21.7.1..."
 if [ -f "$DEPLOYMENT_DIR/ncos.pid" ]; then
     PID=\$(cat "$DEPLOYMENT_DIR/ncos.pid")
     if ps -p \$PID > /dev/null; then
@@ -340,7 +340,7 @@ main() {
 
     # Deployment summary
     echo -e "${GREEN}======================================"
-    echo "NCOS v21 Deployment Complete!"
+    echo "NCOS v21.7.1 Deployment Complete!"
     echo "======================================${NC}"
     echo ""
     echo "Deployment directory: $DEPLOYMENT_DIR"
