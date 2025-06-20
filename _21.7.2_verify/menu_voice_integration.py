@@ -16,7 +16,8 @@ class VoiceEnabledMenuSystem(EnhancedMenuSystem):
     def __init__(self, orchestrator: Any, config: Optional[Dict] | None = None):
         super().__init__(orchestrator)
         self.config = config or {}
-        self.voice_parser = VoiceTagParser()
+        parser_cfg = self.config.get("voice_parser", {})
+        self.voice_parser = VoiceTagParser(config=parser_cfg)
         self.api_base = self.config.get("api_base", "http://localhost:8001")
 
         # Add voice menu to main menu

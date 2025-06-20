@@ -28,7 +28,23 @@ class VoiceTag:
 class VoiceTagParser:
     """Parse voice commands into structured tags"""
 
-    def __init__(self):
+    def __init__(self, config: Optional[Dict[str, Any]] = None):
+        """Initialize the parser with optional configuration."""
+        # Default configuration values
+        self.config = {
+            "confidence_threshold": 0.7,
+            "default_symbol": None,
+            "default_timeframe": None,
+            "bias_keywords": {
+                "bullish": ["bullish", "long", "buy"],
+                "bearish": ["bearish", "short", "sell"],
+            },
+        }
+
+        if config:
+            # Merge user supplied configuration
+            self.config.update(config)
+
         # Load spaCy model (can use en_core_web_sm for lighter weight)
         try:
             self.nlp = spacy.load("en_core_web_sm")
@@ -62,6 +78,19 @@ class VoiceTagParser:
             "ny": "new york"
         }
 
+        # Apply bias keywords from configuration
+        bias_keywords = self.config.get("bias_keywords") or {}
+        if bias_keywords:
+            self.patterns["bias"] = sorted({w for words in bias_keywords.values() for w in words})
+            for bias, words in bias_keywords.items():
+                for word in words:
+                    self.aliases[word] = bias
+
+        # Convenience attributes
+        self.confidence_threshold = self.config.get("confidence_threshold", 0.7)
+        self.default_symbol = self.config.get("default_symbol")
+        self.default_timeframe = self.config.get("default_timeframe")
+
     def parse(self, voice_input: str) -> VoiceTag:
         """Parse voice input into structured tag"""
         voice_input = voice_input.lower().strip()
@@ -71,8 +100,8 @@ class VoiceTagParser:
         )
 
         # Extract entities
-        tag.symbol = self._extract_symbol(voice_input)
-        tag.timeframe = self._extract_timeframe(voice_input)
+        tag.symbol = self._extract_symbol(voice_input) or self.default_symbol
+        tag.timeframe = self._extract_timeframe(voice_input) or self.default_timeframe
         tag.bias = self._extract_bias(voice_input)
         tag.action = self._extract_action(voice_input)
         tag.session = self._extract_session(voice_input)
@@ -182,8 +211,8 @@ class VoiceTagParser:
         """Convert voice tag to journal entry format"""
         return {
             "timestamp": tag.timestamp,
-            "symbol": tag.symbol,
-            "timeframe": tag.timeframe,
+            "symbol": tag.symbol or self.default_symbol,
+            "timeframe": tag.timeframe or self.default_timeframe,
             "bias": tag.bias,
             "session": tag.session,
             "maturity_score": tag.maturity_score,
@@ -209,8 +238,8 @@ class VoiceTagParser:
         menu_action = {
             "action": action_mapping.get(tag.action, "append_journal"),
             "params": {
-                "symbol": tag.symbol,
-                "timeframe": tag.timeframe,
+                "symbol": tag.symbol or self.default_symbol,
+                "timeframe": tag.timeframe or self.default_timeframe,
                 "context": {
                     "bias": tag.bias,
                     "session": tag.session,

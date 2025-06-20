@@ -443,18 +443,19 @@ chmod +x launch.sh
 The voice parser can be customized with confidence thresholds and default values:
 
 ```python
-# In voice_tag_parser.py
-class VoiceTagParser:
-    def __init__(self, config=None):
-        self.config = config or {
-            "confidence_threshold": 0.7,
-            "default_symbol": "XAUUSD",
-            "default_timeframe": "H4",
-            "bias_keywords": {
-                "bullish": ["bullish", "long", "buy", "upward"],
-                "bearish": ["bearish", "short", "sell", "downward"]
-            }
-        }
+from voice_tag_parser import VoiceTagParser
+
+config = {
+    "confidence_threshold": 0.7,
+    "default_symbol": "XAUUSD",
+    "default_timeframe": "H4",
+    "bias_keywords": {
+        "bullish": ["bullish", "long", "buy", "upward"],
+        "bearish": ["bearish", "short", "sell", "downward"],
+    },
+}
+
+parser = VoiceTagParser(config=config)
 ```
 
 ### Journal Configuration
