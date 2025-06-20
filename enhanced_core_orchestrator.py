@@ -217,9 +217,23 @@ class ncOScoreEnhancedOrchestrator:
 
     async def _process_trading_csv(self, file_path: str) -> Dict:
         """Process CSV with full trading analysis"""
+        self.logger.info(f"Processing trading CSV: {file_path}")
         try:
             # Load CSV data
-            df = pd.read_csv(file_path)
+            try:
+                df = pd.read_csv(file_path)
+            except (pd.errors.ParserError, pd.errors.EmptyDataError) as e:
+                msg = f"CSV parsing error for {file_path}: {e}"
+                self.logger.error(msg)
+                return {"status": "error", "error": msg}
+
+            # Validate required columns
+            required_columns = ["timestamp", "open", "high", "low", "close", "volume"]
+            missing_columns = [c for c in required_columns if c not in df.columns]
+            if missing_columns:
+                msg = f"Missing required columns: {missing_columns}"
+                self.logger.error(msg)
+                raise ValueError(msg)
 
             # Store in session state
             file_key = Path(file_path).stem
@@ -258,6 +272,8 @@ class ncOScoreEnhancedOrchestrator:
             # Store analysis in session
             self.session_state.active_analyses[file_key] = analysis_results
 
+            self.logger.info(f"Finished processing trading CSV: {file_path}")
+
             return {
                 "status": "success",
                 "type": "trading_csv",
@@ -278,6 +294,7 @@ class ncOScoreEnhancedOrchestrator:
             }
 
         except Exception as e:
+            self.logger.error(f"Error processing trading CSV {file_path}: {e}")
             return {"status": "error", "error": str(e)}
 
     def _calculate_overall_confluence(self, analysis_results: Dict) -> float:
