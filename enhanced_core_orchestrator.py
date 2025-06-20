@@ -20,6 +20,7 @@ from smc_analysis_engine import ncOScoreSMCEngine
 from enhanced_vector_engine import ncOScoreVectorEngine, BrownVectorStoreIntegration
 from vector_store import VectorStore
 from liquidity_analysis_engine import ncOScoreLiquidityEngine
+
 class MountPoint(Enum):
     """Unified mount point definitions"""
     CUSTOM_GPT = "/mnt/data"
@@ -85,6 +86,7 @@ class ncOScoreEnhancedOrchestrator:
         self.vector_engine = None
         self.liquidity_engine = None
         self.brown_vector_store = None
+        self.drift_agent = None
 
 
     def _load_config(self, config_path: Optional[str]) -> Dict:

@@ -22,6 +22,7 @@ class ncOScoreVectorEngine:
 
     async def embed_market_data(self, df: Any, key: str) -> Dict[str, Any]:  # pragma: no cover - stub
 
+
     async def pattern_matching(self, df: Any, pattern: str) -> Dict[str, Any]:  # pragma: no cover - stub
         return {"status": "success", "similar_patterns": []}
 
