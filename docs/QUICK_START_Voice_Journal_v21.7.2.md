@@ -69,3 +69,22 @@ That's it! You're now tracking trades with voice commands.
 - `mark gold bullish h4 london session`
 - `analyze eurusd 15 minute`
 - `check all trades today`
+
+### Custom Configuration
+You can adjust parser behavior by passing a configuration dictionary:
+
+```python
+from voice_tag_parser import VoiceTagParser
+
+config = {
+    "confidence_threshold": 0.6,
+    "default_symbol": "EURUSD",
+    "default_timeframe": "H1",
+    "bias_keywords": {
+        "bullish": ["bullish", "buy", "long"],
+        "bearish": ["bearish", "sell", "short"],
+    },
+}
+
+parser = VoiceTagParser(config=config)
+```
