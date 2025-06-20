@@ -81,10 +81,6 @@ setup(
     },
     entry_points={
         "console_scripts": [
-            "ncos=ncOS.enhanced_cli:main",
-            "ncos-launch=ncOS.agents.master_orchestrator:main",
-            "ncos-validate=ncOS.utils.validation:main",
-            "ncos-monitor=ncOS.monitoring.dashboard:main",
         ],
     },
     include_package_data=True,

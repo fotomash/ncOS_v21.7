@@ -73,7 +73,7 @@ python setup.py install
 ### **Basic Launch**
 ```bash
 # Launch complete NCOS v21.7.1 system
-python -m ncos.agents.master_orchestrator \
+python -m ncOS.ncos_launcher \
   --mode=enhanced_trading \
   --components=all \
   --strategies=all \
@@ -83,7 +83,7 @@ python -m ncos.agents.master_orchestrator \
 ### **Component-Specific Launch**
 ```bash
 # Launch with specific components
-python -m ncos.agents.master_orchestrator \
+python -m ncOS.ncos_launcher \
   --mode=trading \
   --enable_vector_processing \
   --enable_zanflow_orchestration \

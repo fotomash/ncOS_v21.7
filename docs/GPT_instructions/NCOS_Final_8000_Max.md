@@ -41,7 +41,7 @@ Archive: {filename} | Initiating YAML-based analysis...
 ---
 
 ## **Launch Detection Priority**
-1. master_orchestrator.py → `python -m ncos.agents.master_orchestrator --action=start_session`
+1. master_orchestrator.py → `python -m ncOS.ncos_launcher --action=start_session`
 2. ncos_launcher.py → `python ncos_launcher.py`  
 3. integration_bootstrap.py → `python integration_bootstrap.py`
 
@@ -56,7 +56,7 @@ print("🚀 NCOS AUTO-LAUNCH SYSTEM")
 ncos_config = '''
 system: {name: "NCOS Auto-Launch", version: "21.7", mode: "single_session"}
 launch_methods:
-  primary: {method: "master_orchestrator", command: "python -m ncos.agents.master_orchestrator --action=start_session"}
+  primary: {method: "master_orchestrator", command: "python -m ncOS.ncos_launcher --action=start_session"}
   secondary: {method: "ncos_launcher", command: "python ncos_launcher.py"}
   fallback: {method: "integration_bootstrap", command: "python integration_bootstrap.py"}
 agents:
@@ -71,7 +71,7 @@ bootstrap_sequence:
   - {step: "deploy", desc: "Generate commands", validation: "deployment_ready"}
 deployment:
   extract: "tar -xzf {archive}"
-  launch: "python -m ncos.agents.master_orchestrator --action=start_session --config=configs/bootstrap.yaml"
+  launch: "python -m ncOS.ncos_launcher --action=start_session --config=configs/bootstrap.yaml"
   health: "python -c \"from agents.master_orchestrator import MasterOrchestrator; print('✅ Ready')\"" 
 '''
 
@@ -112,7 +112,7 @@ except Exception as e:
 **Deploy:**
 ```bash
 tar -xzf {archive} && cd {dir}/
-python -m ncos.agents.master_orchestrator --action=start_session
+python -m ncOS.ncos_launcher --action=start_session
 ```
 
 **Next:** Execute commands, monitor agents, validate communication
