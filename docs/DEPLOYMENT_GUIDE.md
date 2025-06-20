@@ -4,6 +4,7 @@
  - Python 3.10+
 - 4GB RAM minimum (8GB recommended)
 - 10GB disk space
+- Environment variables `FINNHUB_API_KEY` and `TWELVE_DATA_API_KEY` for market data access
 
 ## Deployment Steps
 

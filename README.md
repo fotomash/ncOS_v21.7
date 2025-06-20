@@ -28,12 +28,16 @@ cd scripts && python integration_bootstrap.py
 
 ## Environment Variables
 
-Set API keys for external data sources before running the market data API:
+Set API keys for external data sources before running the market data API. The
+service expects the following environment variables:
 
 ```bash
-export FINNHUB_API_KEY="your-finnhub-key"
-export TWELVE_DATA_API_KEY="your-twelvedata-key"
+export FINNHUB_API_KEY="<your-finnhub-key>"
+export TWELVE_DATA_API_KEY="<your-twelvedata-key>"
 ```
+
+If these variables are not defined the market data plugin will fail to fetch
+quotes from Finnhub or Twelve Data.
 
 ## Running Tests
 
