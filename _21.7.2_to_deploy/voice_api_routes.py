@@ -5,7 +5,7 @@ Voice Command API Extensions for ZBAR System
 
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, List
 import speech_recognition as sr
 from enhanced_menu_system import EnhancedMenuSystem
 
