@@ -9,12 +9,15 @@ import numpy as np
 from datetime import datetime
 from typing import Dict, List, Optional, Any
 
+from production_logging import get_logger
+
 class RiskGuardianAgent:
     '''Advanced risk management agent with veto power'''
 
     def __init__(self, config: Dict):
         self.config = config
         self.agent_id = "risk_guardian"
+        self.logger = get_logger(f"agent.{self.agent_id}", agent_id=self.agent_id)
         self.active = True
         self.analysis_history = []
         self.veto_power = config.get('veto_power', True)
@@ -210,7 +213,9 @@ class RiskGuardianAgent:
                 if risk_type in risk_assessment:
                     contribution = risk_assessment[risk_type].get('risk_score', 0) * weight
                     contributions[risk_type] = contribution
-                    # TODO: log contribution value here
+                    self.logger.debug(
+                        f"{risk_type} contribution: {contribution:.2f}",
+                    )
             self.analysis_history.append({'component_contributions': contributions})
 
         return risk_score
