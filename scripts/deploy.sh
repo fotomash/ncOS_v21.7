@@ -100,6 +100,10 @@ numpy==1.24.3
 pydantic==2.0.3
 pyarrow==12.0.1
 python-dateutil==2.8.2
+spacy
+speechrecognition
+pyaudio
+streamlit
 EOF
 
     # Install dependencies

@@ -11,3 +11,7 @@ uvicorn[standard]
 yfinance
 finnhub-python==2.4.23
 requests
+spacy
+speechrecognition
+pyaudio
+streamlit
