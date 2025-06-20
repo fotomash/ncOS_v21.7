@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "NCOS Live Market Data API",
-    "version": "21.7.1",
+    "version": "21.7.2",
     "description": "Provides live market data for stocks, crypto, and forex, powered by the NCOS system."
   },
   "paths": {

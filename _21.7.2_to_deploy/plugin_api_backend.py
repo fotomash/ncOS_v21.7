@@ -9,7 +9,7 @@ import json
 app = FastAPI(
     title="NCOS Live Market Data API",
     description="Provides live market data for stocks, crypto, and forex, powered by the NCOS system.",
-    version="21.7.1"
+    version="21.7.2"
 )
 
 # Allow CORS for development and for the LLM platform to access the API
