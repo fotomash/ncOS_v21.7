@@ -7,7 +7,7 @@
 
 ### 1. Primary Target (Recommended)
 ```bash
-python -m ncos.agents.master_orchestrator --action=start_session
+python -m ncOS.ncos_launcher --action=start_session
 ```
 - **Source**: ncos_execution_guide.yaml
 - **Purpose**: Initialize full NCOS system with orchestration
@@ -36,7 +36,7 @@ python integration_bootstrap.py
 - **ncos_production_agents.yaml** - Agent specifications
 
 ## Auto-Detection Logic:
-1. Check for ncos.agents.master_orchestrator module
+1. Check for ncOS.ncos_launcher module
 2. Check for ncos.launch module
 3. Check for integration_bootstrap.py
 4. Generate bootstrap script if none found

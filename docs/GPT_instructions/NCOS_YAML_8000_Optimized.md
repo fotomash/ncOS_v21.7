@@ -34,15 +34,15 @@ agents:
   master_orchestrator:
     enabled: true
     priority: 1
-    launch_cmd: "python -m ncos.agents.master_orchestrator --action=start_session"
+    launch_cmd: "python -m ncOS.ncos_launcher --action=start_session"
   session_state_manager:
     enabled: true
     priority: 2
-    launch_cmd: "python -m ncos.agents.session_state_manager"
+    launch_cmd: "python -m ncOS.ncos_launcher --agent session_state_manager"
   risk_guardian:
     enabled: true
     priority: 3
-    launch_cmd: "python -m ncos.agents.risk_guardian"
+    launch_cmd: "python -m ncOS.ncos_launcher --agent risk_guardian"
 
 bootstrap_sequence:
   - {step: "system_init", desc: "Initialize NCOS core", validation: "system_ready"}
@@ -56,7 +56,7 @@ bootstrap_sequence:
 deployment:
   setup: "tar -xzf ncOS_v21_*.tar.gz && cd ncOS_v21/"
   install: "pip install -r requirements.txt"
-  launch_primary: "python -m ncos.agents.master_orchestrator --action=start_session --config=configs/bootstrap.yaml"
+  launch_primary: "python -m ncOS.ncos_launcher --action=start_session --config=configs/bootstrap.yaml"
   launch_secondary: "python ncos_launcher.py"
   launch_fallback: "python -c \"from agents.master_orchestrator import MasterOrchestrator; MasterOrchestrator().start_session()\""
 
@@ -108,7 +108,7 @@ tar -xzf ncOS_v21_*.tar.gz && cd ncOS_v21/
 pip install -r requirements.txt
 
 # Launch NCOS
-python -m ncos.agents.master_orchestrator --action=start_session --config=configs/bootstrap.yaml
+python -m ncOS.ncos_launcher --action=start_session --config=configs/bootstrap.yaml
 ```
 
 **Generated Configs:**

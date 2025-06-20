@@ -11,7 +11,7 @@ enhanced_ncos_agents:
     - master_orchestrator
     - session_state_manager
     enabled: true
-    module: ncos.agents.interface.interaction_manager
+    module: agents.interface.interaction_manager
     priority: 6
     triggers:
     - user_interaction
@@ -30,7 +30,7 @@ enhanced_ncos_agents:
     - master_orchestrator
     - vector_data_processor
     enabled: true
-    module: ncos.agents.intelligence.knowledge_agent
+    module: agents.intelligence.knowledge_agent
     priority: 5
     triggers:
     - asset_detection_request
@@ -43,7 +43,7 @@ enhanced_ncos_agents:
     - zanflow_integration
     - vector_data_access
     - knowledge_base_connection
-    module: ncos.agents.master_orchestrator
+    module: agents.master_orchestrator
     priority: 1
     type: coordination
   session_state_manager:
@@ -53,7 +53,7 @@ enhanced_ncos_agents:
     - conversation_flow
     - enhanced_persistence
     - interaction_tracking
-    module: ncos.agents.session_state_manager
+    module: agents.session_state_manager
     priority: 2
     type: state_management
   vector_data_processor:
@@ -66,7 +66,7 @@ enhanced_ncos_agents:
     dependencies:
     - master_orchestrator
     enabled: true
-    module: ncos.agents.data.vector_processor
+    module: agents.data.vector_processor
     priority: 4
     triggers:
     - market_data_update
@@ -83,7 +83,7 @@ enhanced_ncos_agents:
     dependencies:
     - master_orchestrator
     enabled: true
-    module: ncos.agents.workflows.zanflow_orchestrator
+    module: agents.workflows.zanflow_orchestrator
     priority: 3
     triggers:
     - workflow_request

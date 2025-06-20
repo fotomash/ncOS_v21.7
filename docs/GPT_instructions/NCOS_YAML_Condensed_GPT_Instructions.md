@@ -28,7 +28,7 @@ bootstrap_sequence:
   - {step: "configuration_loading", validation: "configs_valid"}
   - {step: "agent_registry_setup", validation: "registry_active"}
 deployment_commands:
-  launch: "python -m ncos.agents.master_orchestrator --action=start_session"
+  launch: "python -m ncOS.ncos_launcher --action=start_session"
 '''
 config = yaml.safe_load(ncos_yaml)
 print("🚀 NCOS YAML CONFIG GENERATED")
