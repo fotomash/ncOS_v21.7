@@ -1,6 +1,6 @@
 [project]
 name = "ncOS"
-version = "0.1.0"
+version = "21.7.2"
 requires-python = ">=3.10"
 
 [project.scripts]
