@@ -9,3 +9,4 @@ matplotlib==3.8.4
 fastapi
 uvicorn[standard]
 yfinance
+finnhub-python
