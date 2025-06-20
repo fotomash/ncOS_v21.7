@@ -305,3 +305,22 @@ Features:
   ✓ Multi-agent consensus
   ✓ Session auto-save
         """
+
+
+async def _run_cli() -> None:
+    """Launch the enhanced CLI after bootstrapping the system."""
+    from ..launch_ncos_v21_7_1_enhanced_complete import (
+        launch_ncos_enhanced_complete,
+    )
+
+    orchestrator = await launch_ncos_enhanced_complete(None)
+    cli = EnhancedLLMCLI(orchestrator)
+    await cli.start()
+
+
+def main() -> None:
+    """Entry point for the ``ncos`` console script."""
+    asyncio.run(_run_cli())
+
+
+__all__ = ["EnhancedLLMCLI", "main"]
