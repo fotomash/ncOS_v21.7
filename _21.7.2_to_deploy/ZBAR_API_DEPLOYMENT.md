@@ -14,7 +14,7 @@ python ncos_zbar_api.py
 
 3. Test with the client:
 ```bash
-python test_zbar_client.py
+python zbar_client_demo.py
 ```
 
 ## API Endpoints
