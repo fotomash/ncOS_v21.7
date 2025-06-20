@@ -5,3 +5,4 @@ requires-python = ">=3.10"
 
 [project.scripts]
 ncos = "ncOS.ncos_launcher:main"
+add-structure = "scripts.add_structure:main"
