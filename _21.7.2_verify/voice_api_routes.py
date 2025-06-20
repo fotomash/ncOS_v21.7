@@ -1,6 +1,8 @@
 
-"""
-Voice Command API Extensions for ZBAR System
+"""Voice Command API Extensions for ZBAR System.
+
+Endpoints are mounted under the ``/voice`` prefix.  The primary route for
+processing a spoken or typed command is ``POST /voice/command``.
 """
 
 from fastapi import APIRouter, HTTPException
