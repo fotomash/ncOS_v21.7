@@ -92,6 +92,36 @@ agents:
     class: "DriftDetectionAgent"
     config_file: "config/drift_detection.yaml"
     enabled: true
+
+  master_orchestrator:
+    module: "master_orchestrator"
+    class: "MasterOrchestrator"
+    description: "Coordinates workflows across agents"
+
+  smc_master_agent:
+    module: "smc_master_agent"
+    class: "SMCMasterAgent"
+    description: "Core SMC analysis engine"
+
+  interaction_manager:
+    module: "interaction_manager"
+    class: "InteractionManager"
+    description: "Handles user interaction flows"
+
+  zanflow_orchestrator:
+    module: "zanflow_orchestrator"
+    class: "ZanflowOrchestrator"
+    description: "Executes Zanflow logical workflows"
+
+  vector_data_processor:
+    module: "vector_data_processor"
+    class: "VectorDataProcessor"
+    description: "Processes vector-based market data"
+
+  knowledge_intelligence:
+    module: "knowledge_intelligence"
+    class: "KnowledgeIntelligence"
+    description: "Provides simple knowledge lookups"
 strategy_agents:
   micro_wyckoff_event:
     class: MicroWyckoffEventAgent
