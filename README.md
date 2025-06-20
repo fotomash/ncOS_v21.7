@@ -109,6 +109,19 @@ To validate your environment and run a quick backtest, execute:
 python scripts/quick_start_predictive.py
 ```
 
+## Fractal and Structure Analysis
+
+The `add_structure.py` script computes fractal highs/lows and a simple market
+structure label from any CSV file containing `Open`, `High`, `Low` and `Close`
+columns. The resulting file includes `fractal_high`, `fractal_low` and
+`structure` columns.
+
+Example usage:
+
+```bash
+python -m scripts.add_structure data/price_data.csv -o data/price_with_structure.csv
+```
+
 ## Contributing
 
 For guidelines on submitting issues and pull requests, see [CONTRIBUTING.md](CONTRIBUTING.md).
