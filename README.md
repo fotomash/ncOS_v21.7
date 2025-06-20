@@ -172,7 +172,7 @@ Start the API and dashboard to try it out:
 
 ```bash
 uvicorn ncos_plugin.plugin_api_backend:app --reload
-streamlit run ncOS/voice_command_dashboard.py
+streamlit run dashboard/zbar_journal_dashboard.py
 ```
 
 Once running, open the dashboard in your browser and issue commands such as

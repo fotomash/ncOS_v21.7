@@ -30,7 +30,7 @@ This integration adds natural language voice command processing to your NCOS ZBA
 - Command history tracking
 - Integration with existing ZBAR API
 
-### 4. Voice Dashboard (`voice_command_dashboard.py`)
+### 4. Voice Dashboard (`zbar_journal_dashboard.py`)
 - Streamlit interface for voice commands
 - Real-time parsing visualization
 - Command history browser

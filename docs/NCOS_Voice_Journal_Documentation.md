@@ -142,7 +142,7 @@ ncos-voice-journal/
 │   ├── voice_api_routes.py
 │   └── ncos_zbar_api.py
 ├── dashboard/
-│   └── voice_command_dashboard.py
+│   └── zbar_journal_dashboard.py
 ├── config/
 │   ├── zbar_config.yaml
 │   └── system_config.yaml
@@ -196,7 +196,7 @@ GET    /journal/query       # Query entries
 GET    /journal/stats       # Journal statistics
 ```
 
-### 5. Streamlit Dashboard (`voice_command_dashboard.py`)
+### 5. Streamlit Dashboard (`zbar_journal_dashboard.py`)
 
 Interactive UI for journal viewing and strategy re-runs.
 
@@ -307,7 +307,7 @@ def initialize_system():
     print("\n✅ System initialization complete!")
     print("\nNext steps:")
     print("1. Start the API server: python ncos_zbar_api.py")
-    print("2. Launch dashboard: streamlit run voice_command_dashboard.py")
+    print("2. Launch dashboard: streamlit run dashboard/zbar_journal_dashboard.py")
     print("3. Run voice interface: python core/ncos_voice_unified.py")
 
 if __name__ == "__main__":
@@ -414,7 +414,7 @@ sleep 3
 
 # Start Streamlit dashboard
 echo "Starting dashboard..."
-streamlit run voice_command_dashboard.py &
+streamlit run dashboard/zbar_journal_dashboard.py &
 DASHBOARD_PID=$!
 
 # Start voice interface
