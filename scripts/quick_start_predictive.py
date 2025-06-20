@@ -72,13 +72,13 @@ def main():
     print("   streamlit run grade_analysis_dashboard.py")
 
     print("\n3. Test Individual Components:")
-    print("   python test_predictive_engine.py")
+    print("   python scripts/test_predictive_engine.py")
 
     print("\n4. Start Live Trading:")
     print("   python ncos_master_orchestrator.py")
 
     print("\n5. Read Documentation:")
-    print("   - PREDICTIVE_ENGINE_GUIDE.md")
+    print("   - docs/PREDICTIVE_ENGINE_GUIDE.md")
     print("   - config/predictive_engine_config.yaml")
 
     print("\n✨ The Predictive Engine is ready to enhance your trading!")
