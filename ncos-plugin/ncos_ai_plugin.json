@@ -1,4 +1,5 @@
-{
+# Write the updated ncos_ai_plugin.json file with actions section
+ncos_ai_plugin = {
   "schema_version": "v1",
   "name_for_human": "NCOS Live Market Data",
   "name_for_model": "ncos_market_data_fetcher",
@@ -10,7 +11,7 @@
   "api": {
     "type": "openapi",
     "url": "https://ncos-v21-7.onrender.com/openapi.json",
-    "is_user_authenticated": false
+    "is_user_authenticated": False
   },
   "actions": [
     {
@@ -75,3 +76,8 @@
   "contact_email": "support@ncos.dev",
   "legal_info_url": "http://ncos.dev/legal"
 }
+
+with open('/mnt/data/ncos_ai_plugin.json', 'w') as f:
+    import json
+    json.dump(ncos_ai_plugin, f, indent=2)
+
