@@ -8,7 +8,7 @@ Get these files from the implementation:
 - `zbar_voice_integration.py`
 - `menu_voice_integration.py`
 - `voice_api_routes.py`
-- `voice_command_dashboard.py`
+- `zbar_journal_dashboard.py`
 
 ### 2. Install Dependencies
 ```bash
@@ -26,7 +26,7 @@ mkdir -p logs config api dashboard core
 python api/main.py
 
 # Terminal 2: Dashboard  
-streamlit run dashboard/voice_command_dashboard.py
+streamlit run dashboard/zbar_journal_dashboard.py
 
 # Terminal 3: Voice Interface
 python ncos_voice/ncos_voice_unified.py
