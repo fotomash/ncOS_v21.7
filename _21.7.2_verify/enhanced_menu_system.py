@@ -5,14 +5,15 @@ Extends existing menu_system.py with voice command support
 """
 
 from typing import Dict, List, Any
-from menu_system import MenuSystem
+from menu_system import EnhancedMenuSystem as BaseEnhancedMenuSystem
 from voice_tag_parser import VoiceTagParser, VoiceTag
 
-class EnhancedMenuSystem(MenuSystem):
+class EnhancedMenuSystem(BaseEnhancedMenuSystem):
     """Menu system with voice command integration"""
 
-    def __init__(self, config: Dict):
-        super().__init__(config)
+    def __init__(self, orchestrator: Any, config: Dict | None = None):
+        super().__init__(orchestrator)
+        self.config = config or {}
         self.voice_parser = VoiceTagParser()
         self.voice_history = []
 
