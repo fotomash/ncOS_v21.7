@@ -48,7 +48,8 @@ Returns:
 To integrate with your existing NCOS system:
 
 1. Replace the `ZBARAgent.process_multi_timeframe()` method with calls to your actual `zbar_agent.py`
-2. Update the journal path to match your system configuration
+2. Configure the journal path using the `JOURNAL_PATH` environment variable or by
+   passing a custom path to `JournalManager`
 3. Add authentication if needed
 4. Deploy behind your NCOS API gateway
 
