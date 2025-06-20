@@ -7,7 +7,7 @@ from pathlib import Path
 import json
 
 # Import your custom Finnhub client
-from finnhub_data_fetcher import finnhub_client
+from ncos_plugin.finnhub_data_fetcher import finnhub_client
 
 app = FastAPI(title="NCOS Live Market Data API", version="21.7.1")
 
