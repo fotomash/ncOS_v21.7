@@ -88,11 +88,15 @@ def verify_schema_mapping():
     with open(registry_path, 'r') as f:
         registry = yaml.safe_load(f) or {}
     missing = []
-    for agent in registry.get('agents', {}):
-        cfg_path = Path('config') / f"{agent.lower()}_config.yaml"
-        if not cfg_path.exists():
-            print(f"⚠️  Warning: Config file for '{agent}' not found at {cfg_path}")
-            missing.append(agent)
+    # Validate config files for both core and strategy agents
+    for section in ("agents", "strategy_agents"):
+        for agent in registry.get(section, {}):
+            cfg_path = Path('config') / f"{agent.lower()}_config.yaml"
+            if not cfg_path.exists():
+                print(
+                    f"⚠️  Warning: Config file for '{agent}' not found at {cfg_path}"
+                )
+                missing.append(agent)
 
     if missing:
         print(f"❌ Error: {len(missing)} configuration file(s) missing for registered agents")
