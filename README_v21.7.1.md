@@ -134,16 +134,21 @@ python -m ncOS.ncos_launcher \
 ### **Agent Registry Configuration**
 ```yaml
 # config/agent_registry.yaml
-enhanced_ncos_agents:
+agents:
   master_orchestrator:
+    module: "master_orchestrator"
     class: "MasterOrchestrator"
     priority: 1
-    enhancements: ["zanflow_integration", "vector_data_access"]
 
   zanflow_orchestrator:
-    class: "ZanflowOrchestratorAgent"
+    module: "zanflow_orchestrator"
+    class: "ZanflowOrchestrator"
     priority: 3
-    capabilities: ["prompt_engineering", "logical_blocks"]
+
+  vector_data_processor:
+    module: "vector_data_processor"
+    class: "VectorDataProcessor"
+    priority: 2
 ```
 
 ### **Strategy Configuration**
