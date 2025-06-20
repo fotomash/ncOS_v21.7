@@ -60,6 +60,9 @@ class VoiceTagParser:
             "actions": ["mark", "log", "analyze", "scan", "check", "run", "execute", "monitor"]
         }
 
+        # Normalize patterns to lower case for matching
+        self.patterns = {k: [p.lower() for p in v] for k, v in self.patterns.items()}
+
         # Mapping for common aliases
         self.aliases = {
             "gold": "XAUUSD",
@@ -77,6 +80,9 @@ class VoiceTagParser:
             "short": "bearish",
             "ny": "new york"
         }
+
+        # Normalize alias keys for case-insensitive lookup
+        self.aliases = {k.lower(): v for k, v in self.aliases.items()}
 
         # Apply bias keywords from configuration
         bias_keywords = self.config.get("bias_keywords") or {}
@@ -119,11 +125,11 @@ class VoiceTagParser:
         # Direct pattern matching
         for symbol in self.patterns["symbols"]:
             if symbol in text:
-                # Apply alias mapping
+                # Apply alias mapping (symbols stored lower case)
                 return self.aliases.get(symbol, symbol.upper())
 
         # Regex for common forex pairs
-        forex_pattern = r"([A-Z]{3}[A-Z]{3}|[A-Z]{3}/[A-Z]{3})"
+        forex_pattern = r"\b([A-Z]{3}/?[A-Z]{3})\b"
         match = re.search(forex_pattern, text.upper())
         if match:
             return match.group(1).replace("/", "")
