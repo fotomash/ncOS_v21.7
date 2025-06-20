@@ -1,0 +1,11 @@
+# ZBAR Configuration
+strategy:
+  name: "ISPTS_v14"
+  version: "1.4.0"
+  
+analysis:
+  timeframes: ["M15", "H1", "H4", "D1"]
+  
+risk:
+  default_risk_percent: 1.0
+  max_positions: 3
