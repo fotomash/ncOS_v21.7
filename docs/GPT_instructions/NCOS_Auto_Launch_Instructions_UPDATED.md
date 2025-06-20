@@ -14,13 +14,12 @@ python -m ncos.launch --agent {agent_name} --config {config_path}
 
 **Method 2: Direct Agent Launch**
 ```
-python -m ncos.agents.{agent_name} --action={action} --config={config}
+python -m ncOS.ncos_launcher --action={action} --config={config}
 ```
 
 **Method 3: Master Orchestrator Launch**
 ```
-python -m ncos.agents.master_orchestrator --action=start_session --config=config/master_orchestrator.yaml
-```
+
 
 **Method 4: Fallback Bootstrap Script**
 ```
@@ -39,7 +38,7 @@ python integration_bootstrap.py  # If present in workspace
 
 #### 2.1 File-Based Triggers (Updated)
 **Primary Triggers:**
-- Upload of files matching ncos.agents.* pattern
+- Upload of files matching agents.* pattern
 - Upload of master_orchestrator.py or related configs
 - Upload of agent_profiles/*.yaml configurations
 - Upload of ncos_execution_guide.yaml
@@ -62,7 +61,7 @@ The system will automatically select the best bootstrap method:
 #### 3.1 NCOS v21 Standard Launch Sequence
 ```
 # 1. Initialize Master Orchestrator
-python -m ncos.agents.master_orchestrator --action=start_session --config=config/master_orchestrator.yaml
+
 
 # 2. Launch Core Agents
 python -m ncos.launch --agent session_state_manager --config agent_profiles/session_state_manager_profile.yaml
@@ -79,17 +78,17 @@ python -m ncos.launch --agent entry_executor --config agent_profiles/entry_execu
 #### 3.2 Alternative Launch Methods
 **Single Command Launch:**
 ```
-python -m ncos.agents.master_orchestrator --action=coordinate_agents --priority=high
+python -m ncOS.ncos_launcher --action=coordinate_agents --priority=high
 ```
 
 **Consciousness-Driven Launch:**
 ```
-python -m ncos.agents.consciousness --action=system_introspection --depth=full
+python -m ncOS.ncos_launcher --action=system_introspection --depth=full
 ```
 
 **Neural Mesh Launch:**
 ```
-python -m ncos.agents.neural_mesh --action=sync_mesh --nodes=all
+python -m ncOS.ncos_launcher --action=sync_mesh --nodes=all
 ```
 
 ### 4. Auto-Generated Bootstrap Script
@@ -181,14 +180,14 @@ Next Actions:
 
 #### 8.1 Bootstrap Detection Protocol
 The system checks for bootstrap methods in this order:
-1. ncos.agents.master_orchestrator
+1. ncOS.ncos_launcher
 2. ncos.launch
 3. integration_bootstrap.py
 4. master_orchestrator.py
 5. agent_registry.yaml
 
 #### 8.2 Launch Command Priority
-Primary: python -m ncos.agents.master_orchestrator --action=start_session
+Primary: python -m ncOS.ncos_launcher --action=start_session
 Secondary: python -m ncos.launch --agent master_orchestrator
 Tertiary: python integration_bootstrap.py
 Fallback: python auto_generated_bootstrap.py
@@ -208,7 +207,7 @@ def launch_ncos_system():
     # Try module-based launch
     try:
         result = subprocess.run([
-            sys.executable, "-m", "ncos.agents.master_orchestrator",
+            sys.executable, "-m", "ncOS.ncos_launcher",
             "--action=start_session"
         ], capture_output=True, text=True, timeout=30)
 
@@ -236,7 +235,7 @@ if __name__ == "__main__":
 
 ## Key Changes from Previous Version:
 
-1. **Updated Bootstrap Targets**: Points to ncos.agents.master_orchestrator as primary
+1. **Updated Bootstrap Targets**: Points to ncOS.ncos_launcher as primary
 2. **Module-Based Launch**: Uses python -m ncos.launch pattern
 3. **Configuration Integration**: Leverages ncos_execution_guide.yaml
 4. **Agent Profile Support**: Uses agent_profiles/*.yaml configurations

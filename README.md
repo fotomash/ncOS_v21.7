@@ -23,13 +23,28 @@ This package contains all components needed to run NCOS v21.
 
 2. Run bootstrap:
    ```bash
-   cd scripts && python integration_bootstrap.py
-   ```
+cd scripts && python integration_bootstrap.py
+```
+
+## Running Tests
+
+Install the project dependencies before executing the test suite:
+
+```bash
+pip install -r requirements.txt
+```
+
+Then run the tests using `pytest`:
+
+```bash
+pytest
+```
 
 ## Directory Structure
 
 - `agents/` - All 13 agent implementations
-- `config/` - Bootstrap and registry configurations  
+- `config/` - Bootstrap and registry configurations. Individual agent
+  configuration files named `<agent>_config.yaml` also live here
 - `scripts/` - Integration bootstrap script
 - `scripts/deploy.sh` - Quick deployment script
 

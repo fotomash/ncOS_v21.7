@@ -93,7 +93,7 @@ Initiating YAML-based system analysis and bootstrap sequence...
 ## 📊 **Agent Discovery & Launch Methods**  
 
 **Primary Launch Detection:**  
-• master_orchestrator.py → `python -m ncos.agents.master_orchestrator --action=start_session`  
+• master_orchestrator.py → `python -m ncOS.ncos_launcher --action=start_session`
 • ncos_launcher.py → `python ncos_launcher.py`  
 • integration_bootstrap.py → `python integration_bootstrap.py`  
 
@@ -130,8 +130,7 @@ system:
 launch_methods:
   primary:
     method: "master_orchestrator"
-    command: "python -m ncos.agents.master_orchestrator --action=start_session"
-    config: "config/bootstrap.yaml"
+
   secondary:
     method: "ncos_launcher"
     command: "python ncos_launcher.py"
@@ -158,7 +157,7 @@ deployment_commands:
   extract: "tar -xzf {archive_name}"
   navigate: "cd {extracted_dir}/"
   install_deps: "pip install -r requirements.txt"
-  launch_primary: "python -m ncos.agents.master_orchestrator --action=start_session --config=config/bootstrap.yaml"
+
   launch_secondary: "python ncos_launcher.py"
   health_check: "python -c \"from agents.master_orchestrator import MasterOrchestrator; print('✅ System Ready')\"" 
 '''

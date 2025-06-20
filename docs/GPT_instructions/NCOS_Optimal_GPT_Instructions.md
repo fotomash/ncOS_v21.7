@@ -106,7 +106,7 @@ print("🎉 System Successfully Launched!")
 
 ## Bootstrap Method Priority
 1. **Auto-execute** embedded bootstrap (always works)
-2. **Attempt** `python -m ncos.agents.master_orchestrator --action=start_session`
+2. **Attempt** `python -m ncOS.ncos_launcher --action=start_session`
 3. **Fallback** to `python ncos_launcher.py` if detected
 4. **Generate** custom bootstrap script if needed
 
