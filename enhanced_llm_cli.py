@@ -10,6 +10,7 @@ from config.gpt_instructions import (
     get_agent_instructions,
     get_auto_progression_config,
 )
+from menu_system import EnhancedMenuSystem
 
 
 class EnhancedLLMCLI:
@@ -18,6 +19,7 @@ class EnhancedLLMCLI:
     def __init__(self, bootstrap_system: Any) -> None:
         self.bootstrap = bootstrap_system
         self.auto_progression = get_auto_progression_config()
+        self.menu_system = EnhancedMenuSystem(self._get_component("orchestrator"))
         self.session_active = False
         self.last_progression = datetime.now()
 
@@ -26,6 +28,13 @@ class EnhancedLLMCLI:
         print("🚀 Bootstrap OS v5.5.2 Enhanced CLI Started")
         print("Features: Vector Memory, Auto-Progression, Token Optimization")
         print("Type 'help' for commands or use natural language")
+
+        # Display initial menu
+        try:
+            menu_yaml = self.menu_system.format_menu(self.menu_system.generate_menu())
+            print("\n" + menu_yaml)
+        except Exception as exc:  # pragma: no cover - menu resilience
+            print(f"Menu generation error: {exc}")
 
         self.session_active = True
 
@@ -145,6 +154,9 @@ class EnhancedLLMCLI:
             return await self._get_agent_status()
         if "memory" in lower:
             return await self._get_memory_status()
+        if "menu" in lower:
+            menu_yaml = self.menu_system.format_menu(self.menu_system.generate_menu())
+            return menu_yaml
         if "help" in lower:
             return self._get_help_text()
         return "Command not recognized. Type 'help' for available commands."
@@ -288,6 +300,7 @@ System Commands:
   • "system status"
   • "list agents"
   • "memory status"
+  • "menu"
   • "help"
 
 Features:
