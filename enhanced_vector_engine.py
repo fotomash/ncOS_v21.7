@@ -21,7 +21,10 @@ class ncOScoreVectorEngine:
         self.store = vector_store or VectorStore()
 
     async def embed_market_data(self, df: Any, key: str) -> Dict[str, Any]:  # pragma: no cover - stub
-
+        """Embed market data and store the resulting vector."""
+        # Stub implementation simply records the key with an empty vector
+        self.store.add_vector(key, [0.0] * self.dimensions)
+        return {"status": "success", "key": key}
 
     async def pattern_matching(self, df: Any, pattern: str) -> Dict[str, Any]:  # pragma: no cover - stub
         return {"status": "success", "similar_patterns": []}
