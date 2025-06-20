@@ -213,6 +213,10 @@ class RiskGuardianAgent:
                 if risk_type in risk_assessment:
                     contribution = risk_assessment[risk_type].get('risk_score', 0) * weight
                     contributions[risk_type] = contribution
+                    # Record each component's contribution to the overall risk score
+                    self.logger.info(
+                        f"{risk_type} contribution: {contribution:.2f}"
+                    )
                     self.logger.debug(
                         f"{risk_type} contribution: {contribution:.2f}",
                     )
