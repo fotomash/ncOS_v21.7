@@ -34,6 +34,12 @@ setup(
         "Source Code": "https://github.com/ncos/phoenix-mesh",
     },
     packages=find_packages(),
+    py_modules=[
+        "ncos_market_manipulation_agent",
+        "ncos_risk_monitor_agent",
+        "ncos_compliance_agent",
+        "ncos_divergence_strategy_agent",
+    ],
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Financial and Insurance Industry",
@@ -65,7 +71,7 @@ setup(
             "mkdocs-mermaid2-plugin>=1.1.0",
         ],
         "gpu": [
-            "torch>=2.0.0+cu118",
+            "torch>=2.0.0",
             "faiss-gpu>=1.7.4",
         ],
         "analytics": [
