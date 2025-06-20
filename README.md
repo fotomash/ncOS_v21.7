@@ -41,15 +41,18 @@ quotes from Finnhub or Twelve Data.
 
 ## Running Tests
 
-Install the project dependencies before executing the test suite. The tests rely
-on `pandas`, `numpy` and all other packages listed in `requirements.txt`:
+Before executing any tests you **must** install the runtime dependencies listed
+in `requirements.txt`. Many of the tests depend on packages such as `pandas` and
+`numpy` and will fail if they are missing.
 
 ```bash
 pip install -r requirements.txt
 python -m spacy download en_core_web_sm
 ```
 
-For additional test utilities install the development requirements as well:
+For additional utilities (like coverage tools) install the development
+requirements as well. You can do this manually or run `make setup-dev` if `make`
+is available:
 
 ```bash
 pip install -r requirements-dev.txt
