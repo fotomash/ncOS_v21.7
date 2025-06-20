@@ -28,10 +28,17 @@ cd scripts && python integration_bootstrap.py
 
 ## Running Tests
 
-Install the project dependencies before executing the test suite:
+Install the project dependencies before executing the test suite. The tests rely
+on `pandas`, `numpy` and all other packages listed in `requirements.txt`:
 
 ```bash
 pip install -r requirements.txt
+```
+
+For additional test utilities install the development requirements as well:
+
+```bash
+pip install -r requirements-dev.txt
 ```
 
 Then run the tests using `pytest`:
