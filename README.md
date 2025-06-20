@@ -158,6 +158,20 @@ python -m scripts.add_structure data/price_data.csv -o data/price_with_structure
 
 For guidelines on submitting issues and pull requests, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
+## Voice Interface
+
+The voice modules allow natural language commands through the `VoiceTagParser` (`ncOS/voice_tag_parser.py`).
+Start the API and dashboard to try it out:
+
+```bash
+uvicorn ncos_plugin.plugin_api_backend:app --reload
+streamlit run ncOS/voice_command_dashboard.py
+```
+
+Once running, open the dashboard in your browser and issue commands such as
+`"mark gold bullish on H4"` or `"analyze EURUSD 15 minute"`. The API exposes
+these operations under the `/voice/command` route.
+
 ## Running `add_structure.py`
 
 The optional `add_structure.py` script enriches OHLCV CSV files with three new
