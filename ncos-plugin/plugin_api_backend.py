@@ -3,8 +3,11 @@ from fastapi.responses import FileResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 import yfinance as yf
 from datetime import datetime
-import json
 from pathlib import Path
+import json
+
+# Import your custom Finnhub client
+from finnhub_data_fetcher import finnhub_client
 
 app = FastAPI(title="NCOS Live Market Data API", version="21.7.1")
 
@@ -16,8 +19,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-BASE_DIR = Path(__file__).parent  # current directory: ncos-plugin/
+BASE_DIR = Path(__file__).parent
 
+# ---- YFinance Endpoints ----
 def get_stock_data(ticker: str):
     try:
         data = yf.Ticker(ticker)
@@ -62,6 +66,7 @@ def get_forex_data(pair: str):
     except Exception as e:
         raise HTTPException(status_code=404, detail=str(e))
 
+# ---- Endpoints ----
 @app.get("/stock/quote")
 def stock_quote(ticker: str = Query(...)):
     return get_stock_data(ticker)
@@ -73,6 +78,22 @@ def crypto_quote(symbol: str = Query(...)):
 @app.get("/forex/quote")
 def forex_quote(pair: str = Query(...)):
     return get_forex_data(pair)
+
+@app.get("/finnhub/quote")
+def finnhub_quote(symbol: str = Query(...)):
+    try:
+        quote = finnhub_client.quote(symbol)
+        return {
+            "symbol": symbol,
+            "current_price": quote["c"],
+            "high": quote["h"],
+            "low": quote["l"],
+            "open": quote["o"],
+            "prev_close": quote["pc"],
+            "timestamp": quote["t"]
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/openapi.json")
 def openapi():
