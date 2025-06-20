@@ -45,7 +45,7 @@ def setup_ncos_voice_journal():
     required_files = [
         ("core/voice_tag_parser.py", "Voice parser"),
         ("core/zbar_voice_integration.py", "ZBAR integration"),
-        ("dashboard/zbar_journal_dashboard.py", "Dashboard"),
+        ("dashboard/voice_command_dashboard.py", "Dashboard"),
         ("config/system_config.yaml", "System configuration")
     ]
 
@@ -68,7 +68,7 @@ def setup_ncos_voice_journal():
         print("\n✅ All files present!")
         print("\n🎉 Setup complete! Next steps:")
         print("  1. Run: python api/main.py")
-        print("  2. Run: streamlit run dashboard/zbar_journal_dashboard.py")
+        print("  2. Run: streamlit run dashboard/voice_command_dashboard.py")
         print("  3. Run: python core/ncos_voice_unified.py")
 
     # Create launch script if not exists
@@ -78,7 +78,7 @@ def setup_ncos_voice_journal():
 echo "🚀 Starting NCOS Voice Journal System..."
 python api/main.py &
 sleep 2
-streamlit run dashboard/zbar_journal_dashboard.py &
+streamlit run dashboard/voice_command_dashboard.py &
 python core/ncos_voice_unified.py
 """
         launch_script.write_text(launch_content)
