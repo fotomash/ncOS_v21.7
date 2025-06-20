@@ -1,2 +1,2 @@
 import runpy
-runpy.run_path('setup_v21.7.1.py')
+runpy.run_path('setup_v21.7.2.py')
