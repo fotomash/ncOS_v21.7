@@ -9,10 +9,10 @@
   },
   "api": {
     "type": "openapi",
-    "url": "http://localhost:8000/openapi.json",
+    "url": "https://ncos-v21-7.onrender.com/openapi.json",
     "is_user_authenticated": false
   },
-  "logo_url": "http://localhost:8000/logo.png",
+  "logo_url": "https://ncos-v21-7.onrender.com/logo.png",
   "contact_email": "support@ncos.dev",
   "legal_info_url": "http://ncos.dev/legal"
 }
