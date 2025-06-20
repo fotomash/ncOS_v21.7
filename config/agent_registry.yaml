@@ -87,6 +87,11 @@ agents:
     module: "entry_executor_smc"
     class: "EntryExecutorSMCAgent"
     enabled: true
+  drift_detection_agent:
+    module: "drift_detection_agent"
+    class: "DriftDetectionAgent"
+    config_file: "config/drift_detection.yaml"
+    enabled: true
 strategy_agents:
   micro_wyckoff_event:
     class: MicroWyckoffEventAgent

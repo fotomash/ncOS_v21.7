@@ -51,6 +51,16 @@ class NCOSLiquidityAnalysisAgent:
             # Calculate overall liquidity probability
             overall_probability = self._calculate_overall_probability(zones, sweep_analysis, equal_levels)
 
+            # Extract zones with a high probability of sweep based on strength
+            high_prob_zones = []
+            for zone in zones:
+                zone_id = f"{zone['type']}_{zone['timestamp']}"
+                prob = sweep_analysis.get(zone_id, {}).get("probability", zone["strength"])
+                if prob > self.zone_strength_threshold:
+                    enriched_zone = zone.copy()
+                    enriched_zone["probability"] = prob
+                    high_prob_zones.append(enriched_zone)
+
             return {
                 "status": "success",
                 "agent_id": self.agent_id,
@@ -59,7 +69,7 @@ class NCOSLiquidityAnalysisAgent:
                 "equal_levels": equal_levels,
                 "overall_probability": overall_probability,
                 "zone_count": len(zones),
-                "high_probability_zones": len([z for z in zones if z["strength"] > self.zone_strength_threshold]),
+                "high_probability_zones": high_prob_zones,
                 "analysis_timestamp": datetime.now().isoformat()
             }
 

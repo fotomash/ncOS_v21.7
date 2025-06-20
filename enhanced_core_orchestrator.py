@@ -18,7 +18,9 @@ import pandas as pd
 # Import our new engines
 from smc_analysis_engine import ncOScoreSMCEngine
 from enhanced_vector_engine import ncOScoreVectorEngine, BrownVectorStoreIntegration
+from vector_store import VectorStore
 from liquidity_analysis_engine import ncOScoreLiquidityEngine
+from agents.performance_monitor import PerformanceMonitor
 
 class MountPoint(Enum):
     """Unified mount point definitions"""
@@ -74,12 +76,18 @@ class ncOScoreEnhancedOrchestrator:
         self.agents = {}
         self.config = self._load_config(config_path)
         self.logger = self._setup_logging()
+        mem_cfg = self.config.get("memory", {})
+        self.memory_manager = EnhancedMemoryManager(
+            ttl_seconds=mem_cfg.get("context_ttl_seconds", 3600),
+            default_window=mem_cfg.get("context_window", 5),
+        )
 
         # Initialize enhanced engines
         self.smc_engine = None
         self.vector_engine = None
         self.liquidity_engine = None
         self.brown_vector_store = None
+
 
     def _load_config(self, config_path: Optional[str]) -> Dict:
         """Load enhanced configuration"""
@@ -99,13 +107,17 @@ class ncOScoreEnhancedOrchestrator:
                 "backend": "in_memory",
                 "max_size_mb": 1024,  # Increased for trading data
                 "compression": True,
-                "gc_enabled": True
+                "gc_enabled": True,
+                "context_ttl_seconds": 3600,
+                "context_window": 5
             },
             "trading": {
                 "supported_timeframes": ["M5", "M15", "H1", "H4", "D1"],
                 "default_timeframe": "H1",
                 "confluence_threshold": 0.6,
                 "signal_strength_threshold": 0.7
+            },
+
             }
         }
 
@@ -131,7 +143,23 @@ class ncOScoreEnhancedOrchestrator:
         await self._initialize_trading_engines()
         await self._validate_boot()
 
+        self.performance_monitor = PerformanceMonitor(
+            self,
+            self.session_state,
+            interval=self.config.get("performance_monitor", {}).get("interval", 300),
+        )
+        if self.config.get("performance_monitor", {}).get("autostart"):
+            await self.performance_monitor.start()
+
         self.logger.info("✅ ncOScore Enhanced initialization complete")
+
+    async def activate_performance_monitor(self) -> None:
+        if self.performance_monitor:
+            await self.performance_monitor.start()
+
+    async def deactivate_performance_monitor(self) -> None:
+        if self.performance_monitor:
+            await self.performance_monitor.stop()
 
     async def _load_enhanced_agents(self):
         """Load enhanced agents including trading engines"""
@@ -144,7 +172,8 @@ class ncOScoreEnhancedOrchestrator:
             "smc_analyzer": "Smart Money Concepts analysis",
             "vector_processor": "Vector operations and similarity search",
             "liquidity_analyzer": "Liquidity analysis and sweep detection",
-            "confluence_calculator": "Multi-timeframe confluence scoring"
+            "confluence_calculator": "Multi-timeframe confluence scoring",
+            "drift_detector": "Embedding drift detection"
         }
 
         for agent_id, description in enhanced_agents.items():
@@ -163,16 +192,23 @@ class ncOScoreEnhancedOrchestrator:
             self.smc_engine = ncOScoreSMCEngine(self.session_state)
             self.logger.info("✅ SMC Analysis Engine initialized")
 
-            # Initialize Vector Engine
+            # Initialize Vector Store and Engine
+            store_path = MountPoint.resolve(self.session_state.mount_points["session"]) / "vector_store.json"
+            self.vector_store = VectorStore(store_path)
             self.vector_engine = ncOScoreVectorEngine(
-                dimensions=1536, 
-                memory_manager=self.session_state
-            )
+                dimensions=1536,
+
             self.logger.info("✅ Vector Engine initialized")
+            self._vector_store_task = asyncio.create_task(self._autosave_vector_store())
 
             # Initialize Brown Vector Store
             self.brown_vector_store = BrownVectorStoreIntegration(self.vector_engine)
             self.logger.info("✅ Brown Vector Store initialized")
+
+            # Initialize Drift Detection Agent
+            drift_cfg = self.config.get("drift_detection", {})
+            self.drift_agent = DriftDetectionAgent(self, drift_cfg)
+            self.logger.info("✅ Drift Detection Agent initialized")
 
             # Initialize Liquidity Engine
             self.liquidity_engine = ncOScoreLiquidityEngine(self.session_state)
@@ -192,7 +228,8 @@ class ncOScoreEnhancedOrchestrator:
             "smc_engine_ready": self.smc_engine is not None,
             "vector_engine_ready": self.vector_engine is not None,
             "liquidity_engine_ready": self.liquidity_engine is not None,
-            "brown_store_ready": self.brown_vector_store is not None
+            "brown_store_ready": self.brown_vector_store is not None,
+            "drift_agent_ready": self.drift_agent is not None
         }
 
         failed = [k for k, v in validations.items() if not v]
@@ -217,9 +254,23 @@ class ncOScoreEnhancedOrchestrator:
 
     async def _process_trading_csv(self, file_path: str) -> Dict:
         """Process CSV with full trading analysis"""
+        self.logger.info(f"Processing trading CSV: {file_path}")
         try:
             # Load CSV data
-            df = pd.read_csv(file_path)
+            try:
+                df = pd.read_csv(file_path)
+            except (pd.errors.ParserError, pd.errors.EmptyDataError) as e:
+                msg = f"CSV parsing error for {file_path}: {e}"
+                self.logger.error(msg)
+                return {"status": "error", "error": msg}
+
+            # Validate required columns
+            required_columns = ["timestamp", "open", "high", "low", "close", "volume"]
+            missing_columns = [c for c in required_columns if c not in df.columns]
+            if missing_columns:
+                msg = f"Missing required columns: {missing_columns}"
+                self.logger.error(msg)
+                raise ValueError(msg)
 
             # Store in session state
             file_key = Path(file_path).stem
@@ -237,6 +288,17 @@ class ncOScoreEnhancedOrchestrator:
             if self.vector_engine:
                 vector_result = await self.vector_engine.embed_market_data(df, f"market_data_{file_key}")
                 analysis_results["vector_analysis"] = vector_result
+
+                # Forward embedding to drift detector
+                if self.drift_agent and vector_result.get("embedding") is not None:
+                    await self.drift_agent.handle_trigger(
+                        "embedding.generated",
+                        {
+                            "embedding": vector_result["embedding"],
+                            "key": f"market_data_{file_key}",
+                        },
+                        {},
+                    )
 
                 # Pattern matching
                 pattern_result = await self.vector_engine.pattern_matching(df, "market_structure")
@@ -258,6 +320,8 @@ class ncOScoreEnhancedOrchestrator:
             # Store analysis in session
             self.session_state.active_analyses[file_key] = analysis_results
 
+            self.logger.info(f"Finished processing trading CSV: {file_path}")
+
             return {
                 "status": "success",
                 "type": "trading_csv",
@@ -278,6 +342,7 @@ class ncOScoreEnhancedOrchestrator:
             }
 
         except Exception as e:
+            self.logger.error(f"Error processing trading CSV {file_path}: {e}")
             return {"status": "error", "error": str(e)}
 
     def _calculate_overall_confluence(self, analysis_results: Dict) -> float:
@@ -466,11 +531,27 @@ class ncOScoreEnhancedOrchestrator:
         if self.vector_engine:
             engine_status["vector_store_stats"] = self.vector_engine.get_vector_store_stats()
 
+        performance = None
+        if self.performance_monitor:
+            performance = self.performance_monitor.get_report()
+
         return {
             "system": base_status,
             "trading": trading_status,
-            "engines": engine_status
+            "engines": engine_status,
+            "performance": performance,
         }
+
+    async def _autosave_vector_store(self, interval: int = 300) -> None:
+        """Periodically save the vector store to disk."""
+        while True:
+            await asyncio.sleep(interval)
+            if self.vector_store:
+                try:
+                    self.vector_store.save()
+                    self.logger.info("💾 Vector store autosaved")
+                except Exception as e:  # pragma: no cover - safeguard
+                    self.logger.error(f"Vector store autosave failed: {e}")
 
     # Additional helper methods for file detection
     def _detect_file_type(self, file_path: str) -> str:
@@ -502,9 +583,24 @@ class ncOScoreEnhancedOrchestrator:
         """Process generic files"""
         return {
             "status": "success",
-            "type": "generic", 
+            "type": "generic",
             "file": file_path,
             "processor": "generic_handler",
             "features": ["content_analysis", "metadata_extraction"],
             "next_actions": ["analyze", "convert", "process"]
         }
+
+    # ------------------------------------------------------------------
+    async def store_memory(self, namespace: str, data: Any, metadata: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+        """Expose memory storage for agents."""
+        entry = self.memory_manager.store_memory(namespace, data, metadata)
+        return {
+            "namespace": namespace,
+            "timestamp": entry.timestamp.isoformat(),
+            "metadata": entry.metadata,
+        }
+
+    async def get_memory(self, namespace: str, window_size: Optional[int] = None) -> List[Any]:
+        """Retrieve a context window for ``namespace``."""
+        entries = self.memory_manager.get_context_window(namespace, window_size)
+        return [e.data for e in entries]

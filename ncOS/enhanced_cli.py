@@ -125,6 +125,12 @@ class EnhancedLLMCLI:
             return await self._get_agent_status()
         if "memory" in command.lower():
             return await self._get_memory_status()
+        if "performance" in command.lower():
+            if "start" in command.lower():
+                return await self._start_performance_monitor()
+            if "stop" in command.lower():
+                return await self._stop_performance_monitor()
+            return await self._get_performance_report()
         if "help" in command.lower():
             return self._get_help_text()
         return "Command not recognized. Type 'help' for available commands."
@@ -220,6 +226,42 @@ class EnhancedLLMCLI:
         }
         return self._format_yaml_response(status)
 
+    async def _get_agent_status(self) -> str:
+        orchestrator = self.bootstrap.get_component("orchestrator")
+        if orchestrator and hasattr(orchestrator, "get_status"):
+            return self._format_yaml_response(orchestrator.get_status())
+        return "Agents unavailable"
+
+    async def _get_memory_status(self) -> str:
+        vector = self.bootstrap.get_component("vector")
+        if vector and hasattr(vector, "get_vector_store_stats"):
+            stats = vector.get_vector_store_stats()
+            return self._format_yaml_response(stats)
+        return "Vector memory unavailable"
+
+    async def _get_performance_report(self) -> str:
+        monitor = self.bootstrap.get_component("performance_monitor")
+        if monitor and hasattr(monitor, "get_report"):
+            report = monitor.get_report()
+            if report:
+                return self._format_yaml_response(report)
+            return "No performance data available"
+        return "Performance monitor unavailable"
+
+    async def _start_performance_monitor(self) -> str:
+        orchestrator = self.bootstrap.get_component("orchestrator")
+        if orchestrator and hasattr(orchestrator, "activate_performance_monitor"):
+            await orchestrator.activate_performance_monitor()
+            return "Performance monitor started"
+        return "Performance monitor unavailable"
+
+    async def _stop_performance_monitor(self) -> str:
+        orchestrator = self.bootstrap.get_component("orchestrator")
+        if orchestrator and hasattr(orchestrator, "deactivate_performance_monitor"):
+            await orchestrator.deactivate_performance_monitor()
+            return "Performance monitor stopped"
+        return "Performance monitor unavailable"
+
     async def _graceful_shutdown(self) -> None:
         """Gracefully shutdown the CLI"""
         print("\n🔄 Gracefully shutting down...")
@@ -251,6 +293,9 @@ System Commands:
   • "system status"
   • "list agents"
   • "memory status"
+  • "performance report"
+  • "start performance monitor"
+  • "stop performance monitor"
   • "help"
 
 Features:

@@ -58,6 +58,7 @@ python ncos_v21_7_1_integration_test_suite.py
      - Liquidity sweep probability analysis
      - Equal highs/lows identification
      - Volume profile integration
+     - Returns a list of high-probability zones for rapid decision making
 
    - **Market Data Native Agent** (`ncos_market_data_native_agent.py`)
      - Technical indicator calculation
