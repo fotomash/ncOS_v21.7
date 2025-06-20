@@ -138,7 +138,7 @@ Interactive dashboard for analyzing results and grade distribution.
 
 ### 4. Component Testing
 ```bash
-python test_predictive_engine.py
+python scripts/test_predictive_engine.py
 ```
 Tests individual components with sample data.
 
