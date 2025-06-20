@@ -1,0 +1,187 @@
+# NCOS v21 Phoenix Mesh - AUTOSTART Configuration
+# This is the primary boot configuration file
+
+version: "21.7.1"
+mode: production  # production, development, test
+
+# Pre-flight requirements
+preflight:
+  python_version: ">=3.8"
+  memory_required: "8GB"
+  disk_space_required: "10GB"
+
+# Mount points configuration
+mount_points:
+  primary:
+    /data: "realtime_market_data"
+    /csv: "csv_discovery_engine"
+    /vectors: "vector_store" 
+    /memory: "persistent_state"
+    /logs: "system_logs"
+    /models: "ml_models"
+
+  workspace_specific:
+    market:
+      - /market/live
+      - /market/signals
+      - /market/orders
+      - /market/positions
+
+    research:
+      - /research/models
+      - /research/backtest
+      - /research/notebooks
+      - /research/reports
+
+    operations:
+      - /ops/monitoring
+      - /ops/alerts
+      - /ops/config
+      - /ops/backup
+
+# Agent initialization order (overrides agents.yaml)
+agent_initialization_order:
+  - master_orchestrator
+  - risk_manager
+  - divergence_strategy_agent
+  - market_regime_detector
+  - performance_tracker
+
+# Workspace configurations
+workspaces:
+  market:
+    class: "MarketWorkspace"
+    resources:
+      cpu_cores: 2
+      memory: "4GB"
+      priority: "high"
+    services:
+      - live_data_feed
+      - order_management
+      - risk_monitoring
+      - position_tracking
+      - performance_analytics
+    auto_start_components:
+      - market_scanner
+      - signal_generator
+      - execution_engine
+
+  research:
+    class: "ResearchWorkspace"
+    resources:
+      cpu_cores: 2
+      memory: "4GB"
+      priority: "normal"
+    services:
+      - model_training
+      - backtesting_engine
+      - feature_engineering
+      - report_generator
+    auto_start_components:
+      - predictive_engine
+      - pattern_detector
+      - optimization_engine
+
+  operations:
+    class: "OperationsWorkspace"
+    resources:
+      cpu_cores: 1
+      memory: "2GB"
+      priority: "low"
+    services:
+      - system_monitor
+      - log_aggregator
+      - alert_manager
+      - backup_service
+    auto_start_components:
+      - health_checker
+      - metric_collector
+      - diagnostics
+
+# Memory and vector configuration
+memory_vector:
+  memory_manager:
+    type: "hierarchical"
+    levels:
+      L1_cache:
+        size: "512MB"
+        ttl: 300
+        eviction: "LRU"
+      L2_persistent:
+        size: "4GB" 
+        backend: "sqlite"
+        compression: true
+      L3_archive:
+        size: "unlimited"
+        backend: "parquet"
+        partition_by: "date"
+
+  vector_store:
+    engine: "faiss"
+    configurations:
+      market_patterns:
+        dimension: 768
+        index_type: "IVF4096,PQ64"
+        metric: "cosine"
+      csv_embeddings:
+        dimension: 512
+        index_type: "Flat"
+        metric: "L2"
+      agent_memory:
+        dimension: 256
+        index_type: "HNSW32"
+        metric: "inner_product"
+
+# Data feed configuration
+data_feeds:
+  market_data:
+    type: "websocket"
+    url: "${MARKET_DATA_URL}"
+    symbols: ["XAUUSD", "EURUSD", "BTCUSD"]
+    interval: "100ms"
+    buffer_size: "100MB"
+
+  csv_discovery:
+    type: "file_watcher"
+    paths:
+      - "./data/csv"
+      - "./imports"
+    patterns: ["*.csv", "*.xlsx"]
+    auto_enrich: true
+
+# System services
+services:
+  event_bus:
+    type: "redis"
+    url: "redis://localhost:6379"
+
+  message_queue:
+    type: "rabbitmq"
+    url: "amqp://localhost:5672"
+
+  metrics:
+    type: "prometheus"
+    port: 9090
+
+  logging:
+    type: "elasticsearch"
+    url: "http://localhost:9200"
+
+# Boot options
+boot_options:
+  parallel_init: true
+  timeout_seconds: 300
+  retry_failed_components: true
+  max_retries: 3
+
+  # Component-specific timeouts
+  component_timeouts:
+    agents: 60
+    workspaces: 120
+    data_feeds: 180
+
+  # Emergency mode settings
+  emergency_mode:
+    skip_non_critical: true
+    minimal_agents: ["master_orchestrator", "risk_manager"]
+    disable_features: ["backtesting", "optimization"]
