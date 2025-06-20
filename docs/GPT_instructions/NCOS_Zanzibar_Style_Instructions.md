@@ -61,7 +61,7 @@ Initiating YAML-based system analysis and bootstrap sequence...
   • Validate agent class definitions and interfaces  
   • Check for master_orchestrator.py as primary coordinator  
   • Scan for session_state_manager.py and risk_guardian.py  
-  • Detect alternative launchers (ncos_launcher.py, integration_bootstrap.py)  
+  • Detect alternative launchers (ncOS/ncos_launcher.py, integration_bootstrap.py)
   • Auto-select optimal launch method based on available components  
   • Output: validated agent registry, launch command sequence, system health check  
 
@@ -94,7 +94,7 @@ Initiating YAML-based system analysis and bootstrap sequence...
 
 **Primary Launch Detection:**  
 • master_orchestrator.py → `python -m ncOS.ncos_launcher --action=start_session`
-• ncos_launcher.py → `python ncos_launcher.py`  
+• ncOS/ncos_launcher.py → `python ncOS/ncos_launcher.py`
 • integration_bootstrap.py → `python integration_bootstrap.py`  
 
 **Agent Validation:**  
@@ -133,7 +133,7 @@ launch_methods:
 
   secondary:
     method: "ncos_launcher"
-    command: "python ncos_launcher.py"
+    command: "python ncOS/ncos_launcher.py"
     config: "auto"
   fallback:
     method: "integration_bootstrap"
@@ -158,7 +158,7 @@ deployment_commands:
   navigate: "cd {extracted_dir}/"
   install_deps: "pip install -r requirements.txt"
 
-  launch_secondary: "python ncos_launcher.py"
+  launch_secondary: "python ncOS/ncos_launcher.py"
   health_check: "python -c \"from agents.master_orchestrator import MasterOrchestrator; print('✅ System Ready')\"" 
 '''
 

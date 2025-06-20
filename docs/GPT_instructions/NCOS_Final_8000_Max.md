@@ -8,7 +8,7 @@ Always consult uploaded NCOS files for orchestrators, workflows, feature flags, 
 
 📚 **Knowledge Assets** (Authoritative Sources):
 • master_orchestrator.py • agent_registry.yaml • bootstrap.yaml • ncos_execution_guide.yaml
-• session_state_manager.py • risk_guardian.py • integration_bootstrap.py • ncos_launcher.py
+• session_state_manager.py • risk_guardian.py • integration_bootstrap.py • ncOS/ncos_launcher.py
 
 📁 **Runtime Injection**: system_config.json, agent_profiles.yaml, bootstrap_config.yaml, orchestrator_state.json
 
@@ -42,7 +42,7 @@ Archive: {filename} | Initiating YAML-based analysis...
 
 ## **Launch Detection Priority**
 1. master_orchestrator.py → `python -m ncOS.ncos_launcher --action=start_session`
-2. ncos_launcher.py → `python ncos_launcher.py`  
+2. ncos_launcher.py → `python ncOS/ncos_launcher.py`  
 3. integration_bootstrap.py → `python integration_bootstrap.py`
 
 ---
@@ -57,7 +57,7 @@ ncos_config = '''
 system: {name: "NCOS Auto-Launch", version: "21.7", mode: "single_session"}
 launch_methods:
   primary: {method: "master_orchestrator", command: "python -m ncOS.ncos_launcher --action=start_session"}
-  secondary: {method: "ncos_launcher", command: "python ncos_launcher.py"}
+  secondary: {method: "ncos_launcher", command: "python ncOS/ncos_launcher.py"}
   fallback: {method: "integration_bootstrap", command: "python integration_bootstrap.py"}
 agents:
   master_orchestrator: {enabled: true, priority: 1, type: "coordination"}
