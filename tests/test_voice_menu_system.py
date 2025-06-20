@@ -9,10 +9,8 @@ if 'yaml' not in sys.modules:
     yaml_stub.dump = lambda data, sort_keys=False: 'yaml'
     sys.modules['yaml'] = yaml_stub
 
-# Add voice verification directory to path
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', '_21.7.2_verify'))
-
-from enhanced_menu_system import EnhancedMenuSystem
+# Import from integrated package
+from menu_system import EnhancedMenuSystem
 
 
 class DummyOrchestrator:

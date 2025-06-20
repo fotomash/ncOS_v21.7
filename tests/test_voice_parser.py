@@ -4,8 +4,15 @@ import unittest
 
 # Ensure parser module can be imported without heavy dependencies
 sys.modules['spacy'] = MagicMock()
-sys.path.append('_21.7.2_verify')
-import voice_tag_parser
+sys.modules['numpy'] = MagicMock()
+sys.modules['pandas'] = MagicMock()
+sys.modules['yaml'] = MagicMock()
+sys.modules['zbar_agent'] = MagicMock()
+sys.modules['requests'] = MagicMock()
+sys.modules['zbar_logger'] = MagicMock()
+sys.modules['engine'] = MagicMock()
+
+from ncOS import voice_tag_parser
 
 class TestVoiceTagParser(unittest.TestCase):
     def setUp(self):
