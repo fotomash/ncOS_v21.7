@@ -20,6 +20,7 @@ from smc_analysis_engine import ncOScoreSMCEngine
 from enhanced_vector_engine import ncOScoreVectorEngine, BrownVectorStoreIntegration
 from vector_store import VectorStore
 from liquidity_analysis_engine import ncOScoreLiquidityEngine
+from agents.performance_monitor import PerformanceMonitor
 
 class MountPoint(Enum):
     """Unified mount point definitions"""
@@ -86,7 +87,6 @@ class ncOScoreEnhancedOrchestrator:
         self.vector_engine = None
         self.liquidity_engine = None
         self.brown_vector_store = None
-        self.drift_agent = None
 
 
     def _load_config(self, config_path: Optional[str]) -> Dict:
@@ -117,9 +117,7 @@ class ncOScoreEnhancedOrchestrator:
                 "confluence_threshold": 0.6,
                 "signal_strength_threshold": 0.7
             },
-            "drift_detection": {
-                "drift_threshold": 1.0,
-                "history_size": 20
+
             }
         }
 
@@ -145,7 +143,23 @@ class ncOScoreEnhancedOrchestrator:
         await self._initialize_trading_engines()
         await self._validate_boot()
 
+        self.performance_monitor = PerformanceMonitor(
+            self,
+            self.session_state,
+            interval=self.config.get("performance_monitor", {}).get("interval", 300),
+        )
+        if self.config.get("performance_monitor", {}).get("autostart"):
+            await self.performance_monitor.start()
+
         self.logger.info("✅ ncOScore Enhanced initialization complete")
+
+    async def activate_performance_monitor(self) -> None:
+        if self.performance_monitor:
+            await self.performance_monitor.start()
+
+    async def deactivate_performance_monitor(self) -> None:
+        if self.performance_monitor:
+            await self.performance_monitor.stop()
 
     async def _load_enhanced_agents(self):
         """Load enhanced agents including trading engines"""
@@ -517,10 +531,15 @@ class ncOScoreEnhancedOrchestrator:
         if self.vector_engine:
             engine_status["vector_store_stats"] = self.vector_engine.get_vector_store_stats()
 
+        performance = None
+        if self.performance_monitor:
+            performance = self.performance_monitor.get_report()
+
         return {
             "system": base_status,
             "trading": trading_status,
-            "engines": engine_status
+            "engines": engine_status,
+            "performance": performance,
         }
 
     async def _autosave_vector_store(self, interval: int = 300) -> None:
