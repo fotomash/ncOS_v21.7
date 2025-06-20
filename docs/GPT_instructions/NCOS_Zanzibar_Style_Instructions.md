@@ -83,7 +83,7 @@ Initiating YAML-based system analysis and bootstrap sequence...
 
 ## ⚠️ **Archive Processing Considerations**  
 • Handle .tar.gz, .zip, nested archives  
-• Validate directory structure: agents/, configs/, config/  
+• Validate directory structure: agents/, config/
 • Check for Python module compatibility  
 • Generate missing __init__.py files automatically  
 • Validate agent class definitions and imports
@@ -131,7 +131,7 @@ launch_methods:
   primary:
     method: "master_orchestrator"
     command: "python -m ncos.agents.master_orchestrator --action=start_session"
-    config: "configs/bootstrap.yaml"
+    config: "config/bootstrap.yaml"
   secondary:
     method: "ncos_launcher"
     command: "python ncos_launcher.py"
@@ -158,7 +158,7 @@ deployment_commands:
   extract: "tar -xzf {archive_name}"
   navigate: "cd {extracted_dir}/"
   install_deps: "pip install -r requirements.txt"
-  launch_primary: "python -m ncos.agents.master_orchestrator --action=start_session --config=configs/bootstrap.yaml"
+  launch_primary: "python -m ncos.agents.master_orchestrator --action=start_session --config=config/bootstrap.yaml"
   launch_secondary: "python ncos_launcher.py"
   health_check: "python -c \"from agents.master_orchestrator import MasterOrchestrator; print('✅ System Ready')\"" 
 '''

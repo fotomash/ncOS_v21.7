@@ -19,7 +19,7 @@ python -m ncos.agents.{agent_name} --action={action} --config={config}
 
 **Method 3: Master Orchestrator Launch**
 ```
-python -m ncos.agents.master_orchestrator --action=start_session --config=configs/master_orchestrator.yaml
+python -m ncos.agents.master_orchestrator --action=start_session --config=config/master_orchestrator.yaml
 ```
 
 **Method 4: Fallback Bootstrap Script**
@@ -62,7 +62,7 @@ The system will automatically select the best bootstrap method:
 #### 3.1 NCOS v21 Standard Launch Sequence
 ```
 # 1. Initialize Master Orchestrator
-python -m ncos.agents.master_orchestrator --action=start_session --config=configs/master_orchestrator.yaml
+python -m ncos.agents.master_orchestrator --action=start_session --config=config/master_orchestrator.yaml
 
 # 2. Launch Core Agents
 python -m ncos.launch --agent session_state_manager --config agent_profiles/session_state_manager_profile.yaml

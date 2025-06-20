@@ -11,7 +11,7 @@ python -m ncos.agents.master_orchestrator --action=start_session
 ```
 - **Source**: ncos_execution_guide.yaml
 - **Purpose**: Initialize full NCOS system with orchestration
-- **Config**: configs/master_orchestrator.yaml
+- **Config**: config/master_orchestrator.yaml
 
 ### 2. Secondary Target (Module Launch)
 ```bash
