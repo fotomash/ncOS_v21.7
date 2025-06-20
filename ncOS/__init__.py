@@ -9,7 +9,6 @@ from .semantic_utils import (
 )
 from .voice_tag_parser import VoiceTagParser, VoiceTag
 from .menu_voice_integration import VoiceEnabledMenuSystem
-from .ncos_voice_unified import NCOSVoiceSystem
 
 # Optional heavy modules are imported lazily to avoid requiring their
 # dependencies during lightweight usage such as unit tests.
@@ -24,6 +23,7 @@ EnhancedLLMCLI = _lazy_import("ncOS.enhanced_cli", "EnhancedLLMCLI")
 NCOSPredictiveEngine = _lazy_import("ncOS.ncos_predictive_engine", "NCOSPredictiveEngine")
 FeatureExtractor = _lazy_import("ncOS.ncos_feature_extractor", "FeatureExtractor")
 DataEnricher = _lazy_import("ncOS.ncos_data_enricher", "DataEnricher")
+NCOSVoiceSystem = _lazy_import("ncOS.ncos_voice_unified", "NCOSVoiceSystem")
 
 __all__ = [
     "extract_and_validate_uploaded_archive",
