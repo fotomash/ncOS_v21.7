@@ -6,17 +6,24 @@ NCOS v21.7.1 Enhanced Complete System Launch Script
 import asyncio
 import sys
 import argparse
+import logging
 from pathlib import Path
 
 # Add current directory to path
 sys.path.append(str(Path(__file__).parent))
 
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+)
+logger = logging.getLogger(__name__)
+
 from ncos_v21_7_1_enhanced_master_orchestrator import NCOSEnhancedMasterOrchestrator
 
 async def launch_ncos_enhanced_complete(config_path=None):
     """Launch NCOS v21.7.1 Enhanced Complete System"""
-    print("🚀 LAUNCHING NCOS v21.7.1 ENHANCED COMPLETE SYSTEM")
-    print("=" * 60)
+    logger.info("🚀 LAUNCHING NCOS v21.7.1 ENHANCED COMPLETE SYSTEM")
+    logger.info("=" * 60)
 
     try:
         # Initialize orchestrator
@@ -27,22 +34,25 @@ async def launch_ncos_enhanced_complete(config_path=None):
 
         # Display system status
         status = orchestrator.get_complete_system_status()
-        print("\n✅ SYSTEM READY!")
-        print(f"   Session ID: {status['system']['session_id']}")
-        print(f"   Version: {status['system']['version']}")
-        print(f"   Active Agents: {status['system']['active_agents']}")
-        print(f"   Trading Features: {len([f for f in status['capabilities'].values() if f])}")
+        logger.info("\n✅ SYSTEM READY!")
+        logger.info("   Session ID: %s", status['system']['session_id'])
+        logger.info("   Version: %s", status['system']['version'])
+        logger.info("   Active Agents: %s", status['system']['active_agents'])
+        logger.info(
+            "   Trading Features: %s",
+            len([f for f in status['capabilities'].values() if f]),
+        )
 
         # Generate initial menu
         menu = orchestrator.generate_complete_enhanced_menu()
-        print("\n🎛️ ENHANCED TRADING SYSTEM READY")
-        print(f"   {menu['title']}")
-        print(f"   Categories: {len(menu['categories'])}")
+        logger.info("\n🎛️ ENHANCED TRADING SYSTEM READY")
+        logger.info("   %s", menu['title'])
+        logger.info("   Categories: %s", len(menu['categories']))
 
         return orchestrator
 
     except Exception as e:
-        print(f"❌ LAUNCH FAILED: {e}")
+        logger.error("❌ LAUNCH FAILED: %s", e)
         raise
 
 def main():
@@ -55,8 +65,8 @@ def main():
     # Launch system
     orchestrator = asyncio.run(launch_ncos_enhanced_complete(args.config))
 
-    print("\n🎯 NCOS v21.7.1 Enhanced Complete System is now running!")
-    print("   Use the orchestrator object to interact with the system")
+    logger.info("\n🎯 NCOS v21.7.1 Enhanced Complete System is now running!")
+    logger.info("   Use the orchestrator object to interact with the system")
 
     return orchestrator
 
