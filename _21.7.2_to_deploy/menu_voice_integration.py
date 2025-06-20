@@ -4,19 +4,20 @@ Menu System Integration with Voice Commands
 Extends your existing menu_system.py with voice capabilities
 """
 
-from menu_system import MenuSystem
+from menu_system import EnhancedMenuSystem
 from voice_tag_parser import VoiceTagParser
 from typing import Dict, List, Any, Optional
 import requests
 import json
 
-class VoiceEnabledMenuSystem(MenuSystem):
+class VoiceEnabledMenuSystem(EnhancedMenuSystem):
     """Enhanced menu system with voice command support"""
 
-    def __init__(self, config: Dict):
-        super().__init__(config)
+    def __init__(self, orchestrator: Any, config: Optional[Dict] | None = None):
+        super().__init__(orchestrator)
+        self.config = config or {}
         self.voice_parser = VoiceTagParser()
-        self.api_base = config.get("api_base", "http://localhost:8001")
+        self.api_base = self.config.get("api_base", "http://localhost:8001")
 
         # Add voice menu to main menu
         self._add_voice_menu()
@@ -397,8 +398,10 @@ def integrate_voice_menu(existing_menu_system):
     class EnhancedMenu(VoiceEnabledMenuSystem, existing_menu_system.__class__):
         pass
 
-    # Copy configuration
-    enhanced = EnhancedMenu(existing_menu_system.config)
+    # Copy configuration and orchestrator
+    orchestrator = getattr(existing_menu_system, "orchestrator", None)
+    config = getattr(existing_menu_system, "config", {})
+    enhanced = EnhancedMenu(orchestrator, config)
 
     # Copy state
     enhanced.current_context = existing_menu_system.current_context
@@ -414,7 +417,7 @@ def demo_voice_menu():
         "api_base": "http://localhost:8001"
     }
 
-    menu = VoiceEnabledMenuSystem(config)
+    menu = VoiceEnabledMenuSystem(orchestrator=None, config=config)
 
     print("=== Voice-Enabled Menu System Demo ===\n")
 
