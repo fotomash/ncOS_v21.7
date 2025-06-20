@@ -1,4 +1,4 @@
-# NCOS v21 Deployment Guide
+# NCOS v21.7.1 Deployment Guide
 
 ## Prerequisites
  - Python 3.10+
