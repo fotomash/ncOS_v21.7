@@ -29,7 +29,7 @@ class NCOSAutoStartManager:
     Integrates all components including the new Predictive Engine
     """
 
-    def __init__(self, config_file: str = "AUTOSTART_v21.md", mode: str = "production"):
+    def __init__(self, config_file: str = "AUTOSTART_v21.yaml", mode: str = "production"):
         self.config_file = config_file
         self.mode = mode
         self.boot_time = datetime.now()
