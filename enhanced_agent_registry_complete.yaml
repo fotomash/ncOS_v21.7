@@ -1,41 +1,4 @@
 enhanced_ncos_agents:
-  interaction_manager:
-    capabilities:
-    - dynamic_menus
-    - conversation_flow
-    - response_generation
-    - user_guidance
-    class: InteractionManagerAgent
-    config_file: config/interface/interaction.yaml
-    dependencies:
-    - master_orchestrator
-    - session_state_manager
-    enabled: true
-    module: agents.interface.interaction_manager
-    priority: 6
-    triggers:
-    - user_interaction
-    - menu_request
-    - conversation_start
-    type: user_interaction
-  knowledge_intelligence:
-    capabilities:
-    - asset_detection
-    - knowledge_retrieval
-    - context_analysis
-    - intelligent_search
-    class: KnowledgeIntelligenceAgent
-    config_file: config/intelligence/knowledge.yaml
-    dependencies:
-    - master_orchestrator
-    - vector_data_processor
-    enabled: true
-    module: agents.intelligence.knowledge_agent
-    priority: 5
-    triggers:
-    - asset_detection_request
-    - knowledge_query
-    type: knowledge_management
   master_orchestrator:
     class: MasterOrchestrator
     enabled: true
@@ -56,36 +19,3 @@ enhanced_ncos_agents:
     module: agents.session_state_manager
     priority: 2
     type: state_management
-  vector_data_processor:
-    capabilities:
-    - real_time_vector_processing
-    - market_data_optimization
-    - native_search
-    class: VectorDataProcessorAgent
-    config_file: config/data/vector_processor.yaml
-    dependencies:
-    - master_orchestrator
-    enabled: true
-    module: agents.data.vector_processor
-    priority: 4
-    triggers:
-    - market_data_update
-    - vector_search_request
-    type: data_processing
-  zanflow_orchestrator:
-    capabilities:
-    - prompt_engineering
-    - logical_blocks
-    - structural_flow
-    - menu_system
-    class: ZanflowOrchestratorAgent
-    config_file: config/zanflow/orchestrator.yaml
-    dependencies:
-    - master_orchestrator
-    enabled: true
-    module: agents.workflows.zanflow_orchestrator
-    priority: 3
-    triggers:
-    - workflow_request
-    - prompt_engineering_needed
-    type: workflow_management
