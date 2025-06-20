@@ -1,10 +1,27 @@
 """Master Orchestrator Agent - Production Ready.
 
 This module coordinates registered agents and orchestrates asynchronous
-workflows across the ncOS platform.
+workflows across the ncOS platform. The orchestrator expects a
+configuration dictionary where each workflow is described under the
+``workflows`` key. A workflow is an ordered list of steps and each step
+defines the name of an agent and the action method to execute.
 
-TODO: Expand documentation with detailed examples and configuration
-requirements.
+Example configuration::
+
+    config = {
+        "workflows": {
+            "startup": {
+                "steps": [
+                    {"agent": "logger", "action": "initialize"},
+                    {"agent": "risk_engine", "action": "warm_up"}
+                ]
+            }
+        }
+    }
+
+Agents are registered at runtime and then referenced by name in the
+workflow definition. After initialization, ``execute_workflow`` can be
+used to process each step asynchronously.
 """
 import asyncio
 import logging
@@ -14,7 +31,29 @@ from datetime import datetime
 class MasterOrchestrator:
     """Coordinate agent workflows.
 
-    TODO: Describe responsibilities and lifecycle management in detail.
+    **Responsibilities**
+    - Manage the lifecycle of registered agents.
+    - Execute workflows defined in the provided configuration.
+    - Track internal state and expose status information.
+
+    **Lifecycle**
+    1. Construct with a configuration dictionary.
+    2. Call :meth:`initialize` to prepare the orchestrator for use.
+    3. Register agents with :meth:`register_agent`.
+    4. Run workflows through :meth:`execute_workflow`.
+
+    **Configuration Expectations**
+    ``config`` must contain a ``workflows`` mapping where each workflow has a
+    ``steps`` list. Each step specifies ``agent`` and ``action`` keys referring
+    to a registered agent and the coroutine method to invoke.
+
+    Example usage::
+
+        orchestrator = MasterOrchestrator(config)
+        await orchestrator.initialize()
+        orchestrator.register_agent('logger', LoggerAgent())
+        orchestrator.register_agent('risk_engine', RiskEngine())
+        results = await orchestrator.execute_workflow('startup', {})
     """
 
     def __init__(self, config: Dict[str, Any]):
