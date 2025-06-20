@@ -496,7 +496,7 @@ zbar:
 
 ### Voice Endpoints
 
-#### POST /voice/process
+#### POST /voice/command
 Process a voice command and return structured result.
 
 **Request:**
@@ -885,7 +885,7 @@ For support or contributions, please refer to the project repository.
 - python core/ncos_voice_unified.py    → Voice interface
 
 📊 API Endpoints:
-- POST   /voice/process                → Process voice command
+- POST   /voice/command                → Process voice command
 - POST   /journal/append               → Add entry
 - GET    /journal/query                → Search entries
 - GET    /journal/recap/{session}      → Session summary
