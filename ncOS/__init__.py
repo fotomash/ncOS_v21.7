@@ -11,6 +11,9 @@ from .enhanced_cli import EnhancedLLMCLI
 from .ncos_predictive_engine import NCOSPredictiveEngine
 from .ncos_feature_extractor import FeatureExtractor
 from .ncos_data_enricher import DataEnricher
+from .voice_tag_parser import VoiceTagParser, VoiceTag
+from .menu_voice_integration import VoiceEnabledMenuSystem
+from .ncos_voice_unified import NCOSVoiceSystem
 
 __all__ = [
     "extract_and_validate_uploaded_archive",
@@ -22,4 +25,8 @@ __all__ = [
     "NCOSPredictiveEngine",
     "FeatureExtractor",
     "DataEnricher",
+    "VoiceTagParser",
+    "VoiceTag",
+    "VoiceEnabledMenuSystem",
+    "NCOSVoiceSystem",
 ]

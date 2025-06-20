@@ -1,6 +1,8 @@
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
+
+from ncOS.voice_api_routes import router as voice_router
 import yfinance as yf
 from datetime import datetime
 from pathlib import Path
@@ -21,6 +23,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Mount voice command API routes
+app.include_router(voice_router)
 
 BASE_DIR = Path(__file__).parent
 
