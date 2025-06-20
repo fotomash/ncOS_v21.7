@@ -145,6 +145,12 @@ class EnhancedLLMCLI:
             return await self._get_agent_status()
         if "memory" in lower:
             return await self._get_memory_status()
+        if "performance" in lower:
+            if "start" in lower:
+                return await self._start_performance_monitor()
+            if "stop" in lower:
+                return await self._stop_performance_monitor()
+            return await self._get_performance_report()
         if "help" in lower:
             return self._get_help_text()
         return "Command not recognized. Type 'help' for available commands."
@@ -258,6 +264,29 @@ class EnhancedLLMCLI:
             return self._format_yaml_response(stats)
         return "Vector memory unavailable"
 
+    async def _get_performance_report(self) -> str:
+        monitor = self._get_component("performance_monitor")
+        if monitor and hasattr(monitor, "get_report"):
+            report = monitor.get_report()
+            if report:
+                return self._format_yaml_response(report)
+            return "No performance data available"
+        return "Performance monitor unavailable"
+
+    async def _start_performance_monitor(self) -> str:
+        monitor = self._get_component("orchestrator")
+        if monitor and hasattr(monitor, "activate_performance_monitor"):
+            await monitor.activate_performance_monitor()
+            return "Performance monitor started"
+        return "Performance monitor unavailable"
+
+    async def _stop_performance_monitor(self) -> str:
+        monitor = self._get_component("orchestrator")
+        if monitor and hasattr(monitor, "deactivate_performance_monitor"):
+            await monitor.deactivate_performance_monitor()
+            return "Performance monitor stopped"
+        return "Performance monitor unavailable"
+
     async def _graceful_shutdown(self) -> None:
         print("\n🔄 Gracefully shutting down...")
         self.session_active = False
@@ -288,6 +317,9 @@ System Commands:
   • "system status"
   • "list agents"
   • "memory status"
+  • "performance report"
+  • "start performance monitor"
+  • "stop performance monitor"
   • "help"
 
 Features:
