@@ -7,7 +7,6 @@ Automatically creates directory structure and initial configuration
 import os
 import sys
 from pathlib import Path
-import shutil
 
 def setup_ncos_voice_journal():
     """Set up the NCOS Voice Journal System"""
