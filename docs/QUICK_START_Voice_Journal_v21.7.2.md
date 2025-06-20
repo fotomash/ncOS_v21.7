@@ -29,7 +29,7 @@ python api/main.py
 streamlit run dashboard/voice_command_dashboard.py
 
 # Terminal 3: Voice Interface
-python ncos_voice/ncos_voice_unified.py
+python core/ncos_voice_unified.py
 ```
 
 ## 🎤 First Commands

@@ -118,5 +118,5 @@ python zbar_voice_integration.py
 python menu_voice_integration.py
 
 # Test unified system
-python ncos_voice_unified.py
+python core/ncos_voice_unified.py
 ```
