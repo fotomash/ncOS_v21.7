@@ -5,6 +5,7 @@ import yfinance as yf
 from datetime import datetime
 from pathlib import Path
 import json
+import os
 import requests
 from fastapi import Query
 
@@ -23,7 +24,8 @@ app.add_middleware(
 
 BASE_DIR = Path(__file__).parent
 
-TWELVE_DATA_API_KEY = "6a29ddba6b9c4a91b969704fcc1b325f"  # or use os.environ.get("TWELVE_DATA_API_KEY")
+# Twelve Data API key should be provided via environment variable
+TWELVE_DATA_API_KEY = os.environ.get("TWELVE_DATA_API_KEY")
 
 def get_twelvedata_price(symbol: str):
     url = f"https://api.twelvedata.com/price?symbol={symbol}&apikey={TWELVE_DATA_API_KEY}"

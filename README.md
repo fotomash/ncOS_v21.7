@@ -26,6 +26,15 @@ This package contains all components needed to run NCOS v21.
 cd scripts && python integration_bootstrap.py
 ```
 
+## Environment Variables
+
+Set API keys for external data sources before running the market data API:
+
+```bash
+export FINNHUB_API_KEY="your-finnhub-key"
+export TWELVE_DATA_API_KEY="your-twelvedata-key"
+```
+
 ## Running Tests
 
 Install the project dependencies before executing the test suite. The tests rely

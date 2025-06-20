@@ -37,6 +37,15 @@ Then install them:
 pip install -r requirements.txt
 ```
 
+### Set API Keys
+
+Provide the required API keys as environment variables before launching the server:
+
+```bash
+export FINNHUB_API_KEY="your-finnhub-key"
+export TWELVE_DATA_API_KEY="your-twelvedata-key"
+```
+
 ### Step 2: Run Locally (for Testing)
 
 You can run the API server on your local machine to test its functionality.

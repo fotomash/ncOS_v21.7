@@ -15,8 +15,8 @@ print("[DEBUG] ✅ finnhub_data_fetcher.py loaded and active")
 
 # --- Initialize Finnhub client ---
 finnhub_client = None
-# Use the provided API key, fallback to environment variable or placeholder
-FINNHUB_API_KEY = os.environ.get("FINNHUB_API_KEY", "d07lgo1r01qrslhp3q3gd07lgo1r01qrslhp3q40") # Using provided key
+# Finnhub API key must be provided via the FINNHUB_API_KEY environment variable
+FINNHUB_API_KEY = os.environ.get("FINNHUB_API_KEY")
 
 # Define base path for saving raw M1 data (consistent with data_pipeline)
 M1_SAVE_DIR = Path("tick_data/m1")
