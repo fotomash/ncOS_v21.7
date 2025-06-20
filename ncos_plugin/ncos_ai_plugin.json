@@ -9,14 +9,14 @@
   },
   "api": {
     "type": "openapi",
-    "url": "https://ncos.onrender.com/openapi.json"
+    "url": "https://emerging-tiger-fair.ngrok-free.app/openapi.json"
   },
   "logo_url": "https://ncos.onrender.com/logo.png",
   "contact_email": "support@ncos.dev",
   "legal_info_url": "http://ncos.dev/legal",
   "servers": [
     {
-      "url": "https://ncos.onrender.com"
+      "url": "https://emerging-tiger-fair.ngrok-free.app/openapi.json"
     }
-  ]
+]
 }
