@@ -7,12 +7,9 @@
   "auth": {
     "type": "none"
   },
-  "api": {
-    "type": "openapi",
-    "url": "http://localhost:8000/openapi.json",
-    "is_user_authenticated": false
-  },
-  "logo_url": "http://localhost:8000/logo.png",
-  "contact_email": "support@ncos.dev",
-  "legal_info_url": "http://ncos.dev/legal"
+"api": {
+  "type": "openapi",
+  "url": "https://ncos.onrender.com/openapi.json"
+},
+"logo_url": "https://ncos.onrender.com/logo.png"
 }
