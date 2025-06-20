@@ -74,14 +74,14 @@ def forex_quote(pair: str = Query(...)):
 
 @app.get("/openapi.json")
 def openapi():
-    with open("/mnt/data/ncos_openapi.json") as f:
+    with open("ncos-plugin/ncos_openapi.json") as f:
         return JSONResponse(content=json.load(f))
 
 @app.get("/ai-plugin.json")
 def plugin_manifest():
-    with open("/mnt/data/ncos_ai_plugin.json") as f:
+    with open("ncos-plugin/ncos_ai_plugin.json") as f:
         return JSONResponse(content=json.load(f))
 
 @app.get("/logo.png")
 def logo():
-    return FileResponse("/mnt/data/logo.png")
+    return FileResponse("ncos-plugin/logo.png")
