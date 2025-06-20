@@ -33,6 +33,7 @@ on `pandas`, `numpy` and all other packages listed in `requirements.txt`:
 
 ```bash
 pip install -r requirements.txt
+python -m spacy download en_core_web_sm
 ```
 
 For additional test utilities install the development requirements as well:
