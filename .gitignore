@@ -1,6 +1,10 @@
 # Log files
 *.log
-logs/
+logs/*
+!logs/.gitkeep
+!logs/backup/
+logs/backup/*
+!logs/backup/.gitkeep
 
 # JSON/YAML reports and configuration files
 scripts/bootstrap_report.json
