@@ -1,2 +1,19 @@
-# Placeholder configuration for MarketDataCaptain
-settings: {}
+agent:
+  name: MarketDataCaptain
+  version: 21.7.0
+  enabled: true
+settings:
+  symbols:
+  - XAUUSD
+  - EURUSD
+  - GBPUSD
+  timeframes:
+  - M1
+  - M5
+  - M15
+  - H1
+  - H4
+  data_source: live
+  update_frequency: 1
+  buffer_size: 1000
+  flush_interval: 10

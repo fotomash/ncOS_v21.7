@@ -1,0 +1,42 @@
+profile_name: MarketDataCaptain
+description: Real-time market data ingestion and processing
+version: 21.7.0
+execution_sequence:
+- data_ingestion
+- tick_processor
+- spread_tracker
+code_map:
+  data_ingestion: ncos.data.ingestion.DataIngestion
+  tick_processor: ncos.data.tick_processor.TickProcessor
+  spread_tracker: ncos.data.spread_tracker.SpreadTracker
+meta_agent:
+  agent_id: NCOS_Market_001
+  strategy_tags:
+  - Market
+  - Data
+  - RealTime
+  llm_contextualization_enabled: true
+data_enricher:
+  enabled: true
+  spread_settings:
+    enabled: true
+    window_size: 25
+    high_vol_baseline: 0.0008
+  tick_context_settings:
+    enable_tick_merge: true
+    journal_tick_context: true
+settings:
+  symbols:
+  - XAUUSD
+  - EURUSD
+  - GBPUSD
+  timeframes:
+  - M1
+  - M5
+  - M15
+  - H1
+  - H4
+  data_source: live
+  update_frequency: 1
+  buffer_size: 1000
+  flush_interval: 10

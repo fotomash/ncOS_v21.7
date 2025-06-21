@@ -5,11 +5,13 @@ Based on patterns from agent_profile_schemas.py and module_configs.py
 """
 
 import yaml
+import json
 from pathlib import Path
-from typing import Dict, List, Any
+from typing import Dict, List, Any, Optional
+from datetime import datetime
 
-# Templates for agent profiles
-AGENT_TEMPLATES: Dict[str, Dict[str, Any]] = {
+# Agent templates based on your schema patterns
+AGENT_TEMPLATES = {
     "CoreSystemAgent": {
         "profile_name": "CoreSystemAgent",
         "description": "Core system orchestration and health monitoring",
@@ -18,21 +20,22 @@ AGENT_TEMPLATES: Dict[str, Dict[str, Any]] = {
         "code_map": {
             "health_check": "ncos.core.health_check.HealthChecker",
             "system_monitor": "ncos.core.system_monitor.SystemMonitor",
-            "log_aggregator": "ncos.core.log_aggregator.LogAggregator",
+            "log_aggregator": "ncos.core.log_aggregator.LogAggregator"
         },
         "meta_agent": {
             "agent_id": "NCOS_Core_001",
             "strategy_tags": ["System", "Health", "Monitoring"],
-            "llm_contextualization_enabled": False,
+            "llm_contextualization_enabled": False
         },
         "settings": {
             "log_level": "INFO",
             "health_check_interval": 60,
             "max_retries": 3,
             "startup_delay": 5,
-            "shutdown_timeout": 30,
-        },
+            "shutdown_timeout": 30
+        }
     },
+
     "MarketDataCaptain": {
         "profile_name": "MarketDataCaptain",
         "description": "Real-time market data ingestion and processing",
@@ -41,24 +44,24 @@ AGENT_TEMPLATES: Dict[str, Dict[str, Any]] = {
         "code_map": {
             "data_ingestion": "ncos.data.ingestion.DataIngestion",
             "tick_processor": "ncos.data.tick_processor.TickProcessor",
-            "spread_tracker": "ncos.data.spread_tracker.SpreadTracker",
+            "spread_tracker": "ncos.data.spread_tracker.SpreadTracker"
         },
         "meta_agent": {
             "agent_id": "NCOS_Market_001",
             "strategy_tags": ["Market", "Data", "RealTime"],
-            "llm_contextualization_enabled": True,
+            "llm_contextualization_enabled": True
         },
         "data_enricher": {
             "enabled": True,
             "spread_settings": {
                 "enabled": True,
                 "window_size": 25,
-                "high_vol_baseline": 0.0008,
+                "high_vol_baseline": 0.0008
             },
             "tick_context_settings": {
                 "enable_tick_merge": True,
-                "journal_tick_context": True,
-            },
+                "journal_tick_context": True
+            }
         },
         "settings": {
             "symbols": ["XAUUSD", "EURUSD", "GBPUSD"],
@@ -66,9 +69,10 @@ AGENT_TEMPLATES: Dict[str, Dict[str, Any]] = {
             "data_source": "live",
             "update_frequency": 1,
             "buffer_size": 1000,
-            "flush_interval": 10,
-        },
+            "flush_interval": 10
+        }
     },
+
     "PortfolioManager": {
         "profile_name": "PortfolioManager",
         "description": "Portfolio optimization and position management",
@@ -77,46 +81,65 @@ AGENT_TEMPLATES: Dict[str, Dict[str, Any]] = {
         "code_map": {
             "risk_calculator": "ncos.portfolio.risk_calculator.RiskCalculator",
             "position_sizer": "ncos.portfolio.position_sizer.PositionSizer",
-            "portfolio_optimizer": "ncos.portfolio.optimizer.PortfolioOptimizer",
+            "portfolio_optimizer": "ncos.portfolio.optimizer.PortfolioOptimizer"
         },
         "meta_agent": {
             "agent_id": "NCOS_Portfolio_001",
             "strategy_tags": ["Portfolio", "Risk", "Optimization"],
-            "llm_contextualization_enabled": True,
+            "llm_contextualization_enabled": True
         },
-        "risk_manager": {"enabled": True, "max_risk_per_trade": 0.01},
+        "risk_manager": {
+            "enabled": True,
+            "max_risk_per_trade": 0.01
+        },
         "settings": {
             "max_positions": 10,
             "risk_per_trade": 0.01,
             "max_daily_risk": 0.05,
             "position_sizing_method": "fixed_fractional",
             "rebalance_interval": 3600,
-            "risk_check_interval": 300,
-        },
+            "risk_check_interval": 300
+        }
     },
+
     "SignalProcessor": {
         "profile_name": "SignalProcessor",
         "description": "Trading signal processing and validation",
         "version": "21.7.0",
-        "execution_sequence": ["context_analyzer", "liquidity_engine", "structure_validator", "fvg_locator", "confluence_stacker"],
+        "execution_sequence": [
+            "context_analyzer",
+            "liquidity_engine", 
+            "structure_validator",
+            "fvg_locator",
+            "confluence_stacker"
+        ],
         "code_map": {
             "context_analyzer": "ncos.signals.context_analyzer.ContextAnalyzer",
             "liquidity_engine": "ncos.signals.liquidity_engine.LiquidityEngine",
             "structure_validator": "ncos.signals.structure_validator.StructureValidator",
             "fvg_locator": "ncos.signals.fvg_locator.FVGLocator",
-            "confluence_stacker": "ncos.signals.confluence_stacker.ConfluenceStacker",
+            "confluence_stacker": "ncos.signals.confluence_stacker.ConfluenceStacker"
         },
         "meta_agent": {
             "agent_id": "NCOS_Signal_001",
             "strategy_tags": ["Signal", "Analysis", "Validation"],
             "llm_contextualization_enabled": True,
-            "memory_embedding_strategy": "on_signal_zbar_summary",
+            "memory_embedding_strategy": "on_signal_zbar_summary"
         },
-        "context_analyzer": {"enabled": True, "bias_determination_timeframes": ["H1", "H4"]},
-        "liquidity_engine": {"enabled": True, "lookback_period": 100},
+        "context_analyzer": {
+            "enabled": True,
+            "bias_determination_timeframes": ["H1", "H4"]
+        },
+        "liquidity_engine": {
+            "enabled": True,
+            "lookback_period": 100
+        },
         "structure_validator": {
             "enabled": True,
-            "swing_engine_config": {"swing_n": 1, "break_on_close": True},
+            "swing_engine_config": {
+                "swing_n": 1,
+                "break_on_close": True
+            }
         },
         "settings": {
             "min_confidence": 0.7,
@@ -124,14 +147,15 @@ AGENT_TEMPLATES: Dict[str, Dict[str, Any]] = {
             "cooldown_period": 300,
             "confirmation_required": True,
             "queue_size": 100,
-            "processing_threads": 4,
+            "processing_threads": 4
         },
         "journaling": {
             "verbosity": "detailed",
             "enable_zbar_format": True,
-            "log_directory": "/logs/signals/",
-        },
+            "log_directory": "/logs/signals/"
+        }
     },
+
     "VoiceCommandAgent": {
         "profile_name": "VoiceCommandAgent",
         "description": "Natural language voice command processing",
@@ -140,54 +164,111 @@ AGENT_TEMPLATES: Dict[str, Dict[str, Any]] = {
         "code_map": {
             "voice_parser": "ncos.voice.voice_tag_parser.VoiceTagParser",
             "command_router": "ncos.voice.llm_orchestrator.CommandRouter",
-            "response_generator": "ncos.voice.response_generator.ResponseGenerator",
+            "response_generator": "ncos.voice.response_generator.ResponseGenerator"
         },
         "meta_agent": {
             "agent_id": "NCOS_Voice_001",
             "strategy_tags": ["Voice", "NLP", "Interface"],
-            "llm_contextualization_enabled": True,
+            "llm_contextualization_enabled": True
         },
         "settings": {
             "wake_word": "ncos",
             "language": "en-US",
             "confidence_threshold": 0.7,
             "max_command_length": 100,
-            "timeout": 5,
-        },
+            "timeout": 5
+        }
     },
+
+    "RiskManager": {
+        "profile_name": "RiskManager",
+        "description": "Risk management and position monitoring",
+        "version": "21.7.0",
+        "execution_sequence": ["risk_assessment", "position_monitor", "alert_generator"],
+        "code_map": {
+            "risk_assessment": "ncos.risk.assessment.RiskAssessment",
+            "position_monitor": "ncos.risk.monitor.PositionMonitor",
+            "alert_generator": "ncos.risk.alerts.AlertGenerator"
+        },
+        "meta_agent": {
+            "agent_id": "NCOS_Risk_001",
+            "strategy_tags": ["Risk", "Monitor", "Alert"],
+            "llm_contextualization_enabled": False
+        },
+        "settings": {
+            "log_level": "WARNING",
+            "alert_threshold": 0.8,
+            "emergency_close_threshold": 0.95,
+            "max_drawdown": 0.20,
+            "daily_loss_limit": 0.06,
+            "correlation_threshold": 0.7,
+            "var_confidence": 0.95
+        }
+    }
 }
 
+def generate_agent_configurations():
+    """Generate all agent configuration files"""
 
-def generate_agent_configurations() -> None:
+    # Create directories
     config_dir = Path("config")
     agents_dir = config_dir / "agents"
     agents_dir.mkdir(parents=True, exist_ok=True)
-    agent_registry: Dict[str, Any] = {"version": "21.7.0", "agents": {}}
+
+    # Generate agent registry
+    agent_registry = {
+        "version": "21.7.0",
+        "agents": {}
+    }
+
+    # Generate individual agent configs
     for agent_name, template in AGENT_TEMPLATES.items():
+        # Create agent config file
         agent_file = agents_dir / f"{agent_name.lower()}_profile.yaml"
-        with open(agent_file, "w") as f:
+
+        with open(agent_file, 'w') as f:
             yaml.dump(template, f, default_flow_style=False, sort_keys=False)
+
+        print(f"✓ Generated agent profile: {agent_file}")
+
+        # Add to registry
         agent_registry["agents"][agent_name] = {
             "profile_path": str(agent_file.relative_to(config_dir)),
             "enabled": True,
-            "priority": 1,
+            "priority": 1
         }
+
+        # Also create the simple config file for backwards compatibility
         simple_config = {
-            "agent": {"name": agent_name, "version": template["version"], "enabled": True},
-            "settings": template.get("settings", {}),
+            "agent": {
+                "name": agent_name,
+                "version": template["version"],
+                "enabled": True
+            },
+            "settings": template.get("settings", {})
         }
+
         simple_file = config_dir / f"{agent_name.lower()}_config.yaml"
-        with open(simple_file, "w") as f:
+        with open(simple_file, 'w') as f:
             yaml.dump(simple_config, f, default_flow_style=False, sort_keys=False)
+
+    # Save agent registry
     registry_file = config_dir / "agent_registry.yaml"
-    with open(registry_file, "w") as f:
+    with open(registry_file, 'w') as f:
         yaml.dump(agent_registry, f, default_flow_style=False, sort_keys=False)
+
+    print(f"\n✓ Generated agent registry: {registry_file}")
+    print(f"✓ Total agents configured: {len(AGENT_TEMPLATES)}")
+
+    # Generate trigger routes based on your patterns
     generate_trigger_routes(config_dir)
+
+    # Generate main system config
     generate_system_config(config_dir)
-    print(f"\u2713 Generated {len(AGENT_TEMPLATES)} agent profiles")
 
+def generate_trigger_routes(config_dir: Path):
+    """Generate trigger routes configuration"""
 
-def generate_trigger_routes(config_dir: Path) -> None:
     trigger_routes = {
         "version": "21.7.0",
         "triggers": {
@@ -197,7 +278,7 @@ def generate_trigger_routes(config_dir: Path) -> None:
                         "description": "XAUUSD tick data trigger",
                         "actions": ["update_market_data", "check_signals", "update_spread"],
                         "conditions": ["market_open", "valid_spread"],
-                        "agents": ["MarketDataCaptain", "SignalProcessor"],
+                        "agents": ["MarketDataCaptain", "SignalProcessor"]
                     }
                 }
             },
@@ -207,7 +288,7 @@ def generate_trigger_routes(config_dir: Path) -> None:
                         "description": "Spread manipulation detection",
                         "actions": ["log_manipulation", "adjust_risk", "notify_trader"],
                         "conditions": ["spread_threshold_exceeded", "volume_spike"],
-                        "agents": ["MarketDataCaptain", "PortfolioManager", "NotificationAgent"],
+                        "agents": ["MarketDataCaptain", "PortfolioManager", "RiskManager"]
                     }
                 },
                 "signal": {
@@ -215,9 +296,9 @@ def generate_trigger_routes(config_dir: Path) -> None:
                         "description": "ZBAR analysis completed",
                         "actions": ["validate_signal", "calculate_position", "prepare_order"],
                         "conditions": ["signal_confidence_met", "risk_approved"],
-                        "agents": ["SignalProcessor", "PortfolioManager"],
+                        "agents": ["SignalProcessor", "PortfolioManager"]
                     }
-                },
+                }
             },
             "voice": {
                 "command": {
@@ -225,7 +306,7 @@ def generate_trigger_routes(config_dir: Path) -> None:
                         "description": "Voice command received",
                         "actions": ["parse_command", "route_to_handler", "generate_response"],
                         "conditions": ["wake_word_detected", "command_valid"],
-                        "agents": ["VoiceCommandAgent"],
+                        "agents": ["VoiceCommandAgent"]
                     }
                 }
             },
@@ -235,69 +316,91 @@ def generate_trigger_routes(config_dir: Path) -> None:
                         "description": "Trading session started",
                         "actions": ["initialize_agents", "load_market_state", "start_monitoring"],
                         "conditions": ["market_open", "system_ready"],
-                        "agents": ["CoreSystemAgent", "MarketDataCaptain", "PortfolioManager"],
+                        "agents": ["CoreSystemAgent", "MarketDataCaptain", "PortfolioManager"]
                     },
                     "end": {
                         "description": "Trading session ended",
                         "actions": ["save_state", "generate_report", "cleanup"],
                         "conditions": ["market_close", "positions_flat"],
-                        "agents": ["CoreSystemAgent", "PortfolioManager"],
-                    },
+                        "agents": ["CoreSystemAgent", "PortfolioManager"]
+                    }
                 }
             },
-        },
+            "strategy": {
+                "divergence": {
+                    "detected": {
+                        "description": "Divergence strategy trigger",
+                        "actions": ["analyze_divergence", "generate_signal", "assess_risk"],
+                        "conditions": ["divergence_confirmed", "volume_support"],
+                        "agents": ["SignalProcessor", "RiskManager"]
+                    }
+                }
+            }
+        }
     }
+
+    # Save as YAML
     trigger_yaml = config_dir / "trigger_routes.yaml"
-    with open(trigger_yaml, "w") as f:
+    with open(trigger_yaml, 'w') as f:
         yaml.dump(trigger_routes, f, default_flow_style=False, sort_keys=False)
 
+    print(f"✓ Generated trigger routes: {trigger_yaml}")
 
-def generate_system_config(config_dir: Path) -> None:
+def generate_system_config(config_dir: Path):
+    """Generate main system configuration"""
+
     system_config = {
         "system": {
             "name": "ncOS",
             "version": "21.7.0",
             "environment": "production",
-            "log_level": "INFO",
+            "log_level": "INFO"
         },
         "orchestration": {
             "max_parallel_agents": 5,
             "default_timeout": 300,
-            "retry_policy": {"max_retries": 3, "backoff_factor": 2, "max_backoff": 60},
+            "retry_policy": {
+                "max_retries": 3,
+                "backoff_factor": 2,
+                "max_backoff": 60
+            }
         },
         "data": {
             "journal_path": "logs/trade_journal.jsonl",
             "backup_interval": 3600,
-            "max_journal_size": 104857600,
-            "archive_old_journals": True,
+            "max_journal_size": 104857600,  # 100MB
+            "archive_old_journals": True
         },
         "voice": {
             "enabled": True,
             "engine": "whisper",
             "model": "base",
             "wake_word": "ncos",
-            "language": "en",
+            "language": "en"
         },
         "api": {
             "host": "0.0.0.0",
             "port": 8000,
             "cors_origins": ["http://localhost:8501"],
-            "api_key_required": False,
+            "api_key_required": False
         },
         "dashboard": {
             "host": "localhost",
             "port": 8501,
             "auto_refresh": True,
-            "refresh_interval": 5,
-        },
+            "refresh_interval": 5
+        }
     }
+
+    # Save main config
     main_config = config_dir / "ncos_config.yaml"
-    with open(main_config, "w") as f:
+    with open(main_config, 'w') as f:
         yaml.dump(system_config, f, default_flow_style=False, sort_keys=False)
 
+    print(f"✓ Generated system config: {main_config}")
 
 if __name__ == "__main__":
-    print("\ud83d\udd27 Advanced Agent Configuration Generator")
+    print("🔧 Advanced Agent Configuration Generator")
     print("=" * 50)
     generate_agent_configurations()
-    print("\n\u2705 Configuration generation complete!")
+    print("\n✅ Configuration generation complete!")

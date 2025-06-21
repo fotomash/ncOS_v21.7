@@ -1,0 +1,34 @@
+system:
+  name: ncOS
+  version: 21.7.0
+  environment: production
+  log_level: INFO
+orchestration:
+  max_parallel_agents: 5
+  default_timeout: 300
+  retry_policy:
+    max_retries: 3
+    backoff_factor: 2
+    max_backoff: 60
+data:
+  journal_path: logs/trade_journal.jsonl
+  backup_interval: 3600
+  max_journal_size: 104857600
+  archive_old_journals: true
+voice:
+  enabled: true
+  engine: whisper
+  model: base
+  wake_word: ncos
+  language: en
+api:
+  host: 0.0.0.0
+  port: 8000
+  cors_origins:
+  - http://localhost:8501
+  api_key_required: false
+dashboard:
+  host: localhost
+  port: 8501
+  auto_refresh: true
+  refresh_interval: 5

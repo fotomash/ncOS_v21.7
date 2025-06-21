@@ -33,8 +33,6 @@ Based on analysis of your uploaded files, I've created a comprehensive fix that 
 - Integrates voice command routing from llm_orchestrator.py
 - Session management and journal persistence
 - Agent profile loading with validation
-  
-  *The authoritative version of this script now lives in the repository root.*
 
 ### 2. **ncos_v21_7_1_enhanced_master_orchestrator.py**
 - Compatibility shim for test imports
@@ -46,8 +44,6 @@ Based on analysis of your uploaded files, I've created a comprehensive fix that 
 - Generates trigger routes with proper mappings
 - Creates system-wide configuration
 - Based on your agent_profile_schemas.py patterns
-  
-  *Use the root-level script for current functionality.*
 
 ### 4. **fix_ncos_comprehensive.py**
 - Automated fix script
@@ -92,8 +88,6 @@ python -m ncos
    - Single unified setup.py
    - All dependencies included
    - Proper entry points
-   
-   *The maintained setup script is `setup_v21.7.1.py` at the repository root.*
 
 5. **File Naming Issues** ✓
    - Fixes double extensions

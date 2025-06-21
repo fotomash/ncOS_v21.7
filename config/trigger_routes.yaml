@@ -1,0 +1,98 @@
+version: 21.7.0
+triggers:
+  data:
+    tick:
+      xauusd:
+        description: XAUUSD tick data trigger
+        actions:
+        - update_market_data
+        - check_signals
+        - update_spread
+        conditions:
+        - market_open
+        - valid_spread
+        agents:
+        - MarketDataCaptain
+        - SignalProcessor
+  analysis:
+    manipulation:
+      spread_detected:
+        description: Spread manipulation detection
+        actions:
+        - log_manipulation
+        - adjust_risk
+        - notify_trader
+        conditions:
+        - spread_threshold_exceeded
+        - volume_spike
+        agents:
+        - MarketDataCaptain
+        - PortfolioManager
+        - RiskManager
+    signal:
+      zbar_complete:
+        description: ZBAR analysis completed
+        actions:
+        - validate_signal
+        - calculate_position
+        - prepare_order
+        conditions:
+        - signal_confidence_met
+        - risk_approved
+        agents:
+        - SignalProcessor
+        - PortfolioManager
+  voice:
+    command:
+      received:
+        description: Voice command received
+        actions:
+        - parse_command
+        - route_to_handler
+        - generate_response
+        conditions:
+        - wake_word_detected
+        - command_valid
+        agents:
+        - VoiceCommandAgent
+  session:
+    trading:
+      start:
+        description: Trading session started
+        actions:
+        - initialize_agents
+        - load_market_state
+        - start_monitoring
+        conditions:
+        - market_open
+        - system_ready
+        agents:
+        - CoreSystemAgent
+        - MarketDataCaptain
+        - PortfolioManager
+      end:
+        description: Trading session ended
+        actions:
+        - save_state
+        - generate_report
+        - cleanup
+        conditions:
+        - market_close
+        - positions_flat
+        agents:
+        - CoreSystemAgent
+        - PortfolioManager
+  strategy:
+    divergence:
+      detected:
+        description: Divergence strategy trigger
+        actions:
+        - analyze_divergence
+        - generate_signal
+        - assess_risk
+        conditions:
+        - divergence_confirmed
+        - volume_support
+        agents:
+        - SignalProcessor
+        - RiskManager

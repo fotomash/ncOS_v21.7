@@ -1,2 +1,10 @@
-# Placeholder configuration for CoreSystemAgent
-settings: {}
+agent:
+  name: CoreSystemAgent
+  version: 21.7.0
+  enabled: true
+settings:
+  log_level: INFO
+  health_check_interval: 60
+  max_retries: 3
+  startup_delay: 5
+  shutdown_timeout: 30
