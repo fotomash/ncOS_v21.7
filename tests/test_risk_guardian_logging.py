@@ -3,9 +3,13 @@ import logging
 import types
 import sys
 
-# Provide dummy pandas and numpy for import
-sys.modules['pandas'] = types.ModuleType('pandas')
-sys.modules['numpy'] = types.ModuleType('numpy')
+import pytest
+
+
+@pytest.fixture(autouse=True)
+def _mock_pd_np(monkeypatch):
+    monkeypatch.setitem(sys.modules, 'pandas', types.ModuleType('pandas'))
+    monkeypatch.setitem(sys.modules, 'numpy', types.ModuleType('numpy'))
 
 from production_logging import configure_production_logging
 from risk_guardian_agent import RiskGuardianAgent

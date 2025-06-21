@@ -2,15 +2,17 @@ import sys
 from unittest.mock import MagicMock
 import unittest
 
-# Ensure parser module can be imported without heavy dependencies
-sys.modules['spacy'] = MagicMock()
-sys.modules['numpy'] = MagicMock()
-sys.modules['pandas'] = MagicMock()
-sys.modules['yaml'] = MagicMock()
-sys.modules['zbar_agent'] = MagicMock()
-sys.modules['requests'] = MagicMock()
-sys.modules['zbar_logger'] = MagicMock()
-sys.modules['engine'] = MagicMock()
+import pytest
+
+
+@pytest.fixture(autouse=True)
+def _mock_deps(monkeypatch):
+    monkeypatch.setitem(sys.modules, "spacy", MagicMock())
+    monkeypatch.setitem(sys.modules, "yaml", MagicMock())
+    monkeypatch.setitem(sys.modules, "zbar_agent", MagicMock())
+    monkeypatch.setitem(sys.modules, "requests", MagicMock())
+    monkeypatch.setitem(sys.modules, "zbar_logger", MagicMock())
+    monkeypatch.setitem(sys.modules, "engine", MagicMock())
 
 from ncOS import voice_tag_parser
 
