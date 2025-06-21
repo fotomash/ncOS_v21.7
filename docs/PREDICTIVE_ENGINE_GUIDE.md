@@ -126,9 +126,9 @@ Ensures all components are properly installed and configured.
 
 ### 2. Backtest Analysis
 ```bash
-python predictive_backtest.py
+python -m backtesting.engine data/price_data.csv
 ```
-Runs comprehensive comparison of performance with/without predictive filtering.
+Runs a sample backtest using the new engine.
 
 ### 3. Results Visualization
 ```bash

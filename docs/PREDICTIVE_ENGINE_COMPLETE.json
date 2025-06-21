@@ -26,7 +26,7 @@
       "phase": 3,
       "name": "Testing & Validation",
       "components": [
-        "predictive_backtest.py",
+        "backtesting/engine.py",
         "grade_analysis_dashboard.py",
         "validate_predictive.py"
       ]
@@ -46,7 +46,7 @@
     "ncos_feature_extractor.py",
     "ncos_data_enricher.py",
     "ncos_divergence_strategy_agent.py",
-    "predictive_backtest.py",
+    "backtesting/engine.py",
     "grade_analysis_dashboard.py",
     "validate_predictive.py",
     "test_predictive_engine.py",
