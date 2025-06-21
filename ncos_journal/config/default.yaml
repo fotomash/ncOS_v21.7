@@ -1,0 +1,21 @@
+# ncOS Journal Configuration
+journal:
+  base_path: ./data/journals
+  writers:
+    - csv
+    - jsonl
+  rotation:
+    enabled: true
+    size_mb: 100
+    retention_days: 90
+
+zbar:
+  min_confidence: 0.7
+  lookback_periods: 20
+
+api:
+  host: localhost
+  port: 8000
+
+dashboard:
+  port: 8501
