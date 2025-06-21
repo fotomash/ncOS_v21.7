@@ -104,8 +104,8 @@ python-dateutil==2.8.2
 
 ```bash
 # Create project directory
-mkdir ncos-voice-journal
-cd ncos-voice-journal
+mkdir ncos_journal
+cd ncos_journal
 
 # Create subdirectories
 mkdir -p logs data config api dashboard core
@@ -132,7 +132,7 @@ pip install -r requirements.txt
 Place the following files in their respective directories:
 
 ```
-ncos-voice-journal/
+ncos_journal/
 ├── core/
 │   ├── voice_tag_parser.py
 │   ├── zbar_voice_integration.py
