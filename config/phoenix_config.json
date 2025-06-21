@@ -1,7 +1,13 @@
 {
-  "phoenix_session": {
-    "enabled": true,
-    "fast_mode": true,
-    "cache_enabled": true
+  "version": "21.7",
+  "name": "NCOS Phoenix Session Manager",
+  "mode": "production",
+  "optimization": {
+    "token_budget": 4096,
+    "compression_enabled": true,
+    "compression_ratio": 0.2,
+    "cache_size": 1000,
+    "vector_dimensions": 768,
+    "batch_size": 32
   }
 }

@@ -1,0 +1,7 @@
+{
+  "phoenix_session": {
+    "enabled": true,
+    "fast_mode": true,
+    "cache_enabled": true
+  }
+}

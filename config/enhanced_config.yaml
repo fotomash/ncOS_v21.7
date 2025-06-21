@@ -1,0 +1,31 @@
+system:
+  name: NCOS v21 Phoenix Mesh
+  version: 21.7
+  enhanced_mode: true
+
+orchestration:
+  use_enhanced: true
+  voice_commands: true
+  session_management: true
+
+zbar:
+  enabled: true
+  api_port: 8001
+  journal_path: data/zbar/journal.jsonl
+
+agents:
+  zbar_agent:
+    enabled: true
+    profiles: [htf_london, ny_session, asian_range]
+  quantitative_analyst:
+    enabled: true
+    strategies: [wyckoff, smc, volume_profile]
+  market_maker:
+    enabled: true
+    mode: simulation
+
+api:
+  host: 0.0.0.0
+  port: 8000
+  cors_enabled: true
+  docs_enabled: true
