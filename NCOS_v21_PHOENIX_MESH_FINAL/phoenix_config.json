@@ -1,1 +1,18 @@
-{}
+{
+  "phoenix_session": {
+    "enabled": true,
+    "mode": "integrated",
+    "fast_mode": true,
+    "cache_enabled": true,
+    "fallback_to_legacy": true,
+    "performance": {
+      "max_workers": 4,
+      "token_budget": 4096,
+      "analysis_timeout": 5.0
+    },
+    "adapters": {
+      "wyckoff": "phoenix_session.adapters.wyckoff_adapter",
+      "charting": "phoenix_session.adapters.chart_adapter"
+    }
+  }
+}
