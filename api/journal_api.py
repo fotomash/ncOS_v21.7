@@ -22,6 +22,7 @@ logger = logging.getLogger(__name__)
 # Create router
 router = APIRouter()
 
+
 # Pydantic models
 class JournalEntry(BaseModel):
     """Model for journal entries"""
@@ -37,6 +38,7 @@ class JournalEntry(BaseModel):
     take_profit: Optional[float] = Field(None, description="Take profit price")
     metadata: Optional[Dict[str, Any]] = Field(default_factory=dict, description="Additional metadata")
 
+
 class JournalQuery(BaseModel):
     """Model for journal queries"""
     symbol: Optional[str] = None
@@ -48,6 +50,7 @@ class JournalQuery(BaseModel):
     limit: int = Field(100, ge=1, le=1000)
     offset: int = Field(0, ge=0)
 
+
 class JournalStats(BaseModel):
     """Model for journal statistics"""
     total_entries: int
@@ -56,11 +59,13 @@ class JournalStats(BaseModel):
     avg_maturity_score: Optional[float]
     date_range: Dict[str, str]
 
+
 # Helper functions
 def get_journal_path() -> Path:
     """Get the journal file path from configuration"""
     # In production, load from config
     return Path("../logs/trade_journal.jsonl")
+
 
 def read_journal_entries(filters: Optional[JournalQuery] = None) -> List[Dict]:
     """Read and filter journal entries"""
@@ -112,6 +117,7 @@ def read_journal_entries(filters: Optional[JournalQuery] = None) -> List[Dict]:
 
     return entries
 
+
 def append_journal_entry(entry_data: Dict) -> Dict:
     """Append a new entry to the journal"""
     journal_path = get_journal_path()
@@ -136,6 +142,7 @@ def append_journal_entry(entry_data: Dict) -> Dict:
         logger.error(f"Error appending to journal: {e}")
         raise HTTPException(status_code=500, detail=f"Error writing to journal: {str(e)}")
 
+
 # API Routes
 
 @router.post("/append", response_model=Dict)
@@ -145,16 +152,17 @@ async def append_entry(entry: JournalEntry):
     result = append_journal_entry(entry_data)
     return result
 
+
 @router.get("/query", response_model=List[Dict])
 async def query_entries(
-    symbol: Optional[str] = Query(None, description="Filter by symbol"),
-    session_id: Optional[str] = Query(None, description="Filter by session ID"),
-    bias: Optional[str] = Query(None, description="Filter by bias"),
-    start_date: Optional[datetime] = Query(None, description="Start date filter"),
-    end_date: Optional[datetime] = Query(None, description="End date filter"),
-    min_maturity: Optional[float] = Query(None, description="Minimum maturity score"),
-    limit: int = Query(100, ge=1, le=1000, description="Maximum results"),
-    offset: int = Query(0, ge=0, description="Result offset")
+        symbol: Optional[str] = Query(None, description="Filter by symbol"),
+        session_id: Optional[str] = Query(None, description="Filter by session ID"),
+        bias: Optional[str] = Query(None, description="Filter by bias"),
+        start_date: Optional[datetime] = Query(None, description="Start date filter"),
+        end_date: Optional[datetime] = Query(None, description="End date filter"),
+        min_maturity: Optional[float] = Query(None, description="Minimum maturity score"),
+        limit: int = Query(100, ge=1, le=1000, description="Maximum results"),
+        offset: int = Query(0, ge=0, description="Result offset")
 ):
     """Query journal entries with filters"""
     filters = JournalQuery(
@@ -170,6 +178,7 @@ async def query_entries(
 
     entries = read_journal_entries(filters)
     return entries
+
 
 @router.get("/recap/{session_id}", response_model=Dict)
 async def get_session_recap(session_id: str):
@@ -210,6 +219,7 @@ async def get_session_recap(session_id: str):
 
     return recap
 
+
 @router.get("/stats", response_model=JournalStats)
 async def get_journal_stats():
     """Get overall journal statistics"""
@@ -243,6 +253,7 @@ async def get_journal_stats():
             "end": timestamps[-1] if timestamps else None
         }
     )
+
 
 @router.delete("/entry/{trace_id}")
 async def delete_entry(trace_id: str):
@@ -283,10 +294,11 @@ async def delete_entry(trace_id: str):
         logger.error(f"Error writing journal: {e}")
         raise HTTPException(status_code=500, detail=f"Error writing journal: {str(e)}")
 
+
 @router.get("/export/csv")
 async def export_csv(
-    session_id: Optional[str] = Query(None, description="Filter by session ID"),
-    symbol: Optional[str] = Query(None, description="Filter by symbol")
+        session_id: Optional[str] = Query(None, description="Filter by session ID"),
+        symbol: Optional[str] = Query(None, description="Filter by symbol")
 ):
     """Export journal entries as CSV"""
     filters = JournalQuery(
@@ -335,10 +347,11 @@ async def export_csv(
         }
     )
 
+
 @router.get("/search")
 async def search_entries(
-    q: str = Query(..., description="Search query"),
-    limit: int = Query(50, ge=1, le=200)
+        q: str = Query(..., description="Search query"),
+        limit: int = Query(50, ge=1, le=200)
 ):
     """Search journal entries by text"""
     entries = read_journal_entries()
@@ -368,6 +381,7 @@ async def search_entries(
         "count": len(results),
         "results": results
     }
+
 
 @router.post("/backup")
 async def create_backup():

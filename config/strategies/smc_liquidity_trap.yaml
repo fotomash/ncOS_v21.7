@@ -2,5 +2,5 @@ strategy:
   name: "SMC Liquidity Trap"
   risk_per_trade: "2.5%"
   max_positions: 2
-  timeframes: ["M1", "M5"]
-  triggers: ["liquidity_trap_detected"]
+  timeframes: [ "M1", "M5" ]
+  triggers: [ "liquidity_trap_detected" ]

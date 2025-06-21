@@ -25,6 +25,7 @@
 ## Auto-Start Options
 
 ### Option 1: Systemd Service (Linux)
+
 ```bash
 # Copy service file
 sudo cp ncos-llm.service /etc/systemd/system/
@@ -38,6 +39,7 @@ sudo systemctl start ncos-llm.service
 ```
 
 ### Option 2: Docker Compose
+
 ```bash
 # Set API key in .env file
 echo "OPENAI_API_KEY=your-key-here" > .env
@@ -47,6 +49,7 @@ docker-compose up -d
 ```
 
 ### Option 3: Cron Job
+
 ```bash
 # Add to crontab
 crontab -e
@@ -58,6 +61,7 @@ crontab -e
 ## Integration with Dashboard
 
 Add to your `app.py`:
+
 ```python
 from llm_dashboard_integration import add_llm_chat_to_dashboard
 

@@ -14,12 +14,14 @@ import psutil
 
 logger = logging.getLogger(__name__)
 
+
 @dataclass
 class MetricPoint:
     """Single metric data point"""
     timestamp: datetime
     value: float
     labels: Dict[str, str] = field(default_factory=dict)
+
 
 class MetricsCollector:
     """Collects and aggregates system metrics"""
@@ -69,6 +71,7 @@ class MetricsCollector:
                 "last": values[-1],
                 "last_timestamp": self.metrics[metric_name][-1].timestamp.isoformat()
             }
+
 
 class HealthMonitor:
     """System health monitoring and reporting"""
@@ -167,6 +170,7 @@ class HealthMonitor:
             "version": "v21.0.0"
         }
 
+
 # Global health monitor instance
 health_monitor = HealthMonitor()
 
@@ -180,7 +184,12 @@ app = FastAPI()
 
 @app.get("/health")
 async def health_check():
-    """Basic health check endpoint"""
+    """
+Basic
+health
+check
+endpoint
+"""
     health_status = await health_monitor.get_health_status()
 
     # Set appropriate HTTP status code
@@ -199,7 +208,11 @@ async def health_check():
 
 @app.get("/metrics")
 async def metrics_endpoint():
-    """Prometheus-compatible metrics endpoint"""
+    """
+Prometheus - compatible
+metrics
+endpoint
+"""
     # Format metrics in Prometheus format
     metrics_text = ""
 
@@ -216,7 +229,12 @@ async def metrics_endpoint():
 
 @app.get("/ready")
 async def readiness_check():
-    """Kubernetes readiness probe endpoint"""
+    """
+Kubernetes
+readiness
+probe
+endpoint
+"""
     # Check if system is ready to accept traffic
     health_status = await health_monitor.get_health_status()
 
@@ -227,7 +245,12 @@ async def readiness_check():
 
 @app.get("/live")
 async def liveness_check():
-    """Kubernetes liveness probe endpoint"""
+    """
+Kubernetes
+liveness
+probe
+endpoint
+"""
     # Simple check that the process is alive
     return {"alive": True}
 """

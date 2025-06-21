@@ -1,4 +1,3 @@
-
 import json
 
 import requests
@@ -48,6 +47,7 @@ def test_zbar_execution():
     journal_response = requests.get(journal_url, params=params)
     print("\nJournal Entries:")
     print(json.dumps(journal_response.json(), indent=2))
+
 
 if __name__ == "__main__":
     test_zbar_execution()

@@ -122,8 +122,8 @@ class RiskGuardianAgent:
     def _assess_correlation_risk(self, symbol: str) -> Dict:
         '''Assess correlation risk with existing positions'''
         # Simplified correlation assessment
-        correlated_positions = [pos for pos in self.open_positions 
-                              if self._are_correlated(symbol, pos.get('symbol', ''))]
+        correlated_positions = [pos for pos in self.open_positions
+                                if self._are_correlated(symbol, pos.get('symbol', ''))]
 
         correlation_exposure = sum(pos.get('size', 0) for pos in correlated_positions)
 
@@ -352,8 +352,8 @@ class RiskGuardianAgent:
     def close_position(self, symbol: str, pnl: float):
         '''Close position and update tracking'''
         # Remove from open positions
-        self.open_positions = [pos for pos in self.open_positions 
-                             if pos.get('symbol') != symbol]
+        self.open_positions = [pos for pos in self.open_positions
+                               if pos.get('symbol') != symbol]
 
         # Update daily P&L
         self.daily_pnl += pnl

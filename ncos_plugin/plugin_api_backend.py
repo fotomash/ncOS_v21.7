@@ -34,9 +34,11 @@ TWELVE_DATA_API_KEY = os.environ.get("TWELVE_DATA_API_KEY")
 if not TWELVE_DATA_API_KEY:
     # Log a warning so the service operator knows why this endpoint fails
     import logging
+
     logging.getLogger(__name__).warning(
         "TWELVE_DATA_API_KEY is not set; /twelvedata/quote will return an error"
     )
+
 
 def get_twelvedata_price(symbol: str):
     if not TWELVE_DATA_API_KEY:
@@ -57,6 +59,8 @@ def get_twelvedata_price(symbol: str):
             status_code=500,
             detail=f"Twelve Data error: {data.get('message', 'Unknown error')}",
         )
+
+
 # ---- YFinance Endpoints ----
 def get_stock_data(ticker: str):
     try:
@@ -68,10 +72,12 @@ def get_stock_data(ticker: str):
             "symbol": info.get("symbol", ticker.upper()),
             "price": info.get("regularMarketPrice"),
             "change_percent": info.get("regularMarketChangePercent", 0) * 100,
-            "timestamp": datetime.fromtimestamp(info.get("regularMarketTime")).isoformat() if info.get("regularMarketTime") else datetime.now().isoformat()
+            "timestamp": datetime.fromtimestamp(info.get("regularMarketTime")).isoformat() if info.get(
+                "regularMarketTime") else datetime.now().isoformat()
         }
     except Exception as e:
         raise HTTPException(status_code=404, detail=str(e))
+
 
 def get_crypto_data(symbol: str):
     try:
@@ -88,6 +94,7 @@ def get_crypto_data(symbol: str):
     except Exception as e:
         raise HTTPException(status_code=404, detail=str(e))
 
+
 def get_forex_data(pair: str):
     try:
         data = yf.Ticker(pair)
@@ -97,23 +104,28 @@ def get_forex_data(pair: str):
         return {
             "pair": info.get("shortName", pair.upper()),
             "rate": info.get("regularMarketPrice"),
-            "timestamp": datetime.fromtimestamp(info.get("regularMarketTime")).isoformat() if info.get("regularMarketTime") else datetime.now().isoformat()
+            "timestamp": datetime.fromtimestamp(info.get("regularMarketTime")).isoformat() if info.get(
+                "regularMarketTime") else datetime.now().isoformat()
         }
     except Exception as e:
         raise HTTPException(status_code=404, detail=str(e))
+
 
 # ---- Endpoints ----
 @app.get("/stock/quote")
 def stock_quote(ticker: str = Query(...)):
     return get_stock_data(ticker)
 
+
 @app.get("/crypto/quote")
 def crypto_quote(symbol: str = Query(...)):
     return get_crypto_data(symbol)
 
+
 @app.get("/forex/quote")
 def forex_quote(pair: str = Query(...)):
     return get_forex_data(pair)
+
 
 @app.get("/finnhub/quote")
 def finnhub_quote(symbol: str = Query(...)):
@@ -131,19 +143,23 @@ def finnhub_quote(symbol: str = Query(...)):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+
 @app.get("/openapi.json")
 def openapi():
     with open(BASE_DIR / "ncos_openapi.json") as f:
         return JSONResponse(content=json.load(f))
+
 
 @app.get("/ai-plugin.json")
 def plugin_manifest():
     with open(BASE_DIR / "ncos_ai_plugin.json") as f:
         return JSONResponse(content=json.load(f))
 
+
 @app.get("/logo.png")
 def logo():
     return FileResponse(BASE_DIR / "logo.png")
+
 
 @app.get("/twelvedata/quote")
 def twelvedata_quote(symbol: str = Query(..., description="Symbol, e.g. 'EUR/USD', 'XAU/USD', 'BTC/USD'")):

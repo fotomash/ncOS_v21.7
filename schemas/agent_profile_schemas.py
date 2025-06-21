@@ -16,4 +16,3 @@ class AgentProfileSchema(BaseModel):
 
     class Config:
         extra = "allow"
-

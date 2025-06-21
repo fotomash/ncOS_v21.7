@@ -3,9 +3,9 @@ enhanced_ncos_agents:
     class: MasterOrchestrator
     enabled: true
     enhancements:
-    - zanflow_integration
-    - vector_data_access
-    - knowledge_base_connection
+      - zanflow_integration
+      - vector_data_access
+      - knowledge_base_connection
     module: agents.master_orchestrator
     priority: 1
     type: coordination
@@ -13,9 +13,9 @@ enhanced_ncos_agents:
     class: SessionStateManager
     enabled: true
     enhancements:
-    - conversation_flow
-    - enhanced_persistence
-    - interaction_tracking
+      - conversation_flow
+      - enhanced_persistence
+      - interaction_tracking
     module: agents.session_state_manager
     priority: 2
     type: state_management

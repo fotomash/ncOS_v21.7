@@ -1,10 +1,13 @@
 # ZBAR Trade Intelligence Overview
 
-This document provides a high level summary of how the ZBAR trading intelligence components operate together in NCOS v21.7.
+This document provides a high level summary of how the ZBAR trading intelligence components operate together in NCOS
+v21.7.
 
 ## Pipeline
 
-The system exposes a REST API (see `docs/ZBAR_API_DEPLOYMENT.md`) that accepts client requests. Incoming data flows through the API to the orchestrator layer, which then triggers ZBAR analysis and the ISPTS strategy pipeline. Results are logged in the JournalDB for later querying.
+The system exposes a REST API (see `docs/ZBAR_API_DEPLOYMENT.md`) that accepts client requests. Incoming data flows
+through the API to the orchestrator layer, which then triggers ZBAR analysis and the ISPTS strategy pipeline. Results
+are logged in the JournalDB for later querying.
 
 ```mermaid
 sequenceDiagram
@@ -26,7 +29,8 @@ sequenceDiagram
 
 ## JournalDB and Journal API
 
-Trading activity is stored in a persistent journal (`trade_journal.jsonl` by default). The journal API exposed by `ncos_zbar_api.py` provides endpoints to append new entries or query historical data:
+Trading activity is stored in a persistent journal (`trade_journal.jsonl` by default). The journal API exposed by
+`ncos_zbar_api.py` provides endpoints to append new entries or query historical data:
 
 ```text
 POST /journal/append  – add new entry
@@ -34,7 +38,8 @@ GET  /journal/query   – filter entries (symbol, strategy, session, trace_id)
 GET  /journal/stats   – summary statistics
 ```
 
-Refer to the detailed interface description in `docs/NCOS_Voice_Journal_Documentation.md` for more information on these endpoints.
+Refer to the detailed interface description in `docs/NCOS_Voice_Journal_Documentation.md` for more information on these
+endpoints.
 
 ## Typical Workflow
 

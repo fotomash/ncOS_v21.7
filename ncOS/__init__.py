@@ -20,6 +20,7 @@ def _lazy_import(module_name, attr):
     except Exception:
         return None
 
+
 EnhancedLLMCLI = _lazy_import("ncOS.enhanced_cli", "EnhancedLLMCLI")
 NCOSPredictiveEngine = _lazy_import("ncOS.ncos_predictive_engine", "NCOSPredictiveEngine")
 FeatureExtractor = _lazy_import("ncOS.ncos_feature_extractor", "FeatureExtractor")

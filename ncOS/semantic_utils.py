@@ -10,9 +10,9 @@ from typing import Any, Dict, Iterable, Optional
 
 
 async def extract_and_validate_uploaded_archive(
-    archive_path: str,
-    extract_to: str | None = None,
-    allowed_formats: Iterable[str] | None = None,
+        archive_path: str,
+        extract_to: str | None = None,
+        allowed_formats: Iterable[str] | None = None,
 ) -> Dict[str, Any]:
     """Extract an uploaded archive and perform basic validation.
 
@@ -88,8 +88,8 @@ async def summarize_workspace_memory(session_state: Any) -> Dict[str, Any]:
 
 
 async def intelligently_route_user_request_to_best_agent(
-    request: Dict[str, Any],
-    agent_registry: Dict[str, Any],
+        request: Dict[str, Any],
+        agent_registry: Dict[str, Any],
 ) -> Dict[str, Any]:
     """Determine the best agent for a given user request.
 
@@ -133,9 +133,9 @@ async def intelligently_route_user_request_to_best_agent(
 
 
 async def automatically_optimize_memory_and_consolidate_session_data(
-    session_state: Any,
-    max_files: int | None = None,
-    max_memory_mb: float | None = None,
+        session_state: Any,
+        max_files: int | None = None,
+        max_memory_mb: float | None = None,
 ) -> Dict[str, Any]:
     """Perform light-weight memory optimization on the session state.
 
@@ -180,8 +180,8 @@ async def automatically_optimize_memory_and_consolidate_session_data(
 
 
 async def detect_and_recover_from_system_errors_automatically(
-    error: Exception | str,
-    context: Optional[Dict[str, Any]] = None,
+        error: Exception | str,
+        context: Optional[Dict[str, Any]] = None,
 ) -> Dict[str, Any]:
     """Attempt automatic recovery from system errors.
 

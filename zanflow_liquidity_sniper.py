@@ -245,7 +245,7 @@ class LiquiditySniperAgent:
                 if best_target['target_type'] == 'buy_side':
                     return 'sell'  # Sell on buy-side liquidity sweep
                 elif best_target['target_type'] == 'sell_side':
-                    return 'buy'   # Buy on sell-side liquidity sweep
+                    return 'buy'  # Buy on sell-side liquidity sweep
 
         return 'hold'
 

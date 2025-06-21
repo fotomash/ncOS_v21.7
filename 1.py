@@ -15,36 +15,36 @@ class ConfigurationConsolidator:
         self.consolidated_config = {}
         self.config_files = []
         self.agent_configs = {}
-        
+
     def scan_config_files(self) -> List[Path]:
         """Scan for all configuration files in the project"""
         config_patterns = ['*.json', '*.yaml', '*.yml', '*.conf', '*.cfg', '*.ini']
         config_files = []
-        
+
         for pattern in config_patterns:
             config_files.extend(self.project_root.rglob(pattern))
-        
+
         # Filter out non-config files
         filtered_files = []
         for file in config_files:
             if any(skip in str(file) for skip in ['node_modules', '__pycache__', '.git', 'venv']):
                 continue
             filtered_files.append(file)
-        
+
         self.config_files = filtered_files
         return filtered_files
-    
+
     def backup_configs(self):
         """Create backup of all configuration files"""
         print(f"Creating backup in {self.backup_dir}")
         self.backup_dir.mkdir(exist_ok=True)
-        
+
         for config_file in self.config_files:
             relative_path = config_file.relative_to(self.project_root)
             backup_path = self.backup_dir / relative_path
             backup_path.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(config_file, backup_path)
-    
+
     def load_config_file(self, file_path: Path) -> Dict[str, Any]:
         """Load configuration from a file"""
         try:
@@ -73,11 +73,11 @@ class ConfigurationConsolidator:
         except Exception as e:
             print(f"Error loading {file_path}: {e}")
             return {}
-    
+
     def analyze_configs(self):
         """Analyze all configuration files and identify patterns"""
         print("\nAnalyzing configuration files...")
-        
+
         # Group configs by directory
         config_by_dir = {}
         for config_file in self.config_files:
@@ -85,7 +85,7 @@ class ConfigurationConsolidator:
             if dir_path not in config_by_dir:
                 config_by_dir[dir_path] = []
             config_by_dir[dir_path].append(config_file)
-        
+
         # Analyze agent configurations
         for dir_path, files in config_by_dir.items():
             if 'agents' in str(dir_path):
@@ -97,11 +97,11 @@ class ConfigurationConsolidator:
                 for file in files:
                     config = self.load_config_file(file)
                     self.agent_configs[agent_name]['configs'][file.name] = config
-    
+
     def consolidate(self):
         """Consolidate configurations into a unified structure"""
         print("\nConsolidating configurations...")
-        
+
         # Create main configuration structure
         self.consolidated_config = {
             'version': '2.0',
@@ -118,7 +118,7 @@ class ConfigurationConsolidator:
             'logging': {},
             'security': {}
         }
-        
+
         # Process agent configurations
         for agent_name, agent_data in self.agent_configs.items():
             agent_config = {
@@ -126,24 +126,24 @@ class ConfigurationConsolidator:
                 'config_files': [str(f.relative_to(self.project_root)) for f in agent_data['files']],
                 'settings': {}
             }
-            
+
             # Merge all agent configs
             for file_name, config in agent_data['configs'].items():
                 if isinstance(config, dict):
                     agent_config['settings'].update(config)
-            
+
             self.consolidated_config['agents'][agent_name] = agent_config
-        
+
         # Process other configurations
         for config_file in self.config_files:
             if 'agents' not in str(config_file):
                 config = self.load_config_file(config_file)
                 self._merge_config(config, config_file)
-    
+
     def _merge_config(self, config: Dict[str, Any], file_path: Path):
         """Merge configuration into appropriate section"""
         file_name = file_path.stem.lower()
-        
+
         if 'database' in file_name or 'db' in file_name:
             self.consolidated_config['database'].update(config)
         elif 'api' in file_name:
@@ -158,7 +158,7 @@ class ConfigurationConsolidator:
             if service_name not in self.consolidated_config['services']:
                 self.consolidated_config['services'][service_name] = {}
             self.consolidated_config['services'][service_name].update(config)
-    
+
     def generate_config_loader(self):
         """Generate configuration loader module"""
         loader_code = '''#!/usr/bin/env python3
@@ -251,34 +251,36 @@ def get_service_config(service_name: str) -> Optional[Dict[str, Any]]:
     """Get service configuration"""
     return config.get_service_config(service_name)
 '''.format(timestamp=datetime.now().isoformat())
-        
+
         # Save the loader
         loader_path = self.project_root / 'config_loader.py'
         with open(loader_path, 'w') as f:
             f.write(loader_code)
-        
+
         print(f"Configuration loader saved to: {loader_path}")
-    
+
     def save_consolidated_config(self):
         """Save the consolidated configuration"""
         config_dir = self.project_root / 'config'
         config_dir.mkdir(exist_ok=True)
-        
+
         config_path = config_dir / 'consolidated_config.json'
         with open(config_path, 'w') as f:
             json.dump(self.consolidated_config, f, indent=2)
-        
+
         print(f"Consolidated configuration saved to: {config_path}")
-        
+
         # Also save a YAML version for readability
         yaml_path = config_dir / 'consolidated_config.yaml'
         with open(yaml_path, 'w') as f:
             yaml.dump(self.consolidated_config, f, default_flow_style=False)
-        
+
         print(f"YAML version saved to: {yaml_path}")
-    
+
     def generate_migration_guide(self):
         """Generate migration guide for developers"""
+
+
 '''
 ## Overview
 The configuration system has been consolidated from {len(self.config_files)} files into a unified structure.

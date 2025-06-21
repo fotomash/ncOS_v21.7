@@ -23,7 +23,9 @@ This package contains all components needed to run NCOS v21.
 
 2. Run bootstrap:
    ```bash
+
 cd scripts && python integration_bootstrap.py
+
 ```
 
 ## Environment Variables
@@ -101,16 +103,21 @@ pytest
   and `setup_v21.7.1.py` as the authoritative copies.
 
 ---
+
 ### Market Manipulation Detection Module
 
-This module provides real-time detection of market manipulation patterns, focusing on spread manipulation and quote stuffing for XAUUSD.
+This module provides real-time detection of market manipulation patterns, focusing on spread manipulation and quote
+stuffing for XAUUSD.
 
 **Core Components:**
+
 - **MarketManipulationAgent:** Ingests real-time tick data and applies configurable rules to detect anomalies.
-- **RiskMonitorAgent:** Subscribes to detection events and executes predefined risk management actions based on severity.
+- **RiskMonitorAgent:** Subscribes to detection events and executes predefined risk management actions based on
+  severity.
 - **ComplianceAgent:** Provides automated logging of all detected events for regulatory and audit purposes.
 
 **Configuration:**
+
 - The module's behavior is controlled by `config/xauusd_manipulation_config.yaml`.
 - Enable or disable agents in `config/agent_registry.yaml`.
 
@@ -120,8 +127,10 @@ The `ncOS.semantic_utils` module provides helper functions for common runtime ta
 
 - **extract_and_validate_uploaded_archive** - Extracts an uploaded archive and validates its format.
 - **summarize_workspace_memory** - Produces a quick summary of processed files, active agents and memory usage.
-- **intelligently_route_user_request_to_best_agent** - Selects the most suitable agent for a request based on type or intent.
-- **automatically_optimize_memory_and_consolidate_session_data** - Trims session data and clamps memory usage to configured limits.
+- **intelligently_route_user_request_to_best_agent** - Selects the most suitable agent for a request based on type or
+  intent.
+- **automatically_optimize_memory_and_consolidate_session_data** - Trims session data and clamps memory usage to
+  configured limits.
 - **detect_and_recover_from_system_errors_automatically** - Attempts basic recovery steps for common system errors.
 
 Example usage:
@@ -202,5 +211,6 @@ your original OHLCV data.
 
 ## Trading Disclaimer
 
-**Trading Disclaimer**: This system is for educational and research purposes. Trading involves risk of financial loss. Past performance does not guarantee future results. Always test thoroughly before live trading.
+**Trading Disclaimer**: This system is for educational and research purposes. Trading involves risk of financial loss.
+Past performance does not guarantee future results. Always test thoroughly before live trading.
 

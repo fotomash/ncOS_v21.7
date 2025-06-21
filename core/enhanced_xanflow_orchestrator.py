@@ -22,6 +22,7 @@ logger = logging.getLogger(__name__)
 CONFIG = load_production_config(os.environ.get("NCOS_CONFIG_PATH"))
 JOURNAL_API = CONFIG.api.journal
 
+
 @dataclass
 class PipelineStage:
     """Represents a stage in the ISPTS pipeline"""
@@ -33,6 +34,7 @@ class PipelineStage:
     start_time: Optional[datetime] = None
     end_time: Optional[datetime] = None
     error: Optional[str] = None
+
 
 class EnhancedXanflowOrchestrator:
     """Enhanced orchestrator with journal integration"""
@@ -72,11 +74,11 @@ class EnhancedXanflowOrchestrator:
             logger.error(f"Failed to log to journal: {e}")
 
     def execute_ispts_pipeline(
-        self,
-        symbol: str,
-        timeframe: str,
-        session_id: str,
-        initial_context: Dict[str, Any]
+            self,
+            symbol: str,
+            timeframe: str,
+            session_id: str,
+            initial_context: Dict[str, Any]
     ) -> Dict[str, Any]:
         """
         Execute the ISPTS pipeline with comprehensive logging
@@ -110,8 +112,8 @@ class EnhancedXanflowOrchestrator:
                 stage.status = "running"
 
                 # Pass output from previous stage as input
-                if i > 0 and stages[i-1].output_data:
-                    stage.input_data.update(stages[i-1].output_data)
+                if i > 0 and stages[i - 1].output_data:
+                    stage.input_data.update(stages[i - 1].output_data)
 
                 # Execute stage
                 stage.output_data = self._execute_stage(stage, pipeline_context)
@@ -247,6 +249,7 @@ class EnhancedXanflowOrchestrator:
             requests.post(f"{JOURNAL_API}/trades", json=trade_data)
         except Exception as e:
             logger.error(f"Failed to log trade decision: {e}")
+
 
 # Usage example
 if __name__ == "__main__":

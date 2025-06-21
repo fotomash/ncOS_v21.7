@@ -11,6 +11,7 @@ class MicroWyckoffEventAgentConfig:
     log_level: str = "INFO"
     custom_params: Dict[str, Any] = field(default_factory=dict)
 
+
 class MicroWyckoffEventAgent:
     """Basic Micro Wyckoff Event strategy agent"""
 

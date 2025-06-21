@@ -51,7 +51,7 @@ class ChartGenerator:
 
     # Only include method we need for tests
     def create_correlation_heatmap(
-        self, correlation_matrix: pd.DataFrame, title: str = "Correlation Matrix"
+            self, correlation_matrix: pd.DataFrame, title: str = "Correlation Matrix"
     ) -> str:
         """Create correlation heatmap and save to file."""
 

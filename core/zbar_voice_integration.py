@@ -1,4 +1,3 @@
-
 """
 ZBAR Agent Integration with Voice Commands
 Extends your existing ZBAR pipeline with voice-triggered analysis
@@ -275,6 +274,7 @@ class VoiceEnabledZBARAgent(ZBARAgent):
             # Fallback to generating sample data
             return self._generate_sample_data(symbol, timeframe)
 
+
 # Example usage function
 def demo_voice_zbar_integration():
     """Demonstrate voice-enabled ZBAR agent"""
@@ -308,6 +308,7 @@ def demo_voice_zbar_integration():
             print(f"Summary: {json.dumps(result['summary'], indent=2)}")
 
         print("-" * 50 + "\n")
+
 
 if __name__ == "__main__":
     demo_voice_zbar_integration()

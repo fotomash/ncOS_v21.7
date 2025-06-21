@@ -1,4 +1,5 @@
 # NCOS Voice-Enabled ZBAR Journal System
+
 ## Complete Implementation Guide v1.0
 
 ---
@@ -37,7 +38,7 @@ The NCOS Voice-Enabled ZBAR Journal System is a comprehensive trading intelligen
 ✅ **Session Tracking**: Group trades by session with recap capabilities  
 ✅ **Re-run Analysis**: One-click strategy re-execution from journal entries  
 ✅ **API Integration**: RESTful endpoints for programmatic access  
-✅ **Context Preservation**: Full metadata and decision tracking  
+✅ **Context Preservation**: Full metadata and decision tracking
 
 ---
 
@@ -497,9 +498,11 @@ zbar:
 ### Voice Endpoints
 
 #### POST /voice/process
+
 Process a voice command and return structured result.
 
 **Request:**
+
 ```json
 {
   "command": "Mark gold bullish on H4",
@@ -510,6 +513,7 @@ Process a voice command and return structured result.
 ```
 
 **Response:**
+
 ```json
 {
   "status": "success",
@@ -529,9 +533,11 @@ Process a voice command and return structured result.
 ### Journal Endpoints
 
 #### POST /journal/append
+
 Add a new journal entry.
 
 **Request:**
+
 ```json
 {
   "symbol": "XAUUSD",
@@ -543,9 +549,11 @@ Add a new journal entry.
 ```
 
 #### GET /journal/query
+
 Query journal entries with filters.
 
 **Parameters:**
+
 - `symbol`: Filter by symbol
 - `session_id`: Filter by session
 - `start_date`: Start date (ISO format)
@@ -553,9 +561,11 @@ Query journal entries with filters.
 - `limit`: Maximum results (default: 100)
 
 #### GET /journal/recap/{session_id}
+
 Get session recap with summary statistics.
 
 **Response:**
+
 ```json
 {
   "session_id": "london_2025",
@@ -645,7 +655,8 @@ print(response.json())
 #### 1. Voice Parser Low Confidence
 
 **Problem**: Parser returns confidence < 0.5  
-**Solution**: 
+**Solution**:
+
 - Use clearer commands with symbol and timeframe
 - Check bias_keywords in configuration
 - Example: Instead of "gold up", use "mark XAUUSD bullish H4"
@@ -654,6 +665,7 @@ print(response.json())
 
 **Problem**: Cannot connect to API endpoints  
 **Solution**:
+
 ```bash
 # Check if API is running
 curl http://localhost:8001/health
@@ -669,6 +681,7 @@ python api/main.py
 
 **Problem**: Dashboard shows "No entries found"  
 **Solution**:
+
 ```bash
 # Check journal file exists
 ls -la logs/trade_journal.jsonl
@@ -684,6 +697,7 @@ chmod 644 logs/trade_journal.jsonl
 
 **Problem**: Dashboard won't load or shows errors  
 **Solution**:
+
 ```bash
 # Clear Streamlit cache
 streamlit cache clear
@@ -699,6 +713,7 @@ pip install --upgrade streamlit
 
 **Problem**: Re-run button returns error  
 **Solution**:
+
 - Ensure ZBAR API endpoint is running
 - Check data availability for symbol/timeframe
 - Verify API base URL in configuration
@@ -724,11 +739,13 @@ logging.basicConfig(
 ### 1. Voice Command Structure
 
 **✅ Good Commands:**
+
 - "Mark XAUUSD bullish H4 London session"
 - "Analyze gold 15 minute chart"
 - "Check all bearish setups today"
 
 **❌ Avoid:**
+
 - "Gold up maybe"
 - "Trade stuff"
 - "Something about euro"
@@ -742,6 +759,7 @@ logging.basicConfig(
 ### 3. Journal Entry Quality
 
 Always include:
+
 - Symbol (full name, e.g., XAUUSD not "gold")
 - Timeframe (M15, H1, H4, D1)
 - Bias (bullish/bearish/neutral)
@@ -857,13 +875,15 @@ async def export_csv(session_id: str = None):
 ## Conclusion
 
 The NCOS Voice-Enabled ZBAR Journal System provides a complete solution for:
+
 - Voice-driven trade logging
 - Persistent journal storage
 - Automated analysis integration
 - Interactive dashboard review
 - Session-based organization
 
-With this system, you can maintain a comprehensive trading journal that survives environment resets while enabling natural language interaction for logging and analysis.
+With this system, you can maintain a comprehensive trading journal that survives environment resets while enabling
+natural language interaction for logging and analysis.
 
 For support or contributions, please refer to the project repository.
 

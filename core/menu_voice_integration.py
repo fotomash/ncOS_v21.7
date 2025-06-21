@@ -1,4 +1,3 @@
-
 """
 Menu System Integration with Voice Commands
 Extends your existing menu_system.py with voice capabilities
@@ -393,6 +392,7 @@ class VoiceEnabledMenuSystem(EnhancedMenuSystem):
 
         return {"status": "displayed", "examples": examples}
 
+
 # Integration helper function
 def integrate_voice_menu(existing_menu_system):
     """Helper to integrate voice features into existing menu system"""
@@ -411,6 +411,7 @@ def integrate_voice_menu(existing_menu_system):
     enhanced.menu_history = existing_menu_system.menu_history
 
     return enhanced
+
 
 # Demo function
 def demo_voice_menu():
@@ -433,6 +434,7 @@ def demo_voice_menu():
     result = menu._show_voice_examples()
 
     print("\nVoice menu integration complete!")
+
 
 if __name__ == "__main__":
     demo_voice_menu()

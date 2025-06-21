@@ -3,11 +3,13 @@ import logging
 from dataclasses import dataclass
 from typing import Any, Dict
 
+
 @dataclass
 class KnowledgeIntelligenceConfig:
     agent_id: str = "knowledge_intelligence"
     enabled: bool = True
     log_level: str = "INFO"
+
 
 class KnowledgeIntelligence:
     """Provide minimal knowledge base lookup functionality."""

@@ -44,6 +44,7 @@ class MountPoint(Enum):
             return Path("./session") / path[10:]
         return Path(path)
 
+
 @dataclass
 class SessionState:
     """Enhanced session state with trading capabilities"""
@@ -65,10 +66,11 @@ class SessionState:
     def __post_init__(self):
         self.mount_points = {
             "custom_gpt": "/mnt/data",
-            "workspace": "./workspace", 
+            "workspace": "./workspace",
             "memory": "./memory",
             "session": "./session"
         }
+
 
 class ncOScoreEnhancedOrchestrator:
     """Enhanced orchestrator with full SMC and vector capabilities"""
@@ -89,7 +91,6 @@ class ncOScoreEnhancedOrchestrator:
         self.vector_engine = None
         self.liquidity_engine = None
         self.brown_vector_store = None
-
 
     def _load_config(self, config_path: Optional[str]) -> Dict:
         """Load enhanced configuration"""
@@ -167,7 +168,7 @@ class ncOScoreEnhancedOrchestrator:
         enhanced_agents = {
             "csv_processor": "CSV processing and enrichment",
             "menu_controller": "Dynamic menu generation",
-            "memory_manager": "Memory and vector management", 
+            "memory_manager": "Memory and vector management",
             "file_handler": "File upload and processing",
             "validator": "System validation and health",
             "smc_analyzer": "Smart Money Concepts analysis",
@@ -335,7 +336,7 @@ class ncOScoreEnhancedOrchestrator:
                 "confluence_score": confluence_score,
                 "signals_generated": len(signals),
                 "features": [
-                    "smc_analysis", "vector_embeddings", "liquidity_analysis", 
+                    "smc_analysis", "vector_embeddings", "liquidity_analysis",
                     "pattern_matching", "confluence_scoring", "signal_generation"
                 ],
                 "next_actions": [
@@ -366,7 +367,8 @@ class ncOScoreEnhancedOrchestrator:
         if "pattern_matching" in analysis_results:
             pattern_data = analysis_results["pattern_matching"]
             if pattern_data.get("status") == "success" and pattern_data.get("similar_patterns"):
-                avg_similarity = sum(p["similarity"] for p in pattern_data["similar_patterns"]) / len(pattern_data["similar_patterns"])
+                avg_similarity = sum(p["similarity"] for p in pattern_data["similar_patterns"]) / len(
+                    pattern_data["similar_patterns"])
                 scores.append(avg_similarity * 0.3)  # 30% weight
 
         return sum(scores) if scores else 0.0
@@ -427,7 +429,7 @@ class ncOScoreEnhancedOrchestrator:
                     },
                     "2": {
                         "label": "Liquidity Analysis",
-                        "action": "run_liquidity_analysis", 
+                        "action": "run_liquidity_analysis",
                         "description": "Detect liquidity pools and sweep probabilities"
                     },
                     "3": {
@@ -574,7 +576,7 @@ class ncOScoreEnhancedOrchestrator:
     async def _process_archive(self, file_path: str) -> Dict:
         """Process archive files"""
         return {
-            "status": "success", 
+            "status": "success",
             "type": "archive",
             "file": file_path,
             "processor": "archive_handler",
@@ -594,7 +596,8 @@ class ncOScoreEnhancedOrchestrator:
         }
 
     # ------------------------------------------------------------------
-    async def store_memory(self, namespace: str, data: Any, metadata: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    async def store_memory(self, namespace: str, data: Any, metadata: Optional[Dict[str, Any]] = None) -> Dict[
+        str, Any]:
         """Expose memory storage for agents."""
         entry = self.memory_manager.store_memory(namespace, data, metadata)
         return {

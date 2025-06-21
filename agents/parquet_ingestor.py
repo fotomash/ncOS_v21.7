@@ -1,4 +1,3 @@
-
 """
 ParquetIngestor Agent Implementation
 Handles financial data ingestion from Parquet files with schema validation
@@ -142,7 +141,8 @@ class ParquetIngestor:
             # Check memory usage
             memory_usage_mb = df.memory_usage(deep=True).sum() / 1024 / 1024
             if memory_usage_mb > self.max_memory_mb:
-                result['warnings'].append(f"File exceeds memory limit ({memory_usage_mb:.2f}MB > {self.max_memory_mb}MB)")
+                result['warnings'].append(
+                    f"File exceeds memory limit ({memory_usage_mb:.2f}MB > {self.max_memory_mb}MB)")
                 # Process in chunks
                 result['processing_mode'] = 'chunked'
 
@@ -199,7 +199,7 @@ class ParquetIngestor:
         batch_result['status'] = 'complete'
         return batch_result
 
-    def stream_ingest(self, file_path: Union[str, Path], schema_type: str = 'market_data', 
+    def stream_ingest(self, file_path: Union[str, Path], schema_type: str = 'market_data',
                       callback=None) -> Dict[str, Any]:
         """Stream ingest large files in chunks"""
         file_path = Path(file_path)

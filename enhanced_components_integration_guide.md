@@ -1,17 +1,20 @@
 # Integration Guide for Enhanced Components
 
 ## Overview
+
 The enhanced components add comprehensive journaling capabilities to your existing XANFLOW/ZANFLOW system.
 
 ## 1. Enhanced Conflict Detector
 
 ### Key Features:
+
 - Automatic journal logging of all conflict analyses
 - Detailed risk assessment documentation
 - Session-based conflict tracking
 - Correlation analysis between assets
 
 ### Integration:
+
 ```python
 from enhanced_conflict_detector import EnhancedConflictDetector, ActiveTradeContext, MaturingSetupContext
 
@@ -25,12 +28,14 @@ report = detector.check_for_conflict(active_trade, maturing_setup)
 ## 2. Enhanced XANFLOW Orchestrator
 
 ### Key Features:
+
 - Pipeline execution logging
 - Stage-by-stage tracking
 - Automatic trade decision logging
 - Performance metrics per pipeline
 
 ### Integration:
+
 ```python
 from enhanced_xanflow_orchestrator import EnhancedXanflowOrchestrator
 
@@ -49,12 +54,14 @@ result = orchestrator.execute_ispts_pipeline(
 ## 3. Enhanced Trade Narrative LLM
 
 ### Key Features:
+
 - Multiple narrative templates
 - Automatic journal entry creation
 - Session summaries
 - Pattern performance analysis
 
 ### Integration:
+
 ```python
 from enhanced_trade_narrative_llm import EnhancedTradeNarrativeLLM
 
@@ -101,7 +108,8 @@ narrative = narrator.generate_trade_narrative(
 ## Viewing Logs:
 
 Access the dashboard at http://localhost:8501 to see:
-- Conflict analyses under "Analysis" 
+
+- Conflict analyses under "Analysis"
 - Pipeline executions under "Journal"
 - Trade narratives under "Journal"
 - Session summaries under "ZBAR Analysis"

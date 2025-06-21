@@ -2,9 +2,9 @@ profile_name: CoreSystemAgent
 description: Core system orchestration and health monitoring
 version: 21.7.0
 execution_sequence:
-- health_check
-- system_monitor
-- log_aggregator
+  - health_check
+  - system_monitor
+  - log_aggregator
 code_map:
   health_check: ncos.core.health_check.HealthChecker
   system_monitor: ncos.core.system_monitor.SystemMonitor
@@ -12,9 +12,9 @@ code_map:
 meta_agent:
   agent_id: NCOS_Core_001
   strategy_tags:
-  - System
-  - Health
-  - Monitoring
+    - System
+    - Health
+    - Monitoring
   llm_contextualization_enabled: false
 settings:
   log_level: INFO

@@ -1,4 +1,3 @@
-
 """
 ncOS Unified v5.0 - Voice Tag Parser
 Natural language processing for voice commands and smart tagging
@@ -25,6 +24,7 @@ class VoiceTag:
     timestamp: str = ""
     raw_text: str = ""
     confidence: float = 0.0
+
 
 class VoiceTagParser:
     """Parse voice commands into structured tags"""
@@ -55,7 +55,8 @@ class VoiceTagParser:
         # Define patterns for entity extraction
         self.patterns = {
             "symbols": ["XAUUSD", "EURUSD", "GBPUSD", "BTCUSD", "gold", "euro", "cable"],
-            "timeframes": ["M1", "M5", "M15", "M30", "H1", "H4", "D1", "1min", "5min", "15min", "hourly", "4hour", "daily"],
+            "timeframes": ["M1", "M5", "M15", "M30", "H1", "H4", "D1", "1min", "5min", "15min", "hourly", "4hour",
+                           "daily"],
             "bias": ["bullish", "bearish", "neutral", "long", "short", "buy", "sell"],
             "sessions": ["london", "new york", "asia", "tokyo", "sydney", "frankfurt"],
             "actions": ["mark", "log", "analyze", "scan", "check", "run", "execute", "monitor"]

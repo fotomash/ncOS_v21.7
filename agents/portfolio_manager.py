@@ -24,6 +24,7 @@ class PortfolioManagerConfig:
     target_allocation: Optional[Dict[str, float]] = field(default_factory=dict)
     custom_params: Dict[str, Any] = field(default_factory=dict)
 
+
 class PortfolioManager:
     """
     PortfolioManager - Portfolio optimization and allocation management
@@ -218,10 +219,12 @@ class PortfolioManager:
         self.logger.info(f"Shutting down {self.config.agent_id}")
         self.status = "shutdown"
 
+
 # Agent factory function
 def create_agent(config: Dict[str, Any] = None) -> PortfolioManager:
     """Factory function to create PortfolioManager instance"""
     return PortfolioManager(config)
+
 
 # Export the agent class
 __all__ = ["PortfolioManager", "PortfolioManagerConfig", "create_agent"]

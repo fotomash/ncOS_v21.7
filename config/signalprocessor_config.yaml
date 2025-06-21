@@ -5,9 +5,9 @@ agent:
 settings:
   min_confidence: 0.7
   signal_types:
-  - entry
-  - exit
-  - adjustment
+    - entry
+    - exit
+    - adjustment
   cooldown_period: 300
   confirmation_required: true
   queue_size: 100

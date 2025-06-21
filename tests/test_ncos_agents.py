@@ -1,4 +1,3 @@
-
 """
 NCOS Agent Unit Test Suite
 Comprehensive testing for all 13 core agents
@@ -15,6 +14,7 @@ from typing import Dict, Any
 # Mock imports for testing (these would be actual imports in production)
 class MockAgent:
     """Base mock agent for testing"""
+
     def __init__(self, config: Dict[str, Any]):
         self.config = config
         self.initialized = False
@@ -22,6 +22,7 @@ class MockAgent:
     def initialize(self) -> bool:
         self.initialized = True
         return True
+
 
 # Test utilities
 def generate_mock_market_data(num_points: int = 100) -> Dict[str, Any]:
@@ -44,6 +45,7 @@ def generate_mock_market_data(num_points: int = 100) -> Dict[str, Any]:
         'symbol': 'TEST',
         'timestamp': datetime.now().isoformat()
     }
+
 
 class TestCoreSystemAgent(unittest.TestCase):
     """Test CoreSystemAgent functionality"""
@@ -75,6 +77,7 @@ class TestCoreSystemAgent(unittest.TestCase):
         agent2 = MockAgent(invalid_config)
         self.assertEqual(agent2.config.get('data_directory', None), None)
 
+
 class TestMarketDataCaptain(unittest.TestCase):
     """Test MarketDataCaptain functionality"""
 
@@ -104,6 +107,7 @@ class TestMarketDataCaptain(unittest.TestCase):
         # Verify retrieval
         retrieved = cache.get('TEST')
         self.assertEqual(retrieved['symbol'], 'TEST')
+
 
 class TestTechnicalAnalyst(unittest.TestCase):
     """Test TechnicalAnalyst functionality"""
@@ -136,6 +140,7 @@ class TestTechnicalAnalyst(unittest.TestCase):
         self.assertGreater(signal['strength'], 0)
         self.assertLessEqual(signal['strength'], 1)
 
+
 class TestVectorMemoryBoot(unittest.TestCase):
     """Test VectorMemoryBoot functionality"""
 
@@ -165,6 +170,7 @@ class TestVectorMemoryBoot(unittest.TestCase):
         dot_product = sum(a * b for a, b in zip(vec1, vec2))
         self.assertGreater(dot_product, 0.8)  # High similarity
 
+
 class TestParquetIngestor(unittest.TestCase):
     """Test ParquetIngestor functionality"""
 
@@ -186,6 +192,7 @@ class TestParquetIngestor(unittest.TestCase):
         # Fill missing values
         processed = [p if p is not None else 101 for p in raw_data['price']]
         self.assertNotIn(None, processed)
+
 
 class TestSMCRouter(unittest.TestCase):
     """Test SMCRouter functionality"""
@@ -211,6 +218,7 @@ class TestSMCRouter(unittest.TestCase):
 
         self.assertIn(decision['route'], routes)
         self.assertGreaterEqual(decision['confidence'], 0.5)
+
 
 class TestMAZ2Executor(unittest.TestCase):
     """Test MAZ2Executor functionality"""
@@ -245,6 +253,7 @@ class TestMAZ2Executor(unittest.TestCase):
 
         self.assertIn(signal, ['buy', 'sell', 'hold'])
 
+
 class TestTMCExecutor(unittest.TestCase):
     """Test TMCExecutor functionality"""
 
@@ -266,6 +275,7 @@ class TestTMCExecutor(unittest.TestCase):
 
         confluence = (trend_score + momentum_score) / 2
         self.assertGreater(confluence, 0.7)
+
 
 class TestRiskGuardian(unittest.TestCase):
     """Test RiskGuardian functionality"""
@@ -290,6 +300,7 @@ class TestRiskGuardian(unittest.TestCase):
 
         self.assertTrue(allowed)
 
+
 class TestPortfolioManager(unittest.TestCase):
     """Test PortfolioManager functionality"""
 
@@ -313,12 +324,13 @@ class TestPortfolioManager(unittest.TestCase):
         target_weights = {'maz2': 0.4, 'tmc': 0.4, 'reserve': 0.2}
 
         total_value = sum(current_values.values())
-        current_weights = {k: v/total_value for k, v in current_values.items()}
+        current_weights = {k: v / total_value for k, v in current_values.items()}
 
         # Check if rebalancing needed
         for strategy in target_weights:
             deviation = abs(current_weights[strategy] - target_weights[strategy])
             self.assertLess(deviation, 0.1)  # 10% tolerance
+
 
 class TestBroadcastRelay(unittest.TestCase):
     """Test BroadcastRelay functionality"""
@@ -344,11 +356,12 @@ class TestBroadcastRelay(unittest.TestCase):
         }
 
         message_type = 'signal'
-        recipients = [agent for agent, types in subscriptions.items() 
-                     if message_type in types]
+        recipients = [agent for agent, types in subscriptions.items()
+                      if message_type in types]
 
         self.assertIn('RiskGuardian', recipients)
         self.assertNotIn('PortfolioManager', recipients)
+
 
 class TestReportGenerator(unittest.TestCase):
     """Test ReportGenerator functionality"""
@@ -372,6 +385,7 @@ class TestReportGenerator(unittest.TestCase):
 
         self.assertIn(selected_format, formats)
 
+
 class TestSessionStateManager(unittest.TestCase):
     """Test SessionStateManager functionality"""
 
@@ -392,6 +406,7 @@ class TestSessionStateManager(unittest.TestCase):
 
         self.assertEqual(restored['session_id'], session_state['session_id'])
         self.assertEqual(restored['active_agents'], 13)
+
 
 def run_all_tests():
     """Run all unit tests"""
@@ -425,6 +440,7 @@ def run_all_tests():
     result = runner.run(suite)
 
     return result
+
 
 if __name__ == '__main__':
     print("NCOS Agent Unit Test Suite")

@@ -1,4 +1,3 @@
-
 """
 NCOS v21 Stress Testing Framework
 Comprehensive testing suite for pre-production validation
@@ -288,7 +287,7 @@ class LiveSimulation:
 
     def run(self) -> Dict[str, Any]:
         """Run live simulation"""
-        logger.info(f"Starting live simulation for {self.duration.total_seconds()/3600:.1f} hours")
+        logger.info(f"Starting live simulation for {self.duration.total_seconds() / 3600:.1f} hours")
 
         self.running = True
         self.monitor.start_monitoring()
@@ -339,8 +338,8 @@ class LiveSimulation:
             return False
 
         # Check if memory consistently increases
-        first_quarter = np.mean(memory_readings[:len(memory_readings)//4])
-        last_quarter = np.mean(memory_readings[-len(memory_readings)//4:])
+        first_quarter = np.mean(memory_readings[:len(memory_readings) // 4])
+        last_quarter = np.mean(memory_readings[-len(memory_readings) // 4:])
 
         # If memory increased by more than 20%
         return (last_quarter - first_quarter) / first_quarter > 0.2
@@ -352,8 +351,8 @@ class LiveSimulation:
             return False
 
         # Compare first and last quarters
-        first_quarter = np.mean(throughput[:len(throughput)//4])
-        last_quarter = np.mean(throughput[-len(throughput)//4:])
+        first_quarter = np.mean(throughput[:len(throughput) // 4])
+        last_quarter = np.mean(throughput[-len(throughput) // 4:])
 
         # If latency increased by more than 50%
         return (last_quarter - first_quarter) / first_quarter > 0.5
@@ -387,7 +386,7 @@ class VolumeStressTest:
             chunks_processed = 0
 
             for i in range(0, total_rows, chunk_size):
-                chunk = df.iloc[i:i+chunk_size]
+                chunk = df.iloc[i:i + chunk_size]
 
                 # Simulate processing time
                 time.sleep(0.01)  # 10ms per chunk
@@ -490,7 +489,7 @@ class FrequencyStressTest:
         """Simulate SMCRouter decision making"""
         # Calculate volatility
         prices = market_data['prices']
-        returns = [prices[i]/prices[i-1] - 1 for i in range(1, len(prices))]
+        returns = [prices[i] / prices[i - 1] - 1 for i in range(1, len(prices))]
         volatility = np.std(returns) if returns else 0
 
         # Make routing decision
@@ -698,8 +697,10 @@ class StressTestRunner:
     def _assess_readiness(self) -> Dict[str, Any]:
         """Assess system readiness based on test results"""
         criteria = {
-            'memory_stability': not self.results.get('live_simulation', {}).get('stability', {}).get('memory_leak_detected', True),
-            'performance_stability': not self.results.get('live_simulation', {}).get('stability', {}).get('performance_degradation', True),
+            'memory_stability': not self.results.get('live_simulation', {}).get('stability', {}).get(
+                'memory_leak_detected', True),
+            'performance_stability': not self.results.get('live_simulation', {}).get('stability', {}).get(
+                'performance_degradation', True),
             'volume_handling': self.results.get('volume_stress', {}).get('rows_per_second', 0) > 100000,
             'high_frequency': self.results.get('frequency_stress', {}).get('success_rate', 0) > 95,
             'error_resilience': self.results.get('error_injection', {}).get('scenarios_passed', 0) >= 3
@@ -728,9 +729,9 @@ if __name__ == '__main__':
     with open('pre_production_readiness_report.json', 'w') as f:
         json.dump(report, f, indent=2)
 
-    print("\n" + "="*50)
+    print("\n" + "=" * 50)
     print("STRESS TEST COMPLETE")
-    print("="*50)
+    print("=" * 50)
     print(f"Recommendation: {report['readiness_assessment']['recommendation']}")
     print(f"Confidence: {report['readiness_assessment']['confidence_score']:.1f}%")
     print("\nDetailed report saved to: pre_production_readiness_report.json")

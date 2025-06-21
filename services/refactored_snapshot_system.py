@@ -9,13 +9,16 @@ from threading import Thread, Event
 # --- Setup basic logging ---
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
+
 class SnapshotConfig:
     """A centralized class to handle configuration for the snapshot system."""
+
     def __init__(self, config_data):
         self.snapshot_interval = config_data.get('snapshot_interval_seconds', 180)
         self.persist_memory = config_data.get('persist_memory', True)
         self.compress_snapshots = config_data.get('compress_snapshots', True)
-        self.snapshot_path_template = config_data.get('snapshot_path_template', './snapshots/ncos_snapshot_{timestamp}.json')
+        self.snapshot_path_template = config_data.get('snapshot_path_template',
+                                                      './snapshots/ncos_snapshot_{timestamp}.json')
         self.max_snapshots = config_data.get('max_snapshots', 10)
 
         self.snapshot_dir = os.path.dirname(self.snapshot_path_template)
@@ -23,8 +26,10 @@ class SnapshotConfig:
             os.makedirs(self.snapshot_dir)
             logging.info(f"Created snapshot directory: {self.snapshot_dir}")
 
+
 class MemoryBridge:
     """Bridge to interact with ncOS memory management."""
+
     def get_current_memory_state(self):
         logging.info("Fetching current memory state.")
         try:
@@ -42,8 +47,10 @@ class MemoryBridge:
         logging.info("System memory state has been restored (simulation).")
         return True
 
+
 class MemorySnapshotManager:
     """Manages creation, restoration, and maintenance of memory snapshots."""
+
     def __init__(self, config, memory_bridge):
         self.config = config
         self.memory_bridge = memory_bridge

@@ -1,2 +1,2 @@
 # Placeholder configuration for SessionStateManager
-settings: {}
+settings: { }

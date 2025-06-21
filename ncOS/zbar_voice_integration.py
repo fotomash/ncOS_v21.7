@@ -9,6 +9,7 @@ from core import voice_tag_parser as _voice_impl
 
 _sys.modules.setdefault("voice_tag_parser", _voice_impl)
 from core import zbar_voice_integration as _impl
+
 _sys.modules.setdefault("zbar_voice_integration", _impl)
 
 VoiceEnabledZBARAgent = _impl.VoiceEnabledZBARAgent

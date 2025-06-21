@@ -21,6 +21,7 @@ class NCOSBaseAgent:
         else:
             self.logger.debug("No handler for trigger %s", trigger_name)
 
-    def register_trigger(self, trigger_name: str, handler: Callable[[Dict[str, Any], Dict[str, Any]], Awaitable[None]]) -> None:
+    def register_trigger(self, trigger_name: str,
+                         handler: Callable[[Dict[str, Any], Dict[str, Any]], Awaitable[None]]) -> None:
         """Register a handler for a trigger name."""
         self.trigger_handlers[trigger_name] = handler

@@ -3,11 +3,13 @@ import logging
 from dataclasses import dataclass
 from typing import Any, Dict, List
 
+
 @dataclass
 class VectorDataProcessorConfig:
     agent_id: str = "vector_data_processor"
     enabled: bool = True
     log_level: str = "INFO"
+
 
 class VectorDataProcessor:
     """Simple processor for vector-based data."""

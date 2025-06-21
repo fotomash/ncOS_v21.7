@@ -99,22 +99,22 @@ class PatternRecognitionEngine:
         window_size = 5
 
         for i in range(len(data) - window_size):
-            window = data.iloc[i : i + window_size]
+            window = data.iloc[i: i + window_size]
 
             open_norm = (window["open"] - window["open"].min()) / (
-                window["open"].max() - window["open"].min() + 1e-8
+                    window["open"].max() - window["open"].min() + 1e-8
             )
             high_norm = (window["high"] - window["high"].min()) / (
-                window["high"].max() - window["high"].min() + 1e-8
+                    window["high"].max() - window["high"].min() + 1e-8
             )
             low_norm = (window["low"] - window["low"].min()) / (
-                window["low"].max() - window["low"].min() + 1e-8
+                    window["low"].max() - window["low"].min() + 1e-8
             )
             close_norm = (window["close"] - window["close"].min()) / (
-                window["close"].max() - window["close"].min() + 1e-8
+                    window["close"].max() - window["close"].min() + 1e-8
             )
             volume_norm = (window["volume"] - window["volume"].min()) / (
-                window["volume"].max() - window["volume"].min() + 1e-8
+                    window["volume"].max() - window["volume"].min() + 1e-8
             )
 
             vector = np.array(

@@ -1,2 +1,2 @@
 # Placeholder configuration for compliance_agent
-settings: {}
+settings: { }

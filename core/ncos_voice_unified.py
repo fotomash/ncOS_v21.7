@@ -1,4 +1,3 @@
-
 """
 Unified Voice Integration for NCOS ZBAR System
 Brings together ZBAR agent and menu system with voice capabilities
@@ -92,6 +91,7 @@ class NCOSVoiceSystem:
 
         print("\nThank you for using NCOS Voice System!")
 
+
 # Quick start function
 def quick_start():
     """Quick start the voice system"""
@@ -103,6 +103,7 @@ def quick_start():
 
     system = NCOSVoiceSystem(config)
     system.start_interactive_session()
+
 
 if __name__ == "__main__":
     quick_start()

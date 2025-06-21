@@ -2,7 +2,8 @@
 
 ## Overview
 
-The ncOS Journal v2.0 is a standalone journaling system extracted from ncOS v21.7, focused purely on trade journaling and analysis without any voice dependencies.
+The ncOS Journal v2.0 is a standalone journaling system extracted from ncOS v21.7, focused purely on trade journaling
+and analysis without any voice dependencies.
 
 ## Key Features
 
@@ -55,12 +56,13 @@ ncos_journal/
    ```
 
 4. **Access the interfaces**:
-   - API: http://localhost:8000
-   - Dashboard: http://localhost:8501
+    - API: http://localhost:8000
+    - Dashboard: http://localhost:8501
 
 ## Usage Examples
 
 ### Python API
+
 ```python
 from journal_manager import JournalManager
 
@@ -85,6 +87,7 @@ recap = journal.get_session_recap()
 ```
 
 ### REST API
+
 ```bash
 # Start session
 curl -X POST http://localhost:8000/api/journal/session/start   -H "Content-Type: application/json"   -d '{"session_name": "morning_trading"}'

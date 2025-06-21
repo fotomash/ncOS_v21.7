@@ -1,4 +1,3 @@
-
 """
 SMCRouter Agent Implementation
 Smart Market Classifier routing for multi-strategy execution
@@ -19,12 +18,14 @@ class MarketRegime(Enum):
     STABLE = "stable"
     UNKNOWN = "unknown"
 
+
 class RouteType(Enum):
     """Routing decision types"""
     MAZ2 = "maz2"
     TMC = "tmc"
     HYBRID = "hybrid"
     HOLD = "hold"
+
 
 class SMCRouter:
     """
@@ -64,7 +65,7 @@ class SMCRouter:
 
         returns = []
         for i in range(1, len(prices)):
-            ret = (prices[i] - prices[i-1]) / prices[i-1]
+            ret = (prices[i] - prices[i - 1]) / prices[i - 1]
             returns.append(ret)
 
         if not returns:
@@ -97,7 +98,7 @@ class SMCRouter:
         else:
             normalized_slope = 0
 
-        direction = 'up' if normalized_slope > self.trend_threshold else                    'down' if normalized_slope < -self.trend_threshold else 'neutral'
+        direction = 'up' if normalized_slope > self.trend_threshold else 'down' if normalized_slope < -self.trend_threshold else 'neutral'
 
         return abs(normalized_slope), direction
 
@@ -128,8 +129,8 @@ class SMCRouter:
         else:
             return MarketRegime.RANGING
 
-    def calculate_routing_confidence(self, market_data: Dict[str, Any], 
-                                   regime: MarketRegime) -> float:
+    def calculate_routing_confidence(self, market_data: Dict[str, Any],
+                                     regime: MarketRegime) -> float:
         """Calculate confidence score for routing decision"""
         confidence_factors = []
 
@@ -159,8 +160,8 @@ class SMCRouter:
 
         return statistics.mean(confidence_factors) if confidence_factors else 0.5
 
-    def determine_route(self, market_data: Dict[str, Any], 
-                       execution_params: Dict[str, Any]) -> Dict[str, Any]:
+    def determine_route(self, market_data: Dict[str, Any],
+                        execution_params: Dict[str, Any]) -> Dict[str, Any]:
         """Determine optimal routing based on market conditions"""
         # Classify market regime
         regime = self.classify_market_regime(market_data)
@@ -226,8 +227,8 @@ class SMCRouter:
         self.routing_stats['total_routes'] += 1
         return route_decision
 
-    def batch_route(self, market_snapshots: List[Dict[str, Any]], 
-                   execution_params: Dict[str, Any]) -> List[Dict[str, Any]]:
+    def batch_route(self, market_snapshots: List[Dict[str, Any]],
+                    execution_params: Dict[str, Any]) -> List[Dict[str, Any]]:
         """Process multiple market snapshots and return routing decisions"""
         routing_decisions = []
 

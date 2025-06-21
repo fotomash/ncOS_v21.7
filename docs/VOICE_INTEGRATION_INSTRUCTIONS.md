@@ -80,16 +80,19 @@ system.start_interactive_session()
 ## Voice Command Reference
 
 ### Marking/Logging
+
 - "Mark [symbol] [bias] on [timeframe]"
 - "Log trade idea: [your notes]"
 - "Mark [symbol] [bias], [session] session, maturity [score]"
 
 ### Analysis
+
 - "Analyze [symbol] [timeframe]"
 - "Run ZBAR on [symbol]"
 - "Scan for [pattern] in [session]"
 
 ### Queries
+
 - "Show all [bias] setups"
 - "Check [session] trades"
 - "Find [symbol] entries today"

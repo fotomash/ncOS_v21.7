@@ -11,6 +11,7 @@ except Exception:  # pragma: no cover - fallback when psutil unavailable
     psutil = None  # type: ignore
 import resource
 
+
 def _summarize_workspace_memory(state: Any) -> Dict[str, Any]:
     memory_mb = getattr(state, "memory_usage_mb", 0.0)
     processed_files = getattr(state, "processed_files", [])
@@ -23,6 +24,7 @@ def _summarize_workspace_memory(state: Any) -> Dict[str, Any]:
         "active_agents": len(active_agents),
         "trading_signals": len(trading_signals),
     }
+
 
 async def _optimize_memory(state: Any) -> None:
     files = getattr(state, "processed_files", [])

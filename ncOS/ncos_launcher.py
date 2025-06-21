@@ -14,6 +14,7 @@ import yaml
 FAST_MODE = os.getenv("NCOS_FAST_MODE", "0") == "1"
 from pathlib import Path
 
+
 def find_ncos_root():
     """Find the NCOS root directory"""
     # Check if we're already in the right place
@@ -41,6 +42,7 @@ def find_ncos_root():
 
     return None
 
+
 def setup_environment(ncos_root):
     """Set up the Python environment"""
     # Add paths to Python path
@@ -60,12 +62,14 @@ def setup_environment(ncos_root):
 
     return True
 
+
 def validate_all_configs():
     """Validate YAML config files."""
     config_dir = Path('config')
     for cfg in config_dir.glob('*.yaml'):
         with open(cfg, 'r') as f:
             yaml.safe_load(f)
+
 
 def register_agents():
     """Ensure agents in registry can be imported."""
@@ -78,6 +82,7 @@ def register_agents():
         module_name = data.get('module')
         if module_name:
             __import__(module_name)
+
 
 def verify_schema_mapping():
     """Verify each agent has a corresponding config file."""
@@ -101,10 +106,12 @@ def verify_schema_mapping():
     if missing:
         print(f"❌ Error: {len(missing)} configuration file(s) missing for registered agents")
 
+
 def parse_args():
     parser = argparse.ArgumentParser(description="NCOS Launcher")
     parser.add_argument("--fast", action="store_true", help="Enable FAST_MODE")
     return parser.parse_args()
+
 
 def main():
     args = parse_args()
@@ -171,6 +178,7 @@ def main():
         import traceback
         traceback.print_exc()
         sys.exit(1)
+
 
 if __name__ == "__main__":
     main()

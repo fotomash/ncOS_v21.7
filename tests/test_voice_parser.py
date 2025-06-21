@@ -14,7 +14,9 @@ def _mock_deps(monkeypatch):
     monkeypatch.setitem(sys.modules, "zbar_logger", MagicMock())
     monkeypatch.setitem(sys.modules, "engine", MagicMock())
 
+
 from ncOS import voice_tag_parser
+
 
 class TestVoiceTagParser(unittest.TestCase):
     def setUp(self):
@@ -33,6 +35,7 @@ class TestVoiceTagParser(unittest.TestCase):
         self.assertEqual(tag.timeframe, 'M1')
         self.assertEqual(tag.bias, 'bearish')
         self.assertEqual(tag.notes, 'after nfp')
+
 
 if __name__ == '__main__':
     unittest.main()

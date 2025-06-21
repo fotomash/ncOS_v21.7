@@ -127,5 +127,6 @@ def test_predictive_engine():
         print(f"  Conflict Type: {conflict['conflict_type']}")
         print(f"  Recommendation: {conflict['recommendation']}")
 
+
 if __name__ == "__main__":
     test_predictive_engine()

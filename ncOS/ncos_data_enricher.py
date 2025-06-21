@@ -14,6 +14,7 @@ from ncos_predictive_schemas import DataEnricherConfig, SpreadTrackerConfig
 
 logger = logging.getLogger(__name__)
 
+
 class SpreadTracker:
     """Tracks spread behavior and calculates stability metrics."""
 
@@ -68,10 +69,10 @@ class DataEnricher:
         logger.info("DataEnricher initialized")
 
     def enrich_bar_data(
-        self,
-        current_bar: pd.Series,
-        historical_data: pd.DataFrame,
-        context: Optional[Dict[str, Any]] = None
+            self,
+            current_bar: pd.Series,
+            historical_data: pd.DataFrame,
+            context: Optional[Dict[str, Any]] = None
     ) -> Tuple[pd.Series, Dict[str, Any]]:
         """
         Enrich a single bar with calculated features.
@@ -112,9 +113,9 @@ class DataEnricher:
         return enriched_bar, metadata
 
     def enrich_dataframe(
-        self,
-        data: pd.DataFrame,
-        context: Optional[Dict[str, Any]] = None
+            self,
+            data: pd.DataFrame,
+            context: Optional[Dict[str, Any]] = None
     ) -> pd.DataFrame:
         """
         Enrich an entire dataframe with calculated features.
@@ -154,9 +155,9 @@ class DataEnricher:
         return enriched_data
 
     def _calculate_htf_alignment_indicators(
-        self,
-        current_bar: pd.Series,
-        historical_data: pd.DataFrame
+            self,
+            current_bar: pd.Series,
+            historical_data: pd.DataFrame
     ) -> Dict[str, float]:
         """Calculate indicators for higher timeframe alignment."""
         close_prices = historical_data['close']
@@ -189,9 +190,9 @@ class DataEnricher:
         }
 
     def _calculate_tick_density_proxy(
-        self,
-        current_bar: pd.Series,
-        historical_data: pd.DataFrame
+            self,
+            current_bar: pd.Series,
+            historical_data: pd.DataFrame
     ) -> Dict[str, float]:
         """Calculate tick density proxy using volume data."""
         if 'volume' not in historical_data.columns:
@@ -216,9 +217,9 @@ class DataEnricher:
         }
 
     def _calculate_technical_features(
-        self,
-        current_bar: pd.Series,
-        historical_data: pd.DataFrame
+            self,
+            current_bar: pd.Series,
+            historical_data: pd.DataFrame
     ) -> Dict[str, float]:
         """Calculate additional technical features for context."""
         features = {}

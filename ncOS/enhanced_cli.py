@@ -141,8 +141,8 @@ class EnhancedLLMCLI:
             try:
                 time_since_last = (datetime.now() - self.last_progression).total_seconds()
                 if (
-                    time_since_last
-                    > self.auto_progression["triggers"]["session_save_interval"]
+                        time_since_last
+                        > self.auto_progression["triggers"]["session_save_interval"]
                 ):
                     await self._trigger_auto_progression("session_save", {})
 

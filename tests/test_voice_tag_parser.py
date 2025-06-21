@@ -29,5 +29,6 @@ class TestVoiceTagParser(unittest.TestCase):
         self.assertEqual(action["params"]["symbol"], "XAUUSD")
         self.assertEqual(action["params"]["timeframe"], "H4")
 
+
 if __name__ == "__main__":
     unittest.main()

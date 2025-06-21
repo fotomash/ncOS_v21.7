@@ -6,6 +6,7 @@ from fastapi import FastAPI, Response
 
 app = FastAPI()
 
+
 @app.get("/chart/{timeframe}")
 def get_btc_chart(timeframe: str):
     file_map = {

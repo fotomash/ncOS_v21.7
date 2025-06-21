@@ -60,10 +60,10 @@ class DataEnricher:
         logger.info("DataEnricher initialized")
 
     def enrich_bar_data(
-        self,
-        current_bar: pd.Series,
-        historical_data: pd.DataFrame,
-        context: Optional[Dict[str, Any]] = None,
+            self,
+            current_bar: pd.Series,
+            historical_data: pd.DataFrame,
+            context: Optional[Dict[str, Any]] = None,
     ) -> Tuple[pd.Series, Dict[str, Any]]:
         """Enrich a single bar with calculated features."""
         enriched_bar = current_bar.copy()
@@ -123,7 +123,7 @@ class DataEnricher:
         return enriched
 
     def _calculate_htf_alignment_indicators(
-        self, current_bar: pd.Series, historical_data: pd.DataFrame
+            self, current_bar: pd.Series, historical_data: pd.DataFrame
     ) -> Dict[str, float]:
         close_prices = historical_data["close"]
         current_close = float(current_bar["close"])

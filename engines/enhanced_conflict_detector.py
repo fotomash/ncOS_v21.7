@@ -20,12 +20,14 @@ logger = logging.getLogger(__name__)
 CONFIG = load_production_config(os.environ.get("NCOS_CONFIG_PATH"))
 JOURNAL_API = CONFIG.api.journal
 
+
 class ConflictDetectionConfig(BaseModel):
     """Configuration for conflict detection"""
     same_direction_threshold: float = 0.8
     opposite_direction_threshold: float = 0.6
     correlation_window: int = 20
     log_to_journal: bool = True
+
 
 class ActiveTradeContext(BaseModel):
     """Context for currently active trade"""
@@ -39,6 +41,7 @@ class ActiveTradeContext(BaseModel):
     session_id: str
     trace_id: str
 
+
 class MaturingSetupContext(BaseModel):
     """Context for newly maturing trade setup"""
     symbol: str
@@ -50,6 +53,7 @@ class MaturingSetupContext(BaseModel):
     patterns: List[str]
     session_id: str
 
+
 class ConflictReport(BaseModel):
     """Detailed conflict analysis report"""
     conflict_detected: bool
@@ -58,6 +62,7 @@ class ConflictReport(BaseModel):
     recommendation: str
     risk_assessment: Dict[str, Any]
     timestamp: datetime = None
+
 
 class EnhancedConflictDetector:
     """Enhanced conflict detector with journal integration"""
@@ -95,9 +100,9 @@ class EnhancedConflictDetector:
             logger.error(f"Failed to log to journal: {e}")
 
     def check_for_conflict(
-        self,
-        active_trade: ActiveTradeContext,
-        maturing_setup: MaturingSetupContext
+            self,
+            active_trade: ActiveTradeContext,
+            maturing_setup: MaturingSetupContext
     ) -> ConflictReport:
         """
         Check for conflicts between active trade and new setup
@@ -205,9 +210,9 @@ class EnhancedConflictDetector:
         return correlations.get(pair, 0.0)
 
     def _calculate_combined_risk(
-        self,
-        active: ActiveTradeContext,
-        maturing: MaturingSetupContext
+            self,
+            active: ActiveTradeContext,
+            maturing: MaturingSetupContext
     ) -> Dict[str, float]:
         """Calculate combined risk metrics"""
         active_risk = self._calculate_risk(
@@ -231,6 +236,7 @@ class EnhancedConflictDetector:
             "total_risk": active_risk + new_risk,
             "risk_concentration": max(active_risk, new_risk) / (active_risk + new_risk)
         }
+
 
 # Usage example
 if __name__ == "__main__":

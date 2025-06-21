@@ -24,6 +24,7 @@ class MarketDataCaptainConfig:
     symbols: Optional[List[str]] = field(default_factory=list)
     custom_params: Dict[str, Any] = field(default_factory=dict)
 
+
 class MarketDataCaptain:
     """
     MarketDataCaptain - Market data ingestion and real-time feed management
@@ -196,10 +197,12 @@ class MarketDataCaptain:
         self.logger.info(f"Shutting down {self.config.agent_id}")
         self.status = "shutdown"
 
+
 # Agent factory function
 def create_agent(config: Dict[str, Any] = None) -> MarketDataCaptain:
     """Factory function to create MarketDataCaptain instance"""
     return MarketDataCaptain(config)
+
 
 # Export the agent class
 __all__ = ["MarketDataCaptain", "MarketDataCaptainConfig", "create_agent"]

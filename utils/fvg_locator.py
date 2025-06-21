@@ -40,10 +40,10 @@ class FVGLocator:
         self._log = logger or (lambda *_a, **_kw: None)
 
     def run(
-        self,
-        data: List[Candle],
-        state: Dict[str, Any],
-        raw_cfg: Dict[str, Any],
+            self,
+            data: List[Candle],
+            state: Dict[str, Any],
+            raw_cfg: Dict[str, Any],
     ) -> Dict[str, Any]:
         if not state.get("Structural_Shift_Detected"):
             return self._fail("NO_STRUCTURAL_SHIFT")
@@ -91,12 +91,12 @@ class FVGLocator:
         return self._fail("NO_FVG_FOUND")
 
     def _gap_is_valid(
-        self,
-        c1: Candle,
-        c3: Candle,
-        direction: str,
-        cfg: FVGLocatorConfig,
-        pip: Decimal,
+            self,
+            c1: Candle,
+            c3: Candle,
+            direction: str,
+            cfg: FVGLocatorConfig,
+            pip: Decimal,
     ) -> bool:
         if direction == "bullish" and c1["low"] > c3["high"]:
             gap_size = (Decimal(c1["low"]) - Decimal(c3["high"])) / pip

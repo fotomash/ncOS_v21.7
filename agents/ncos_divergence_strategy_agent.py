@@ -17,6 +17,7 @@ from ncos_risk_engine import calculate_sl_and_risk
 
 logger = logging.getLogger(__name__)
 
+
 class DivergenceStrategyAgent(NCOSBaseAgent):
     """
     Executes a trading strategy based on RSI divergence with predictive quality scoring.
@@ -49,10 +50,10 @@ class DivergenceStrategyAgent(NCOSBaseAgent):
         # Quality-based trade filtering
         self.min_grade_to_trade = self.config.get('min_grade_to_trade', 'B')
         self.grade_risk_multipliers = self.config.get('grade_risk_multipliers', {
-            'A': 1.2,   # 20% more risk for A-grade setups
-            'B': 1.0,   # Normal risk for B-grade
-            'C': 0.7,   # Reduced risk for C-grade
-            'D': 0.0    # No trade for D-grade
+            'A': 1.2,  # 20% more risk for A-grade setups
+            'B': 1.0,  # Normal risk for B-grade
+            'C': 0.7,  # Reduced risk for C-grade
+            'D': 0.0  # No trade for D-grade
         })
 
         # Data buffer for calculations
@@ -89,7 +90,7 @@ class DivergenceStrategyAgent(NCOSBaseAgent):
             # Enrich the historical data if enricher is enabled
             if self.data_enricher.config.enabled and len(self.historical_data) > 0:
                 new_row, _ = self.data_enricher.enrich_bar_data(
-                    new_row.iloc[0], 
+                    new_row.iloc[0],
                     self.historical_data
                 )
                 new_row = pd.DataFrame([new_row]).set_index('timestamp')
@@ -122,8 +123,8 @@ class DivergenceStrategyAgent(NCOSBaseAgent):
         try:
             # Extract features for predictive scoring
             features = self.feature_extractor.extract_features(
-                bar, 
-                self.historical_data, 
+                bar,
+                self.historical_data,
                 context
             )
 
@@ -229,7 +230,8 @@ class DivergenceStrategyAgent(NCOSBaseAgent):
 
         # Add CHoCH data (simulated based on structure)
         context['choch_data'] = {
-            'break_strength': 0.8 if bar.get('structure') == signal_type.replace('buy', 'bullish').replace('sell', 'bearish') else 0.3,
+            'break_strength': 0.8 if bar.get('structure') == signal_type.replace('buy', 'bullish').replace('sell',
+                                                                                                           'bearish') else 0.3,
             'volume_on_break': bar.get('volume', 0) > self.historical_data['volume'].mean() * 1.2,
             'follow_through_bars': 2  # Placeholder
         }
@@ -271,11 +273,11 @@ class DivergenceStrategyAgent(NCOSBaseAgent):
         return True
 
     async def _execute_quality_adjusted_trade(
-        self, 
-        bar: pd.Series, 
-        trade_type: str, 
-        grade: str, 
-        maturity_score: float
+            self,
+            bar: pd.Series,
+            trade_type: str,
+            grade: str,
+            maturity_score: float
     ):
         """Execute trade with quality-adjusted risk parameters."""
         try:
@@ -384,7 +386,7 @@ class DivergenceStrategyAgent(NCOSBaseAgent):
 
         if total_evaluated > 0:
             grade_percentages = {
-                grade: (count / total_evaluated * 100) 
+                grade: (count / total_evaluated * 100)
                 for grade, count in self.trade_stats['grade_distribution'].items()
             }
             execution_rate = self.trade_stats['trades_executed'] / total_evaluated * 100

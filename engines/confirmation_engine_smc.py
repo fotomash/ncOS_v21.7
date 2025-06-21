@@ -31,7 +31,7 @@ def _find_ltf_swing_points(series: pd.Series, n: int = 2) -> pd.Series:
 
 
 def _find_ltf_poi_candle(
-    df_slice: pd.DataFrame, break_candle_index: int, is_bullish_break: bool
+        df_slice: pd.DataFrame, break_candle_index: int, is_bullish_break: bool
 ) -> Optional[Tuple[pd.Timestamp, List[float], str]]:
     """Find the candle likely causing the structure break."""
     if break_candle_index <= 0 or break_candle_index >= len(df_slice):
@@ -74,8 +74,8 @@ def _find_ltf_poi_candle(
     if origin_candle is not None and not origin_candle.isnull().all():
         poi_timestamp = origin_candle.name
         if all(
-            col in origin_candle.index and pd.notna(origin_candle[col])
-            for col in ["Low", "High"]
+                col in origin_candle.index and pd.notna(origin_candle[col])
+                for col in ["Low", "High"]
         ):
             poi_range = [origin_candle["Low"], origin_candle["High"]]
             poi_type = "OB"
@@ -96,11 +96,11 @@ def _find_ltf_poi_candle(
 
 
 def confirm_smc_entry(
-    htf_poi: Dict,
-    ltf_data: pd.DataFrame,
-    strategy_variant: str,
-    config: Optional[Dict] = None,
-    structure_context: Optional[Dict] = None,
+        htf_poi: Dict,
+        ltf_data: pd.DataFrame,
+        strategy_variant: str,
+        config: Optional[Dict] = None,
+        structure_context: Optional[Dict] = None,
 ) -> Dict[str, Any]:
     """Confirm potential trade entry using LTF structure."""
     print(
@@ -336,13 +336,13 @@ if __name__ == "__main__":  # pragma: no cover - simple smoke test
     ltf_df1.iloc[swing_high_iloc, ltf_df1.columns.get_loc("High")] = 1.1002
     ltf_df1.iloc[break_iloc, ltf_df1.columns.get_loc("Close")] = 1.1005
     ltf_df1.iloc[break_iloc - 1, ltf_df1.columns.get_loc("Open")] = (
-        ltf_df1.iloc[break_iloc - 1]["Close"] + 0.0001
+            ltf_df1.iloc[break_iloc - 1]["Close"] + 0.0001
     )
     ltf_df1.iloc[break_iloc - 1, ltf_df1.columns.get_loc("Low")] = (
-        ltf_df1.iloc[break_iloc - 1]["Close"] - 0.0002
+            ltf_df1.iloc[break_iloc - 1]["Close"] - 0.0002
     )
     ltf_df1.iloc[break_iloc - 1, ltf_df1.columns.get_loc("High")] = (
-        ltf_df1.iloc[break_iloc - 1]["Open"] + 0.00005
+            ltf_df1.iloc[break_iloc - 1]["Open"] + 0.00005
     )
 
     print("\n--- Testing Bullish Confirmation ---")
@@ -363,13 +363,13 @@ if __name__ == "__main__":  # pragma: no cover - simple smoke test
     ltf_df2.iloc[swing_low_iloc, ltf_df2.columns.get_loc("Low")] = 1.1048
     ltf_df2.iloc[break_iloc, ltf_df2.columns.get_loc("Close")] = 1.1045
     ltf_df2.iloc[break_iloc - 1, ltf_df2.columns.get_loc("Open")] = (
-        ltf_df2.iloc[break_iloc - 1]["Close"] - 0.0001
+            ltf_df2.iloc[break_iloc - 1]["Close"] - 0.0001
     )
     ltf_df2.iloc[break_iloc - 1, ltf_df2.columns.get_loc("High")] = (
-        ltf_df2.iloc[break_iloc - 1]["Open"] + 0.0002
+            ltf_df2.iloc[break_iloc - 1]["Open"] + 0.0002
     )
     ltf_df2.iloc[break_iloc - 1, ltf_df2.columns.get_loc("Low")] = (
-        ltf_df2.iloc[break_iloc - 1]["Open"] - 0.00005
+            ltf_df2.iloc[break_iloc - 1]["Open"] - 0.00005
     )
 
     print("\n--- Testing Bearish Confirmation ---")

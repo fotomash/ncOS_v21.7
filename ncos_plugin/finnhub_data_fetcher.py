@@ -27,7 +27,7 @@ FINNHUB_API_KEY = os.environ.get("FINNHUB_API_KEY")
 
 # Define base path for saving raw M1 data (consistent with data_pipeline)
 M1_SAVE_DIR = Path("tick_data/m1")
-M1_SAVE_DIR.mkdir(parents=True, exist_ok=True) # Ensure directory exists
+M1_SAVE_DIR.mkdir(parents=True, exist_ok=True)  # Ensure directory exists
 
 try:
     if not FINNHUB_API_KEY or len(FINNHUB_API_KEY) < 20:  # Basic check for placeholder/invalid key
@@ -51,6 +51,7 @@ except Exception as e:
     logger.error("Failed to initialize Finnhub client: %s", e)
     finnhub_client = None
 
+
 # --- Symbol Resolution Logic ---
 def _resolve_symbol_type(symbol: str) -> str:
     """ Determines asset type based on symbol format. """
@@ -61,11 +62,12 @@ def _resolve_symbol_type(symbol: str) -> str:
     elif ":" in symbol and any(s in symbol for s in ["OANDA:", "FXCM:", "PEPPERSTONE:", "ICMARKETS:"]):
         return "forex"
     elif any(s in symbol for s in ["XAU", "XAG", "GOLD", "SILVER"]):
-         return "forex" # Finnhub often uses forex endpoint for metals CFDs
+        return "forex"  # Finnhub often uses forex endpoint for metals CFDs
     elif any(s in symbol for s in ["SPX", "US500", "NAS100", "USTEC", "US30", "DE40", "UK100", "^"]):
-        return "index_cfd" # Or potentially 'stock' if using stock endpoint for index CFDs
+        return "index_cfd"  # Or potentially 'stock' if using stock endpoint for index CFDs
     # Default fallback
     return "stock"
+
 
 # --- Core Raw Fetcher ---
 def _fetch_raw_candles(symbol: str, resolution: str, start_unix: int, end_unix: int) -> dict:
@@ -100,80 +102,82 @@ def _fetch_raw_candles(symbol: str, resolution: str, start_unix: int, end_unix: 
                 )
             result = finnhub_client.forex_candles(symbol, resolution, start_unix, end_unix)
         elif sym_type == "index_cfd":
-             # Index CFDs might use stock or forex endpoints depending on broker feed in Finnhub
-             # Try stock first, then forex as fallback? Or require specific prefix?
-             # Let's assume stock endpoint works for common index symbols like SPX, NDX
+            # Index CFDs might use stock or forex endpoints depending on broker feed in Finnhub
+            # Try stock first, then forex as fallback? Or require specific prefix?
+            # Let's assume stock endpoint works for common index symbols like SPX, NDX
             logger.info(
                 "[FinnhubFetch] Attempting index fetch for %s using stock_candles endpoint.",
                 symbol,
             )
-             result = finnhub_client.stock_candles(symbol, resolution, start_unix, end_unix)
-            if result.get("s") != "ok" and ":" not in symbol:  # Fallback for indices without prefix
-                logger.warning(
-                    "[FinnhubFetch] Stock endpoint failed for index %s. Trying with OANDA: prefix via forex_candles.",
-                    symbol,
-                )
-                try:
-                    result = finnhub_client.forex_candles(
-                        f"OANDA:{symbol}", resolution, start_unix, end_unix
-                    )
-                except Exception:
-                    pass  # Ignore error if fallback also fails
-        else: # Default to stock endpoint
             result = finnhub_client.stock_candles(symbol, resolution, start_unix, end_unix)
-
-        # --- Process Result ---
-        if result.get("s") == "no_data":
-            logger.info(
-                "[FinnhubFetch] No data returned from Finnhub for %s in the specified range.",
+        if result.get("s") != "ok" and ":" not in symbol:  # Fallback for indices without prefix
+            logger.warning(
+                "[FinnhubFetch] Stock endpoint failed for index %s. Trying with OANDA: prefix via forex_candles.",
                 symbol,
             )
-            # Return empty DataFrame matching expected structure
-            empty_df = pd.DataFrame(columns=['Open', 'High', 'Low', 'Close', 'Volume'])
-            empty_df.index.name = 'Timestamp'
-            return {'status': 'ok', 'data': empty_df}
+            try:
+                result = finnhub_client.forex_candles(
+                    f"OANDA:{symbol}", resolution, start_unix, end_unix
+                )
+            except Exception:
+                pass  # Ignore error if fallback also fails
+    else:  # Default to stock endpoint
+    result = finnhub_client.stock_candles(symbol, resolution, start_unix, end_unix)
 
-        if result.get("s") != "ok":
-            error_msg = f"API returned status: {result.get('s')}"
-            logger.error(
-                "[FinnhubFetch] Finnhub API error for %s: %s", symbol, error_msg
-            )
-            return {'status': 'error', 'source': 'finnhub', 'message': error_msg}
 
-        # Convert to DataFrame
-        df = pd.DataFrame({
-            'Timestamp': pd.to_datetime(result.get("t", []), unit='s', utc=True),
-            'Open': result.get("o", []),
-            'High': result.get("h", []),
-            'Low': result.get("l", []),
-            'Close': result.get("c", []),
-            'Volume': result.get("v", [])
-        }).set_index("Timestamp")
+# --- Process Result ---
+if result.get("s") == "no_data":
+    logger.info(
+        "[FinnhubFetch] No data returned from Finnhub for %s in the specified range.",
+        symbol,
+    )
+    # Return empty DataFrame matching expected structure
+    empty_df = pd.DataFrame(columns=['Open', 'High', 'Low', 'Close', 'Volume'])
+    empty_df.index.name = 'Timestamp'
+    return {'status': 'ok', 'data': empty_df}
 
-        # Ensure correct dtypes
-        for col in ['Open', 'High', 'Low', 'Close', 'Volume']:
-            df[col] = pd.to_numeric(df[col], errors='coerce')
-        df.dropna(subset=['Open', 'High', 'Low', 'Close'], inplace=True) # Drop rows with NaN OHLC
-        df['Volume'].fillna(0, inplace=True) # Fill NaN Volume
+if result.get("s") != "ok":
+    error_msg = f"API returned status: {result.get('s')}"
+    logger.error(
+        "[FinnhubFetch] Finnhub API error for %s: %s", symbol, error_msg
+    )
+    return {'status': 'error', 'source': 'finnhub', 'message': error_msg}
 
-        logger.info(
-            "[FinnhubFetch] Successfully fetched %s raw candles for %s.",
-            len(df),
-            symbol,
-        )
-        return {'status': 'ok', 'data': df}
+# Convert to DataFrame
+df = pd.DataFrame({
+    'Timestamp': pd.to_datetime(result.get("t", []), unit='s', utc=True),
+    'Open': result.get("o", []),
+    'High': result.get("h", []),
+    'Low': result.get("l", []),
+    'Close': result.get("c", []),
+    'Volume': result.get("v", [])
+}).set_index("Timestamp")
 
-    except finnhub.FinnhubAPIException as api_e:
-        logger.error("[FinnhubFetch] Finnhub API Exception for %s: %s", symbol, api_e)
-        return {
-            'status': 'error',
-            'source': 'finnhub',
-            'message': f"API Exception: {api_e}",
-        }
-    except Exception as e:
-        logger.error("[FinnhubFetch] Unexpected Exception fetching %s: %s", symbol, e)
-        traceback.print_exc()
-        return {'status': 'error', 'source': 'finnhub', 'message': f"Exception: {e}"}
+# Ensure correct dtypes
+for col in ['Open', 'High', 'Low', 'Close', 'Volume']:
+    df[col] = pd.to_numeric(df[col], errors='coerce')
+df.dropna(subset=['Open', 'High', 'Low', 'Close'], inplace=True)  # Drop rows with NaN OHLC
+df['Volume'].fillna(0, inplace=True)  # Fill NaN Volume
+
+logger.info(
+    "[FinnhubFetch] Successfully fetched %s raw candles for %s.",
+    len(df),
+    symbol,
+)
+return {'status': 'ok', 'data': df}
+
+except finnhub.FinnhubAPIException as api_e:
+logger.error("[FinnhubFetch] Finnhub API Exception for %s: %s", symbol, api_e)
+return {
+    'status': 'error',
+    'source': 'finnhub',
+    'message': f"API Exception: {api_e}",
+}
+except Exception as e:
+logger.error("[FinnhubFetch] Unexpected Exception fetching %s: %s", symbol, e)
+traceback.print_exc()
+return {'status': 'error', 'source': 'finnhub', 'message': f"Exception: {e}"}
+
 
 # --- Aggregation Interface ---
 def load_and_aggregate_m1(symbol: str, start_dt: datetime, end_dt: datetime, save_raw_m1: bool = True) -> dict:
@@ -199,7 +203,7 @@ def load_and_aggregate_m1(symbol: str, start_dt: datetime, end_dt: datetime, sav
     result = _fetch_raw_candles(symbol, "1", int(start_dt_utc.timestamp()), int(end_dt_utc.timestamp()))
 
     if result["status"] != "ok":
-        return result # Propagate fetch error
+        return result  # Propagate fetch error
 
     df_m1 = result["data"]
     if df_m1.empty:
@@ -217,7 +221,7 @@ def load_and_aggregate_m1(symbol: str, start_dt: datetime, end_dt: datetime, sav
             filename = f"{safe_symbol_name}_M1_{start_dt_utc:%Y%m%d%H%M}_{end_dt_utc:%Y%m%d%H%M}.csv"
             filepath = M1_SAVE_DIR / filename
             # Save with appropriate format (e.g., comma-separated, include index)
-            df_m1.to_csv(filepath, sep=',', index=True, header=True) # Save with comma for standard processing
+            df_m1.to_csv(filepath, sep=',', index=True, header=True)  # Save with comma for standard processing
             logger.info(
                 "[FinnhubFetch] Saved raw M1 data (%s rows) to %s",
                 len(df_m1),
@@ -260,6 +264,7 @@ def load_and_aggregate_m1(symbol: str, start_dt: datetime, end_dt: datetime, sav
         traceback.print_exc()
         return {'status': 'error', 'source': 'resample', 'message': str(agg_err)}
 
+
 # --- Deprecated Function (Direct Fetch) ---
 def fetch_finnhub_ohlcv(symbol: str, start_time: datetime, end_time: datetime, resolution: str = '1') -> pd.DataFrame:
     """ Deprecated: Use load_and_aggregate_m1 instead for consistent workflow. """
@@ -275,7 +280,6 @@ def fetch_finnhub_ohlcv(symbol: str, start_time: datetime, end_time: datetime, r
     else:
         # Return empty dataframe on error to match expected type hint (though error is lost)
         return pd.DataFrame(columns=['Open', 'High', 'Low', 'Close', 'Volume'])
-
 
 # --- CLI Testing Support ---
 # Removed for operational code

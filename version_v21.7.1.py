@@ -26,7 +26,7 @@ SYSTEM_DESCRIPTION = "Complete AI Trading Ecosystem with Multi-Agent Orchestrati
 # Component versions
 COMPONENTS = {
     "core_system": "21.7.1",
-    "agent_framework": "21.7.1", 
+    "agent_framework": "21.7.1",
     "trading_strategies": "21.7.1",
     "vector_processing": "21.7.1",
     "zanflow_orchestration": "21.7.1",
@@ -51,13 +51,16 @@ FEATURES = {
     "real_time_monitoring": True
 }
 
+
 def get_version():
     """Get the current version string."""
     return __version__
 
+
 def get_version_info():
     """Get the version info tuple."""
     return __version_info__
+
 
 def get_build_info():
     """Get build information."""
@@ -69,6 +72,7 @@ def get_build_info():
         "system_name": SYSTEM_NAME,
         "system_codename": SYSTEM_CODENAME
     }
+
 
 def get_system_info():
     """Get complete system information."""
@@ -88,12 +92,14 @@ def get_system_info():
         "features": FEATURES
     }
 
+
 # Version validation
 def validate_version():
     """Validate version consistency."""
     assert __version__ == SYSTEM_VERSION, "Version mismatch detected"
     assert __version__ == BUILD_VERSION, "Build version mismatch detected"
     return True
+
 
 # Initialize validation on import
 validate_version()

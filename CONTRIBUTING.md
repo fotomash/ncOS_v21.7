@@ -1,6 +1,7 @@
 # Contributing to NCOS
 
-We welcome community participation through issues and pull requests. Please read the guidelines below to help us review your contributions efficiently.
+We welcome community participation through issues and pull requests. Please read the guidelines below to help us review
+your contributions efficiently.
 
 ## Submitting Issues
 

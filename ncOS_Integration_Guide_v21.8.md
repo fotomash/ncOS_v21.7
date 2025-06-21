@@ -2,7 +2,8 @@
 
 ## Overview
 
-This guide shows how to integrate the refactored ncOS components - separating the core trading system from the journal system and voice module.
+This guide shows how to integrate the refactored ncOS components - separating the core trading system from the journal
+system and voice module.
 
 ## Architecture Overview
 
@@ -182,6 +183,7 @@ class TradingEngine:
 ## Deployment Options
 
 ### Option 1: Monolithic Deployment
+
 ```yaml
 # docker-compose.yml
 version: '3.8'
@@ -203,6 +205,7 @@ services:
 ```
 
 ### Option 2: Microservices Deployment
+
 ```yaml
 # Each component as separate service
 # Deploy only what you need
@@ -218,6 +221,7 @@ services:
 ```
 
 ### Option 3: Hybrid Deployment
+
 - Core trading: Cloud/VPS for low latency
 - Journal system: Local for data sovereignty
 - Voice module: Edge device (optional)
@@ -243,24 +247,24 @@ services:
 ## Benefits Achieved
 
 1. **Separation of Concerns**
-   - Trading logic independent of journaling
-   - Voice features completely optional
-   - Each component can be scaled independently
+    - Trading logic independent of journaling
+    - Voice features completely optional
+    - Each component can be scaled independently
 
 2. **Improved Performance**
-   - 30% faster trading operations without voice overhead
-   - Async journal writes don't block trades
-   - Optimized data structures for each component
+    - 30% faster trading operations without voice overhead
+    - Async journal writes don't block trades
+    - Optimized data structures for each component
 
 3. **Better Maintainability**
-   - Clear module boundaries
-   - Easier to test individual components
-   - Simpler debugging and monitoring
+    - Clear module boundaries
+    - Easier to test individual components
+    - Simpler debugging and monitoring
 
 4. **Flexibility**
-   - Deploy only what you need
-   - Easy to add new storage backends
-   - Can integrate with external journal systems
+    - Deploy only what you need
+    - Easy to add new storage backends
+    - Can integrate with external journal systems
 
 ## Next Steps
 

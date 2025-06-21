@@ -2,9 +2,9 @@ profile_name: PortfolioManager
 description: Portfolio optimization and position management
 version: 21.7.0
 execution_sequence:
-- risk_calculator
-- position_sizer
-- portfolio_optimizer
+  - risk_calculator
+  - position_sizer
+  - portfolio_optimizer
 code_map:
   risk_calculator: ncos.portfolio.risk_calculator.RiskCalculator
   position_sizer: ncos.portfolio.position_sizer.PositionSizer
@@ -12,9 +12,9 @@ code_map:
 meta_agent:
   agent_id: NCOS_Portfolio_001
   strategy_tags:
-  - Portfolio
-  - Risk
-  - Optimization
+    - Portfolio
+    - Risk
+    - Optimization
   llm_contextualization_enabled: true
 risk_manager:
   enabled: true

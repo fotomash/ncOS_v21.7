@@ -28,10 +28,10 @@ class JsonFormatter(logging.Formatter):
 
 
 def configure_production_logging(
-    log_dir: str,
-    log_level: str = "INFO",
-    max_bytes: int = 10 * 1024 * 1024,
-    backup_count: int = 5,
+        log_dir: str,
+        log_level: str = "INFO",
+        max_bytes: int = 10 * 1024 * 1024,
+        backup_count: int = 5,
 ) -> None:
     """Configure rotating JSON loggers for the application."""
 

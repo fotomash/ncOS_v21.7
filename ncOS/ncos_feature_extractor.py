@@ -12,6 +12,7 @@ import talib
 
 logger = logging.getLogger(__name__)
 
+
 class FeatureExtractor:
     """
     Extracts features from market data for predictive scoring.
@@ -24,10 +25,10 @@ class FeatureExtractor:
         logger.info("FeatureExtractor initialized")
 
     def extract_features(
-        self,
-        current_bar: pd.Series,
-        historical_data: pd.DataFrame,
-        context: Optional[Dict[str, Any]] = None
+            self,
+            current_bar: pd.Series,
+            historical_data: pd.DataFrame,
+            context: Optional[Dict[str, Any]] = None
     ) -> Dict[str, float]:
         """
         Extract all features needed for predictive scoring.
@@ -81,10 +82,10 @@ class FeatureExtractor:
         return features
 
     def _calculate_htf_bias_alignment(
-        self, 
-        current_bar: pd.Series,
-        historical_data: pd.DataFrame,
-        context: Optional[Dict[str, Any]]
+            self,
+            current_bar: pd.Series,
+            historical_data: pd.DataFrame,
+            context: Optional[Dict[str, Any]]
     ) -> float:
         """
         Calculate how well the current setup aligns with higher timeframe bias.
@@ -146,10 +147,10 @@ class FeatureExtractor:
         return clarity_score
 
     def _calculate_sweep_strength(
-        self,
-        current_bar: pd.Series,
-        historical_data: pd.DataFrame,
-        context: Optional[Dict[str, Any]]
+            self,
+            current_bar: pd.Series,
+            historical_data: pd.DataFrame,
+            context: Optional[Dict[str, Any]]
     ) -> float:
         """
         Calculate the strength of liquidity sweep validation.
@@ -169,9 +170,9 @@ class FeatureExtractor:
         velocity_score = min(sweep_velocity / 5.0, 1.0)  # Normalize to 5 bars
 
         strength_score = (
-            magnitude_score * 0.4 +
-            velocity_score * 0.3 +
-            rejection_strength * 0.3
+                magnitude_score * 0.4 +
+                velocity_score * 0.3 +
+                rejection_strength * 0.3
         )
 
         return strength_score
@@ -198,10 +199,10 @@ class FeatureExtractor:
         return score
 
     def _calculate_poi_validation(
-        self,
-        current_bar: pd.Series,
-        historical_data: pd.DataFrame,
-        context: Optional[Dict[str, Any]]
+            self,
+            current_bar: pd.Series,
+            historical_data: pd.DataFrame,
+            context: Optional[Dict[str, Any]]
     ) -> float:
         """
         Calculate Point of Interest (POI) validation score.
@@ -224,9 +225,9 @@ class FeatureExtractor:
         return touch_score + respect_score + confluence_score
 
     def _calculate_tick_density(
-        self,
-        current_bar: pd.Series,
-        context: Optional[Dict[str, Any]]
+            self,
+            current_bar: pd.Series,
+            context: Optional[Dict[str, Any]]
     ) -> float:
         """
         Calculate tick density score as a proxy for liquidity.
@@ -243,9 +244,9 @@ class FeatureExtractor:
         return 0.5  # Default neutral score
 
     def _calculate_spread_stability(
-        self,
-        current_bar: pd.Series,
-        historical_data: pd.DataFrame
+            self,
+            current_bar: pd.Series,
+            historical_data: pd.DataFrame
     ) -> float:
         """
         Calculate spread stability score (inverse of instability).

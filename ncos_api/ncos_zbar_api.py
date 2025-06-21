@@ -1,4 +1,3 @@
-
 import json
 import os
 import uuid
@@ -12,6 +11,7 @@ from pydantic import BaseModel
 
 app = FastAPI(title="NCOS ZBAR Strategy API", version="5.0")
 
+
 # --- Pydantic Models ---
 class DataBlock(BaseModel):
     id: str
@@ -19,17 +19,20 @@ class DataBlock(BaseModel):
     columns: List[str]
     data: List[List[Any]]
 
+
 class ExecutionContext(BaseModel):
     initial_htf_bias: Optional[str] = None
     trace_id: Optional[str] = None
     session_id: Optional[str] = None
     agent_profile: Optional[str] = "default"
 
+
 class ZBARRequest(BaseModel):
     strategy: str
     asset: str
     blocks: List[DataBlock]
     context: Optional[ExecutionContext] = None
+
 
 class EntrySignal(BaseModel):
     timestamp: str
@@ -40,12 +43,14 @@ class EntrySignal(BaseModel):
     rr: float
     killzone_match_name: Optional[str] = None
 
+
 class PredictiveSnapshot(BaseModel):
     maturity_score: float
     grade: str
     conflict_signal: bool
     poi_quality: Optional[str] = None
     structure_alignment: Optional[str] = None
+
 
 class ZBARResponse(BaseModel):
     status: str  # PASS or FAIL
@@ -54,6 +59,7 @@ class ZBARResponse(BaseModel):
     predictive_snapshot: Optional[PredictiveSnapshot] = None
     zbar_trace_id: str
     metadata: Optional[Dict[str, Any]] = None
+
 
 # --- Journal Entry Model ---
 class JournalEntry(BaseModel):
@@ -70,6 +76,7 @@ class JournalEntry(BaseModel):
     status: str
     reason: Optional[str] = None
     metadata: Optional[Dict[str, Any]] = None
+
 
 # --- Core ZBAR Logic (Placeholder) ---
 class ZBARAgent:
@@ -112,6 +119,7 @@ class ZBARAgent:
                 "reason": "No valid POI detected in premium zone"
             }
 
+
 # --- Journal Manager ---
 class JournalManager:
     def __init__(self, journal_path: Optional[str] = None):
@@ -151,10 +159,12 @@ class JournalManager:
                     entries.append(entry)
         return entries
 
+
 # Initialize components
 zbar_agent = ZBARAgent()
 # Journal path can be overridden via the JOURNAL_PATH environment variable
 journal_manager = JournalManager()
+
 
 # --- API Endpoints ---
 
@@ -219,13 +229,14 @@ async def append_journal(entry: JournalEntry):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to append entry: {str(e)}")
 
+
 @app.get("/journal/query")
 async def query_journal(
-    symbol: Optional[str] = None,
-    strategy: Optional[str] = None,
-    session_id: Optional[str] = None,
-    trace_id: Optional[str] = None,
-    limit: int = 100
+        symbol: Optional[str] = None,
+        strategy: Optional[str] = None,
+        session_id: Optional[str] = None,
+        trace_id: Optional[str] = None,
+        limit: int = 100
 ):
     """Query the trade journal with filters"""
 
@@ -250,6 +261,7 @@ async def query_journal(
         "entries": entries
     }
 
+
 @app.get("/journal/stats")
 async def journal_stats():
     """Get journal statistics"""
@@ -265,7 +277,8 @@ async def journal_stats():
     failed_trades = len([e for e in all_entries if e.get("status") == "FAIL"])
 
     # Average maturity score for passed trades
-    maturity_scores = [e.get("maturity_score", 0) for e in all_entries if e.get("status") == "PASS" and e.get("maturity_score")]
+    maturity_scores = [e.get("maturity_score", 0) for e in all_entries if
+                       e.get("status") == "PASS" and e.get("maturity_score")]
     avg_maturity = sum(maturity_scores) / len(maturity_scores) if maturity_scores else 0
 
     # Symbol distribution
@@ -283,6 +296,7 @@ async def journal_stats():
         "symbol_distribution": symbol_counts
     }
 
+
 @app.get("/")
 async def root():
     return {
@@ -296,7 +310,9 @@ async def root():
         ]
     }
 
+
 if __name__ == "__main__":
     import uvicorn
+
     print("Starting NCOS ZBAR Strategy API on http://localhost:8001")
     uvicorn.run(app, host="0.0.0.0", port=8001)

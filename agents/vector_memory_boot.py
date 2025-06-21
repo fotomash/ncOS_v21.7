@@ -1,4 +1,3 @@
-
 """
 VectorMemoryBoot Agent Implementation
 Handles vector database initialization and persistence with single-session priority
@@ -27,6 +26,7 @@ class VectorEntry:
             'metadata': self.metadata,
             'timestamp': self.timestamp.isoformat()
         }
+
 
 class VectorMemoryBoot:
     """

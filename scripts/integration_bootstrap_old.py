@@ -1,4 +1,3 @@
-
 """
 NCOS Integration Bootstrap
 Master script to load and initialize all 13 agents
@@ -21,6 +20,7 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger('NCOS_Bootstrap')
+
 
 class NCOSIntegrationBootstrap:
     """
@@ -432,7 +432,8 @@ class NCOSIntegrationBootstrap:
             success = True
         else:
             self.system_state['status'] = 'partial'
-            logger.warning(f"Bootstrap partial: {self.system_state['agents_initialized']}/{total_agents} agents initialized")
+            logger.warning(
+                f"Bootstrap partial: {self.system_state['agents_initialized']}/{total_agents} agents initialized")
             success = self.system_state['agents_initialized'] > 0
 
         # Save bootstrap report
@@ -508,9 +509,9 @@ def main():
         success = bootstrap.bootstrap()
 
         if success:
-            print("\n" + "="*50)
+            print("\n" + "=" * 50)
             print("NCOS SYSTEM SUCCESSFULLY BOOTSTRAPPED")
-            print("="*50)
+            print("=" * 50)
 
             # Display system status
             status = bootstrap.get_system_status()

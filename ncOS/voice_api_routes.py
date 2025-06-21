@@ -1,4 +1,3 @@
-
 """Voice Command API Extensions for ZBAR System.
 
 Endpoints are mounted under the ``/voice`` prefix.  The primary route for
@@ -15,9 +14,11 @@ from .menu_voice_integration import VoiceEnabledMenuSystem
 
 router = APIRouter(prefix="/voice", tags=["voice"])
 
+
 class VoiceCommand(BaseModel):
     text: str
     source: Optional[str] = "text"  # text, audio_file, microphone
+
 
 class VoiceResponse(BaseModel):
     status: str
@@ -27,8 +28,10 @@ class VoiceResponse(BaseModel):
     suggestions: Optional[List[Dict]] = None
     message: Optional[str] = None
 
+
 # Initialize voice-enabled menu system
 menu_system = VoiceEnabledMenuSystem(orchestrator=None, config={})
+
 
 @router.post("/command", response_model=VoiceResponse)
 async def process_voice_command(command: VoiceCommand):
@@ -47,6 +50,7 @@ async def process_voice_command(command: VoiceCommand):
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
 
 @router.post("/transcribe")
 async def transcribe_audio(audio_file: bytes):
@@ -78,10 +82,12 @@ async def transcribe_audio(audio_file: bytes):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+
 @router.get("/examples")
 async def get_voice_examples():
     """Get voice command examples"""
     return menu_system.get_voice_menu()
+
 
 @router.get("/history")
 async def get_voice_history(limit: int = 10):

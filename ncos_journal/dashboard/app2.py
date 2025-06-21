@@ -1,4 +1,3 @@
-
 from datetime import datetime
 from pathlib import Path
 from typing import List, Optional, Dict, Any
@@ -12,6 +11,7 @@ router = APIRouter(prefix="/zbar", tags=["ZBAR"])
 DATA_DIR = Path(__file__).parent.parent / "data"
 ZBAR_DIR = DATA_DIR / "zbar"
 ZBAR_DIR.mkdir(parents=True, exist_ok=True)
+
 
 class ZBAREntry(BaseModel):
     symbol: str
@@ -33,6 +33,7 @@ class ZBAREntry(BaseModel):
     notes: Optional[str] = None
     logged_at: datetime = None
 
+
 class ZBARAnalysis(BaseModel):
     symbol: str
     timeframe: str
@@ -41,67 +42,71 @@ class ZBARAnalysis(BaseModel):
     technical_indicators: Dict[str, Any]
     analysis_notes: str
 
+
 @router.post("/log")
 def log_zbar_entry(entry: ZBAREntry):
     """Log a ZBAR journal entry"""
     if entry.logged_at is None:
         entry.logged_at = datetime.now()
-    
+
     entry_dict = entry.dict()
     entry_dict['logged_at'] = entry_dict['logged_at'].isoformat()
-    
+
     # Save to ZBAR journal
     journal_file = ZBAR_DIR / f"zbar_journal_{datetime.now().strftime('%Y%m')}.jsonl"
     with open(journal_file, 'a') as f:
         f.write(json.dumps(entry_dict) + '\\n')
-    
+
     return {"message": "ZBAR entry logged", "entry": entry_dict}
+
 
 @router.get("/entries")
 def get_zbar_entries(
-    session_id: Optional[str] = None,
-    symbol: Optional[str] = None,
-    limit: int = 100
+        session_id: Optional[str] = None,
+        symbol: Optional[str] = None,
+        limit: int = 100
 ):
     """Get ZBAR entries with optional filters"""
     entries = []
-    
+
     for file in sorted(ZBAR_DIR.glob("zbar_journal_*.jsonl"), reverse=True):
         with open(file, 'r') as f:
             for line in f:
                 if line.strip():
                     entry = json.loads(line)
-                    
+
                     # Apply filters
                     if session_id and entry.get('session_id') != session_id:
                         continue
                     if symbol and entry.get('symbol') != symbol:
                         continue
-                    
+
                     entries.append(entry)
                     if len(entries) >= limit:
                         return entries
-    
+
     return entries
+
 
 @router.post("/analyze")
 def analyze_zbar_patterns(analysis: ZBARAnalysis):
     """Log ZBAR pattern analysis"""
     analysis_dict = analysis.dict()
     analysis_dict['timestamp'] = datetime.now().isoformat()
-    
+
     # Save analysis
     analysis_file = ZBAR_DIR / f"analysis_{analysis.symbol}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
     with open(analysis_file, 'w') as f:
         json.dump(analysis_dict, f, indent=2)
-    
+
     return {"message": "Analysis saved", "analysis": analysis_dict}
+
 
 @router.get("/sessions")
 def get_sessions():
     """Get all unique session IDs"""
     sessions = set()
-    
+
     for file in ZBAR_DIR.glob("zbar_journal_*.jsonl"):
         with open(file, 'r') as f:
             for line in f:
@@ -109,33 +114,34 @@ def get_sessions():
                     entry = json.loads(line)
                     if 'session_id' in entry:
                         sessions.add(entry['session_id'])
-    
+
     return sorted(list(sessions))
+
 
 @router.get("/session/{session_id}")
 def get_session_details(session_id: str):
     """Get detailed information about a specific session"""
     entries = get_zbar_entries(session_id=session_id, limit=1000)
-    
+
     if not entries:
         raise HTTPException(status_code=404, detail="Session not found")
-    
+
     # Calculate session statistics
     total_trades = len(entries)
     profitable_trades = sum(1 for e in entries if e.get('pnl', 0) > 0)
     total_pnl = sum(e.get('pnl', 0) for e in entries)
     symbols = list(set(e['symbol'] for e in entries if 'symbol' in e))
-    
+
     # Pattern analysis
     all_patterns = []
     for e in entries:
         if 'patterns' in e and isinstance(e['patterns'], list):
             all_patterns.extend(e['patterns'])
-    
+
     pattern_counts = {}
     for p in all_patterns:
         pattern_counts[p] = pattern_counts.get(p, 0) + 1
-    
+
     return {
         "session_id": session_id,
         "total_trades": total_trades,
@@ -153,7 +159,7 @@ with open('ncos_journal/api/zbar_routes.py', 'w') as f:
     f.write(zbar_api_content)
 
 # Update the main API to include ZBAR routes
-updated_api_main = 
+updated_api_main =
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -189,6 +195,7 @@ ANALYSIS_DIR = DATA_DIR / "analysis"
 JOURNALS_DIR.mkdir(parents=True, exist_ok=True)
 ANALYSIS_DIR.mkdir(parents=True, exist_ok=True)
 
+
 # Pydantic models
 class TradeEntry(BaseModel):
     symbol: str
@@ -207,6 +214,7 @@ class TradeEntry(BaseModel):
     maturity_score: Optional[float] = None
     confluence_score: Optional[float] = None
 
+
 class JournalEntry(BaseModel):
     title: str
     content: str
@@ -214,11 +222,13 @@ class JournalEntry(BaseModel):
     tags: Optional[List[str]] = None
     timestamp: datetime = None
 
+
 class AnalysisEntry(BaseModel):
     symbol: str
     analysis_type: str
     content: dict
     timestamp: datetime = None
+
 
 @app.get("/")
 def read_root():
@@ -233,31 +243,33 @@ def read_root():
         }
     }
 
+
 @app.post("/trades")
 def create_trade(trade: TradeEntry):
     """Log a new trade"""
     trade_dict = trade.dict()
     trade_dict['timestamp'] = trade_dict['timestamp'].isoformat()
-    
+
     # Save to JSONL file
     trades_file = JOURNALS_DIR / f"trades_{datetime.now().strftime('%Y%m')}.jsonl"
     with open(trades_file, 'a') as f:
         f.write(json.dumps(trade_dict) + '\\n')
-    
+
     # Also save to ZBAR journal if it has ZBAR fields
     if trade.session_id or trade.trace_id:
         zbar_file = JOURNALS_DIR / "trade_journal.jsonl"
         trade_dict['logged_at'] = trade_dict['timestamp']
         with open(zbar_file, 'a') as f:
             f.write(json.dumps(trade_dict) + '\\n')
-    
+
     return {"message": "Trade logged successfully", "trade": trade_dict}
+
 
 @app.get("/trades")
 def get_trades(limit: int = 100):
     """Get recent trades"""
     trades = []
-    
+
     # Read from all trade files
     for file in sorted(JOURNALS_DIR.glob("trades_*.jsonl"), reverse=True):
         with open(file, 'r') as f:
@@ -266,30 +278,32 @@ def get_trades(limit: int = 100):
                     trades.append(json.loads(line))
                     if len(trades) >= limit:
                         return trades
-    
+
     return trades
+
 
 @app.post("/journal")
 def create_journal_entry(entry: JournalEntry):
     """Create a new journal entry"""
     if entry.timestamp is None:
         entry.timestamp = datetime.now()
-    
+
     entry_dict = entry.dict()
     entry_dict['timestamp'] = entry_dict['timestamp'].isoformat()
-    
+
     # Save to JSONL file
     journal_file = JOURNALS_DIR / f"journal_{datetime.now().strftime('%Y%m')}.jsonl"
     with open(journal_file, 'a') as f:
         f.write(json.dumps(entry_dict) + '\\n')
-    
+
     return {"message": "Journal entry created", "entry": entry_dict}
+
 
 @app.get("/journal")
 def get_journal_entries(limit: int = 50, category: Optional[str] = None):
     """Get journal entries"""
     entries = []
-    
+
     for file in sorted(JOURNALS_DIR.glob("journal_*.jsonl"), reverse=True):
         with open(file, 'r') as f:
             for line in f:
@@ -299,37 +313,39 @@ def get_journal_entries(limit: int = 50, category: Optional[str] = None):
                         entries.append(entry)
                         if len(entries) >= limit:
                             return entries
-    
+
     return entries
+
 
 @app.post("/analysis")
 def create_analysis(analysis: AnalysisEntry):
     """Log analysis results"""
     if analysis.timestamp is None:
         analysis.timestamp = datetime.now()
-    
+
     analysis_dict = analysis.dict()
     analysis_dict['timestamp'] = analysis_dict['timestamp'].isoformat()
-    
+
     # Save to JSONL file
     analysis_file = ANALYSIS_DIR / f"analysis_{analysis.symbol}_{datetime.now().strftime('%Y%m')}.jsonl"
     with open(analysis_file, 'a') as f:
         f.write(json.dumps(analysis_dict) + '\\n')
-    
+
     return {"message": "Analysis logged", "analysis": analysis_dict}
+
 
 @app.get("/stats")
 def get_stats():
     """Get trading statistics"""
     trades = get_trades(limit=1000)
-    
+
     if not trades:
         return {"message": "No trades found"}
-    
+
     total_trades = len(trades)
     profitable_trades = sum(1 for t in trades if t.get('pnl', 0) > 0)
     total_pnl = sum(t.get('pnl', 0) for t in trades)
-    
+
     # Calculate win rate by session if available
     session_stats = {}
     for trade in trades:
@@ -345,7 +361,7 @@ def get_stats():
             if trade.get('pnl', 0) > 0:
                 session_stats[session_id]['profitable'] += 1
             session_stats[session_id]['pnl'] += trade.get('pnl', 0)
-    
+
     return {
         "total_trades": total_trades,
         "profitable_trades": profitable_trades,
@@ -355,18 +371,20 @@ def get_stats():
         "session_stats": session_stats
     }
 
+
 @app.get("/health")
 def health_check():
     """Health check endpoint"""
     return {"status": "healthy", "timestamp": datetime.now().isoformat()}
 
+
 # Strategy execution endpoint for ZBAR re-runs
 @app.post("/strategy/zbar/execute_multi")
 def execute_zbar_strategy(
-    strategy: str,
-    asset: str,
-    blocks: List[str],
-    context: dict
+        strategy: str,
+        asset: str,
+        blocks: List[str],
+        context: dict
 ):
     """Execute ZBAR strategy (placeholder for actual implementation)"""
     # This is a placeholder - in production, this would connect to your actual strategy engine

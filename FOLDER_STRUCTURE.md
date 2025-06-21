@@ -53,20 +53,24 @@ ncos_journal/
 ### 🆕 New Files to Create/Download:
 
 #### In `core/` folder:
+
 1. **voice_tag_parser.py** - The NLP parser that converts voice to structured data
 2. **zbar_voice_integration.py** - Extends your ZBAR agent with voice
 3. **menu_voice_integration.py** - Adds voice menu to your system
 4. **ncos_voice_unified.py** - Unified interface for all voice commands
 
 #### In `api/` folder:
+
 1. **main.py** - Create this using the code from documentation
 2. **voice_api_routes.py** - Voice API endpoints
 3. **journal_api.py** - Journal API endpoints (create from docs)
 
 #### In `dashboard/` folder:
+
 1. **zbar_journal_dashboard.py** - The Streamlit dashboard with session recap
 
 #### In `config/` folder:
+
 1. **system_config.yaml** - Main configuration (generated)
 2. **zbar_config.yaml** - Copy from your existing or use sample
 
@@ -116,6 +120,7 @@ pip install -r requirements.txt
 ## Integration Points
 
 ### 1. **Minimal Integration** (Use voice standalone):
+
 ```
 ncos_journal/
 ├── core/           # Just the voice files
@@ -125,6 +130,7 @@ ncos_journal/
 ```
 
 ### 2. **Full Integration** (Merge with existing NCOS):
+
 ```
 your-ncos-project/
 ├── core/
@@ -144,30 +150,35 @@ your-ncos-project/
 After setting up, verify:
 
 ✅ **Core files present:**
+
 ```bash
 ls core/
 # Should show: voice_tag_parser.py, zbar_voice_integration.py, etc.
 ```
 
 ✅ **API files ready:**
+
 ```bash
 ls api/
 # Should show: main.py, voice_api_routes.py, journal_api.py
 ```
 
 ✅ **Config files exist:**
+
 ```bash
 ls config/
 # Should show: system_config.yaml, zbar_config.yaml
 ```
 
 ✅ **Logs directory created:**
+
 ```bash
 ls -la logs/
 # Should show: backup/ directory
 ```
 
 ✅ **Dependencies installed:**
+
 ```bash
 pip list | grep -E "fastapi|streamlit|pandas"
 # Should show all required packages

@@ -29,44 +29,44 @@ class AgentRationalizer:
         self.consolidation_strategy = {
             'MarketAnalysis': {
                 'consolidated_name': 'MarketAnalysisAgent',
-                'merge_candidates': ['market_data', 'technical_analyst', 'market_condition', 
-                                   'price_action', 'volume_analysis', 'market_structure'],
+                'merge_candidates': ['market_data', 'technical_analyst', 'market_condition',
+                                     'price_action', 'volume_analysis', 'market_structure'],
                 'core_functions': ['analyze_market', 'get_indicators', 'detect_patterns']
             },
             'RiskManagement': {
                 'consolidated_name': 'RiskManagementAgent',
                 'merge_candidates': ['risk_guardian', 'risk_monitor', 'exposure_manager',
-                                   'position_sizer', 'stop_loss', 'risk_calculator'],
+                                     'position_sizer', 'stop_loss', 'risk_calculator'],
                 'core_functions': ['calculate_risk', 'manage_exposure', 'set_stops']
             },
             'TradeExecution': {
                 'consolidated_name': 'TradeExecutionAgent',
                 'merge_candidates': ['trade_executor', 'order_manager', 'smc_executor',
-                                   'tmc_executor', 'maz2_executor', 'execution_router'],
+                                     'tmc_executor', 'maz2_executor', 'execution_router'],
                 'core_functions': ['execute_trade', 'manage_orders', 'route_execution']
             },
             'StrategyAnalysis': {
                 'consolidated_name': 'StrategyAnalysisAgent',
                 'merge_candidates': ['strategy_evaluator', 'smc_master', 'wyckoff_phase',
-                                   'orderflow_anomaly', 'divergence_strategy', 'liquidity_analysis'],
+                                     'orderflow_anomaly', 'divergence_strategy', 'liquidity_analysis'],
                 'core_functions': ['evaluate_strategy', 'identify_setup', 'score_opportunity']
             },
             'SystemMonitoring': {
                 'consolidated_name': 'SystemMonitoringAgent',
                 'merge_candidates': ['performance_monitor', 'metrics_aggregator', 'health_monitor',
-                                   'system_status', 'alert_manager', 'drift_detection'],
+                                     'system_status', 'alert_manager', 'drift_detection'],
                 'core_functions': ['monitor_performance', 'aggregate_metrics', 'send_alerts']
             },
             'DataManagement': {
                 'consolidated_name': 'DataManagementAgent',
                 'merge_candidates': ['data_enricher', 'data_validator', 'data_processor',
-                                   'signal_processor', 'data_pipeline', 'data_captain'],
+                                     'signal_processor', 'data_pipeline', 'data_captain'],
                 'core_functions': ['process_data', 'validate_data', 'enrich_data']
             },
             'JournalSession': {
                 'consolidated_name': 'JournalSessionAgent',
                 'merge_candidates': ['journal_manager', 'session_manager', 'trade_logger',
-                                   'session_state', 'trade_history', 'performance_tracker'],
+                                     'session_state', 'trade_history', 'performance_tracker'],
                 'core_functions': ['log_trade', 'manage_session', 'track_performance']
             }
         }
@@ -613,6 +613,7 @@ __all__ = [
         print("4. Remove old agent files after validation")
 
         return True
+
 
 if __name__ == "__main__":
     rationalizer = AgentRationalizer()

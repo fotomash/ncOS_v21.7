@@ -29,6 +29,7 @@ class FactorWeights(BaseModel):
     class Config:
         extra = "allow"
 
+
 class GradeThresholds(BaseModel):
     """Defines the score thresholds for A, B, C grades."""
     A: float = Field(default=0.85, ge=0.0, le=1.0)
@@ -47,6 +48,7 @@ class GradeThresholds(BaseModel):
             raise ValueError("Grade C threshold must be less than Grade B")
         return v
 
+
 class ConflictDetectionConfig(BaseModel):
     """Configuration for conflict detection logic."""
     enabled: bool = Field(default=True)
@@ -60,6 +62,7 @@ class ConflictDetectionConfig(BaseModel):
             raise ValueError("Review threshold must be >= alert threshold")
         return v
 
+
 class PredictiveScorerConfig(BaseModel):
     """Configuration for the PredictiveScorer module."""
     enabled: bool = Field(default=True)
@@ -68,12 +71,14 @@ class PredictiveScorerConfig(BaseModel):
     min_score_to_emit_potential_entry: float = Field(default=0.65, ge=0.0, le=1.0)
     conflict_detection_settings: ConflictDetectionConfig = Field(default_factory=ConflictDetectionConfig)
 
+
 class SpreadTrackerConfig(BaseModel):
     """Configuration for spread tracking and stability analysis."""
     enabled: bool = Field(default=True)
     window_size: int = Field(default=25, ge=5)
     high_vol_baseline: float = Field(default=0.0008, gt=0)
     stability_threshold: float = Field(default=0.3, ge=0.0, le=1.0)
+
 
 class DataEnricherConfig(BaseModel):
     """Configuration for the data enrichment pipeline."""
@@ -83,6 +88,7 @@ class DataEnricherConfig(BaseModel):
     calculate_htf_alignment: bool = Field(default=True)
     spread_tracker_config: SpreadTrackerConfig = Field(default_factory=SpreadTrackerConfig)
 
+
 class PredictiveJournalingConfig(BaseModel):
     """Configuration for predictive journaling features."""
     enabled: bool = Field(default=True)
@@ -91,11 +97,13 @@ class PredictiveJournalingConfig(BaseModel):
     log_format: Literal["json", "yaml", "both"] = Field(default="json")
     log_directory: str = Field(default="logs/predictive_journal")
 
+
 class FeatureExtractorConfig(BaseModel):
     """Configuration for feature extraction."""
     enabled: bool = Field(default=True)
     use_cached_features: bool = Field(default=True)
     feature_cache_ttl_seconds: int = Field(default=300)
+
 
 # Composite configuration for the entire predictive system
 class PredictiveEngineConfig(BaseModel):

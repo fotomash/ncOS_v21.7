@@ -6,6 +6,7 @@ Sets up the refactored journal system
 
 from pathlib import Path
 
+
 def setup_journal_system():
     """Setup the journal system directory structure"""
 
@@ -132,6 +133,7 @@ wait
     print("2. Install requirements: pip install -r ncos_journal/requirements.txt")
     print("3. Launch the system: ./ncos_journal/launch.sh")
     print("The journal system is now independent of voice components!")
+
 
 if __name__ == "__main__":
     setup_journal_system()

@@ -1,4 +1,3 @@
-
 ncos_auto_boot:
   mode: auto               # auto | semi | manual
   verbosity: normal        # quiet | normal | verbose
@@ -45,8 +44,8 @@ ncos_auto_boot:
       - London: "07:00-10:00"
       - NY: "13:00-16:00"
     timeframes:
-      - HTF: ["1H", "4H", "1D"]
-      - LTF: ["M1", "15T"]
+      - HTF: [ "1H", "4H", "1D" ]
+      - LTF: [ "M1", "15T" ]
 
   boot_flags:
     ignore_missing_agents: false

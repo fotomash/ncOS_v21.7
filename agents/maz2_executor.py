@@ -1,4 +1,3 @@
-
 """
 MAZ2Executor Agent Implementation
 Mean-reversion Adaptive Zone v2 execution strategy
@@ -22,6 +21,7 @@ class ExecutionOrder:
     order_type: str  # 'market', 'limit', 'stop'
     status: str  # 'pending', 'filled', 'cancelled'
     metadata: Dict[str, Any]
+
 
 class MAZ2Executor:
     """
@@ -105,7 +105,7 @@ class MAZ2Executor:
         if len(prices) < 2:
             return 0.0
 
-        returns = [(prices[i] - prices[i-1]) / prices[i-1] for i in range(1, len(prices))]
+        returns = [(prices[i] - prices[i - 1]) / prices[i - 1] for i in range(1, len(prices))]
         return statistics.stdev(returns) if len(returns) > 1 else abs(returns[0])
 
     def generate_signals(self, market_data: Dict[str, Any]) -> List[Dict[str, Any]]:
@@ -166,8 +166,8 @@ class MAZ2Executor:
 
         return signals
 
-    def calculate_position_size(self, signal: Dict[str, Any], 
-                               account_balance: float) -> float:
+    def calculate_position_size(self, signal: Dict[str, Any],
+                                account_balance: float) -> float:
         """Calculate appropriate position size based on signal and risk"""
         base_size = min(self.max_position_size, account_balance * 0.1)  # Max 10% per trade
 
@@ -183,8 +183,8 @@ class MAZ2Executor:
 
         return round(adjusted_size, 2)
 
-    def execute_order(self, signal: Dict[str, Any], 
-                     market_data: Dict[str, Any]) -> ExecutionOrder:
+    def execute_order(self, signal: Dict[str, Any],
+                      market_data: Dict[str, Any]) -> ExecutionOrder:
         """Execute order based on signal"""
         current_price = market_data.get('current_price', 0)
         symbol = market_data.get('symbol', 'UNKNOWN')
@@ -236,7 +236,7 @@ class MAZ2Executor:
         if order.side == 'buy':
             new_position = self.position_tracker['current_position'] + order.quantity
             total_cost = (self.position_tracker['current_position'] * self.position_tracker['average_price'] +
-                         order.quantity * fill_price)
+                          order.quantity * fill_price)
             self.position_tracker['average_price'] = total_cost / new_position if new_position > 0 else 0
             self.position_tracker['current_position'] = new_position
         else:  # sell
@@ -252,8 +252,8 @@ class MAZ2Executor:
         """Update position tracking with current market price"""
         if self.position_tracker['current_position'] != 0:
             self.position_tracker['unrealized_pnl'] = (
-                (current_price - self.position_tracker['average_price']) * 
-                self.position_tracker['current_position']
+                    (current_price - self.position_tracker['average_price']) *
+                    self.position_tracker['current_position']
             )
 
     def get_execution_stats(self) -> Dict[str, Any]:
@@ -264,8 +264,8 @@ class MAZ2Executor:
 
         # Calculate win rate
         if self.execution_history:
-            profitable_trades = sum(1 for order in self.execution_history 
-                                  if order.metadata.get('pnl', 0) > 0)
+            profitable_trades = sum(1 for order in self.execution_history
+                                    if order.metadata.get('pnl', 0) > 0)
             stats['win_rate'] = profitable_trades / len(self.execution_history)
 
         return stats

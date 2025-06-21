@@ -13,24 +13,28 @@ This integration adds natural language voice command processing to your NCOS ZBA
 ## Components
 
 ### 1. Voice Tag Parser (`voice_tag_parser.py`)
+
 - Natural language processing for trading commands
 - Entity extraction (symbols, timeframes, bias, sessions)
 - Confidence scoring
 - Alias mapping (e.g., "gold" → "XAUUSD")
 
 ### 2. Enhanced Menu System (`enhanced_menu_system.py`)
+
 - Extends your existing `menu_system.py`
 - Routes voice commands to actions
 - Handles confidence-based execution
 - Provides suggestions for unclear commands
 
 ### 3. Voice API Routes (`voice_api_routes.py`)
+
 - FastAPI endpoints for voice processing
 - Audio transcription support
 - Command history tracking
 - Integration with existing ZBAR API
 
 ### 4. Voice Dashboard (`zbar_journal_dashboard.py`)
+
 - Streamlit interface for voice commands
 - Real-time parsing visualization
 - Command history browser
@@ -39,18 +43,21 @@ This integration adds natural language voice command processing to your NCOS ZBA
 ## Installation
 
 1. Install additional dependencies:
+
 ```bash
 pip install spacy speechrecognition pyaudio
 python -m spacy download en_core_web_sm
 ```
 
 2. Add voice routes to your main API:
+
 ```python
 from voice_api_routes import router as voice_router
 app.include_router(voice_router)
 ```
 
 3. Update your existing menu system import:
+
 ```python
 from enhanced_menu_system import EnhancedMenuSystem
 # Use EnhancedMenuSystem instead of MenuSystem

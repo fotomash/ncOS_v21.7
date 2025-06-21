@@ -23,6 +23,7 @@ class CoreSystemAgentConfig:
     auto_recovery: Optional[bool] = True
     custom_params: Dict[str, Any] = field(default_factory=dict)
 
+
 class CoreSystemAgent:
     """
     CoreSystemAgent - Core system orchestration and lifecycle management
@@ -196,10 +197,12 @@ class CoreSystemAgent:
         self.logger.info(f"Shutting down {self.config.agent_id}")
         self.status = "shutdown"
 
+
 # Agent factory function
 def create_agent(config: Dict[str, Any] = None) -> CoreSystemAgent:
     """Factory function to create CoreSystemAgent instance"""
     return CoreSystemAgent(config)
+
 
 # Export the agent class
 __all__ = ["CoreSystemAgent", "CoreSystemAgentConfig", "create_agent"]

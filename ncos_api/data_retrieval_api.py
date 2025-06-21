@@ -6,6 +6,7 @@ from fastapi.responses import JSONResponse
 
 app = FastAPI(title="ZBAR Data Retrieval API", version="1.0")
 
+
 @app.get("/data/retrieve")
 def retrieve_data(symbol: str = Query(...), tf: str = Query(...), limit: int = Query(200)):
     base_path = f"/mnt/data/BAR_DATA/{symbol.upper()}/"

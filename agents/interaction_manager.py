@@ -3,11 +3,13 @@ import logging
 from dataclasses import dataclass
 from typing import Any, Dict
 
+
 @dataclass
 class InteractionManagerConfig:
     agent_id: str = "interaction_manager"
     enabled: bool = True
     log_level: str = "INFO"
+
 
 class InteractionManager:
     """Minimal interaction management agent."""

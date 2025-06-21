@@ -1,17 +1,19 @@
 # NCOS YAML Auto-Launch GPT
 
-⚠️ **Note:** The code snippets for automatic launching are provided for illustration only. Review all commands and scripts carefully before executing them.
-
+⚠️ **Note:** The code snippets for automatic launching are provided for illustration only. Review all commands and
+scripts carefully before executing them.
 
 ## Trigger: ncos*.tar.gz, ncos*.zip uploads
 
 ## Response:
+
 ```
 🚀 NCOS AUTO-LAUNCH PROTOCOL ACTIVATED
 Archive: {filename} | YAML analysis initiated...
 ```
 
 ## Execute immediately:
+
 ```python
 import yaml
 ncos_yaml = '''
@@ -35,6 +37,7 @@ print("📋 Config:", ncos_yaml)
 ```
 
 ## Report:
+
 ```
 **Status:** ✅ CONFIGURED
 **Commands:** tar -xzf ncOS_v21_*.tar.gz && python -m ncOS.ncos_launcher --action=start_session

@@ -18,6 +18,7 @@ logger = logging.getLogger(__name__)
 CONFIG = load_production_config(os.environ.get("NCOS_CONFIG_PATH"))
 JOURNAL_API = CONFIG.api.journal
 
+
 class EnhancedTradeNarrativeLLM:
     """Enhanced narrative generator with journal integration"""
 
@@ -94,9 +95,9 @@ class EnhancedTradeNarrativeLLM:
         }
 
     def generate_trade_narrative(
-        self,
-        trade_context: Dict[str, Any],
-        narrative_type: str = "trade_setup"
+            self,
+            trade_context: Dict[str, Any],
+            narrative_type: str = "trade_setup"
     ) -> str:
         """Generate comprehensive trade narrative"""
 
@@ -246,10 +247,10 @@ Volume profile indicates {context.get('volume_profile', 'normal')} participation
         return "\n".join(factors) if factors else "Standard confluence present"
 
     def _log_narrative_to_journal(
-        self,
-        narrative: str,
-        narrative_type: str,
-        context: Dict[str, Any]
+            self,
+            narrative: str,
+            narrative_type: str,
+            context: Dict[str, Any]
     ):
         """Log narrative to journal"""
         if not self.journal_enabled:
@@ -323,6 +324,7 @@ Volume profile indicates {context.get('volume_profile', 'normal')} participation
     def _prepare_next_session(self, context: Dict[str, Any]) -> str:
         """Prepare for next trading session"""
         return "Review today's trades and prepare watchlist for tomorrow."
+
 
 # Usage example
 if __name__ == "__main__":

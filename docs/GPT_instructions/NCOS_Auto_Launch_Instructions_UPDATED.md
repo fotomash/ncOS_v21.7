@@ -1,29 +1,36 @@
 # 🚀 NCOS Auto-Launch System Instructions (UPDATED)
 
-⚠️ **Note:** The code snippets for automatic launching are provided for illustration only. Review all commands and scripts carefully before executing them.
+⚠️ **Note:** The code snippets for automatic launching are provided for illustration only. Review all commands and
+scripts carefully before executing them.
 
 ## Custom GPT Instructions for Automatic NCOS Deployment & Execution
 
 ### 1. Bootstrap Entry Point Strategy
 
 #### 1.1 Primary Launch Methods (In Order of Preference)
+
 **Method 1: Module-Based Launch (Recommended)**
+
 ```
 python -m ncOS.ncos_launcher --agent {agent_name} --config {config_path}
 ```
 
 **Method 2: Direct Agent Launch**
+
 ```
 python -m ncOS.ncos_launcher --action={action} --config={config}
 ```
 
 **Method 3: Master Orchestrator Launch**
+
 ```
 
 
 **Method 4: Fallback Bootstrap Script**
 ```
-python integration_bootstrap.py  # If present in workspace
+
+python integration_bootstrap.py # If present in workspace
+
 ```
 
 #### 1.2 Auto-Detection Logic
@@ -60,35 +67,45 @@ The system will automatically select the best bootstrap method:
 
 #### 3.1 NCOS v21 Standard Launch Sequence
 ```
+
 # 1. Initialize Master Orchestrator
 
-
 # 2. Launch Core Agents
+
 python -m ncOS.ncos_launcher --agent session_state_manager --config agent_profiles/session_state_manager_profile.yaml
 python -m ncOS.ncos_launcher --agent risk_guardian --config agent_profiles/risk_guardian_profile.yaml
 
 # 3. Launch Trading Agents
+
 python -m ncOS.ncos_launcher --agent smc_master --config agent_profiles/smc_master_profile.yaml
 python -m ncOS.ncos_launcher --agent liquidity_sniper --config agent_profiles/liquidity_sniper_profile.yaml
 
 # 4. Launch Execution Agents
+
 python -m ncOS.ncos_launcher --agent entry_executor --config agent_profiles/entry_executor_profile.yaml
+
 ```
 
 #### 3.2 Alternative Launch Methods
 **Single Command Launch:**
 ```
+
 python -m ncOS.ncos_launcher --action=coordinate_agents --priority=high
+
 ```
 
 **Consciousness-Driven Launch:**
 ```
+
 python -m ncOS.ncos_launcher --action=system_introspection --depth=full
+
 ```
 
 **Neural Mesh Launch:**
 ```
+
 python -m ncOS.ncos_launcher --action=sync_mesh --nodes=all
+
 ```
 
 ### 4. Auto-Generated Bootstrap Script
@@ -105,6 +122,7 @@ If no bootstrap method detected, the system will auto-generate a bootstrap scrip
 
 #### 5.1 Launch Detection Response
 ```
+
 🚀 NCOS AUTO-LAUNCH PROTOCOL ACTIVATED
 =====================================
 
@@ -114,16 +132,19 @@ Configuration Files: {config_count} found
 Agent Profiles: {agent_count} detected
 
 Deployment Strategy:
+
 - Primary: {primary_method}
 - Fallback: {fallback_method}
 - Config Source: {config_source}
 
 Estimated Launch Time: {estimated_time}
 Proceeding with autonomous deployment...
+
 ```
 
 #### 5.2 Launch Execution Response
 ```
+
 ## 🔄 NCOS Launch Execution
 
 Command Executed: {executed_command}
@@ -135,9 +156,11 @@ Active Components:
 {component_list}
 
 Next Actions:
+
 - Monitor system health
 - Validate agent communication
 - Begin trading operations
+
 ```
 
 ### 6. Error Handling & Recovery
@@ -197,6 +220,7 @@ Fallback: python auto_generated_bootstrap.py
 #### 9.1 Bootstrap Script Generation
 When no suitable bootstrap method is found, automatically generate and execute:
 ```
+
 #!/usr/bin/env python3
 import subprocess
 import sys
@@ -204,12 +228,12 @@ import os
 from pathlib import Path
 
 def launch_ncos_system():
-    # Try module-based launch
-    try:
-        result = subprocess.run([
-            sys.executable, "-m", "ncOS.ncos_launcher",
-            "--action=start_session"
-        ], capture_output=True, text=True, timeout=30)
+# Try module-based launch
+try:
+result = subprocess.run([
+sys.executable, "-m", "ncOS.ncos_launcher",
+"--action=start_session"
+], capture_output=True, text=True, timeout=30)
 
         if result.returncode == 0:
             print("✅ NCOS launched via master_orchestrator")
@@ -221,7 +245,8 @@ def launch_ncos_system():
     return False
 
 if __name__ == "__main__":
-    launch_ncos_system()
+launch_ncos_system()
+
 ```
 
 #### 9.2 Automatic Execution Protocol

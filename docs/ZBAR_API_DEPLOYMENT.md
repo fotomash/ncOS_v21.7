@@ -3,16 +3,19 @@
 ## Quick Start
 
 1. Install dependencies:
+
 ```bash
 pip install -r requirements_zbar.txt
 ```
 
 2. Run the API server:
+
 ```bash
 python ncos_zbar_api.py
 ```
 
 3. Test with the client:
+
 ```bash
 python zbar_client_demo.py
 ```
@@ -20,14 +23,17 @@ python zbar_client_demo.py
 ## API Endpoints
 
 ### 1. Execute ZBAR Strategy
+
 **POST** `/strategy/zbar/execute_multi`
 
 Executes ZBAR analysis on multi-timeframe data blocks.
 
 ### 2. Query Journal
+
 **GET** `/journal/query`
 
 Query parameters:
+
 - `symbol`: Filter by trading symbol
 - `strategy`: Filter by strategy name
 - `session_id`: Filter by session
@@ -35,9 +41,11 @@ Query parameters:
 - `limit`: Max results (default: 100)
 
 ### 3. Journal Statistics
+
 **GET** `/journal/stats`
 
 Returns:
+
 - Total trades
 - Pass/fail rates
 - Average maturity scores

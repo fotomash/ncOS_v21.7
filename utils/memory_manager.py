@@ -56,4 +56,3 @@ class EnhancedMemoryManager:
     def _cleanup_expired(self) -> None:
         for ns in list(self._namespaces.keys()):
             self._cleanup_namespace(ns)
-

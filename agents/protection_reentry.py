@@ -11,6 +11,7 @@ class ProtectionReentryAgentConfig:
     log_level: str = "INFO"
     custom_params: Dict[str, Any] = field(default_factory=dict)
 
+
 class ProtectionReentryAgent:
     """Basic Protection Reentry strategy agent"""
 

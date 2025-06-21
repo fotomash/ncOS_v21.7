@@ -24,6 +24,7 @@ class RiskGuardianConfig:
     stop_loss_pct: Optional[float] = 0.03
     custom_params: Dict[str, Any] = field(default_factory=dict)
 
+
 class RiskGuardian:
     """
     RiskGuardian - Risk management and position monitoring
@@ -248,10 +249,12 @@ class RiskGuardian:
         self.logger.info(f"Shutting down {self.config.agent_id}")
         self.status = "shutdown"
 
+
 # Agent factory function
 def create_agent(config: Dict[str, Any] = None) -> RiskGuardian:
     """Factory function to create RiskGuardian instance"""
     return RiskGuardian(config)
+
 
 # Export the agent class
 __all__ = ["RiskGuardian", "RiskGuardianConfig", "create_agent"]

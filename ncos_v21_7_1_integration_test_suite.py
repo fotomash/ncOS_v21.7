@@ -1,4 +1,3 @@
-
 """
 NCOS v21.7.1 Enhanced Complete Integration Test Suite
 Comprehensive testing for all integrated components
@@ -17,6 +16,7 @@ import pandas as pd
 # standalone test suite can import project modules when executed from
 # any location.
 sys.path.append(str(Path(__file__).resolve().parent))
+
 
 class NCOSIntegrationTestSuite:
     """Comprehensive integration testing suite"""
@@ -180,7 +180,8 @@ class NCOSIntegrationTestSuite:
             self.test_results["configuration"] = {"status": "passed", "details": "Configuration validated"}
 
         except FileNotFoundError:
-            self.test_results["configuration"] = {"status": "passed", "details": "Config file not found (acceptable in test)"}
+            self.test_results["configuration"] = {"status": "passed",
+                                                  "details": "Config file not found (acceptable in test)"}
             self.passed_tests += 1
 
     async def _test_api_compatibility(self):
@@ -241,7 +242,7 @@ class NCOSIntegrationTestSuite:
 
         self.passed_tests += 1
         self.test_results["performance"] = {
-            "status": "passed", 
+            "status": "passed",
             "details": f"Performance metrics: init={init_time:.2f}s, menu={menu_time:.3f}s, detection={detection_time:.3f}s"
         }
 
@@ -308,10 +309,12 @@ class NCOSIntegrationTestSuite:
         print(f"   Success Rate: {success_rate:.1f}%")
         print(f"   Status: {report['summary']['status']}")
 
+
 # Run the test suite
 async def run_integration_tests():
     test_suite = NCOSIntegrationTestSuite()
     return await test_suite.run_complete_test_suite()
+
 
 # Execute tests
 if __name__ == "__main__":

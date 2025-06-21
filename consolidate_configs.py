@@ -222,5 +222,10 @@ class ConfigConsolidator:
 
     def create_config_loader(self):
         """Create a Python configuration loader"""
-        loader_code = 
-Unified Configuration Loader for ncOS
+        loader_code =
+
+
+Unified
+Configuration
+Loader
+for ncOS

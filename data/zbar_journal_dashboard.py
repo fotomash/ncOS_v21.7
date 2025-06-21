@@ -1,4 +1,3 @@
-
 import requests
 import streamlit as st
 
@@ -14,7 +13,7 @@ col1, col2 = st.columns([3, 1])
 
 with col1:
     voice_input = st.text_input(
-        "Voice Command:", 
+        "Voice Command:",
         placeholder="e.g., 'Mark gold bullish on H4 with high maturity'"
     )
 

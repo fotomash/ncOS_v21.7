@@ -291,43 +291,48 @@ if agent_config and agent_config.get('enabled'):
 
         for agent_name in self.consolidated_config['agents']:
             guide += f"- agents.{agent_name}
+
+
 "
 
-        guide += "
+guide += "
 ## Environment Variables
 "
-        guide += "- NCOS_ENV: Set to 'development', 'staging', or 'production'
+guide += "- NCOS_ENV: Set to 'development', 'staging', or 'production'
 "
 
-        guide_path = self.project_root / 'CONFIG_MIGRATION_GUIDE.md'
-        with open(guide_path, 'w') as f:
-            f.write(guide)
+guide_path = self.project_root / 'CONFIG_MIGRATION_GUIDE.md'
+with open(guide_path, 'w') as f:
+    f.write(guide)
 
-        print(f"Migration guide saved to: {guide_path}")
+print(f"Migration guide saved to: {guide_path}")
 
-    def run(self):
-        print("Starting configuration consolidation...")
 
-        config_files = self.scan_config_files()
-        print(f"Found {len(config_files)} configuration files")
+def run(self):
+    print("Starting configuration consolidation...")
 
-        if not config_files:
-            print("No configuration files found!")
-            return None
+    config_files = self.scan_config_files()
+    print(f"Found {len(config_files)} configuration files")
 
-        self.backup_configs()
-        self.analyze_configs()
-        self.consolidate()
-        self.save_consolidated_config()
-        self.generate_config_loader()
-        self.generate_migration_guide()
+    if not config_files:
+        print("No configuration files found!")
+        return None
 
-        print("
-Consolidation complete!")
-        print(f"Total agents configured: {len(self.consolidated_config['agents'])}")
-        print(f"Total services configured: {len(self.consolidated_config['services'])}")
+    self.backup_configs()
+    self.analyze_configs()
+    self.consolidate()
+    self.save_consolidated_config()
+    self.generate_config_loader()
+    self.generate_migration_guide()
 
-        return self.consolidated_config
+    print("
+    Consolidation
+    complete!")
+    print(f"Total agents configured: {len(self.consolidated_config['agents'])}")
+    print(f"Total services configured: {len(self.consolidated_config['services'])}")
+
+    return self.consolidated_config
+
 
 if __name__ == "__main__":
     import sys

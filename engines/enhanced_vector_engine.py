@@ -11,10 +11,10 @@ class ncOScoreVectorEngine:
     """Simple placeholder vector engine with persistent storage."""
 
     def __init__(
-        self,
-        dimensions: int,
-        memory_manager: Any | None = None,
-        vector_store: VectorStore | None = None,
+            self,
+            dimensions: int,
+            memory_manager: Any | None = None,
+            vector_store: VectorStore | None = None,
     ) -> None:
         self.dimensions = dimensions
         self.memory_manager = memory_manager

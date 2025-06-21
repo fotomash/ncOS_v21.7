@@ -2,11 +2,11 @@ profile_name: SignalProcessor
 description: Trading signal processing and validation
 version: 21.7.0
 execution_sequence:
-- context_analyzer
-- liquidity_engine
-- structure_validator
-- fvg_locator
-- confluence_stacker
+  - context_analyzer
+  - liquidity_engine
+  - structure_validator
+  - fvg_locator
+  - confluence_stacker
 code_map:
   context_analyzer: ncos.signals.context_analyzer.ContextAnalyzer
   liquidity_engine: ncos.signals.liquidity_engine.LiquidityEngine
@@ -16,16 +16,16 @@ code_map:
 meta_agent:
   agent_id: NCOS_Signal_001
   strategy_tags:
-  - Signal
-  - Analysis
-  - Validation
+    - Signal
+    - Analysis
+    - Validation
   llm_contextualization_enabled: true
   memory_embedding_strategy: on_signal_zbar_summary
 context_analyzer:
   enabled: true
   bias_determination_timeframes:
-  - H1
-  - H4
+    - H1
+    - H4
 liquidity_engine:
   enabled: true
   lookback_period: 100
@@ -37,9 +37,9 @@ structure_validator:
 settings:
   min_confidence: 0.7
   signal_types:
-  - entry
-  - exit
-  - adjustment
+    - entry
+    - exit
+    - adjustment
   cooldown_period: 300
   confirmation_required: true
   queue_size: 100

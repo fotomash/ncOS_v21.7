@@ -19,12 +19,14 @@ class LoggingConfig(BaseModel):
     backup_count: int = Field(default=10, ge=1, le=50)
     structured: bool = Field(default=True)
 
+
 class CircuitBreakerConfig(BaseModel):
     """Circuit breaker configuration"""
     failure_threshold: int = Field(default=5, ge=1, le=20)
     success_threshold: int = Field(default=2, ge=1, le=10)
     timeout_seconds: int = Field(default=60, ge=10, le=300)
     half_open_attempts: int = Field(default=3, ge=1, le=10)
+
 
 class MonitoringConfig(BaseModel):
     """Monitoring configuration"""
@@ -33,17 +35,20 @@ class MonitoringConfig(BaseModel):
     retention_minutes: int = Field(default=60, ge=10, le=1440)
     collection_interval: int = Field(default=10, ge=1, le=60)
 
+
 class AgentConfig(BaseModel):
     """Agent-specific configuration"""
     timeout_seconds: int = Field(default=30, ge=5, le=300)
     max_retries: int = Field(default=3, ge=0, le=10)
     memory_limit_mb: Optional[int] = Field(default=None, ge=100, le=10000)
 
+
 class APIConfig(BaseModel):
     """External service endpoints"""
     journal: str = Field(default="http://localhost:8000")
     dashboard: str = Field(default="http://localhost:8001")
     llm: str = Field(default="http://localhost:8002")
+
 
 class ProductionConfig(BaseModel):
     """Main production configuration"""
@@ -60,7 +65,7 @@ class ProductionConfig(BaseModel):
     features: Dict[str, bool] = Field(default_factory=lambda: {
         "parquet_processing": False,  # Disabled by default
         "vector_persistence": False,  # Disabled by default
-        "zbar_integration": False,    # Disabled by default
+        "zbar_integration": False,  # Disabled by default
         "async_workflows": True,
         "circuit_breakers": True,
         "structured_logging": True
@@ -72,6 +77,7 @@ class ProductionConfig(BaseModel):
         if v not in allowed:
             raise ValueError(f"Environment must be one of {allowed}")
         return v
+
 
 def load_production_config(config_path: Optional[str] = None) -> ProductionConfig:
     """Load production configuration with environment variable overrides"""
@@ -120,6 +126,7 @@ def load_production_config(config_path: Optional[str] = None) -> ProductionConfi
             current[parts[-1]] = value
 
     return ProductionConfig(**config_dict)
+
 
 # Production configuration file template
 PRODUCTION_CONFIG_YAML = """
@@ -176,6 +183,7 @@ features:
   structured_logging: true
 """
 
+
 def save_default_config(path: str = "production_config.yaml") -> None:
     """Write the default production configuration to ``path``.
 
@@ -184,4 +192,3 @@ def save_default_config(path: str = "production_config.yaml") -> None:
 
     with open(path, "w") as f:
         f.write(PRODUCTION_CONFIG_YAML)
-

@@ -11,6 +11,7 @@ from production_logging import get_logger
 
 logger = get_logger(__name__)
 
+
 class MonitoredAgent:
     """Base class for monitored agents"""
 

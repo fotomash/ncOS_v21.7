@@ -1,4 +1,3 @@
-
 """
 NCOS Integration Test Suite
 Tests for inter-agent communication and system workflows
@@ -16,9 +15,11 @@ from typing import Dict, List, Any
 # tests can import modules that live alongside this directory.
 sys.path.append(str(Path(__file__).resolve().parents[1]))
 
+
 # Mock implementations for integration testing
 class MockMarketDataProvider:
     """Mock market data provider for testing"""
+
     def __init__(self):
         self.data_points = []
         self.current_index = 0
@@ -45,8 +46,10 @@ class MockMarketDataProvider:
         self.current_index += 1
         return tick
 
+
 class MockAgentMesh:
     """Mock agent communication mesh"""
+
     def __init__(self):
         self.agents = {}
         self.message_queue = queue.Queue()
@@ -282,8 +285,8 @@ class TestStrategyExecutionIntegration(unittest.TestCase):
         risk_messages = self.mesh.get_messages_for('RiskGuardian')
         self.assertEqual(len(risk_messages), 2)
 
-        total_allocation = sum(msg['payload']['signal']['allocation'] 
-                             for msg in risk_messages)
+        total_allocation = sum(msg['payload']['signal']['allocation']
+                               for msg in risk_messages)
         self.assertEqual(total_allocation, 10000)
 
 
@@ -419,8 +422,8 @@ class TestSystemIntegration(unittest.TestCase):
             })
 
         # Verify error propagation
-        broadcast_messages = [msg for msg in self.mesh.message_log 
-                            if msg['from'] == 'BroadcastRelay']
+        broadcast_messages = [msg for msg in self.mesh.message_log
+                              if msg['from'] == 'BroadcastRelay']
         self.assertEqual(len(broadcast_messages), 3)
 
     def test_concurrent_strategy_execution(self):
@@ -506,13 +509,17 @@ class IntegrationTestReport:
                 'passed': result.testsRun - len(result.failures) - len(result.errors),
                 'failed': len(result.failures),
                 'errors': len(result.errors),
-                'success_rate': ((result.testsRun - len(result.failures) - len(result.errors)) / result.testsRun * 100) if result.testsRun > 0 else 0
+                'success_rate': ((result.testsRun - len(result.failures) - len(
+                    result.errors)) / result.testsRun * 100) if result.testsRun > 0 else 0
             },
             'test_flows': {
                 'data_flow': 'PASSED' if not any('DataFlow' in str(f[0]) for f in result.failures) else 'FAILED',
-                'strategy_execution': 'PASSED' if not any('StrategyExecution' in str(f[0]) for f in result.failures) else 'FAILED',
-                'memory_persistence': 'PASSED' if not any('MemoryPersistence' in str(f[0]) for f in result.failures) else 'FAILED',
-                'system_integration': 'PASSED' if not any('SystemIntegration' in str(f[0]) for f in result.failures) else 'FAILED'
+                'strategy_execution': 'PASSED' if not any(
+                    'StrategyExecution' in str(f[0]) for f in result.failures) else 'FAILED',
+                'memory_persistence': 'PASSED' if not any(
+                    'MemoryPersistence' in str(f[0]) for f in result.failures) else 'FAILED',
+                'system_integration': 'PASSED' if not any(
+                    'SystemIntegration' in str(f[0]) for f in result.failures) else 'FAILED'
             },
             'details': {
                 'failures': [str(f) for f in result.failures],

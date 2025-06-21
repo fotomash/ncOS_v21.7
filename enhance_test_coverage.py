@@ -97,12 +97,17 @@ class TestGenerator:
         class_name = class_info["name"]
         test_code = f"""
 class Test{class_name}:
-    """Test cases for {class_name}""
+    """
+        Test
+        cases
+        for {class_name}""
 
     @pytest.fixture
     def instance(self):
         """Create instance for testing"""
         return {class_name}()
+
+
 """
 
         for method in class_info['methods']:
@@ -113,62 +118,95 @@ class Test{class_name}:
             if method['is_async']:
                 test_code += f"""
 
-    @pytest.mark.asyncio
-    async def test_{method_name}(self, instance):
-        """Test {method_name} method"""
-        # TODO: Implement test
-        result = await instance.{method_name}()
-        assert result is not None
+
+@pytest.mark.asyncio
+async def test_{method_name}(self, instance):
+
+
+"""Test {method_name} method"""
+# TODO: Implement test
+result = await instance.
+{method_name}()
+assert result is not None
 """
             else:
                 test_code += f"""
 
-    def test_{method_name}(self, instance):
-        """Test {method_name} method"""
-        # TODO: Implement test
-        result = instance.{method_name}()
-        assert result is not None
+
+def test_{method_name}(self, instance):
+
+
+"""Test {method_name} method"""
+# TODO: Implement test
+result = instance.
+{method_name}()
+assert result is not None
 """
 
         return test_code
 
     def generate_test_function(self, func_info):
-        """Generate test for a function"""
+        """
+Generate
+test
+for a function"""
         func_name = func_info["name"]
         if func_info['is_async']:
             return f"""
+
+
 @pytest.mark.asyncio
 async def test_{func_name}():
-    """Test {func_name} function"""
-    # TODO: Implement test
-    result = await {func_name}()
-    assert result is not None
+
+
+"""Test {func_name} function"""
+# TODO: Implement test
+result = await {func_name}()
+assert result is not None
 """
         else:
             return f"""
+
+
 def test_{func_name}():
-    """Test {func_name} function"""
-    # TODO: Implement test
-    result = {func_name}()
-    assert result is not None
+
+
+"""Test {func_name} function"""
+# TODO: Implement test
+result = {func_name}()
+assert result is not None
 """
 
     def generate_api_test(self, endpoint_info):
-        """Generate test for API endpoint"""
+        """
+Generate
+test
+for API endpoint"""
         method = endpoint_info["method"]
         function = endpoint_info["function"]
         path = endpoint_info["path"]
         return f"""
+
+
 @pytest.mark.asyncio
-async def test_{function}_endpoint(client):
-    """Test {method.upper()} {path}"""
-    response = await client.{method}("{path}")
-    assert response.status_code == 200
-    # TODO: Add more specific assertions
+async def test_{function}
+
+
+_endpoint(client):
+"""Test {method.upper()} {path}"""
+response = await client.
+{method}("{path}")
+assert response.status_code == 200
+# TODO: Add more specific assertions
 """
 
     def generate_test_file(self, module_path, components):
-        """Generate complete test file for a module"""
+        """
+Generate
+complete
+test
+file
+for a module"""
         module_name = module_path.stem
         relative_import = str(module_path.relative_to(self.project_root)).replace('/', '.').replace('.py', '')
 
@@ -181,7 +219,10 @@ from datetime import datetime
 
 # Import module under test
 try:
-    from {relative_import} import *
+    from
+
+    {relative_import}
+    import *
 except ImportError:
     # Handle import errors gracefully
     pass
@@ -209,6 +250,7 @@ except ImportError:
         # Add integration test template
         test_content += f"""
 
+
 # Integration Tests
 class TestIntegration:
     """Integration tests for {module_name}"""
@@ -224,12 +266,20 @@ class TestIntegration:
         """Test integration scenario"""
         # TODO: Implement integration test
         assert True
+
+
 """
 
         return test_content
 
     def create_test_structure(self):
-        """Create proper test directory structure"""
+        """
+Create
+proper
+test
+directory
+structure
+"""
         print("📁 Creating test structure...")
 
         # Create test directories
@@ -246,31 +296,47 @@ class TestIntegration:
             directory.mkdir(parents=True, exist_ok=True)
             init_file = directory / "__init__.py"
             if not init_file.exists():
-                init_file.write_text('"""Test package"""\n')
+                init_file.write_text('"""
+Test
+package
+"""\n')
 
     def generate_pytest_config(self):
-        """Generate pytest configuration"""
+        """
+Generate
+pytest
+configuration
+"""
         pytest_ini = """[tool:pytest]
 testpaths = tests
-python_files = test_*.py *_test.py
-python_classes = Test*
-python_functions = test_*
+python_files = test_ *.py * _test.py
+python_classes = Test *
+python_functions = test_ *
 asyncio_mode = auto
 
 # Coverage settings
-addopts = 
-    --cov=ncOS_v21.7
-    --cov-report=html
-    --cov-report=term-missing
-    --cov-fail-under=40
-    -v
+addopts =
+--cov = ncOS_v21
+.7
+--cov - report = html
+--cov - report = term - missing
+--cov - fail - under = 40
+-v
 
 # Markers
 markers =
-    slow: marks tests as slow (deselect with '-m "not slow"')
-    integration: marks tests as integration tests
-    unit: marks tests as unit tests
-    api: marks tests as API tests
+slow: marks
+tests as slow(deselect
+with '-m "not slow"')
+integration: marks
+tests as integration
+tests
+unit: marks
+tests as unit
+tests
+api: marks
+tests as API
+tests
 """
 
         conftest_py = """"""
@@ -285,12 +351,14 @@ import sys
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
+
 @pytest.fixture
 def event_loop():
     """Create an instance of the default event loop for the test session."""
     loop = asyncio.get_event_loop_policy().new_event_loop()
     yield loop
     loop.close()
+
 
 @pytest.fixture
 async def mock_agent():
@@ -301,6 +369,7 @@ async def mock_agent():
     agent.process = AsyncMock(return_value={"status": "success"})
     return agent
 
+
 @pytest.fixture
 def mock_config():
     """Mock configuration for testing"""
@@ -310,6 +379,7 @@ def mock_config():
         "api": {"host": "localhost", "port": 8000}
     }
 
+
 @pytest.fixture
 async def test_client():
     """Test client for API testing"""
@@ -318,6 +388,8 @@ async def test_client():
 
     async with AsyncClient(app=app, base_url="http://test") as client:
         yield client
+
+
 """
 
         # Save configurations
@@ -332,7 +404,10 @@ async def test_client():
         print(f"✅ Created pytest.ini and conftest.py")
 
     def generate_priority_tests(self):
-        """Generate tests for priority modules"""
+        """
+Generate
+tests
+for priority modules"""
         print("\n🎯 Generating tests for priority modules...")
 
         for module_relative in self.priority_modules:
@@ -367,7 +442,7 @@ async def test_client():
 
     def create_test_runner(self):
         """Create test runner script"""
-        runner_script = """#!/usr/bin/env python3
+        runner_script = """  # !/usr/bin/env python3
 """
 ncOS Test Runner
 Convenient script to run tests with various options
@@ -375,6 +450,7 @@ Convenient script to run tests with various options
 import subprocess
 import sys
 import argparse
+
 
 def run_tests(args):
     """Run tests with specified options"""
@@ -398,6 +474,7 @@ def run_tests(args):
     print(f"Running: {' '.join(cmd)}")
     return subprocess.run(cmd).returncode
 
+
 def main():
     parser = argparse.ArgumentParser(description="ncOS Test Runner")
     parser.add_argument("--coverage", "-c", action="store_true", help="Run with coverage")
@@ -408,6 +485,7 @@ def main():
 
     args = parser.parse_args()
     sys.exit(run_tests(args))
+
 
 if __name__ == "__main__":
     main()
@@ -423,41 +501,78 @@ if __name__ == "__main__":
         print(f"✅ Created test runner: run_tests.py")
 
     def generate_report(self):
-        """Generate test generation report"""
-        report = f"""# Test Coverage Enhancement Report
+        """
+Generate
+test
+generation
+report
+"""
+        report = f"""  # Test Coverage Enhancement Report
 Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
 
 ## Summary
-- Files Analyzed: {self.coverage_report['files_analyzed']}
-- Test Files Generated: {self.coverage_report['generated_tests']}
-- Classes with Tests: {self.coverage_report['classes_tested']}
-- Functions with Tests: {self.coverage_report['functions_tested']}
+- Files
+Analyzed: {self.coverage_report['files_analyzed']}
+- Test
+Files
+Generated: {self.coverage_report['generated_tests']}
+- Classes
+with Tests: {self.coverage_report['classes_tested']}
+- Functions
+with Tests: {self.coverage_report['functions_tested']}
 
 '
 ## Test Structure Created
 ```
-tests/
-├── unit/           # Unit tests
-├── integration/    # Integration tests
-├── agents/         # Agent-specific tests
-├── api/           # API tests
-├── strategies/    # Strategy tests
-├── fixtures/      # Shared test fixtures
-└── conftest.py    # Pytest configuration
+tests /
+├── unit /  # Unit tests
+├── integration /  # Integration tests
+├── agents /  # Agent-specific tests
+├── api /  # API tests
+├── strategies /  # Strategy tests
+├── fixtures /  # Shared test fixtures
+└── conftest.py  # Pytest configuration
 ```
 
 ## Coverage Goals
-- Current: 13.3%
-- Target: 40%
-- Generated tests will add approximately 15-20% coverage
-- Manual test implementation needed for remaining coverage
+- Current: 13.3 %
+- Target: 40 %
+- Generated
+tests
+will
+add
+approximately
+15 - 20 % coverage
+- Manual
+test
+implementation
+needed
+for remaining coverage
 
 ## Next Steps
-1. Run: `python run_tests.py --coverage`
-2. Review generated test stubs
-3. Implement TODO sections in tests
-4. Add edge cases and error scenarios
-5. Run coverage report: `pytest --cov-report=html`
+1.
+Run: `python
+run_tests.py - -coverage
+`
+2.
+Review
+generated
+test
+stubs
+3.
+Implement
+TODO
+sections in tests
+4.
+Add
+edge
+cases and error
+scenarios
+5.
+Run
+coverage
+report: `pytest - -cov - report = html
+`
 """
 
         report_path = "test_generation_report.md"
@@ -467,7 +582,11 @@ tests/
         print(f"\n📊 Report saved: {report_path}")
 
     def run(self):
-        """Execute test generation"""
+        """
+Execute
+test
+generation
+"""
         print("🚀 Starting Test Coverage Enhancement")
         print("=" * 50)
 

@@ -11,6 +11,7 @@ class WyckoffPhaseCycleAgentConfig:
     log_level: str = "INFO"
     custom_params: Dict[str, Any] = field(default_factory=dict)
 
+
 class WyckoffPhaseCycleAgent:
     """Basic Wyckoff Phase Cycle strategy agent"""
 

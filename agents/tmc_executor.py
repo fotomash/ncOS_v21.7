@@ -1,4 +1,3 @@
-
 """
 TMCExecutor Agent Implementation
 Trend-Momentum Confluence execution strategy
@@ -20,6 +19,7 @@ class TMCSignal:
     momentum_score: float
     confluence_score: float
     metadata: Dict[str, Any]
+
 
 class TMCExecutor:
     """
@@ -87,8 +87,8 @@ class TMCExecutor:
         momentum = ((current_price - past_price) / past_price) * 100
         return momentum
 
-    def calculate_atr(self, high_prices: List[float], low_prices: List[float], 
-                     close_prices: List[float], period: int = 14) -> float:
+    def calculate_atr(self, high_prices: List[float], low_prices: List[float],
+                      close_prices: List[float], period: int = 14) -> float:
         """Calculate Average True Range for volatility"""
         if len(high_prices) < period + 1:
             return 0.0
@@ -97,7 +97,7 @@ class TMCExecutor:
         for i in range(1, len(high_prices)):
             high = high_prices[i]
             low = low_prices[i]
-            prev_close = close_prices[i-1]
+            prev_close = close_prices[i - 1]
 
             tr = max(
                 high - low,
@@ -144,8 +144,8 @@ class TMCExecutor:
 
         return normalized_score, direction
 
-    def calculate_momentum_score(self, prices: List[float], 
-                                volumes: List[float] = None) -> float:
+    def calculate_momentum_score(self, prices: List[float],
+                                 volumes: List[float] = None) -> float:
         """Calculate momentum score with volume confirmation"""
         if len(prices) < self.momentum_period + 1:
             return 0.0
@@ -170,8 +170,8 @@ class TMCExecutor:
         return min(weighted_score, 1.0)
 
     def calculate_confluence(self, trend_score: float, momentum_score: float,
-                           trend_direction: str, current_price: float,
-                           prices: List[float]) -> float:
+                             trend_direction: str, current_price: float,
+                             prices: List[float]) -> float:
         """Calculate trend-momentum confluence score"""
         # Base confluence from trend and momentum alignment
         base_confluence = (trend_score + momentum_score) / 2
@@ -181,7 +181,7 @@ class TMCExecutor:
 
         # Check if momentum confirms trend
         momentum = self.calculate_momentum(prices, self.momentum_period)
-        if (trend_direction == 'bullish' and momentum > 0) or            (trend_direction == 'bearish' and momentum < 0):
+        if (trend_direction == 'bullish' and momentum > 0) or (trend_direction == 'bearish' and momentum < 0):
             confluence_multiplier *= 1.2
         else:
             confluence_multiplier *= 0.8
@@ -190,7 +190,8 @@ class TMCExecutor:
         ema_short = self.calculate_ema(prices, self.trend_periods[0])
         ema_long = self.calculate_ema(prices, self.trend_periods[-1])
 
-        if (trend_direction == 'bullish' and ema_short > ema_long) or            (trend_direction == 'bearish' and ema_short < ema_long):
+        if (trend_direction == 'bullish' and ema_short > ema_long) or (
+                trend_direction == 'bearish' and ema_short < ema_long):
             confluence_multiplier *= 1.1
 
         final_confluence = base_confluence * confluence_multiplier
@@ -294,7 +295,7 @@ class TMCExecutor:
         if len(prices) < 20:
             atr = statistics.stdev(prices) * 2 if len(prices) > 1 else prices[-1] * 0.02
         else:
-            ranges = [abs(prices[i] - prices[i-1]) for i in range(1, len(prices))]
+            ranges = [abs(prices[i] - prices[i - 1]) for i in range(1, len(prices))]
             atr = statistics.mean(ranges[-14:]) * 2
 
         current_price = prices[-1]
@@ -336,7 +337,7 @@ class TMCExecutor:
 
             # Check for momentum exhaustion
             momentum = self.calculate_momentum(prices, self.momentum_period)
-            if (position_type == 'long' and momentum < -5) or                (position_type == 'short' and momentum > 5):
+            if (position_type == 'long' and momentum < -5) or (position_type == 'short' and momentum > 5):
                 exit_type = f'exit_{position_type}'
                 signals.append(TMCSignal(
                     timestamp=datetime.now(),

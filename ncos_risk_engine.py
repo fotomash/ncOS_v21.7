@@ -10,10 +10,10 @@ import pandas as pd
 
 logger = logging.getLogger(__name__)
 
-
 # --- Optional Dependencies --------------------------------------------------
 try:
     from core.mentfx_stoploss_model_v2_adaptive import compute_mentfx_stop_loss_adaptive
+
     MENTFX_SL_AVAILABLE = True
     logger.info("[RiskEngine] Imported mentfx_stoploss_model_v2_adaptive.")
 except Exception:  # pragma: no cover - optional
@@ -24,6 +24,7 @@ except Exception:  # pragma: no cover - optional
 
 try:
     from core.volatility_engine import get_volatility_profile
+
     VOLATILITY_ENGINE_AVAILABLE = True
     logger.info("[RiskEngine] Imported volatility_engine.")
 except Exception:  # pragma: no cover - optional
@@ -34,6 +35,7 @@ except Exception:  # pragma: no cover - optional
 
 try:
     import talib
+
     TALIB_AVAILABLE = True
     logger.info("[RiskEngine] TA-Lib found for ATR calculation.")
 except Exception:  # pragma: no cover - optional
@@ -43,6 +45,7 @@ except Exception:  # pragma: no cover - optional
 # --- Cross-Domain Risk Analyzer ---------------------------------------------
 try:
     from engines.cross_domain_risk_analyzer import CrossDomainRiskAnalyzer, RiskFactor
+
     CROSS_DOMAIN_AVAILABLE = True
     _cross_domain_analyzer = CrossDomainRiskAnalyzer()
     logger.info("[RiskEngine] CrossDomainRiskAnalyzer initialized.")
@@ -107,7 +110,7 @@ def get_pip_point_value(symbol: str, account_currency: str = "USD") -> Optional[
         "FUNDEDTRADINGPLUS/",
     ]:
         if cleaned.startswith(prefix):
-            cleaned = cleaned[len(prefix) :]
+            cleaned = cleaned[len(prefix):]
     cleaned = cleaned.replace("_", "").replace("/", "").replace("-", "").replace(".", "")
 
     aliases = {
@@ -217,17 +220,17 @@ def map_conviction_to_risk(score: int) -> float:
 
 # --- Main API ----------------------------------------------------------------
 def calculate_sl_and_risk(
-    account_balance: float,
-    conviction_score: int,
-    entry_price: float,
-    entry_time: datetime,
-    trade_type: str,
-    symbol: str,
-    ohlc_data: pd.DataFrame,
-    mentfx_sl_config: Optional[Dict[str, Any]] = None,
-    atr_config: Optional[Dict[str, Any]] = None,
-    risk_config: Optional[Dict[str, Any]] = None,
-    volatility_config: Optional[Dict[str, Any]] = None,
+        account_balance: float,
+        conviction_score: int,
+        entry_price: float,
+        entry_time: datetime,
+        trade_type: str,
+        symbol: str,
+        ohlc_data: pd.DataFrame,
+        mentfx_sl_config: Optional[Dict[str, Any]] = None,
+        atr_config: Optional[Dict[str, Any]] = None,
+        risk_config: Optional[Dict[str, Any]] = None,
+        volatility_config: Optional[Dict[str, Any]] = None,
 ) -> Dict[str, Any]:
     """Calculate blended stop-loss and lot size."""
     output: Dict[str, Any] = {

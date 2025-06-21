@@ -2,9 +2,9 @@ profile_name: RiskManager
 description: Risk management and position monitoring
 version: 21.7.0
 execution_sequence:
-- risk_assessment
-- position_monitor
-- alert_generator
+  - risk_assessment
+  - position_monitor
+  - alert_generator
 code_map:
   risk_assessment: ncos.risk.assessment.RiskAssessment
   position_monitor: ncos.risk.monitor.PositionMonitor
@@ -12,9 +12,9 @@ code_map:
 meta_agent:
   agent_id: NCOS_Risk_001
   strategy_tags:
-  - Risk
-  - Monitor
-  - Alert
+    - Risk
+    - Monitor
+    - Alert
   llm_contextualization_enabled: false
 settings:
   log_level: WARNING

@@ -3,11 +3,13 @@ import logging
 from dataclasses import dataclass
 from typing import Any, Dict, List
 
+
 @dataclass
 class ZanflowOrchestratorConfig:
     agent_id: str = "zanflow_orchestrator"
     enabled: bool = True
     log_level: str = "INFO"
+
 
 class ZanflowOrchestrator:
     """Minimal agent to orchestrate simple workflows."""

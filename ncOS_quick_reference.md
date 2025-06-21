@@ -3,13 +3,15 @@
 ## 🚀 Three Key Scripts
 
 ### 1. Configuration Consolidator
+
 ```bash
 python consolidate_configs.py
 # Merges 82 configs → ~10 unified files
 # Creates config_loader.py for easy access
 ```
 
-### 2. Test Coverage Enhancer  
+### 2. Test Coverage Enhancer
+
 ```bash
 python enhance_test_coverage.py
 # Generates test structure and stubs
@@ -18,6 +20,7 @@ python enhance_test_coverage.py
 ```
 
 ### 3. Agent Rationalizer
+
 ```bash
 python rationalize_agents.py
 # Consolidates 53 agents → ~25

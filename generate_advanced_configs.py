@@ -106,7 +106,7 @@ AGENT_TEMPLATES = {
         "version": "21.7.0",
         "execution_sequence": [
             "context_analyzer",
-            "liquidity_engine", 
+            "liquidity_engine",
             "structure_validator",
             "fvg_locator",
             "confluence_stacker"
@@ -205,6 +205,7 @@ AGENT_TEMPLATES = {
     }
 }
 
+
 def generate_agent_configurations():
     """Generate all agent configuration files"""
 
@@ -263,6 +264,7 @@ def generate_agent_configurations():
 
     # Generate main system config
     generate_system_config(config_dir)
+
 
 def generate_trigger_routes(config_dir: Path):
     """Generate trigger routes configuration"""
@@ -344,6 +346,7 @@ def generate_trigger_routes(config_dir: Path):
 
     print(f"✓ Generated trigger routes: {trigger_yaml}")
 
+
 def generate_system_config(config_dir: Path):
     """Generate main system configuration"""
 
@@ -396,6 +399,7 @@ def generate_system_config(config_dir: Path):
         yaml.dump(system_config, f, default_flow_style=False, sort_keys=False)
 
     print(f"✓ Generated system config: {main_config}")
+
 
 if __name__ == "__main__":
     print("🔧 Advanced Agent Configuration Generator")

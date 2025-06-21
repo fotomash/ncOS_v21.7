@@ -11,6 +11,7 @@ class SMCLiquidityTrapAgentConfig:
     log_level: str = "INFO"
     custom_params: Dict[str, Any] = field(default_factory=dict)
 
+
 class SMCLiquidityTrapAgent:
     """Basic SMC Liquidity Trap strategy agent"""
 

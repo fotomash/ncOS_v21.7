@@ -24,6 +24,7 @@ class BroadcastRelayConfig:
     message_ttl: Optional[int] = 3600
     custom_params: Dict[str, Any] = field(default_factory=dict)
 
+
 class BroadcastRelay:
     """
     BroadcastRelay - Message broadcasting and inter-agent communication
@@ -235,10 +236,12 @@ class BroadcastRelay:
         self.logger.info(f"Shutting down {self.config.agent_id}")
         self.status = "shutdown"
 
+
 # Agent factory function
 def create_agent(config: Dict[str, Any] = None) -> BroadcastRelay:
     """Factory function to create BroadcastRelay instance"""
     return BroadcastRelay(config)
+
 
 # Export the agent class
 __all__ = ["BroadcastRelay", "BroadcastRelayConfig", "create_agent"]

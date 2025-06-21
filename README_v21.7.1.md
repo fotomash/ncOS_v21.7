@@ -4,7 +4,9 @@
 [![Status](https://img.shields.io/badge/status-production--ready-green.svg)](https://github.com/ncos/phoenix-mesh)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-**Neural Cognitive Operating System (NCOS) v21.7.1 Phoenix Mesh** is a comprehensive AI-powered trading ecosystem that combines advanced market analysis, multi-agent orchestration, and intelligent workflow management for institutional-grade trading operations.
+**Neural Cognitive Operating System (NCOS) v21.7.1 Phoenix Mesh** is a comprehensive AI-powered trading ecosystem that
+combines advanced market analysis, multi-agent orchestration, and intelligent workflow management for
+institutional-grade trading operations.
 
 ## 🎯 **System Overview**
 
@@ -52,12 +54,14 @@ Knowledge Base → Intelligence → Workflow → Triggers → State Manager
 ## 🚀 **Quick Start**
 
 ### **Prerequisites**
- - Python 3.10+
+
+- Python 3.10+
 - Redis (for L1 memory)
 - PostgreSQL with pgvector (for L3 memory)
 - FAISS (for L2 vector similarity)
 
 ### **Installation**
+
 ```bash
 # Clone the repository
 git clone https://github.com/ncos/phoenix-mesh.git
@@ -71,6 +75,7 @@ python setup.py install
 ```
 
 ### **Basic Launch**
+
 ```bash
 # Launch complete NCOS v21.7.1 system
 python -m ncOS.ncos_launcher \
@@ -81,6 +86,7 @@ python -m ncOS.ncos_launcher \
 ```
 
 ### **Component-Specific Launch**
+
 ```bash
 # Launch with specific components
 python -m ncOS.ncos_launcher \
@@ -94,36 +100,42 @@ python -m ncOS.ncos_launcher \
 ## 🎯 **Trading Strategies**
 
 ### **1. SMC Liquidity Trap Agent**
+
 - **Focus**: Engineered liquidity exploitation with tick validation
 - **Timeframes**: M1, M5
 - **Risk Profile**: Aggressive (2.5% per trade)
 - **Features**: Liquidity hunting, trap reversal detection
 
 ### **2. Wyckoff Phase Cycle Agent**
+
 - **Focus**: Phase transition analysis for trend plays
 - **Timeframes**: H1, M15, M5
 - **Risk Profile**: Conservative (1.5% per trade)
 - **Features**: Accumulation/distribution detection, phase analysis
 
 ### **3. Session Sweep Reversal Agent**
+
 - **Focus**: Session-based sweep and reversal trading
 - **Timeframes**: M5, M1
 - **Risk Profile**: Moderate (2% per trade)
 - **Features**: Kill zone awareness, session timing
 
 ### **4. Micro Wyckoff Event Agent**
+
 - **Focus**: Tick-level precision analysis with event scoring
 - **Timeframes**: Tick, M1
 - **Risk Profile**: Precision (1% per trade)
 - **Features**: Micro-structure analysis, event scoring
 
 ### **5. Orderflow Anomaly Agent**
+
 - **Focus**: Volume/orderflow anomaly detection and filtering
 - **Timeframes**: M1, M5
 - **Risk Profile**: Defensive (1.5% per trade)
 - **Features**: Volume spike detection, orderflow analysis
 
 ### **6. Protection Reentry Agent**
+
 - **Focus**: Advanced risk management with reentry logic
 - **Timeframes**: M1, M5
 - **Risk Profile**: Protective (1% per trade)
@@ -132,6 +144,7 @@ python -m ncOS.ncos_launcher \
 ## 🔧 **Configuration**
 
 ### **Agent Registry Configuration**
+
 ```yaml
 # config/agent_registry.yaml
 agents:
@@ -152,6 +165,7 @@ agents:
 ```
 
 ### **Strategy Configuration**
+
 ```yaml
 # config/strategies/smc_liquidity_trap.yaml
 strategy:
@@ -163,6 +177,7 @@ strategy:
 ```
 
 ### **Trigger Routes Configuration**
+
 ```yaml
 # config/trigger_routes.toml
 triggers:
@@ -175,21 +190,25 @@ triggers:
 ## 📊 **System Features**
 
 ### **Native Vector Processing**
+
 - **10x Performance**: Native vector operations for market data
 - **Real-time Search**: Pattern matching and similarity search
 - **Optimized Storage**: Efficient vector indexing and retrieval
 
 ### **Zanflow Orchestration**
+
 - **Workflow Management**: Advanced logical block processing
 - **Prompt Engineering**: Intelligent prompt generation and optimization
 - **Structural Flow**: Dynamic workflow execution and management
 
 ### **Knowledge Intelligence**
+
 - **Asset Detection**: Automatic asset classification and detection
 - **Knowledge Retrieval**: Context-aware information retrieval
 - **Intelligent Search**: Semantic search across knowledge base
 
 ### **Enhanced Interaction**
+
 - **Dynamic Menus**: Context-aware menu generation
 - **Conversation Flow**: Intelligent conversation management
 - **Response Templates**: Optimized response generation
@@ -197,12 +216,14 @@ triggers:
 ## 🛡️ **Risk Management**
 
 ### **Multi-Layer Risk Protection**
+
 - **Per-Strategy Limits**: Individual risk allocation per strategy
 - **Portfolio Protection**: Overall portfolio risk monitoring
 - **Real-time Monitoring**: Continuous risk assessment
 - **Auto-Recovery**: Automatic system recovery mechanisms
 
 ### **Risk Allocation**
+
 ```
 Total System Risk Allocation: ~9%
 ├── SMC Liquidity Trap: 2.5% (Aggressive)
@@ -216,12 +237,14 @@ Total System Risk Allocation: ~9%
 ## 📈 **Performance Metrics**
 
 ### **System Performance**
+
 - **Data Processing**: 10x faster with native vector operations
 - **Strategy Execution**: Sub-second signal generation
 - **Risk Monitoring**: Real-time risk assessment
 - **Memory Efficiency**: Optimized multi-tier memory system
 
 ### **Trading Performance**
+
 - **Multi-Timeframe**: Tick to H1 analysis coverage
 - **Strategy Diversity**: 6 complementary trading approaches
 - **Risk-Adjusted**: Optimized risk/reward ratios
@@ -230,6 +253,7 @@ Total System Risk Allocation: ~9%
 ## 🔄 **System Monitoring**
 
 ### **Health Checks**
+
 ```bash
 # System health validation
 python -c "from agents.master_orchestrator import MasterOrchestrator; MasterOrchestrator().validate_system()"
@@ -239,6 +263,7 @@ python -c "from agents.risk_guardian import RiskGuardian; RiskGuardian().system_
 ```
 
 ### **Performance Monitoring**
+
 - **Agent Performance**: Individual agent metrics
 - **Strategy Performance**: Trading strategy analytics
 - **System Resources**: Memory and CPU utilization
@@ -247,12 +272,14 @@ python -c "from agents.risk_guardian import RiskGuardian; RiskGuardian().system_
 ## 📚 **Documentation**
 
 ### **Configuration Files**
+
 - `config/agent_registry.yaml` - Agent definitions and priorities
 - `config/strategy_profiles.json` - Trading strategy configurations
 - `config/trigger_routes.toml` - Trigger routing and priorities
 - `config/system_config.json` - System-wide configuration
 
 ### **Agent Documentation**
+
 - `docs/agents/` - Individual agent documentation
 - `docs/strategies/` - Trading strategy guides
 - `docs/workflows/` - Zanflow workflow documentation
@@ -263,6 +290,7 @@ python -c "from agents.risk_guardian import RiskGuardian; RiskGuardian().system_
 We welcome contributions to NCOS v21.7.1! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
 
 ### **Development Setup**
+
 ```bash
 # Development installation
 pip install -e .[dev]
@@ -289,12 +317,14 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🎯 **Roadmap**
 
 ### **v21.8.0 (Planned)**
+
 - Enhanced machine learning integration
 - Advanced backtesting capabilities
 - Extended asset class support
 - Performance optimizations
 
 ### **v22.0.0 (Future)**
+
 - Multi-broker integration
 - Advanced portfolio management
 - Real-time collaboration features

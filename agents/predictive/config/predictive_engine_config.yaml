@@ -33,7 +33,7 @@ data_sources:
     anonymized: true
   external_feeds:
     enabled: false
-    sources: []
+    sources: [ ]
 output:
   format: structured
   include_confidence: true
@@ -48,8 +48,8 @@ optimization:
 logging:
   level: INFO
   destinations:
-  - file
-  - monitoring
+    - file
+    - monitoring
   rotation:
     enabled: true
     max_size: 100MB

@@ -20,6 +20,7 @@ logger = logging.getLogger(__name__)
 
 from ncos_v21_7_1_enhanced_master_orchestrator import NCOSEnhancedMasterOrchestrator
 
+
 async def launch_ncos_enhanced_complete(config_path=None):
     """Launch NCOS v21.7.1 Enhanced Complete System"""
     logger.info("🚀 LAUNCHING NCOS v21.7.1 ENHANCED COMPLETE SYSTEM")
@@ -55,6 +56,7 @@ async def launch_ncos_enhanced_complete(config_path=None):
         logger.error("❌ LAUNCH FAILED: %s", e)
         raise
 
+
 def main():
     parser = argparse.ArgumentParser(description="Launch NCOS v21.7.1 Enhanced Complete System")
     parser.add_argument("--config", help="Configuration file path")
@@ -69,6 +71,7 @@ def main():
     logger.info("   Use the orchestrator object to interact with the system")
 
     return orchestrator
+
 
 if __name__ == "__main__":
     main()

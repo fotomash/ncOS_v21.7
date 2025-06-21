@@ -22,12 +22,16 @@ try:
     )
 except ImportError:
     from pydantic import BaseModel, Field
+
+
     class BaseModuleConfig(BaseModel):
         enabled: bool = True
+
         class Config:
             extra = "allow"
 
 logger = logging.getLogger(__name__)
+
 
 class MasterOrchestrator:
     """
@@ -318,6 +322,7 @@ class MasterOrchestrator:
             "variant": variant,
             "timestamp": datetime.utcnow().isoformat()
         }
+
 
 # Compatibility shim for imports
 enhanced_master_orchestrator = MasterOrchestrator

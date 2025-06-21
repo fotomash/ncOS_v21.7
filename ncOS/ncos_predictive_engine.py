@@ -17,6 +17,7 @@ from ncos_predictive_schemas import (
 
 logger = logging.getLogger(__name__)
 
+
 class PredictiveScorer:
     """
     Calculates maturity scores and grades for trading setups based on multiple factors.
@@ -91,10 +92,10 @@ class PredictiveScorer:
             return "D"
 
     def check_conflict_with_active_trades(
-        self, 
-        new_setup_score: float,
-        new_setup_direction: str,
-        active_trades: List[Dict[str, Any]]
+            self,
+            new_setup_score: float,
+            new_setup_direction: str,
+            active_trades: List[Dict[str, Any]]
     ) -> Dict[str, Any]:
         """
         Check if a new setup conflicts with existing active trades.
@@ -118,7 +119,8 @@ class PredictiveScorer:
                 # Add recommendation based on new setup quality
                 if new_setup_score >= self.conflict_detection.suggest_review_trade_if_new_setup_maturity_above:
                     conflict_info["recommendation"] = "review_active_trade"
-                    conflict_info["reason"] = f"New {new_setup_direction} setup has very high quality ({new_setup_score:.2f})"
+                    conflict_info[
+                        "reason"] = f"New {new_setup_direction} setup has very high quality ({new_setup_score:.2f})"
                 elif new_setup_score >= self.conflict_detection.min_new_setup_maturity_for_conflict_alert:
                     conflict_info["recommendation"] = "monitor_both"
                     conflict_info["reason"] = f"New setup quality ({new_setup_score:.2f}) warrants attention"
@@ -148,12 +150,12 @@ class PredictiveJournal:
         logger.info(f"PredictiveJournal initialized. Log directory: {self.log_dir}")
 
     def log_evaluation(
-        self, 
-        timestamp: datetime,
-        symbol: str,
-        features: Dict[str, float],
-        scoring_result: Dict[str, Any],
-        context: Optional[Dict[str, Any]] = None
+            self,
+            timestamp: datetime,
+            symbol: str,
+            features: Dict[str, float],
+            scoring_result: Dict[str, Any],
+            context: Optional[Dict[str, Any]] = None
     ):
         """Log a predictive evaluation if it meets the criteria."""
         if not self.config.enabled:
@@ -229,12 +231,12 @@ class NCOSPredictiveEngine:
         logger.info("NCOS Predictive Engine initialized")
 
     def evaluate_setup(
-        self,
-        timestamp: datetime,
-        symbol: str,
-        features: Dict[str, float],
-        active_trades: Optional[List[Dict[str, Any]]] = None,
-        context: Optional[Dict[str, Any]] = None
+            self,
+            timestamp: datetime,
+            symbol: str,
+            features: Dict[str, float],
+            active_trades: Optional[List[Dict[str, Any]]] = None,
+            context: Optional[Dict[str, Any]] = None
     ) -> Dict[str, Any]:
         """
         Evaluate a trading setup and return comprehensive analysis.
@@ -266,9 +268,9 @@ class NCOSPredictiveEngine:
         return evaluation_result
 
     def _generate_recommendation(
-        self, 
-        scoring_details: Dict[str, Any], 
-        conflict_analysis: Dict[str, Any]
+            self,
+            scoring_details: Dict[str, Any],
+            conflict_analysis: Dict[str, Any]
     ) -> str:
         """Generate a trading recommendation based on scoring and conflicts."""
         grade = scoring_details.get("grade", "D")

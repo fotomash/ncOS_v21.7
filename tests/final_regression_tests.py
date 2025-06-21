@@ -25,6 +25,7 @@ TEST_CONFIG = {
     "iterations": 100
 }
 
+
 class TestProductionHardening:
     """Test suite for production hardening features"""
 
@@ -79,7 +80,7 @@ class TestProductionHardening:
             configure_production_logging(
                 log_dir=temp_dir,
                 log_level="DEBUG",
-                max_bytes=1024*1024,
+                max_bytes=1024 * 1024,
                 backup_count=3
             )
 
@@ -127,6 +128,7 @@ class TestProductionHardening:
     @pytest.mark.asyncio
     async def test_health_monitoring(self):
         """Test health monitoring system"""
+
         # Register test health check
         def test_health_check():
             return {"status": "healthy", "test": True}
@@ -167,6 +169,7 @@ class TestProductionHardening:
         # Cleanup
         del os.environ["NCOS_LOG_LEVEL"]
         del os.environ["NCOS_MONITORING_PORT"]
+
 
 class TestAgentIntegrationWithHardening:
     """Test agent integration with production hardening"""
@@ -260,6 +263,7 @@ class TestAgentIntegrationWithHardening:
         health = orchestrator.get_health_status()
         assert health["open_circuits"] > 0
 
+
 class TestFullSystemRegression:
     """Full system regression tests"""
 
@@ -323,6 +327,7 @@ class TestFullSystemRegression:
         health = await health_monitor.get_health_status()
         assert health["status"] in ["healthy", "degraded"]
 
+
 # Test execution report generator
 def generate_regression_report(results: Dict[str, Any]) -> Dict[str, Any]:
     """Generate comprehensive regression test report"""
@@ -342,7 +347,7 @@ def generate_regression_report(results: Dict[str, Any]) -> Dict[str, Any]:
                 "tests": ["structured_format", "rotation", "multi_level"]
             },
             "monitoring": {
-                "status": "passed", 
+                "status": "passed",
                 "tests": ["metrics_collection", "health_checks", "endpoints"]
             },
             "integration": {
@@ -359,6 +364,7 @@ def generate_regression_report(results: Dict[str, Any]) -> Dict[str, Any]:
         },
         "recommendation": "READY FOR PRODUCTION"
     }
+
 
 if __name__ == "__main__":
     # Run tests and generate report

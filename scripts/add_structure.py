@@ -40,8 +40,8 @@ def calculate_fractals(df: pd.DataFrame, window: int = 2) -> pd.DataFrame:
     lows = df["Low"].values
 
     for i in range(window, len(df) - window):
-        hi_slice = highs[i - window : i + window + 1]
-        lo_slice = lows[i - window : i + window + 1]
+        hi_slice = highs[i - window: i + window + 1]
+        lo_slice = lows[i - window: i + window + 1]
         if highs[i] == hi_slice.max():
             fractals.iat[i, 0] = True
         if lows[i] == lo_slice.min():

@@ -1,4 +1,3 @@
-
 """
 NCOS v21.7.1 Liquidity Analysis Agent
 Advanced liquidity analysis with sweep detection and zone identification
@@ -16,6 +15,7 @@ class LiquidityZoneType(Enum):
     SUPPLY = "supply_zone"
     EQUAL_HIGHS = "equal_highs"
     EQUAL_LOWS = "equal_lows"
+
 
 class NCOSLiquidityAnalysisAgent:
     """NCOS Liquidity Analysis Agent"""
@@ -125,8 +125,8 @@ class NCOSLiquidityAnalysisAgent:
 
             if reaction_strength > self.zone_strength_threshold:
                 # Find the demand zone range
-                zone_low = min(candles[j]["low"] for j in range(i-5, i+1))
-                zone_high = max(candles[j]["high"] for j in range(i-5, i+1))
+                zone_low = min(candles[j]["low"] for j in range(i - 5, i + 1))
+                zone_high = max(candles[j]["high"] for j in range(i - 5, i + 1))
 
                 zones.append({
                     "type": LiquidityZoneType.DEMAND.value,
@@ -135,7 +135,7 @@ class NCOSLiquidityAnalysisAgent:
                     "center": (zone_low + zone_high) / 2,
                     "strength": reaction_strength,
                     "timestamp": current["timestamp"],
-                    "volume_profile": self._calculate_volume_profile(candles, i-5, i+1)
+                    "volume_profile": self._calculate_volume_profile(candles, i - 5, i + 1)
                 })
 
         return zones
@@ -153,8 +153,8 @@ class NCOSLiquidityAnalysisAgent:
 
             if reaction_strength > self.zone_strength_threshold:
                 # Find the supply zone range
-                zone_low = min(candles[j]["low"] for j in range(i-5, i+1))
-                zone_high = max(candles[j]["high"] for j in range(i-5, i+1))
+                zone_low = min(candles[j]["low"] for j in range(i - 5, i + 1))
+                zone_high = max(candles[j]["high"] for j in range(i - 5, i + 1))
 
                 zones.append({
                     "type": LiquidityZoneType.SUPPLY.value,
@@ -163,7 +163,7 @@ class NCOSLiquidityAnalysisAgent:
                     "center": (zone_low + zone_high) / 2,
                     "strength": reaction_strength,
                     "timestamp": current["timestamp"],
-                    "volume_profile": self._calculate_volume_profile(candles, i-5, i+1)
+                    "volume_profile": self._calculate_volume_profile(candles, i - 5, i + 1)
                 })
 
         return zones
@@ -174,8 +174,8 @@ class NCOSLiquidityAnalysisAgent:
             return 0.0
 
         # Calculate price movement strength
-        low_point = min(candles[j]["low"] for j in range(index-5, index+1))
-        high_after = max(candles[j]["high"] for j in range(index, index+6))
+        low_point = min(candles[j]["low"] for j in range(index - 5, index + 1))
+        high_after = max(candles[j]["high"] for j in range(index, index + 6))
 
         if low_point == 0:
             return 0.0
@@ -183,8 +183,8 @@ class NCOSLiquidityAnalysisAgent:
         price_change = (high_after - low_point) / low_point
 
         # Calculate volume confirmation
-        volume_before = sum(candles[j]["volume"] for j in range(index-5, index))
-        volume_after = sum(candles[j]["volume"] for j in range(index, index+5))
+        volume_before = sum(candles[j]["volume"] for j in range(index - 5, index))
+        volume_after = sum(candles[j]["volume"] for j in range(index, index + 5))
 
         volume_ratio = volume_after / volume_before if volume_before > 0 else 1.0
 
@@ -198,8 +198,8 @@ class NCOSLiquidityAnalysisAgent:
             return 0.0
 
         # Calculate price movement strength
-        high_point = max(candles[j]["high"] for j in range(index-5, index+1))
-        low_after = min(candles[j]["low"] for j in range(index, index+6))
+        high_point = max(candles[j]["high"] for j in range(index - 5, index + 1))
+        low_after = min(candles[j]["low"] for j in range(index, index + 6))
 
         if high_point == 0:
             return 0.0
@@ -207,8 +207,8 @@ class NCOSLiquidityAnalysisAgent:
         price_change = (high_point - low_after) / high_point
 
         # Calculate volume confirmation
-        volume_before = sum(candles[j]["volume"] for j in range(index-5, index))
-        volume_after = sum(candles[j]["volume"] for j in range(index, index+5))
+        volume_before = sum(candles[j]["volume"] for j in range(index - 5, index))
+        volume_after = sum(candles[j]["volume"] for j in range(index, index + 5))
 
         volume_ratio = volume_after / volume_before if volume_before > 0 else 1.0
 
@@ -221,7 +221,7 @@ class NCOSLiquidityAnalysisAgent:
         if start < 0 or end >= len(candles):
             return {"total_volume": 0, "avg_volume": 0}
 
-        volumes = [candles[i]["volume"] for i in range(start, end+1)]
+        volumes = [candles[i]["volume"] for i in range(start, end + 1)]
 
         return {
             "total_volume": sum(volumes),
@@ -321,7 +321,7 @@ class NCOSLiquidityAnalysisAgent:
                 continue
 
             matches = [i]
-            for j, other_price in enumerate(prices[i+1:], i+1):
+            for j, other_price in enumerate(prices[i + 1:], i + 1):
                 if abs(price - other_price) / price <= tolerance:
                     matches.append(j)
                     used_indices.add(j)
@@ -337,7 +337,8 @@ class NCOSLiquidityAnalysisAgent:
 
         return equal_levels
 
-    def _calculate_overall_probability(self, zones: List[Dict], sweep_analysis: Dict, equal_levels: List[Dict]) -> float:
+    def _calculate_overall_probability(self, zones: List[Dict], sweep_analysis: Dict,
+                                       equal_levels: List[Dict]) -> float:
         """Calculate overall liquidity probability"""
         scores = []
 

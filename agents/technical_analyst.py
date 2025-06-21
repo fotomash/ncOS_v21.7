@@ -22,6 +22,7 @@ class TechnicalAnalystConfig:
     lookback_period: Optional[int] = 100
     custom_params: Dict[str, Any] = field(default_factory=dict)
 
+
 class TechnicalAnalyst:
     """
     TechnicalAnalyst - Technical analysis and indicator calculation
@@ -99,7 +100,8 @@ class TechnicalAnalyst:
         for indicator_name, indicator_config in self.indicators.items():
             if indicator_config["enabled"]:
                 try:
-                    result = await self._calculate_indicator_value(indicator_name, prices, indicator_config["parameters"])
+                    result = await self._calculate_indicator_value(indicator_name, prices,
+                                                                   indicator_config["parameters"])
                     analysis_result["indicators"][indicator_name] = result
                     self.metrics["indicators_calculated"] += 1
                 except Exception as e:
@@ -115,7 +117,8 @@ class TechnicalAnalyst:
 
         return analysis_result
 
-    async def _calculate_indicator_value(self, indicator: str, prices: List[float], params: Dict[str, Any]) -> Dict[str, Any]:
+    async def _calculate_indicator_value(self, indicator: str, prices: List[float], params: Dict[str, Any]) -> Dict[
+        str, Any]:
         """Calculate a specific indicator value"""
         if indicator == "sma":
             return await self._calculate_sma(prices, params.get("period", 20))
@@ -124,7 +127,8 @@ class TechnicalAnalyst:
         elif indicator == "rsi":
             return await self._calculate_rsi(prices, params.get("period", 14))
         elif indicator == "macd":
-            return await self._calculate_macd(prices, params.get("fast", 12), params.get("slow", 26), params.get("signal", 9))
+            return await self._calculate_macd(prices, params.get("fast", 12), params.get("slow", 26),
+                                              params.get("signal", 9))
         else:
             return {"error": f"Unknown indicator: {indicator}"}
 
@@ -170,7 +174,7 @@ class TechnicalAnalyst:
             return {"error": f"Insufficient data for RSI({period})"}
 
         # Calculate price changes
-        changes = [prices[i] - prices[i-1] for i in range(1, len(prices))]
+        changes = [prices[i] - prices[i - 1] for i in range(1, len(prices))]
 
         # Separate gains and losses
         gains = [change if change > 0 else 0 for change in changes]
@@ -305,10 +309,12 @@ class TechnicalAnalyst:
         self.logger.info(f"Shutting down {self.config.agent_id}")
         self.status = "shutdown"
 
+
 # Agent factory function
 def create_agent(config: Dict[str, Any] = None) -> TechnicalAnalyst:
     """Factory function to create TechnicalAnalyst instance"""
     return TechnicalAnalyst(config)
+
 
 # Export the agent class
 __all__ = ["TechnicalAnalyst", "TechnicalAnalystConfig", "create_agent"]

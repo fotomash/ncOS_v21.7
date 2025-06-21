@@ -26,6 +26,7 @@ class SessionStateManagerConfig:
     backup_interval: Optional[int] = 3600
     custom_params: Dict[str, Any] = field(default_factory=dict)
 
+
 class SessionStateManager:
     """
     SessionStateManager - Session state persistence and recovery
@@ -361,10 +362,12 @@ class SessionStateManager:
 
         self.status = "shutdown"
 
+
 # Agent factory function
 def create_agent(config: Dict[str, Any] = None) -> SessionStateManager:
     """Factory function to create SessionStateManager instance"""
     return SessionStateManager(config)
+
 
 # Export the agent class
 __all__ = ["SessionStateManager", "SessionStateManagerConfig", "create_agent"]

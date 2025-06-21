@@ -13,6 +13,7 @@ def _mock_deps(monkeypatch):
     monkeypatch.setitem(sys.modules, "zbar_agent", MagicMock())
     monkeypatch.setitem(sys.modules, "zbar_logger", MagicMock())
 
+
 from ncOS.menu_voice_integration import VoiceEnabledMenuSystem
 
 

@@ -1,4 +1,3 @@
-
 """
 NCOS v21.7.1 Market Data Native Agent
 Native market data processing with technical indicators and correlations
@@ -148,9 +147,9 @@ class NCOSMarketDataNativeAgent:
                 if i == 0:
                     obv_value = volume.iloc[i] if not pd.isna(volume.iloc[i]) else 0
                 else:
-                    if close.iloc[i] > close.iloc[i-1]:
+                    if close.iloc[i] > close.iloc[i - 1]:
                         obv_value += volume.iloc[i] if not pd.isna(volume.iloc[i]) else 0
-                    elif close.iloc[i] < close.iloc[i-1]:
+                    elif close.iloc[i] < close.iloc[i - 1]:
                         obv_value -= volume.iloc[i] if not pd.isna(volume.iloc[i]) else 0
                 obv.append(obv_value)
 
@@ -236,11 +235,13 @@ class NCOSMarketDataNativeAgent:
         window = 5
         for i in range(window, len(df) - window):
             # Check for local high (resistance)
-            if all(high.iloc[i] >= high.iloc[i-j] for j in range(1, window+1)) and                all(high.iloc[i] >= high.iloc[i+j] for j in range(1, window+1)):
+            if all(high.iloc[i] >= high.iloc[i - j] for j in range(1, window + 1)) and all(
+                    high.iloc[i] >= high.iloc[i + j] for j in range(1, window + 1)):
                 resistance_levels.append(float(high.iloc[i]))
 
             # Check for local low (support)
-            if all(low.iloc[i] <= low.iloc[i-j] for j in range(1, window+1)) and                all(low.iloc[i] <= low.iloc[i+j] for j in range(1, window+1)):
+            if all(low.iloc[i] <= low.iloc[i - j] for j in range(1, window + 1)) and all(
+                    low.iloc[i] <= low.iloc[i + j] for j in range(1, window + 1)):
                 support_levels.append(float(low.iloc[i]))
 
         return {

@@ -11,6 +11,7 @@ class OrderflowAnomalyAgentConfig:
     log_level: str = "INFO"
     custom_params: Dict[str, Any] = field(default_factory=dict)
 
+
 class OrderflowAnomalyAgent:
     """Basic Orderflow Anomaly strategy agent"""
 

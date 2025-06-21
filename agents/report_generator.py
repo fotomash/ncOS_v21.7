@@ -26,6 +26,7 @@ class ReportGeneratorConfig:
     formats: Optional[List[str]] = field(default_factory=lambda: ["json", "csv"])
     custom_params: Dict[str, Any] = field(default_factory=dict)
 
+
 class ReportGenerator:
     """
     ReportGenerator - Report generation and data visualization
@@ -80,7 +81,7 @@ class ReportGenerator:
                 "sections": ["agents", "metrics", "alerts"]
             },
             "performance": {
-                "title": "Performance Report", 
+                "title": "Performance Report",
                 "sections": ["portfolio", "trades", "pnl"]
             },
             "risk": {
@@ -378,10 +379,12 @@ class ReportGenerator:
         self.logger.info(f"Shutting down {self.config.agent_id}")
         self.status = "shutdown"
 
+
 # Agent factory function
 def create_agent(config: Dict[str, Any] = None) -> ReportGenerator:
     """Factory function to create ReportGenerator instance"""
     return ReportGenerator(config)
+
 
 # Export the agent class
 __all__ = ["ReportGenerator", "ReportGeneratorConfig", "create_agent"]
