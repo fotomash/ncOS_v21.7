@@ -1,7 +1,7 @@
 # NCOS Voice Journal System - Complete Folder Structure
 
 ```
-ncos-voice-journal/
+ncos_journal/
 │
 ├── 📁 core/                          # Core voice and integration modules
 │   ├── voice_tag_parser.py           # NLP parser for voice commands
@@ -86,25 +86,25 @@ from core.zbar_voice_integration import VoiceEnabledZBARAgent as ZBARAgent
 
 ```bash
 # 1. Create the folder structure
-mkdir -p ncos-voice-journal/{core,api,dashboard,config,logs/backup,data}
+mkdir -p ncos_journal/{core,api,dashboard,config,logs/backup,data}
 
 # 2. Copy the generated files to their locations
-cp voice_tag_parser.py ncos-voice-journal/core/
-cp zbar_voice_integration.py ncos-voice-journal/core/
-cp menu_voice_integration.py ncos-voice-journal/core/
-cp ncos_voice_unified.py ncos-voice-journal/core/
-cp voice_api_routes.py ncos-voice-journal/api/
-cp zbar_journal_dashboard.py ncos-voice-journal/dashboard/
-cp system_config.yaml ncos-voice-journal/config/
+cp voice_tag_parser.py ncos_journal/core/
+cp zbar_voice_integration.py ncos_journal/core/
+cp menu_voice_integration.py ncos_journal/core/
+cp ncos_voice_unified.py ncos_journal/core/
+cp voice_api_routes.py ncos_journal/api/
+cp zbar_journal_dashboard.py ncos_journal/dashboard/
+cp system_config.yaml ncos_journal/config/
 
 # 3. Copy documentation and setup files
-cp NCOS_Voice_Journal_Documentation.md ncos-voice-journal/
-cp QUICK_START_Voice_Journal.md ncos-voice-journal/
-cp requirements.txt ncos-voice-journal/
-cp setup_ncos.py ncos-voice-journal/
+cp NCOS_Voice_Journal_Documentation.md ncos_journal/
+cp QUICK_START_Voice_Journal.md ncos_journal/
+cp requirements.txt ncos_journal/
+cp setup_ncos.py ncos_journal/
 
 # 4. Navigate to the project
-cd ncos-voice-journal
+cd ncos_journal
 
 # 5. Run the setup script
 python setup_ncos.py
@@ -117,7 +117,7 @@ pip install -r requirements.txt
 
 ### 1. **Minimal Integration** (Use voice standalone):
 ```
-ncos-voice-journal/
+ncos_journal/
 ├── core/           # Just the voice files
 ├── api/            # API server
 ├── dashboard/      # Streamlit UI

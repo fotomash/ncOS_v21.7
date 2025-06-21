@@ -3,7 +3,7 @@
 ## Complete Structure:
 
 ```
-🏠 ncos-voice-journal/
+🏠 ncos_journal/
     │
     ├── 🧠 core/
     │   ├── 🎤 voice_tag_parser.py

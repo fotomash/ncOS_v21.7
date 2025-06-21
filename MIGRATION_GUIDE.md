@@ -7,7 +7,7 @@ Keep your existing NCOS separate and run voice journal alongside:
 ```bash
 your-workspace/
 ├── ncos-v21/              # Your existing NCOS
-└── ncos-voice-journal/    # New voice system
+└── ncos_journal/    # New voice system
 ```
 
 ## Option 2: Integrated Installation (For Production)
