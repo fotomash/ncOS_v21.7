@@ -1,55 +1,79 @@
 #!/bin/bash
+# NCOS Voice Journal System Launcher
 
-echo "Starting ncOS Journal v2.0..."
+echo "🚀 Starting NCOS Voice Journal System..."
+echo "=================================="
 
-# Kill any existing processes on ports 8000 and 8501
-echo "Checking for existing processes..."
-lsof -ti:8000 | xargs kill -9 2>/dev/null || true
-lsof -ti:8501 | xargs kill -9 2>/dev/null || true
+# Check Python version
+python_version=$(python3 --version 2>&1 | awk '{print $2}')
+echo "Python version: $python_version"
 
-# Get the directory where this script is located
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+# Check if virtual environment exists
+if [ ! -d "venv" ]; then
+    echo "Creating virtual environment..."
+    python3 -m venv venv
+fi
 
-# Start API server
-echo "Starting API server..."
-cd "$SCRIPT_DIR"
-uvicorn api.main:app --reload --host 0.0.0.0 --port 8000 &
-API_PID=$!
+# Activate virtual environment
+echo "Activating virtual environment..."
+source venv/bin/activate
 
-# Wait a moment for API to start
-sleep 2
+# Install/update dependencies
+echo "Checking dependencies..."
+pip install -r requirements.txt -q
 
-# Start dashboard
-echo "Starting dashboard..."
-cd "$SCRIPT_DIR"
-streamlit run dashboard/app.py --server.port 8501 --server.address 0.0.0.0 &
-DASHBOARD_PID=$!
-
-echo ""
-echo "ncOS Journal is running!"
-echo "API: http://localhost:8000"
-echo "API Docs: http://localhost:8000/docs"
-echo "Dashboard: http://localhost:8501"
-echo ""
-echo "Press Ctrl+C to stop..."
-
-# Function to handle cleanup
+# Function to cleanup on exit
 cleanup() {
     echo ""
-    echo "Stopping ncOS Journal..."
-    kill $API_PID 2>/dev/null || true
-    kill $DASHBOARD_PID 2>/dev/null || true
-    # Also kill any lingering processes
-    lsof -ti:8000 | xargs kill -9 2>/dev/null || true
-    lsof -ti:8501 | xargs kill -9 2>/dev/null || true
-    echo "ncOS Journal stopped."
+    echo "Shutting down services..."
+    kill $API_PID $DASHBOARD_PID 2>/dev/null
+    echo "✅ All services stopped"
     exit 0
 }
 
-# Set up trap to catch Ctrl+C
-trap cleanup INT
+# Set trap for cleanup
+trap cleanup INT TERM
 
-# Wait indefinitely
-while true; do
-    sleep 1
-done
+# Start API server in background
+echo ""
+echo "Starting API server on port 8001..."
+cd api && python main.py &
+API_PID=$!
+cd ..
+
+# Wait for API to start
+sleep 3
+
+# Check if API is running
+if ! curl -s http://localhost:8001/health > /dev/null; then
+    echo "❌ API failed to start"
+    exit 1
+fi
+
+echo "✅ API server running"
+
+# Start Streamlit dashboard
+echo ""
+echo "Starting dashboard on port 8501..."
+cd dashboard && streamlit run zbar_journal_dashboard.py --server.port 8501 &
+DASHBOARD_PID=$!
+cd ..
+
+# Wait for dashboard to start
+sleep 3
+
+echo ""
+echo "✅ All services started!"
+echo ""
+echo "📊 Dashboard: http://localhost:8501"
+echo "📚 API Docs: http://localhost:8001/docs"
+echo ""
+echo "Starting voice interface..."
+echo "=================================="
+echo ""
+
+# Start voice interface (this runs in foreground)
+cd core && python ncos_voice_unified.py
+
+# If voice interface exits, cleanup
+cleanup
