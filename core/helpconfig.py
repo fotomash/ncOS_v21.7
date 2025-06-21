@@ -3,17 +3,17 @@
 
 from __future__ import annotations
 
-from argparse import Action
-from collections.abc import Generator
 import os
 import sys
+from argparse import Action
+from collections.abc import Generator
 
+import pytest
 from _pytest.config import Config
 from _pytest.config import ExitCode
 from _pytest.config import PrintHelp
 from _pytest.config.argparsing import Parser
 from _pytest.terminal import TerminalReporter
-import pytest
 
 
 class HelpAction(Action):
@@ -53,7 +53,7 @@ def pytest_addoption(parser: Parser) -> None:
         default=0,
         dest="version",
         help="Display pytest version and information about plugins. "
-        "When given twice, also display information about plugins.",
+             "When given twice, also display information about plugins.",
     )
     group._addoption(  # private to use reserved lower-case short option
         "-h",
@@ -69,15 +69,15 @@ def pytest_addoption(parser: Parser) -> None:
         default=[],
         metavar="name",
         help="Early-load given plugin module name or entry point (multi-allowed). "
-        "To avoid loading of plugins, use the `no:` prefix, e.g. "
-        "`no:doctest`. See also --disable-plugin-autoload.",
+             "To avoid loading of plugins, use the `no:` prefix, e.g. "
+             "`no:doctest`. See also --disable-plugin-autoload.",
     )
     group.addoption(
         "--disable-plugin-autoload",
         action="store_true",
         default=False,
         help="Disable plugin auto-loading through entry point packaging metadata. "
-        "Only plugins explicitly specified in -p or env var PYTEST_PLUGINS will be loaded.",
+             "Only plugins explicitly specified in -p or env var PYTEST_PLUGINS will be loaded.",
     )
     group.addoption(
         "--traceconfig",
@@ -94,8 +94,8 @@ def pytest_addoption(parser: Parser) -> None:
         dest="debug",
         metavar="DEBUG_FILE_NAME",
         help="Store internal tracing debug information in this log file. "
-        "This file is opened with 'w' and truncated as a result, care advised. "
-        "Default: pytestdebug.log.",
+             "This file is opened with 'w' and truncated as a result, care advised. "
+             "Default: pytestdebug.log.",
     )
     group._addoption(  # private to use reserved lower-case short option
         "-o",
@@ -103,7 +103,7 @@ def pytest_addoption(parser: Parser) -> None:
         dest="override_ini",
         action="append",
         help='Override ini option with "option=value" style, '
-        "e.g. `-o xfail_strict=True -o cache_dir=cache`.",
+             "e.g. `-o xfail_strict=True -o cache_dir=cache`.",
     )
 
 

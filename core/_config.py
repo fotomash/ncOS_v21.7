@@ -330,7 +330,6 @@ def prepare_config(config: ConfigDict | dict[str, Any] | type[Any] | None) -> Co
 
 config_keys = set(ConfigDict.__annotations__.keys())
 
-
 V2_REMOVED_KEYS = {
     'allow_mutation',
     'error_msg_templates',

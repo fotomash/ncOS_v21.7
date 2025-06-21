@@ -52,7 +52,7 @@ split_date: '2025-06-21T16:03:32.623700'
 statistics:
   categories: !!python/object/apply:collections.defaultdict
     args:
-    - !!python/name:builtins.int ''
+      - !!python/name:builtins.int ''
     dictitems:
       backup: 1
       bootstrap: 1

@@ -1,4 +1,3 @@
 """
 Exceptions module for core
 """
-

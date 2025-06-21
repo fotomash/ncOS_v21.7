@@ -59,60 +59,60 @@ NCOS_v21_7_1_Enhanced_Complete_Deployment_Manifest:
       testing_coverage: 100%
       total_agents_integrated: 8
     next_steps:
-    - Connect to live market data feeds
-    - Configure API endpoints for trading platform
-    - Set up monitoring and alerting
-    - Deploy to production environment
-    - Train team on enhanced capabilities
-    - Implement risk management protocols
+      - Connect to live market data feeds
+      - Configure API endpoints for trading platform
+      - Set up monitoring and alerting
+      - Deploy to production environment
+      - Train team on enhanced capabilities
+      - Implement risk management protocols
 docker-compose:
   services:
     journal-api:
       build: .
       container_name: ncos-journal-api
       environment:
-      - JOURNAL_DATA_DIR=/app/journal_data
+        - JOURNAL_DATA_DIR=/app/journal_data
       ports:
-      - 8000:8000
+        - 8000:8000
       restart: unless-stopped
       volumes:
-      - ./journal_data:/app/journal_data
+        - ./journal_data:/app/journal_data
     journal-dashboard:
       build: .
       command: streamlit run app.py
       container_name: ncos-journal-dashboard
       depends_on:
-      - journal-api
+        - journal-api
       ports:
-      - 8501:8501
+        - 8501:8501
       restart: unless-stopped
       volumes:
-      - ./journal_data:/app/journal_data
+        - ./journal_data:/app/journal_data
     llm-assistant:
       build: .
       command: python llm_assistant.py
       container_name: ncos-llm-assistant
       depends_on:
-      - journal-api
+        - journal-api
       environment:
-      - OPENAI_API_KEY=${OPENAI_API_KEY}
-      - JOURNAL_API_URL=http://journal-api:8000
+        - OPENAI_API_KEY=${OPENAI_API_KEY}
+        - JOURNAL_API_URL=http://journal-api:8000
       ports:
-      - 8002:8002
+        - 8002:8002
       restart: unless-stopped
       volumes:
-      - ./journal_data:/app/journal_data
+        - ./journal_data:/app/journal_data
     nginx:
       container_name: ncos-nginx
       depends_on:
-      - journal-api
-      - journal-dashboard
-      - llm-assistant
+        - journal-api
+        - journal-dashboard
+        - llm-assistant
       image: nginx:alpine
       ports:
-      - 80:80
-      - 443:443
+        - 80:80
+        - 443:443
       restart: unless-stopped
       volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
+        - ./nginx.conf:/etc/nginx/nginx.conf
   version: '3.8'

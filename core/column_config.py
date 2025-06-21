@@ -37,7 +37,6 @@ __all__ = [
     "TimeColumn",
 ]
 
-
 from streamlit.elements.lib.column_types import (
     AreaChartColumn,
     BarChartColumn,

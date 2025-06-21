@@ -4,14 +4,15 @@ Robust Configuration Consolidator for ncOS
 Handles YAML errors gracefully and provides better error reporting
 """
 
-import os
 import json
-import yaml
-import shutil
-from pathlib import Path
-from datetime import datetime
-from collections import defaultdict
 import re
+import shutil
+from collections import defaultdict
+from datetime import datetime
+from pathlib import Path
+
+import yaml
+
 
 class RobustConfigConsolidator:
     def __init__(self, root_dir="."):
@@ -345,6 +346,7 @@ class RobustConfigConsolidator:
         print("\nConsolidation complete!")
         if self.errors:
             print(f"\n⚠️  {len(self.errors)} errors were encountered. Check consolidation_errors.txt for details.")
+
 
 if __name__ == "__main__":
     consolidator = RobustConfigConsolidator()

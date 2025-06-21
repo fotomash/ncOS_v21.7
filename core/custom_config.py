@@ -12,14 +12,12 @@ from torch.ao.quantization.quant_type import (
     QuantType,
 )
 
-
 __all__ = [
     "ConvertCustomConfig",
     "FuseCustomConfig",
     "PrepareCustomConfig",
     "StandaloneModuleConfigEntry",
 ]
-
 
 # TODO: replace all usages with these constants
 STANDALONE_MODULE_NAME_DICT_KEY = "standalone_module_name"
@@ -78,12 +76,12 @@ class PrepareCustomConfig:
         return f"PrepareCustomConfig({dict_nonempty})"
 
     def set_standalone_module_name(
-        self,
-        module_name: str,
-        qconfig_mapping: Optional[QConfigMapping],
-        example_inputs: tuple[Any, ...],
-        prepare_custom_config: Optional[PrepareCustomConfig],
-        backend_config: Optional[BackendConfig],
+            self,
+            module_name: str,
+            qconfig_mapping: Optional[QConfigMapping],
+            example_inputs: tuple[Any, ...],
+            prepare_custom_config: Optional[PrepareCustomConfig],
+            backend_config: Optional[BackendConfig],
     ) -> PrepareCustomConfig:
         """
         Set the configuration for running a standalone module identified by ``module_name``.
@@ -98,12 +96,12 @@ class PrepareCustomConfig:
         return self
 
     def set_standalone_module_class(
-        self,
-        module_class: type,
-        qconfig_mapping: Optional[QConfigMapping],
-        example_inputs: tuple[Any, ...],
-        prepare_custom_config: Optional[PrepareCustomConfig],
-        backend_config: Optional[BackendConfig],
+            self,
+            module_class: type,
+            qconfig_mapping: Optional[QConfigMapping],
+            example_inputs: tuple[Any, ...],
+            prepare_custom_config: Optional[PrepareCustomConfig],
+            backend_config: Optional[BackendConfig],
     ) -> PrepareCustomConfig:
         """
         Set the configuration for running a standalone module identified by ``module_class``.
@@ -118,10 +116,10 @@ class PrepareCustomConfig:
         return self
 
     def set_float_to_observed_mapping(
-        self,
-        float_class: type,
-        observed_class: type,
-        quant_type: QuantType = QuantType.STATIC,
+            self,
+            float_class: type,
+            observed_class: type,
+            quant_type: QuantType = QuantType.STATIC,
     ) -> PrepareCustomConfig:
         """
         Set the mapping from a custom float module class to a custom observed module class.
@@ -139,7 +137,7 @@ class PrepareCustomConfig:
         return self
 
     def set_non_traceable_module_names(
-        self, module_names: list[str]
+            self, module_names: list[str]
     ) -> PrepareCustomConfig:
         """
         Set the modules that are not symbolically traceable, identified by name.
@@ -148,7 +146,7 @@ class PrepareCustomConfig:
         return self
 
     def set_non_traceable_module_classes(
-        self, module_classes: list[type]
+            self, module_classes: list[type]
     ) -> PrepareCustomConfig:
         """
         Set the modules that are not symbolically traceable, identified by class.
@@ -183,7 +181,7 @@ class PrepareCustomConfig:
     # TODO: remove this
     @classmethod
     def from_dict(
-        cls, prepare_custom_config_dict: dict[str, Any]
+            cls, prepare_custom_config_dict: dict[str, Any]
     ) -> PrepareCustomConfig:
         """
         Create a ``PrepareCustomConfig`` from a dictionary with the following items:
@@ -220,7 +218,7 @@ class PrepareCustomConfig:
             )
 
         def _get_prepare_custom_config(
-            obj: Any, dict_key: str
+                obj: Any, dict_key: str
         ) -> Optional[PrepareCustomConfig]:
             """
             Convert the given object into a PrepareCustomConfig if possible, else throw an exception.
@@ -247,11 +245,11 @@ class PrepareCustomConfig:
 
         conf = cls()
         for (
-            module_name,
-            qconfig_dict,
-            example_inputs,
-            _prepare_custom_config_dict,
-            backend_config_dict,
+                module_name,
+                qconfig_dict,
+                example_inputs,
+                _prepare_custom_config_dict,
+                backend_config_dict,
         ) in prepare_custom_config_dict.get(STANDALONE_MODULE_NAME_DICT_KEY, []):
             qconfig_mapping = _get_qconfig_mapping(
                 qconfig_dict, STANDALONE_MODULE_NAME_DICT_KEY
@@ -270,11 +268,11 @@ class PrepareCustomConfig:
                 backend_config,
             )
         for (
-            module_class,
-            qconfig_dict,
-            example_inputs,
-            _prepare_custom_config_dict,
-            backend_config_dict,
+                module_class,
+                qconfig_dict,
+                example_inputs,
+                _prepare_custom_config_dict,
+                backend_config_dict,
         ) in prepare_custom_config_dict.get(STANDALONE_MODULE_CLASS_DICT_KEY, []):
             qconfig_mapping = _get_qconfig_mapping(
                 qconfig_dict, STANDALONE_MODULE_CLASS_DICT_KEY
@@ -293,7 +291,7 @@ class PrepareCustomConfig:
                 backend_config,
             )
         for quant_type_name, custom_module_mapping in prepare_custom_config_dict.get(
-            FLOAT_TO_OBSERVED_DICT_KEY, {}
+                FLOAT_TO_OBSERVED_DICT_KEY, {}
         ).items():
             quant_type = _quant_type_from_str(quant_type_name)
             for float_class, observed_class in custom_module_mapping.items():
@@ -350,8 +348,8 @@ class PrepareCustomConfig:
                 _make_tuple(module_class, sm_config_entry)
             )
         for (
-            quant_type,
-            float_to_observed_mapping,
+                quant_type,
+                float_to_observed_mapping,
         ) in self.float_to_observed_mapping.items():
             if FLOAT_TO_OBSERVED_DICT_KEY not in d:
                 d[FLOAT_TO_OBSERVED_DICT_KEY] = {}
@@ -391,10 +389,10 @@ class ConvertCustomConfig:
         return f"ConvertCustomConfig({dict_nonempty})"
 
     def set_observed_to_quantized_mapping(
-        self,
-        observed_class: type,
-        quantized_class: type,
-        quant_type: QuantType = QuantType.STATIC,
+            self,
+            observed_class: type,
+            quantized_class: type,
+            quant_type: QuantType = QuantType.STATIC,
     ) -> ConvertCustomConfig:
         """
         Set the mapping from a custom observed module class to a custom quantized module class.
@@ -418,7 +416,7 @@ class ConvertCustomConfig:
     # TODO: remove this
     @classmethod
     def from_dict(
-        cls, convert_custom_config_dict: dict[str, Any]
+            cls, convert_custom_config_dict: dict[str, Any]
     ) -> ConvertCustomConfig:
         """
         Create a ``ConvertCustomConfig`` from a dictionary with the following items:
@@ -436,7 +434,7 @@ class ConvertCustomConfig:
         """
         conf = cls()
         for quant_type_name, custom_module_mapping in convert_custom_config_dict.get(
-            OBSERVED_TO_QUANTIZED_DICT_KEY, {}
+                OBSERVED_TO_QUANTIZED_DICT_KEY, {}
         ).items():
             quant_type = _quant_type_from_str(quant_type_name)
             for observed_class, quantized_class in custom_module_mapping.items():
@@ -455,8 +453,8 @@ class ConvertCustomConfig:
         """
         d: dict[str, Any] = {}
         for (
-            quant_type,
-            observed_to_quantized_mapping,
+                quant_type,
+                observed_to_quantized_mapping,
         ) in self.observed_to_quantized_mapping.items():
             if OBSERVED_TO_QUANTIZED_DICT_KEY not in d:
                 d[OBSERVED_TO_QUANTIZED_DICT_KEY] = {}

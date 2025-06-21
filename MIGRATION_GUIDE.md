@@ -1,25 +1,30 @@
 # ncOS Project Consolidation and Remapping Guide
 
 ## Overview
+
 This guide explains the consolidation and remapping process for the ncOS project.
 
 ## What This Does
 
 ### 1. **Backup Creation**
+
 - Creates a timestamped backup of your current project
 - Ensures you can revert if needed
 
 ### 2. **Structure Reorganization**
+
 - Consolidates duplicate files
 - Creates a clean, modular structure
 - Organizes code by functionality
 
 ### 3. **Configuration Consolidation**
+
 - Merges all configuration files
 - Creates category-based config files
 - Establishes a unified configuration system
 
 ### 4. **Code Migration**
+
 - Moves Python files to appropriate modules
 - Maintains functionality while improving organization
 - Updates module structure
@@ -53,13 +58,13 @@ ncOS_consolidated/
    ```
 
 2. **Review the Results**:
-   - Check `consolidation_report.json` for details
-   - Review `CONSOLIDATION_SUMMARY.md` for overview
+    - Check `consolidation_report.json` for details
+    - Review `CONSOLIDATION_SUMMARY.md` for overview
 
 3. **Update Your Code**:
-   - Update import statements
-   - Test functionality
-   - Update documentation
+    - Update import statements
+    - Test functionality
+    - Update documentation
 
 ## Benefits
 
@@ -95,6 +100,6 @@ ncOS_consolidated/
    ```
 
 4. **Update Documentation**:
-   - Update README.md
-   - Update API documentation
-   - Update deployment guides
+    - Update README.md
+    - Update API documentation
+    - Update deployment guides

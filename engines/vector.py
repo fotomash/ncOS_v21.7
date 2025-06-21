@@ -1,4 +1,3 @@
 """
 Vector module for engines
 """
-

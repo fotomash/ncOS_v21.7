@@ -1,9 +1,11 @@
 # Config Loader for Split YAML Files
 # Automatically loads all split configuration files
 
-import yaml
 from pathlib import Path
 from typing import Dict, Any
+
+import yaml
+
 
 class ConfigLoader:
     def __init__(self, config_dir: str = '.'):
@@ -49,6 +51,7 @@ class ConfigLoader:
                 return category_data[key]
 
         return None
+
 
 # Example usage
 if __name__ == '__main__':

@@ -1,12 +1,14 @@
 # YAML Split Report
 
 ## Summary
+
 - **Original File**: ncOS_v21.7-main/config/general_config.yaml
 - **Original Size**: 24,089,894 bytes (22.97 MB)
 - **Total Keys**: 93
 - **Files Created**: 12
 
 ## Categories
+
 - **backup**: 1 keys
 - **bootstrap**: 1 keys
 - **config**: 28 keys
@@ -21,6 +23,7 @@
 - **trigger**: 2 keys
 
 ## Benefits
+
 1. ✅ Faster loading times
 2. ✅ Lower memory usage
 3. ✅ Easier to edit and maintain
@@ -28,6 +31,7 @@
 5. ✅ Category-based organization
 
 ## Usage
+
 ```python
 from config_loader import ConfigLoader
 

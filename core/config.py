@@ -50,11 +50,12 @@ Implementation
 
 from __future__ import annotations
 
+import re
+import warnings
 from contextlib import (
     ContextDecorator,
     contextmanager,
 )
-import re
 from typing import (
     TYPE_CHECKING,
     Any,
@@ -63,7 +64,6 @@ from typing import (
     NamedTuple,
     cast,
 )
-import warnings
 
 from pandas._typing import (
     F,
@@ -451,6 +451,7 @@ reset_option = CallableDynamicDoc(_reset_option, _reset_option_tmpl)
 describe_option = CallableDynamicDoc(_describe_option, _describe_option_tmpl)
 options = DictWrapper(_global_config)
 
+
 #
 # Functions for use by pandas developers, in addition to User - api
 
@@ -489,11 +490,11 @@ class option_context(ContextDecorator):
 
 
 def register_option(
-    key: str,
-    defval: object,
-    doc: str = "",
-    validator: Callable[[object], Any] | None = None,
-    cb: Callable[[str], Any] | None = None,
+        key: str,
+        defval: object,
+        doc: str = "",
+        validator: Callable[[object], Any] | None = None,
+        cb: Callable[[str], Any] | None = None,
 ) -> None:
     """
     Register an option in the package-wide pandas config object
@@ -564,10 +565,10 @@ def register_option(
 
 
 def deprecate_option(
-    key: str,
-    msg: str | None = None,
-    rkey: str | None = None,
-    removal_ver: str | None = None,
+        key: str,
+        msg: str | None = None,
+        rkey: str | None = None,
+        removal_ver: str | None = None,
 ) -> None:
     """
     Mark option `key` as deprecated, if code attempts to access this option,
@@ -764,7 +765,7 @@ def pp_options_list(keys: Iterable[str], width: int = 80, _print: bool = False):
     keys = [x for x in keys if x.find(".") >= 0]
 
     for k, g in groupby(sorted(keys), lambda x: x[: x.rfind(".")]):
-        ks = [x[len(k) + 1 :] for x in list(g)]
+        ks = [x[len(k) + 1:] for x in list(g)]
         ls += pp(k, ks)
     s = "\n".join(ls)
     if _print:

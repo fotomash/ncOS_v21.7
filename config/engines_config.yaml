@@ -4,6 +4,6 @@ _metadata:
   created: '2025-06-21T16:03:32.623343'
   keys_count: 2
 vector_processor:
-  settings: {}
+  settings: { }
 vectormemoryboot_config:
-  settings: {}
+  settings: { }

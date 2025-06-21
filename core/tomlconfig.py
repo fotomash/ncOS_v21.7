@@ -7,9 +7,8 @@ from __future__ import annotations
 
 import os
 import re
-
-from typing import Any, Callable, TypeVar
 from collections.abc import Iterable
+from typing import Any, Callable, TypeVar
 
 from coverage import env
 from coverage.exceptions import ConfigError
@@ -19,7 +18,8 @@ from coverage.types import TConfigSectionOut, TConfigValueOut
 os = isolate_module(os)
 
 if env.PYVERSION >= (3, 11, 0, "alpha", 7):
-    import tomllib      # pylint: disable=import-error
+    import tomllib  # pylint: disable=import-error
+
     has_tomllib = True
 else:
     # TOML support on Python 3.10 and below is an install-time extra option.
@@ -32,6 +32,7 @@ class TomlDecodeError(Exception):
 
 
 TWant = TypeVar("TWant")
+
 
 class TomlConfigParser:
     """TOML file reading with the interface of HandyConfigParser."""
@@ -148,13 +149,13 @@ class TomlConfigParser:
         return value
 
     def _check_type(
-        self,
-        section: str,
-        option: str,
-        value: Any,
-        type_: type[TWant],
-        converter: Callable[[Any], TWant] | None,
-        type_desc: str,
+            self,
+            section: str,
+            option: str,
+            value: Any,
+            type_: type[TWant],
+            converter: Callable[[Any], TWant] | None,
+            type_desc: str,
     ) -> TWant:
         """Check that `value` has the type we want, converting if needed.
 

@@ -27,6 +27,7 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 
 from packaging import version
 
+from .import_utils import is_auto_gptq_available
 from ..utils import (
     is_auto_awq_available,
     is_compressed_tensors_available,
@@ -37,8 +38,6 @@ from ..utils import (
     is_torchao_available,
     logging,
 )
-from .import_utils import is_auto_gptq_available
-
 
 if is_torch_available():
     import torch
@@ -219,12 +218,12 @@ class AutoRoundConfig(QuantizationConfigMixin):
     """
 
     def __init__(
-        self,
-        bits: int = 4,
-        group_size: int = 128,
-        sym: bool = True,
-        backend: str = "auto",
-        **kwargs,
+            self,
+            bits: int = 4,
+            group_size: int = 128,
+            sym: bool = True,
+            backend: str = "auto",
+            **kwargs,
     ):
         self.bits = bits
         self.group_size = group_size
@@ -298,14 +297,14 @@ class HqqConfig(QuantizationConfigMixin):
     """
 
     def __init__(
-        self,
-        nbits: int = 4,
-        group_size: int = 64,
-        view_as_float: bool = False,
-        axis: Optional[int] = None,
-        dynamic_config: Optional[dict] = None,
-        skip_modules: List[str] = ["lm_head"],
-        **kwargs,
+            self,
+            nbits: int = 4,
+            group_size: int = 64,
+            view_as_float: bool = False,
+            axis: Optional[int] = None,
+            dynamic_config: Optional[dict] = None,
+            skip_modules: List[str] = ["lm_head"],
+            **kwargs,
     ):
         if is_hqq_available():
             from hqq.core.quantize import BaseQuantizeConfig as HQQBaseQuantizeConfig
@@ -453,18 +452,18 @@ class BitsAndBytesConfig(QuantizationConfigMixin):
     """
 
     def __init__(
-        self,
-        load_in_8bit=False,
-        load_in_4bit=False,
-        llm_int8_threshold=6.0,
-        llm_int8_skip_modules=None,
-        llm_int8_enable_fp32_cpu_offload=False,
-        llm_int8_has_fp16_weight=False,
-        bnb_4bit_compute_dtype=None,
-        bnb_4bit_quant_type="fp4",
-        bnb_4bit_use_double_quant=False,
-        bnb_4bit_quant_storage=None,
-        **kwargs,
+            self,
+            load_in_8bit=False,
+            load_in_4bit=False,
+            llm_int8_threshold=6.0,
+            llm_int8_skip_modules=None,
+            llm_int8_enable_fp32_cpu_offload=False,
+            llm_int8_has_fp16_weight=False,
+            bnb_4bit_compute_dtype=None,
+            bnb_4bit_quant_type="fp4",
+            bnb_4bit_use_double_quant=False,
+            bnb_4bit_quant_storage=None,
+            **kwargs,
     ):
         self.quant_method = QuantizationMethod.BITS_AND_BYTES
 
@@ -564,7 +563,7 @@ class BitsAndBytesConfig(QuantizationConfigMixin):
             raise TypeError("bnb_4bit_use_double_quant must be a boolean")
 
         if self.load_in_4bit and not version.parse(importlib.metadata.version("bitsandbytes")) >= version.parse(
-            "0.39.0"
+                "0.39.0"
         ):
             raise ValueError(
                 "4 bit quantization requires bitsandbytes>=0.39.0 - please upgrade your bitsandbytes version"
@@ -706,30 +705,30 @@ class GPTQConfig(QuantizationConfigMixin):
     """
 
     def __init__(
-        self,
-        bits: int,
-        tokenizer: Any = None,
-        dataset: Optional[Union[List[str], str]] = None,
-        group_size: int = 128,
-        damp_percent: float = 0.1,
-        desc_act: bool = False,
-        sym: bool = True,
-        true_sequential: bool = True,
-        checkpoint_format: str = "gptq",
-        meta: Optional[Dict[str, Any]] = None,
-        backend: Optional[str] = None,
-        use_cuda_fp16: bool = False,
-        model_seqlen: Optional[int] = None,
-        block_name_to_quantize: Optional[str] = None,
-        module_name_preceding_first_block: Optional[List[str]] = None,
-        batch_size: int = 1,
-        pad_token_id: Optional[int] = None,
-        use_exllama: Optional[bool] = None,
-        max_input_length: Optional[int] = None,
-        exllama_config: Optional[Dict[str, Any]] = None,
-        cache_block_outputs: bool = True,
-        modules_in_block_to_quantize: Optional[List[List[str]]] = None,
-        **kwargs,
+            self,
+            bits: int,
+            tokenizer: Any = None,
+            dataset: Optional[Union[List[str], str]] = None,
+            group_size: int = 128,
+            damp_percent: float = 0.1,
+            desc_act: bool = False,
+            sym: bool = True,
+            true_sequential: bool = True,
+            checkpoint_format: str = "gptq",
+            meta: Optional[Dict[str, Any]] = None,
+            backend: Optional[str] = None,
+            use_cuda_fp16: bool = False,
+            model_seqlen: Optional[int] = None,
+            block_name_to_quantize: Optional[str] = None,
+            module_name_preceding_first_block: Optional[List[str]] = None,
+            batch_size: int = 1,
+            pad_token_id: Optional[int] = None,
+            use_exllama: Optional[bool] = None,
+            max_input_length: Optional[int] = None,
+            exllama_config: Optional[Dict[str, Any]] = None,
+            cache_block_outputs: bool = True,
+            modules_in_block_to_quantize: Optional[List[List[str]]] = None,
+            **kwargs,
     ):
         self.quant_method = QuantizationMethod.GPTQ
         self.bits = bits
@@ -908,18 +907,18 @@ class AwqConfig(QuantizationConfigMixin):
     """
 
     def __init__(
-        self,
-        bits: int = 4,
-        group_size: int = 128,
-        zero_point: bool = True,
-        version: AWQLinearVersion = AWQLinearVersion.GEMM,
-        backend: AwqBackendPackingMethod = AwqBackendPackingMethod.AUTOAWQ,
-        do_fuse: Optional[bool] = None,
-        fuse_max_seq_len: Optional[int] = None,
-        modules_to_fuse: Optional[dict] = None,
-        modules_to_not_convert: Optional[List] = None,
-        exllama_config: Optional[Dict[str, int]] = None,
-        **kwargs,
+            self,
+            bits: int = 4,
+            group_size: int = 128,
+            zero_point: bool = True,
+            version: AWQLinearVersion = AWQLinearVersion.GEMM,
+            backend: AwqBackendPackingMethod = AwqBackendPackingMethod.AUTOAWQ,
+            do_fuse: Optional[bool] = None,
+            fuse_max_seq_len: Optional[int] = None,
+            modules_to_fuse: Optional[dict] = None,
+            modules_to_not_convert: Optional[List] = None,
+            exllama_config: Optional[Dict[str, int]] = None,
+            **kwargs,
     ):
         self.quant_method = QuantizationMethod.AWQ
 
@@ -1070,13 +1069,13 @@ class AqlmConfig(QuantizationConfigMixin):
     """
 
     def __init__(
-        self,
-        in_group_size: int = 8,
-        out_group_size: int = 1,
-        num_codebooks: int = 1,
-        nbits_per_codebook: int = 16,
-        linear_weights_not_to_quantize: Optional[List[str]] = None,
-        **kwargs,
+            self,
+            in_group_size: int = 8,
+            out_group_size: int = 1,
+            num_codebooks: int = 1,
+            nbits_per_codebook: int = 16,
+            linear_weights_not_to_quantize: Optional[List[str]] = None,
+            **kwargs,
     ):
         self.quant_method = QuantizationMethod.AQLM
         self.in_group_size = in_group_size
@@ -1101,7 +1100,7 @@ class AqlmConfig(QuantizationConfigMixin):
             raise TypeError("nbits_per_codebook must be a float")
 
         if self.linear_weights_not_to_quantize is not None and not isinstance(
-            self.linear_weights_not_to_quantize, list
+                self.linear_weights_not_to_quantize, list
         ):
             raise ValueError("linear_weights_not_to_quantize must be a list of strings")
 
@@ -1127,20 +1126,20 @@ class VptqLayerConfig(QuantizationConfigMixin):
     """
 
     def __init__(
-        self,
-        enable_norm: bool = True,
-        enable_perm: bool = True,
-        group_num: int = 1,
-        group_size: int = -1,
-        in_features: int = -1,
-        indices_as_float: bool = False,
-        is_indice_packed: bool = True,
-        num_centroids: tuple = [-1, -1],
-        num_res_centroids: tuple = [-1, -1],
-        out_features: int = -1,
-        outlier_size: int = 0,
-        vector_lens: tuple = [-1, -1],
-        **kwargs,
+            self,
+            enable_norm: bool = True,
+            enable_perm: bool = True,
+            group_num: int = 1,
+            group_size: int = -1,
+            in_features: int = -1,
+            indices_as_float: bool = False,
+            is_indice_packed: bool = True,
+            num_centroids: tuple = [-1, -1],
+            num_res_centroids: tuple = [-1, -1],
+            out_features: int = -1,
+            outlier_size: int = 0,
+            vector_lens: tuple = [-1, -1],
+            **kwargs,
     ):
         self.enable_norm = enable_norm
         self.enable_perm = enable_perm
@@ -1181,12 +1180,12 @@ class VptqConfig(QuantizationConfigMixin):
     """
 
     def __init__(
-        self,
-        enable_proxy_error: bool = False,
-        config_for_layers: Dict[str, Any] = {},
-        shared_layer_config: Dict[str, Any] = {},
-        modules_to_not_convert: Optional[List] = None,
-        **kwargs,
+            self,
+            enable_proxy_error: bool = False,
+            config_for_layers: Dict[str, Any] = {},
+            shared_layer_config: Dict[str, Any] = {},
+            modules_to_not_convert: Optional[List] = None,
+            **kwargs,
     ):
         self.quant_method = QuantizationMethod.VPTQ
         self.enable_proxy_error = enable_proxy_error
@@ -1222,11 +1221,11 @@ class QuantoConfig(QuantizationConfigMixin):
     """
 
     def __init__(
-        self,
-        weights="int8",
-        activations=None,
-        modules_to_not_convert: Optional[List] = None,
-        **kwargs,
+            self,
+            weights="int8",
+            activations=None,
+            modules_to_not_convert: Optional[List] = None,
+            **kwargs,
     ):
         self.quant_method = QuantizationMethod.QUANTO
         self.weights = weights
@@ -1261,10 +1260,10 @@ class EetqConfig(QuantizationConfigMixin):
     """
 
     def __init__(
-        self,
-        weights: str = "int8",
-        modules_to_not_convert: Optional[List] = None,
-        **kwargs,
+            self,
+            weights: str = "int8",
+            modules_to_not_convert: Optional[List] = None,
+            **kwargs,
     ):
         self.quant_method = QuantizationMethod.EETQ
         self.weights = weights
@@ -1307,17 +1306,17 @@ class CompressedTensorsConfig(QuantizationConfigMixin):
     """
 
     def __init__(
-        self,
-        config_groups: Optional[Dict[str, Union["QuantizationScheme", List[str]]]] = None,  # noqa: F821
-        format: str = "dense",
-        quantization_status: "QuantizationStatus" = "initialized",  # noqa: F821
-        kv_cache_scheme: Optional["QuantizationArgs"] = None,  # noqa: F821
-        global_compression_ratio: Optional[float] = None,
-        ignore: Optional[List[str]] = None,
-        sparsity_config: Optional[Dict[str, Any]] = None,
-        quant_method: str = "compressed-tensors",
-        run_compressed: bool = True,
-        **kwargs,
+            self,
+            config_groups: Optional[Dict[str, Union["QuantizationScheme", List[str]]]] = None,  # noqa: F821
+            format: str = "dense",
+            quantization_status: "QuantizationStatus" = "initialized",  # noqa: F821
+            kv_cache_scheme: Optional["QuantizationArgs"] = None,  # noqa: F821
+            global_compression_ratio: Optional[float] = None,
+            ignore: Optional[List[str]] = None,
+            sparsity_config: Optional[Dict[str, Any]] = None,
+            quant_method: str = "compressed-tensors",
+            run_compressed: bool = True,
+            **kwargs,
     ):
         if is_compressed_tensors_available():
             from compressed_tensors.config import SparsityCompressionConfig
@@ -1458,8 +1457,8 @@ class CompressedTensorsConfig(QuantizationConfigMixin):
         )
 
         return (
-            isinstance(self.sparsity_config, SparsityCompressionConfig)
-            and self.sparsity_config.format != CompressionFormat.dense.value
+                isinstance(self.sparsity_config, SparsityCompressionConfig)
+                and self.sparsity_config.format != CompressionFormat.dense.value
         )
 
 
@@ -1478,10 +1477,10 @@ class FbgemmFp8Config(QuantizationConfigMixin):
     """
 
     def __init__(
-        self,
-        activation_scale_ub: float = 1200.0,
-        modules_to_not_convert: Optional[List] = None,
-        **kwargs,
+            self,
+            activation_scale_ub: float = 1200.0,
+            modules_to_not_convert: Optional[List] = None,
+            **kwargs,
     ):
         self.quant_method = QuantizationMethod.FBGEMM_FP8
         self.activation_scale_ub = activation_scale_ub
@@ -1515,14 +1514,14 @@ class HiggsConfig(QuantizationConfigMixin):
     """
 
     def __init__(
-        self,
-        bits: int = 4,
-        p: int = 2,
-        modules_to_not_convert: Optional[List[str]] = None,
-        hadamard_size: int = 512,
-        group_size: int = 256,
-        tune_metadata: Optional[Dict[str, Any]] = None,
-        **kwargs,
+            self,
+            bits: int = 4,
+            p: int = 2,
+            modules_to_not_convert: Optional[List[str]] = None,
+            hadamard_size: int = 512,
+            group_size: int = 256,
+            tune_metadata: Optional[Dict[str, Any]] = None,
+            **kwargs,
     ):
         if tune_metadata is None:
             tune_metadata = {}
@@ -1616,12 +1615,12 @@ class TorchAoConfig(QuantizationConfigMixin):
     """
 
     def __init__(
-        self,
-        quant_type: Union[str, "AOBaseConfig"],  # noqa: F821
-        modules_to_not_convert: Optional[List] = None,
-        include_input_output_embeddings: bool = False,
-        untie_embedding_weights: bool = False,
-        **kwargs,
+            self,
+            quant_type: Union[str, "AOBaseConfig"],  # noqa: F821
+            modules_to_not_convert: Optional[List] = None,
+            include_input_output_embeddings: bool = False,
+            untie_embedding_weights: bool = False,
+            **kwargs,
     ):
         self.quant_method = QuantizationMethod.TORCHAO
         self.quant_type = quant_type
@@ -1707,11 +1706,11 @@ class TorchAoConfig(QuantizationConfigMixin):
             methods = self._get_torchao_quant_type_to_method()
             quant_type_kwargs = self.quant_type_kwargs.copy()
             if (
-                not torch.cuda.is_available()
-                and is_torchao_available()
-                and self.quant_type == "int4_weight_only"
-                and version.parse(importlib.metadata.version("torchao")) >= version.parse("0.8.0")
-                and quant_type_kwargs.get("layout", None) is None
+                    not torch.cuda.is_available()
+                    and is_torchao_available()
+                    and self.quant_type == "int4_weight_only"
+                    and version.parse(importlib.metadata.version("torchao")) >= version.parse("0.8.0")
+                    and quant_type_kwargs.get("layout", None) is None
             ):
                 from torchao.dtypes import Int4CPULayout
 
@@ -1804,13 +1803,13 @@ class BitNetQuantConfig(QuantizationConfigMixin):
     """
 
     def __init__(
-        self,
-        modules_to_not_convert: Optional[List] = None,
-        linear_class: Optional[str] = "bitlinear",
-        quantization_mode: Optional[str] = "offline",
-        use_rms_norm: Optional[bool] = False,
-        rms_norm_eps: Optional[float] = 1e-6,
-        **kwargs,
+            self,
+            modules_to_not_convert: Optional[List] = None,
+            linear_class: Optional[str] = "bitlinear",
+            quantization_mode: Optional[str] = "offline",
+            use_rms_norm: Optional[bool] = False,
+            rms_norm_eps: Optional[float] = 1e-6,
+            **kwargs,
     ):
         if linear_class not in ["bitlinear", "autobitlinear"]:
             raise ValueError(f"linear_class must be either 'bitlinear' or 'autobitlinear', but got {linear_class}")
@@ -1855,13 +1854,13 @@ class SpQRConfig(QuantizationConfigMixin):
     """
 
     def __init__(
-        self,
-        bits: int = 3,
-        beta1: int = 16,
-        beta2: int = 16,
-        shapes: Optional[Dict[str, int]] = None,
-        modules_to_not_convert: Optional[List[str]] = None,
-        **kwargs,
+            self,
+            bits: int = 3,
+            beta1: int = 16,
+            beta2: int = 16,
+            shapes: Optional[Dict[str, int]] = None,
+            modules_to_not_convert: Optional[List[str]] = None,
+            **kwargs,
     ):
         if shapes is None:
             shapes = {}
@@ -1909,11 +1908,11 @@ class FineGrainedFP8Config(QuantizationConfigMixin):
     """
 
     def __init__(
-        self,
-        activation_scheme: str = "dynamic",
-        weight_block_size: Tuple[int, int] = (128, 128),
-        modules_to_not_convert: Optional[List] = None,
-        **kwargs,
+            self,
+            activation_scheme: str = "dynamic",
+            weight_block_size: Tuple[int, int] = (128, 128),
+            modules_to_not_convert: Optional[List] = None,
+            **kwargs,
     ):
         self.quant_method = QuantizationMethod.FP8
         self.modules_to_not_convert = modules_to_not_convert
@@ -1936,8 +1935,8 @@ class FineGrainedFP8Config(QuantizationConfigMixin):
 
 class QuarkConfig(QuantizationConfigMixin):
     def __init__(
-        self,
-        **kwargs,
+            self,
+            **kwargs,
     ):
         if is_torch_available() and is_quark_available():
             from quark import __version__ as quark_version

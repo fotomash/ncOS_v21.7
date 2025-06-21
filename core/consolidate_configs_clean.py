@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-import os
 import json
-import yaml
 import shutil
-from pathlib import Path
 from datetime import datetime
-from typing import Dict, List, Any
+from pathlib import Path
+
+import yaml
+
 
 class ConfigurationConsolidator:
     def __init__(self, project_root: str):
@@ -325,7 +325,8 @@ if agent_config and agent_config.get('enabled'):
         print(f"Total services configured: {len(self.consolidated_config['services'])}")
 
         return self.consolidated_config
-        
+
+
 if __name__ == "__main__":
     import sys
 

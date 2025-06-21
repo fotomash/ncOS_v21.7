@@ -5,5 +5,5 @@ _metadata:
   keys_count: 1
 logging:
   description: logging configuration
-  settings: {}
+  settings: { }
   version: '1.0'

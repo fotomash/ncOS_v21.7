@@ -5,10 +5,10 @@ from datetime import datetime
 from typing import Any, Dict, Optional
 
 import yaml
-
 from config.gpt_instructions import (
     get_auto_progression_config,
 )
+
 from menu_system import EnhancedMenuSystem
 
 

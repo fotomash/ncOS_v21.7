@@ -24,12 +24,12 @@ bootstrap:
         cache_size: 1000
         enabled: true
         feeds:
-        - yahoo
-        - alpha_vantage
+          - yahoo
+          - alpha_vantage
         symbols:
-        - AAPL
-        - GOOGL
-        - MSFT
+          - AAPL
+          - GOOGL
+          - MSFT
         update_interval: 60
       ParquetIngestor:
         batch_size: 1000
@@ -66,40 +66,40 @@ bootstrap:
       TechnicalAnalyst:
         enabled: true
         indicators:
-        - sma
-        - ema
-        - rsi
-        - macd
+          - sma
+          - ema
+          - rsi
+          - macd
         lookback_period: 100
         timeframes:
-        - 1m
-        - 5m
-        - 15m
-        - 1h
-        - 1d
+          - 1m
+          - 5m
+          - 15m
+          - 1h
+          - 1d
       VectorMemoryBoot:
         enabled: true
         memory_size: 1000
     initialization_order:
-    - CoreSystemAgent
-    - VectorMemoryBoot
-    - ParquetIngestor
-    - MarketDataCaptain
-    - TechnicalAnalyst
-    - SMCRouter
-    - MAZ2Executor
-    - TMCExecutor
-    - RiskGuardian
-    - PortfolioManager
-    - BroadcastRelay
-    - ReportGenerator
-    - SessionStateManager
-    - smc_liquidity_trap
-    - wyckoff_phase_cycle
-    - session_sweep_reversal
-    - micro_wyckoff_event
-    - orderflow_anomaly
-    - protection_reentry
+      - CoreSystemAgent
+      - VectorMemoryBoot
+      - ParquetIngestor
+      - MarketDataCaptain
+      - TechnicalAnalyst
+      - SMCRouter
+      - MAZ2Executor
+      - TMCExecutor
+      - RiskGuardian
+      - PortfolioManager
+      - BroadcastRelay
+      - ReportGenerator
+      - SessionStateManager
+      - smc_liquidity_trap
+      - wyckoff_phase_cycle
+      - session_sweep_reversal
+      - micro_wyckoff_event
+      - orderflow_anomaly
+      - protection_reentry
   system:
     environment: production
     name: NCOS

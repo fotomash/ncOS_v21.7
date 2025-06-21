@@ -20,8 +20,6 @@ from pathlib import Path
 from textwrap import dedent
 from typing import TYPE_CHECKING, Any, Final, Literal, Union, cast
 
-from typing_extensions import TypeAlias
-
 from streamlit.elements.lib.image_utils import AtomicImage, image_to_url
 from streamlit.errors import (
     StreamlitInvalidMenuItemKeyError,
@@ -35,6 +33,7 @@ from streamlit.runtime.metrics_util import gather_metrics
 from streamlit.runtime.scriptrunner_utils.script_run_context import get_script_run_ctx
 from streamlit.string_util import is_emoji, validate_material_icon
 from streamlit.url_util import is_url
+from typing_extensions import TypeAlias
 
 if TYPE_CHECKING:
     from typing_extensions import TypeGuard
@@ -108,11 +107,11 @@ def _get_favicon_string(page_icon: PageIcon) -> str:
 
 @gather_metrics("set_page_config")
 def set_page_config(
-    page_title: str | None = None,
-    page_icon: PageIcon | None = None,
-    layout: Layout | None = None,
-    initial_sidebar_state: InitialSideBarState | None = None,
-    menu_items: MenuItems | None = None,
+        page_title: str | None = None,
+        page_icon: PageIcon | None = None,
+        layout: Layout | None = None,
+        initial_sidebar_state: InitialSideBarState | None = None,
+        menu_items: MenuItems | None = None,
 ) -> None:
     """
     Configure the default settings of the page.
@@ -285,7 +284,7 @@ def get_random_emoji() -> str:
 
 
 def set_menu_items_proto(
-    lowercase_menu_items: MenuItems, menu_items_proto: PageConfigProto.MenuItems
+        lowercase_menu_items: MenuItems, menu_items_proto: PageConfigProto.MenuItems
 ) -> None:
     if GET_HELP_KEY in lowercase_menu_items:
         if lowercase_menu_items[GET_HELP_KEY] is not None:
@@ -312,7 +311,7 @@ def validate_menu_items(menu_items: MenuItems) -> None:
         if not valid_menu_item_key(k):
             raise StreamlitInvalidMenuItemKeyError(key=k)
         if v is not None and (
-            not is_url(v, ("http", "https", "mailto")) and k != ABOUT_KEY
+                not is_url(v, ("http", "https", "mailto")) and k != ABOUT_KEY
         ):
             raise StreamlitInvalidURLError(url=v)
 

@@ -4,14 +4,14 @@ ncOS Project Consolidation and Remapping Tool
 Consolidates and reorganizes the ncOS project structure
 """
 
-import os
-import shutil
 import json
-import yaml
-from pathlib import Path
-from typing import Dict, List, Any
 import logging
+import shutil
 from datetime import datetime
+from pathlib import Path
+from typing import Dict, Any
+
+import yaml
 
 # Configure logging
 logging.basicConfig(
@@ -19,6 +19,7 @@ logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
+
 
 class ProjectConsolidator:
     """Handles project consolidation and remapping"""
@@ -117,8 +118,8 @@ Consolidated and remapped ncOS project structure.
         logger.info("Consolidating configuration files")
 
         config_files = list(self.source_dir.rglob('*.yaml')) + \
-                      list(self.source_dir.rglob('*.yml')) + \
-                      list(self.source_dir.rglob('*.json'))
+                       list(self.source_dir.rglob('*.yml')) + \
+                       list(self.source_dir.rglob('*.json'))
 
         consolidated = {
             'agents': {},
@@ -369,6 +370,7 @@ Consolidated and remapped ncOS project structure.
             logger.error(f"Consolidation failed: {e}")
             raise
 
+
 def main():
     """Main entry point"""
     import argparse
@@ -381,6 +383,7 @@ def main():
 
     consolidator = ProjectConsolidator(args.source, args.target)
     consolidator.run()
+
 
 if __name__ == '__main__':
     main()

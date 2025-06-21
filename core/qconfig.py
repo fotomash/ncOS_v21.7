@@ -3,7 +3,6 @@ import copy
 import warnings
 from collections import namedtuple
 from typing import Any, Optional, Union
-from typing_extensions import deprecated
 
 import torch
 import torch.nn as nn
@@ -23,6 +22,7 @@ from torch.ao.quantization.fake_quantize import (
     fused_wt_fake_quant_range_neg_127_to_127,
     FusedMovingAvgObsFakeQuantize,
 )
+from typing_extensions import deprecated
 
 from .observer import (
     _PartialWrapper,
@@ -45,7 +45,6 @@ from .observer import (
     ReuseInputObserver,
     weight_observer_range_neg_127_to_127,
 )
-
 
 __all__ = [
     "QConfig",
@@ -340,14 +339,14 @@ qconfig.
 """
 default_symmetric_qnnpack_qconfig = QConfig(
     activation=HistogramObserver.with_args(
-        dtype=torch.qint8, reduce_range=False, eps=2**-12
+        dtype=torch.qint8, reduce_range=False, eps=2 ** -12
     ),
     weight=weight_observer_range_neg_127_to_127,
 )
 
 default_per_channel_symmetric_qnnpack_qconfig = QConfig(
     activation=HistogramObserver.with_args(
-        dtype=torch.qint8, reduce_range=False, eps=2**-12
+        dtype=torch.qint8, reduce_range=False, eps=2 ** -12
     ),
     weight=per_channel_weight_observer_range_neg_127_to_127,
 )
@@ -490,7 +489,7 @@ default_symmetric_qnnpack_qat_qconfig = QConfig(
         quant_max=127,
         dtype=torch.qint8,
         reduce_range=False,
-        eps=2**-12,
+        eps=2 ** -12,
     ),
     weight=fused_wt_fake_quant_range_neg_127_to_127,
 )
@@ -502,7 +501,7 @@ default_per_channel_symmetric_qnnpack_qat_qconfig = QConfig(
         quant_max=127,
         dtype=torch.qint8,
         reduce_range=False,
-        eps=2**-12,
+        eps=2 ** -12,
     ),
     weight=fused_per_channel_wt_fake_quant_range_neg_127_to_127,
 )
@@ -571,7 +570,7 @@ QConfigAny.__module__ = "torch.ao.quantization.qconfig"
 
 
 def _add_module_to_qconfig_obs_ctr(
-    qconfig: QConfigAny, module: Optional[nn.Module]
+        qconfig: QConfigAny, module: Optional[nn.Module]
 ) -> Any:
     r"""This is a helper function for use in quantization prepare that updates a qconfig so that
     the constructors stored in the qconfig will create observers on the same device that
@@ -622,11 +621,11 @@ _ObserverOrFakeQuantizeConstructor = Union[
 
 
 def _obs_or_fq_ctr_equals(
-    obs_or_fq1: _ObserverOrFakeQuantizeConstructor,
-    obs_or_fq2: _ObserverOrFakeQuantizeConstructor,
+        obs_or_fq1: _ObserverOrFakeQuantizeConstructor,
+        obs_or_fq2: _ObserverOrFakeQuantizeConstructor,
 ):
     if isinstance(obs_or_fq1, _PartialWrapper) and isinstance(
-        obs_or_fq2, _PartialWrapper
+            obs_or_fq2, _PartialWrapper
     ):
         return _partial_wrapper_equals(obs_or_fq1, obs_or_fq2)
     return obs_or_fq1 == obs_or_fq2
@@ -649,9 +648,9 @@ def _partial_wrapper_equals(obs_or_fq1: _PartialWrapper, obs_or_fq2: _PartialWra
         obs_or_fq2_keywords.pop("observer")
     keywords_equal = keywords_equal and obs_or_fq1_keywords == obs_or_fq2_keywords
     return (
-        obs_or_fq1.p.func == obs_or_fq2.p.func
-        and obs_or_fq1.p.args == obs_or_fq2.p.args
-        and keywords_equal
+            obs_or_fq1.p.func == obs_or_fq2.p.func
+            and obs_or_fq1.p.args == obs_or_fq2.p.args
+            and keywords_equal
     )
 
 
@@ -682,7 +681,7 @@ def _activation_is_memoryless(qconfig: QConfig):
 
     def _is_memoryless(observer):
         return (
-            hasattr(observer, "averaging_constant") and observer.averaging_constant == 1
+                hasattr(observer, "averaging_constant") and observer.averaging_constant == 1
         )
 
     act = qconfig.activation()
@@ -694,7 +693,7 @@ def _activation_is_memoryless(qconfig: QConfig):
 
 def _is_reuse_input_qconfig(qconfig: Optional[QConfig]):
     return (
-        qconfig is not None
-        and isinstance(qconfig.activation(), ReuseInputObserver)
-        and isinstance(qconfig.weight(), NoopObserver)
+            qconfig is not None
+            and isinstance(qconfig.activation(), ReuseInputObserver)
+            and isinstance(qconfig.weight(), NoopObserver)
     )

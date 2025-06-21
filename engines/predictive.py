@@ -1,4 +1,3 @@
 """
 Predictive module for engines
 """
-

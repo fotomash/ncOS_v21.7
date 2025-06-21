@@ -10,7 +10,6 @@ from typing import Optional
 
 import torch
 
-
 _IS_MONKEYTYPE_INSTALLED = True
 try:
     import monkeytype  # type: ignore[import]
@@ -89,6 +88,7 @@ if _IS_MONKEYTYPE_INSTALLED:
         def log(self, trace: CallTrace) -> None:
             self.traces.append(trace)
 
+
     class JitTypeTraceStore(CallTraceStore):
         def __init__(self) -> None:
             super().__init__()
@@ -103,10 +103,10 @@ if _IS_MONKEYTYPE_INSTALLED:
                 self.trace_records[qualified_name].append(t)
 
         def filter(
-            self,
-            qualified_name: str,
-            qualname_prefix: Optional[str] = None,
-            limit: int = 2000,
+                self,
+                qualified_name: str,
+                qualname_prefix: Optional[str] = None,
+                limit: int = 2000,
         ) -> list[CallTraceThunk]:
             return self.trace_records[qualified_name]
 
@@ -141,6 +141,7 @@ if _IS_MONKEYTYPE_INSTALLED:
         def get_args_types(self, qualified_name: str) -> dict:
             return self.consolidate_types(qualified_name)
 
+
     class JitTypeTraceConfig(monkeytype.config.Config):
         def __init__(self, s: JitTypeTraceStore):
             super().__init__()
@@ -163,13 +164,16 @@ else:
         def __init__(self) -> None:
             pass
 
+
     class JitTypeTraceStore:  # type:  ignore[no-redef]
         def __init__(self) -> None:
             self.trace_records = None
 
+
     class JitTypeTraceConfig:  # type:  ignore[no-redef]
         def __init__(self) -> None:
             pass
+
 
     monkeytype_trace = None  # type: ignore[assignment]  # noqa: F811
 
@@ -187,7 +191,7 @@ def jit_code_filter(code: CodeType) -> bool:
     """
     # Filter code without a source file and exclude this check for 'forward' calls.
     if code.co_name != "forward" and (
-        not code.co_filename or code.co_filename[0] == "<"
+            not code.co_filename or code.co_filename[0] == "<"
     ):
         return False
 

@@ -7,10 +7,8 @@ from typing import Any, Callable, Optional, TYPE_CHECKING, Union
 
 import torch
 
-
 if TYPE_CHECKING:
     from torch.ao.quantization.utils import Pattern
-
 
 __all__ = [
     "BackendConfig",
@@ -19,7 +17,6 @@ __all__ = [
     "DTypeWithConstraints",
     "ObservationType",
 ]
-
 
 # DTypeConfig dict keys
 INPUT_DTYPE_DICT_KEY = "input_dtype"
@@ -187,12 +184,12 @@ scale_min_lower_bound=None, scale_max_upper_bound=None)
     is_dynamic: Optional[bool]
 
     def __init__(
-        self,
-        input_dtype: Union[torch.dtype, DTypeWithConstraints, None] = None,
-        output_dtype: Union[torch.dtype, DTypeWithConstraints, None] = None,
-        weight_dtype: Union[torch.dtype, DTypeWithConstraints, None] = None,
-        bias_dtype: Optional[torch.dtype] = None,
-        is_dynamic: Optional[bool] = None,
+            self,
+            input_dtype: Union[torch.dtype, DTypeWithConstraints, None] = None,
+            output_dtype: Union[torch.dtype, DTypeWithConstraints, None] = None,
+            weight_dtype: Union[torch.dtype, DTypeWithConstraints, None] = None,
+            bias_dtype: Optional[torch.dtype] = None,
+            is_dynamic: Optional[bool] = None,
     ):
         if isinstance(input_dtype, DTypeWithConstraints):
             self.input_dtype_with_constraints = input_dtype
@@ -240,21 +237,21 @@ scale_min_lower_bound=None, scale_max_upper_bound=None)
         """
         input_dtype = dtype_config_dict.get(INPUT_DTYPE_DICT_KEY, None)
         if input_dtype is not None and not isinstance(
-            input_dtype, (torch.dtype, DTypeWithConstraints)
+                input_dtype, (torch.dtype, DTypeWithConstraints)
         ):
             raise ValueError(
                 "Expected input_dtype to be a torch.dtype or DTypeWithConstraints"
             )
         output_dtype = dtype_config_dict.get(OUTPUT_DTYPE_DICT_KEY, None)
         if output_dtype is not None and not isinstance(
-            output_dtype, (torch.dtype, DTypeWithConstraints)
+                output_dtype, (torch.dtype, DTypeWithConstraints)
         ):
             raise ValueError(
                 "Expected output_dtype to be a torch.dtype or DTypeWithConstraints"
             )
         weight_dtype = dtype_config_dict.get(WEIGHT_DTYPE_DICT_KEY, None)
         if weight_dtype is not None and not isinstance(
-            weight_dtype, (torch.dtype, DTypeWithConstraints)
+                weight_dtype, (torch.dtype, DTypeWithConstraints)
         ):
             raise ValueError(
                 "Expected weight_dtype to be a torch.dtype or DTypeWithConstraints"
@@ -384,7 +381,7 @@ class BackendConfig:
         return self
 
     def set_backend_pattern_configs(
-        self, configs: list[BackendPatternConfig]
+            self, configs: list[BackendPatternConfig]
     ) -> BackendConfig:
         """
         Set the configs for patterns that can be run on the target backend.
@@ -462,8 +459,8 @@ class BackendPatternConfig:
             k: v
             for k, v in self.__dict__.items()
             if (
-                (not isinstance(v, (list, dict)) and v is not None)
-                or (isinstance(v, (list, dict)) and len(v) > 0)
+                    (not isinstance(v, (list, dict)) and v is not None)
+                    or (isinstance(v, (list, dict)) and len(v) > 0)
             )
         }
         return f"BackendPatternConfig({dict_nonempty})"
@@ -484,7 +481,7 @@ class BackendPatternConfig:
         return self
 
     def set_observation_type(
-        self, observation_type: ObservationType
+            self, observation_type: ObservationType
     ) -> BackendPatternConfig:
         """
         Set how observers should be inserted in the graph for this pattern.
@@ -518,7 +515,7 @@ class BackendPatternConfig:
         return self
 
     def set_dtype_configs(
-        self, dtype_configs: list[DTypeConfig]
+            self, dtype_configs: list[DTypeConfig]
     ) -> BackendPatternConfig:
         """
         Set the supported data types passed as arguments to quantize ops in the
@@ -528,7 +525,7 @@ class BackendPatternConfig:
         return self
 
     def set_root_module(
-        self, root_module: type[torch.nn.Module]
+            self, root_module: type[torch.nn.Module]
     ) -> BackendPatternConfig:
         """
         Set the module that represents the root for this pattern.
@@ -553,7 +550,7 @@ class BackendPatternConfig:
         return self
 
     def set_reference_quantized_module(
-        self, reference_quantized_module: type[torch.nn.Module]
+            self, reference_quantized_module: type[torch.nn.Module]
     ) -> BackendPatternConfig:
         """
         Set the module that represents the reference quantized implementation for
@@ -565,7 +562,7 @@ class BackendPatternConfig:
         return self
 
     def set_fused_module(
-        self, fused_module: type[torch.nn.Module]
+            self, fused_module: type[torch.nn.Module]
     ) -> BackendPatternConfig:
         """
         Set the module that represents the fused implementation for this pattern.
@@ -596,19 +593,19 @@ class BackendPatternConfig:
         return self
 
     def _set_extra_inputs_getter(
-        self, extra_inputs_getter: Callable
+            self, extra_inputs_getter: Callable
     ) -> BackendPatternConfig:
         self._extra_inputs_getter = extra_inputs_getter
         return self
 
     def _set_num_tensor_args_to_observation_type(
-        self, num_tensor_args_to_observation_type: dict[int, ObservationType]
+            self, num_tensor_args_to_observation_type: dict[int, ObservationType]
     ) -> BackendPatternConfig:
         self._num_tensor_args_to_observation_type = num_tensor_args_to_observation_type
         return self
 
     def _set_input_type_to_index(
-        self, input_type_to_index: dict[str, int]
+            self, input_type_to_index: dict[str, int]
     ) -> BackendPatternConfig:
         self._input_type_to_index = input_type_to_index
         return self
@@ -629,7 +626,7 @@ class BackendPatternConfig:
 
     @classmethod
     def from_dict(
-        cls, backend_pattern_config_dict: dict[str, Any]
+            cls, backend_pattern_config_dict: dict[str, Any]
     ) -> BackendPatternConfig:
         """
         Create a ``BackendPatternConfig`` from a dictionary with the following items:

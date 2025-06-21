@@ -3,7 +3,6 @@ from datetime import datetime
 from typing import Dict, Any
 
 import yaml
-
 from config.gpt_instructions import (
     get_auto_progression_config,
 )
