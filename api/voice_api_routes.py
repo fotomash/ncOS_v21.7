@@ -7,9 +7,10 @@ processing a spoken or typed command is ``POST /voice/command``.
 from typing import Optional, Dict, Any, List
 
 import speech_recognition as sr
-from enhanced_menu_system import EnhancedMenuSystem
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
+
+from .menu_voice_integration import VoiceEnabledMenuSystem
 
 router = APIRouter(prefix="/voice", tags=["voice"])
 
@@ -28,8 +29,8 @@ class VoiceResponse(BaseModel):
     message: Optional[str] = None
 
 
-# Initialize enhanced menu system
-menu_system = EnhancedMenuSystem(config={})
+# Initialize voice-enabled menu system
+menu_system = VoiceEnabledMenuSystem(orchestrator=None, config={})
 
 
 @router.post("/command", response_model=VoiceResponse)
