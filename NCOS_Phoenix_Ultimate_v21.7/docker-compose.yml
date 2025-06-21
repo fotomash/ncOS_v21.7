@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  ncos-phoenix:
+    build: .
+    container_name: ncos-phoenix-session
+    ports:
+      - "8000:8000"
+    environment:
+      - NCOS_ENV=production
+      - API_KEY=${API_KEY}
+    volumes:
+      - ./logs:/app/logs
+      - ./data:/app/data
+      - ./config:/app/config
+    restart: unless-stopped
+    networks:
+      - ncos-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: ncos-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - ncos-network
+
+networks:
+  ncos-network:
+    driver: bridge
