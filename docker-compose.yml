@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  journal-api:
+    build: .
+    container_name: ncos-journal-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./journal_data:/app/journal_data
+    environment:
+      - JOURNAL_DATA_DIR=/app/journal_data
+    restart: unless-stopped
+
+  journal-dashboard:
+    build: .
+    container_name: ncos-journal-dashboard
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./journal_data:/app/journal_data
+    command: streamlit run app.py
+    depends_on:
+      - journal-api
+    restart: unless-stopped
+
+  llm-assistant:
+    build: .
+    container_name: ncos-llm-assistant
+    ports:
+      - "8002:8002"
+    volumes:
+      - ./journal_data:/app/journal_data
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - JOURNAL_API_URL=http://journal-api:8000
+    command: python llm_assistant.py
+    depends_on:
+      - journal-api
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:alpine
+    container_name: ncos-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - journal-api
+      - journal-dashboard
+      - llm-assistant
+    restart: unless-stopped

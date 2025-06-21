@@ -1,0 +1,39 @@
+# ncOS v21.7 Quick Reference
+
+## Starting the System
+```bash
+./launch_fixed.sh
+```
+
+## Accessing the System
+- API: http://localhost:8000
+- Dashboard: http://localhost:8501
+
+## Key Commands
+- Check status: `./check_journal.sh`
+- Stop system: `./stop_journal.sh`
+- View logs: `tail -f journal_data/logs/journal.log`
+
+## API Quick Examples
+```python
+# Log a trade
+POST /journal/entry
+{
+    "type": "trade",
+    "symbol": "XAUUSD",
+    "action": "BUY",
+    "entry": 2650.50,
+    "stop_loss": 2645.00,
+    "take_profit": 2665.00
+}
+
+# Get ZBAR analysis
+GET /zbar/analysis?symbol=XAUUSD&timeframe=H4
+```
+
+## Dashboard Features
+- Trade Journal: View and filter all entries
+- ZBAR Analysis: Pattern detection interface
+- Performance Metrics: Statistics and charts
+- Session Replay: Review trading sessions
+- Conflict Detection: Strategy alignment check

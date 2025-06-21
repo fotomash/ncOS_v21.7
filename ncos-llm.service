@@ -1,0 +1,16 @@
+[Unit]
+Description=ncOS Journal LLM Assistant
+After=network.target
+
+[Service]
+Type=simple
+User=trader
+WorkingDirectory=/home/trader/ncOS_journal
+Environment="PATH=/usr/local/bin:/usr/bin:/bin"
+Environment="OPENAI_API_KEY=your-key-here"
+ExecStart=/usr/bin/python3 /home/trader/ncOS_journal/llm_assistant.py
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
