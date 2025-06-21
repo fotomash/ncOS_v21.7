@@ -1,0 +1,1 @@
+"""NCOS Trading Strategies Module"""
