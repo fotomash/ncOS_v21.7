@@ -2,7 +2,33 @@
 name = "ncOS"
 version = "21.7.2"
 requires-python = ">=3.10"
+dependencies = [
+    "fastapi==0.115.13",
+    "uvicorn==0.34.3",
+    "streamlit==1.46.0",
+    "pandas==2.3.0",
+    "pydantic==2.11.7",
+    "PyYAML==6.0.2",
+    "requests==2.32.4",
+    "python-dateutil==2.9.0.post0",
+    "numpy==2.3.0",
+    "python-multipart==0.0.20",
+    "matplotlib==3.10.3",
+    "plotly==6.1.2",
+    "yfinance==0.2.63",
+]
 
 [project.scripts]
 ncos = "ncOS.ncos_launcher:main"
 add-structure = "scripts.add_structure:main"
+
+[project.optional-dependencies]
+voice = [
+    "spacy",
+    "speechrecognition",
+    "pyaudio",
+]
+dev = [
+    "pytest",
+    "pytest-asyncio",
+]
