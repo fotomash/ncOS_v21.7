@@ -1,9 +1,0 @@
-_metadata:
-  source: ncOS_v21.7-main/config/general_config.yaml
-  category: backup
-  created: '2025-06-21T16:03:21.957448'
-  keys_count: 1
-backup_metadata:
-  timestamp: '20250621_151855'
-  total_files: 194
-  warnings: [ ]

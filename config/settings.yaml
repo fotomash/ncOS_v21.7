@@ -1,0 +1,30 @@
+agents:
+  auto_discover: true
+  config_file: config/agents_config.yaml
+api:
+  config_file: config/api_config.yaml
+  host: 0.0.0.0
+  port: 8000
+  reload: true
+engines:
+  predictive:
+    config_file: config/engines_config.yaml
+    enabled: true
+  vector:
+    config_file: config/engines_config.yaml
+    enabled: true
+logging:
+  file: logs/ncOS.log
+  format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+  level: INFO
+paths:
+  config: ./config
+  data: ./data
+  logs: ./logs
+  root: .
+  src: ./src
+  tests: ./tests
+project:
+  description: Neural Compute Operating System
+  name: ncOS
+  version: '21.7'

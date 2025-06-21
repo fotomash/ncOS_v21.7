@@ -1,0 +1,187 @@
+ncos_openapi:
+  info:
+    description: Provides live market data for stocks, crypto, and forex, powered
+      by the NCOS system.
+    title: NCOS Live Market Data API
+    version: 21.7.2
+  openapi: 3.0.0
+  paths:
+    /crypto/quote:
+      get:
+        operationId: getCryptoQuote
+        parameters:
+        - in: query
+          name: symbol
+          required: true
+          schema:
+            type: string
+        responses:
+          '200':
+            content:
+              application/json:
+                schema:
+                  type: object
+            description: Crypto data
+        summary: Get a real-time cryptocurrency price
+    /forex/quote:
+      get:
+        operationId: getForexQuote
+        parameters:
+        - in: query
+          name: pair
+          required: true
+          schema:
+            type: string
+        responses:
+          '200':
+            content:
+              application/json:
+                schema:
+                  type: object
+            description: Forex data
+        summary: Get a real-time forex exchange rate
+    /stock/quote:
+      get:
+        operationId: getStockQuote
+        parameters:
+        - in: query
+          name: ticker
+          required: true
+          schema:
+            type: string
+        responses:
+          '200':
+            content:
+              application/json:
+                schema:
+                  type: object
+            description: Stock data
+        summary: Get a real-time stock quote
+trigger_routes_strategies:
+  strategy_triggers:
+    accumulation_signal:
+      actions:
+      - analyze_phase_transition
+      - update_market_context
+      conditions:
+      - accumulation_phase
+      - volume_confirmation
+      priority: 7
+      route_to:
+      - wyckoff_phase_cycle
+    engineered_liquidity_signal:
+      actions:
+      - analyze_trap_setup
+      - validate_risk_parameters
+      conditions:
+      - smc_signal_strength > 0.7
+      - liquidity_pool_identified
+      priority: 8
+      route_to:
+      - smc_liquidity_trap
+    liquidity_trap_detected:
+      actions:
+      - analyze_trap_setup
+      - validate_risk_parameters
+      conditions:
+      - smc_signal_strength > 0.7
+      - liquidity_pool_identified
+      priority: 8
+      route_to:
+      - smc_liquidity_trap
+      - risk_guardian
+    micro_wyckoff_signal:
+      actions:
+      - evaluate_tick_event
+      - prepare_precision_entry
+      conditions:
+      - tick_score > threshold
+      - micro_structure_valid
+      priority: 10
+      route_to:
+      - micro_wyckoff_event
+    orderflow_anomaly_detected:
+      actions:
+      - analyze_anomaly
+      - adjust_risk_parameters
+      conditions:
+      - volume_anomaly
+      - price_action_divergence
+      priority: 6
+      route_to:
+      - orderflow_anomaly
+      - risk_guardian
+    phase_transition_detected:
+      actions:
+      - analyze_phase_transition
+      - update_market_context
+      conditions:
+      - wyckoff_phase_change
+      - volume_confirmation
+      priority: 7
+      route_to:
+      - wyckoff_phase_cycle
+      - session_state_manager
+    reentry_opportunity:
+      actions:
+      - evaluate_reentry
+      - update_risk_profile
+      conditions:
+      - position_available
+      - reentry_criteria_met
+      priority: 5
+      route_to:
+      - protection_reentry
+    session_open:
+      actions:
+      - scan_for_sweeps
+      - prepare_reversal_setups
+      conditions:
+      - session_start_time
+      - volatility_threshold_met
+      priority: 9
+      route_to:
+      - session_sweep_reversal
+      - master_orchestrator
+    stop_loss_hit:
+      actions:
+      - evaluate_reentry
+      - update_risk_profile
+      conditions:
+      - position_closed
+      - reentry_criteria_met
+      priority: 5
+      route_to:
+      - protection_reentry
+      - risk_guardian
+    sweep_reversal_signal:
+      actions:
+      - analyze_reversal_signal
+      - confirm_session_state
+      conditions:
+      - sweep_detected
+      - session_context_valid
+      priority: 9
+      route_to:
+      - session_sweep_reversal
+    tick_event_scored:
+      actions:
+      - evaluate_tick_event
+      - prepare_precision_entry
+      conditions:
+      - tick_score > threshold
+      - micro_structure_valid
+      priority: 10
+      route_to:
+      - micro_wyckoff_event
+      - entry_executor_smc
+    volume_spike:
+      actions:
+      - analyze_volume_spike
+      - adjust_risk_parameters
+      conditions:
+      - high_volume_detected
+      - orderbook_imbalance
+      priority: 6
+      route_to:
+      - orderflow_anomaly

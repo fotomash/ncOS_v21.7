@@ -1,0 +1,140 @@
+agent_registry_strategy_update:
+  strategy_agents:
+    micro_wyckoff_event:
+      class: MicroWyckoffEventAgent
+      config_file: config/strategies/micro_wyckoff_event.yaml
+      dependencies:
+      - master_orchestrator
+      - risk_guardian
+      enabled: true
+      max_positions: 1
+      module: agents.micro_wyckoff_event
+      priority: 10
+      risk_per_trade: 0.01
+      risk_profile: precision
+      timeframes:
+      - tick
+      - M1
+      triggers:
+      - tick_event_scored
+      - micro_wyckoff_signal
+      type: tick_analysis
+    orderflow_anomaly:
+      class: OrderflowAnomalyAgent
+      config_file: config/strategies/orderflow_anomaly.yaml
+      dependencies:
+      - master_orchestrator
+      - liquidity_sniper
+      enabled: true
+      max_positions: 1
+      module: agents.orderflow_anomaly
+      priority: 11
+      risk_per_trade: 0.015
+      risk_profile: defensive
+      timeframes:
+      - M1
+      - M5
+      triggers:
+      - orderflow_anomaly_detected
+      - volume_spike
+      type: orderflow_analysis
+    protection_reentry:
+      class: ProtectionReentryAgent
+      config_file: config/strategies/protection_reentry.yaml
+      dependencies:
+      - risk_guardian
+      - session_state_manager
+      enabled: true
+      max_positions: 3
+      module: agents.protection_reentry
+      priority: 12
+      risk_per_trade: 0.01
+      risk_profile: protective
+      timeframes:
+      - M1
+      - M5
+      triggers:
+      - stop_loss_hit
+      - reentry_opportunity
+      type: risk_management
+    session_sweep_reversal:
+      class: SessionSweepReversalAgent
+      config_file: config/strategies/session_sweep_reversal.yaml
+      dependencies:
+      - master_orchestrator
+      - entry_executor_smc
+      enabled: true
+      max_positions: 2
+      module: agents.session_sweep_reversal
+      priority: 9
+      risk_per_trade: 0.02
+      risk_profile: moderate
+      timeframes:
+      - M5
+      - M1
+      triggers:
+      - session_open
+      - sweep_reversal_signal
+      type: session_trading
+    smc_liquidity_trap:
+      class: SMCLiquidityTrapAgent
+      config_file: config/strategies/smc_liquidity_trap.yaml
+      dependencies:
+      - master_orchestrator
+      - liquidity_sniper
+      - risk_guardian
+      enabled: true
+      max_positions: 2
+      module: agents.smc_liquidity_trap
+      priority: 7
+      risk_per_trade: 0.025
+      risk_profile: aggressive
+      timeframes:
+      - M1
+      - M5
+      triggers:
+      - liquidity_trap_detected
+      - engineered_liquidity_signal
+      type: smc_execution
+    wyckoff_phase_cycle:
+      class: WyckoffPhaseCycleAgent
+      config_file: config/strategies/wyckoff_phase_cycle.yaml
+      dependencies:
+      - master_orchestrator
+      - session_state_manager
+      enabled: true
+      max_positions: 1
+      module: agents.wyckoff_phase_cycle
+      priority: 8
+      risk_per_trade: 0.015
+      risk_profile: conservative
+      timeframes:
+      - H1
+      - M15
+      - M5
+      triggers:
+      - phase_transition_detected
+      - accumulation_signal
+      type: wyckoff_analysis
+enhanced_agent_registry_complete:
+  enhanced_ncos_agents:
+    master_orchestrator:
+      class: MasterOrchestrator
+      enabled: true
+      enhancements:
+      - zanflow_integration
+      - vector_data_access
+      - knowledge_base_connection
+      module: agents.master_orchestrator
+      priority: 1
+      type: coordination
+    session_state_manager:
+      class: SessionStateManager
+      enabled: true
+      enhancements:
+      - conversation_flow
+      - enhanced_persistence
+      - interaction_tracking
+      module: agents.session_state_manager
+      priority: 2
+      type: state_management
