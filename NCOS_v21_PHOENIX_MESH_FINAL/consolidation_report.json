@@ -1,0 +1,1405 @@
+{
+  "timestamp": "2025-06-21T16:52:25.699111",
+  "source_directory": "/Users/tom/Documents/GitHub/ncOS_v21.7",
+  "target_directory": "ncOS_consolidated",
+  "files_processed": 279,
+  "errors": 0,
+  "mappings": [
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agent_registry_strategy_update.yaml",
+      "category": "agents",
+      "status": "consolidated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/render.yaml",
+      "category": "general",
+      "status": "consolidated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/ncos_v21_7_1_implementation_checklist.yaml",
+      "category": "general",
+      "status": "consolidated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/enhanced_agent_registry_complete.yaml",
+      "category": "agents",
+      "status": "consolidated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/comprehensive_trigger_system.yaml",
+      "category": "general",
+      "status": "consolidated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/ncos_auto_boot.yaml",
+      "category": "general",
+      "status": "consolidated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/trigger_routes_strategies.yaml",
+      "category": "api",
+      "status": "consolidated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/config/ncos_system_config.yaml",
+      "category": "general",
+      "status": "consolidated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/config/engines_config.yaml",
+      "category": "engines",
+      "status": "consolidated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/config/monitoring_config.yaml",
+      "category": "general",
+      "status": "consolidated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/config/bootstrap_config.yaml",
+      "category": "general",
+      "status": "consolidated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/config/manifest_config.yaml",
+      "category": "general",
+      "status": "consolidated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/config/models_config.yaml",
+      "category": "models",
+      "status": "consolidated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/config/config_config.yaml",
+      "category": "general",
+      "status": "consolidated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/config/deployment_config.yaml",
+      "category": "general",
+      "status": "consolidated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/config/testing_config.yaml",
+      "category": "general",
+      "status": "consolidated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/config/trigger_config.yaml",
+      "category": "general",
+      "status": "consolidated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/config/general_config.yaml",
+      "category": "general",
+      "status": "consolidated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/ncos_journal/config/default.yaml",
+      "category": "general",
+      "status": "consolidated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/docker-compose.yml",
+      "category": "general",
+      "status": "consolidated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/ncos_comprehensive_integration.json",
+      "category": "general",
+      "status": "consolidated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/fix_summary.json",
+      "category": "general",
+      "status": "consolidated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/PACKAGE_INFO.json",
+      "category": "general",
+      "status": "consolidated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/fix_report.json",
+      "category": "general",
+      "status": "consolidated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/system_config_v21.7.1.json",
+      "category": "general",
+      "status": "consolidated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/NCOS_v21_7_1_Enhanced_Complete_Deployment_Manifest.json",
+      "category": "general",
+      "status": "consolidated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/ncos_strategy_integration_complete.json",
+      "category": "general",
+      "status": "consolidated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/ncos_v21_7_1_integration_test_report_test_20250619_221413.json",
+      "category": "general",
+      "status": "consolidated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/ncos_v21_7_1_refactoring_analysis.json",
+      "category": "general",
+      "status": "consolidated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/ncos_plugin/ncos_openapi.json",
+      "category": "api",
+      "status": "consolidated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/ncos_plugin/ncos_ai_plugin.json",
+      "category": "general",
+      "status": "consolidated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/docs/predictive_engine_phase1_summary.json",
+      "category": "engines",
+      "status": "consolidated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/docs/PREDICTIVE_ENGINE_COMPLETE.json",
+      "category": "engines",
+      "status": "consolidated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/docs/predictive_engine_phase2_summary.json",
+      "category": "engines",
+      "status": "consolidated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/docs/GPT_instructions/ncOS_v21.7_GPT_Instructions.json",
+      "category": "general",
+      "status": "consolidated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/ncos_journal/config.json",
+      "category": "general",
+      "status": "consolidated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/menu_system.py",
+      "destination": "ncOS_consolidated/src/core/menu_system.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/launch_ncos_v21_7_1_enhanced_complete.py",
+      "destination": "ncOS_consolidated/src/core/launch_ncos_v21_7_1_enhanced_complete.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/rationalize_agents.py",
+      "destination": "ncOS_consolidated/src/agents/rationalize_agents.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/production_logging.py",
+      "destination": "ncOS_consolidated/src/core/production_logging.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/ncos_predictive_schemas.py",
+      "destination": "ncOS_consolidated/src/core/ncos_predictive_schemas.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/monitoring.py",
+      "destination": "ncOS_consolidated/src/core/monitoring.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/enhanced_llm_cli.py",
+      "destination": "ncOS_consolidated/src/core/enhanced_llm_cli.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/# Create an enhanced dashboard that inte.py",
+      "destination": "ncOS_consolidated/src/core/# Create an enhanced dashboard that inte.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/123.py",
+      "destination": "ncOS_consolidated/src/core/123.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/consolidate_configs.py",
+      "destination": "ncOS_consolidated/src/core/consolidate_configs.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/setup_journal_system.py",
+      "destination": "ncOS_consolidated/src/core/setup_journal_system.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/journal_api.py",
+      "destination": "ncOS_consolidated/src/api/journal_api.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/__init__.py",
+      "destination": "ncOS_consolidated/src/core/__init__.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/consolidate_and_remap.py",
+      "destination": "ncOS_consolidated/src/core/consolidate_and_remap.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/consolidate_configs_robust.py",
+      "destination": "ncOS_consolidated/src/core/consolidate_configs_robust.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/production_config.py",
+      "destination": "ncOS_consolidated/src/core/production_config.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/llm_assistant.py",
+      "destination": "ncOS_consolidated/src/core/llm_assistant.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/generate_advanced_configs.py",
+      "destination": "ncOS_consolidated/src/core/generate_advanced_configs.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/setup.py",
+      "destination": "ncOS_consolidated/src/core/setup.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/comprehensive_fix.py",
+      "destination": "ncOS_consolidated/src/core/comprehensive_fix.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/enhanced_trade_narrative_llm.py",
+      "destination": "ncOS_consolidated/src/core/enhanced_trade_narrative_llm.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/smc_router_hardened.py",
+      "destination": "ncOS_consolidated/src/api/smc_router_hardened.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/enhanced_core_orchestrator.py",
+      "destination": "ncOS_consolidated/src/core/enhanced_core_orchestrator.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/1.py",
+      "destination": "ncOS_consolidated/src/core/1.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/consolidate_configs_clean.py",
+      "destination": "ncOS_consolidated/src/core/consolidate_configs_clean.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/version_v21.7.1.py",
+      "destination": "ncOS_consolidated/src/core/version_v21.7.1.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/main.py",
+      "destination": "ncOS_consolidated/src/api/main.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/llm_dashboard_integration.py",
+      "destination": "ncOS_consolidated/src/core/llm_dashboard_integration.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/zanflow_liquidity_sniper.py",
+      "destination": "ncOS_consolidated/src/core/zanflow_liquidity_sniper.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/ncos_risk_engine.py",
+      "destination": "ncOS_consolidated/src/engines/ncos_risk_engine.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/backtesting/__init__.py",
+      "destination": "ncOS_consolidated/src/core/__init__.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/backtesting/engine.py",
+      "destination": "ncOS_consolidated/src/engines/engine.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/_build_config.py",
+      "destination": "ncOS_consolidated/src/core/_build_config.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/menu_system.py",
+      "destination": "ncOS_consolidated/src/core/menu_system.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/launch_ncos_v21_7_1_enhanced_complete.py",
+      "destination": "ncOS_consolidated/src/core/launch_ncos_v21_7_1_enhanced_complete.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/ncos_feature_extractor.py",
+      "destination": "ncOS_consolidated/src/core/ncos_feature_extractor.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/voice_tag_parser.py",
+      "destination": "ncOS_consolidated/src/core/voice_tag_parser.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/configuration.py",
+      "destination": "ncOS_consolidated/src/core/configuration.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/market_bias_launcher.py",
+      "destination": "ncOS_consolidated/src/core/market_bias_launcher.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/conftest.py",
+      "destination": "ncOS_consolidated/src/core/conftest.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/_monkeytype_config.py",
+      "destination": "ncOS_consolidated/src/core/_monkeytype_config.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/data_enricher.py",
+      "destination": "ncOS_consolidated/src/core/data_enricher.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/helpconfig.py",
+      "destination": "ncOS_consolidated/src/core/helpconfig.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/npy_pkg_config.py",
+      "destination": "ncOS_consolidated/src/core/npy_pkg_config.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/page_config.py",
+      "destination": "ncOS_consolidated/src/core/page_config.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/memory_manager.py",
+      "destination": "ncOS_consolidated/src/core/memory_manager.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/config.py",
+      "destination": "ncOS_consolidated/src/core/config.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/enhanced_cli.py",
+      "destination": "ncOS_consolidated/src/core/enhanced_cli.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/polyconfig.py",
+      "destination": "ncOS_consolidated/src/core/polyconfig.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/cache_storage_manager_config.py",
+      "destination": "ncOS_consolidated/src/core/cache_storage_manager_config.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/standardized_handler.py",
+      "destination": "ncOS_consolidated/src/core/standardized_handler.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/vector_store.py",
+      "destination": "ncOS_consolidated/src/core/vector_store.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/production_logging.py",
+      "destination": "ncOS_consolidated/src/core/production_logging.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/ncos_predictive_schemas.py",
+      "destination": "ncOS_consolidated/src/core/ncos_predictive_schemas.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/monitoring.py",
+      "destination": "ncOS_consolidated/src/core/monitoring.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/zbar_voice_integration.py",
+      "destination": "ncOS_consolidated/src/core/zbar_voice_integration.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/enhanced_llm_cli.py",
+      "destination": "ncOS_consolidated/src/core/enhanced_llm_cli.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/semantic_utils.py",
+      "destination": "ncOS_consolidated/src/core/semantic_utils.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/# Create an enhanced dashboard that inte.py",
+      "destination": "ncOS_consolidated/src/core/# Create an enhanced dashboard that inte.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/enhanced_xanflow_orchestrator.py",
+      "destination": "ncOS_consolidated/src/core/enhanced_xanflow_orchestrator.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/ncos_voice_unified.py",
+      "destination": "ncOS_consolidated/src/core/ncos_voice_unified.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/123.py",
+      "destination": "ncOS_consolidated/src/core/123.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/consolidate_configs.py",
+      "destination": "ncOS_consolidated/src/core/consolidate_configs.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/qconfig.py",
+      "destination": "ncOS_consolidated/src/core/qconfig.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/setup_journal_system.py",
+      "destination": "ncOS_consolidated/src/core/setup_journal_system.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/ufunc_config.py",
+      "destination": "ncOS_consolidated/src/core/ufunc_config.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/__init__.py",
+      "destination": "ncOS_consolidated/src/core/__init__.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/consolidate_and_remap.py",
+      "destination": "ncOS_consolidated/src/core/consolidate_and_remap.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/chart.py",
+      "destination": "ncOS_consolidated/src/core/chart.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/column_config.py",
+      "destination": "ncOS_consolidated/src/core/column_config.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/consolidate_configs_robust.py",
+      "destination": "ncOS_consolidated/src/core/consolidate_configs_robust.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/production_config.py",
+      "destination": "ncOS_consolidated/src/core/production_config.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/llm_assistant.py",
+      "destination": "ncOS_consolidated/src/core/llm_assistant.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/generate_advanced_configs.py",
+      "destination": "ncOS_consolidated/src/core/generate_advanced_configs.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/final_regression_tests.py",
+      "destination": "ncOS_consolidated/src/core/final_regression_tests.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/_sysconfig.py",
+      "destination": "ncOS_consolidated/src/core/_sysconfig.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/core_enhanced_master_orchestrator.py",
+      "destination": "ncOS_consolidated/src/core/core_enhanced_master_orchestrator.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/setup.py",
+      "destination": "ncOS_consolidated/src/core/setup.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/comprehensive_fix.py",
+      "destination": "ncOS_consolidated/src/core/comprehensive_fix.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/enhanced_trade_narrative_llm.py",
+      "destination": "ncOS_consolidated/src/core/enhanced_trade_narrative_llm.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/integration_tests.py",
+      "destination": "ncOS_consolidated/src/core/integration_tests.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/circuit_breaker.py",
+      "destination": "ncOS_consolidated/src/core/circuit_breaker.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/utils.py",
+      "destination": "ncOS_consolidated/src/core/utils.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/ncos_v21_7_1_enhanced_master_orchestrator.py",
+      "destination": "ncOS_consolidated/src/core/ncos_v21_7_1_enhanced_master_orchestrator.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/enhanced_core_orchestrator.py",
+      "destination": "ncOS_consolidated/src/core/enhanced_core_orchestrator.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/1.py",
+      "destination": "ncOS_consolidated/src/core/1.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/ncos_data_enricher.py",
+      "destination": "ncOS_consolidated/src/core/ncos_data_enricher.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/trade_journal_viewer.py",
+      "destination": "ncOS_consolidated/src/core/trade_journal_viewer.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/settings.py",
+      "destination": "ncOS_consolidated/src/core/settings.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/consolidate_configs_clean.py",
+      "destination": "ncOS_consolidated/src/core/consolidate_configs_clean.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/exceptions.py",
+      "destination": "ncOS_consolidated/src/core/exceptions.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/version_v21.7.1.py",
+      "destination": "ncOS_consolidated/src/core/version_v21.7.1.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/gpt_instructions.py",
+      "destination": "ncOS_consolidated/src/core/gpt_instructions.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/backend_config.py",
+      "destination": "ncOS_consolidated/src/core/backend_config.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/fvg_locator.py",
+      "destination": "ncOS_consolidated/src/core/fvg_locator.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/tomlconfig.py",
+      "destination": "ncOS_consolidated/src/core/tomlconfig.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/_config.py",
+      "destination": "ncOS_consolidated/src/core/_config.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/master_orchestrator_hardened.py",
+      "destination": "ncOS_consolidated/src/core/master_orchestrator_hardened.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/_ufunc_config.py",
+      "destination": "ncOS_consolidated/src/core/_ufunc_config.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/custom_config.py",
+      "destination": "ncOS_consolidated/src/core/custom_config.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/ncos_launcher.py",
+      "destination": "ncOS_consolidated/src/core/ncos_launcher.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/sysconfig.py",
+      "destination": "ncOS_consolidated/src/core/sysconfig.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/module_configs.py",
+      "destination": "ncOS_consolidated/src/core/module_configs.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/quantization_config.py",
+      "destination": "ncOS_consolidated/src/core/quantization_config.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/chart_generator.py",
+      "destination": "ncOS_consolidated/src/core/chart_generator.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/llm_dashboard_integration.py",
+      "destination": "ncOS_consolidated/src/core/llm_dashboard_integration.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/__main__.py",
+      "destination": "ncOS_consolidated/src/core/__main__.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/zanflow_liquidity_sniper.py",
+      "destination": "ncOS_consolidated/src/core/zanflow_liquidity_sniper.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/menu_voice_integration.py",
+      "destination": "ncOS_consolidated/src/core/menu_voice_integration.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/core/finnhub_data_fetcher.py",
+      "destination": "ncOS_consolidated/src/core/finnhub_data_fetcher.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/ncos_plugin/__init__.py",
+      "destination": "ncOS_consolidated/src/core/__init__.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/ncos_plugin/plugin_api_backend.py",
+      "destination": "ncOS_consolidated/src/api/plugin_api_backend.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/ncos_plugin/finnhub_data_fetcher.py",
+      "destination": "ncOS_consolidated/src/core/finnhub_data_fetcher.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/ncos_api/__init__.py",
+      "destination": "ncOS_consolidated/src/api/__init__.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/ncos_api/data_retrieval_api.py",
+      "destination": "ncOS_consolidated/src/api/data_retrieval_api.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/ncos_api/ncos_zbar_api.py",
+      "destination": "ncOS_consolidated/src/api/ncos_zbar_api.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/ncOS/ncos_feature_extractor.py",
+      "destination": "ncOS_consolidated/src/core/ncos_feature_extractor.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/ncOS/voice_tag_parser.py",
+      "destination": "ncOS_consolidated/src/core/voice_tag_parser.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/ncOS/enhanced_cli.py",
+      "destination": "ncOS_consolidated/src/core/enhanced_cli.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/ncOS/zbar_voice_integration.py",
+      "destination": "ncOS_consolidated/src/core/zbar_voice_integration.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/ncOS/semantic_utils.py",
+      "destination": "ncOS_consolidated/src/core/semantic_utils.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/ncOS/ncos_voice_unified.py",
+      "destination": "ncOS_consolidated/src/core/ncos_voice_unified.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/ncOS/__init__.py",
+      "destination": "ncOS_consolidated/src/core/__init__.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/ncOS/ncos_predictive_engine.py",
+      "destination": "ncOS_consolidated/src/engines/ncos_predictive_engine.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/ncOS/voice_api_routes.py",
+      "destination": "ncOS_consolidated/src/api/voice_api_routes.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/ncOS/ncos_data_enricher.py",
+      "destination": "ncOS_consolidated/src/core/ncos_data_enricher.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/ncOS/trade_journal_viewer.py",
+      "destination": "ncOS_consolidated/src/core/trade_journal_viewer.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/ncOS/ncos_launcher.py",
+      "destination": "ncOS_consolidated/src/core/ncos_launcher.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/ncOS/__main__.py",
+      "destination": "ncOS_consolidated/src/core/__main__.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/ncOS/menu_voice_integration.py",
+      "destination": "ncOS_consolidated/src/core/menu_voice_integration.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/config/config_loader.py",
+      "destination": "ncOS_consolidated/src/core/config_loader.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/tests/__init__.py",
+      "destination": "ncOS_consolidated/src/core/__init__.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/metrics_aggregator.py",
+      "destination": "ncOS_consolidated/src/agents/metrics_aggregator.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/technical_analyst.py",
+      "destination": "ncOS_consolidated/src/agents/technical_analyst.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/strategy_evaluator.py",
+      "destination": "ncOS_consolidated/src/agents/strategy_evaluator.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/ncos_risk_monitor_agent.py",
+      "destination": "ncOS_consolidated/src/agents/ncos_risk_monitor_agent.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/maz2_executor.py",
+      "destination": "ncOS_consolidated/src/agents/maz2_executor.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/market_conditioner.py",
+      "destination": "ncOS_consolidated/src/agents/market_conditioner.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/risk_guardian_agent.py",
+      "destination": "ncOS_consolidated/src/agents/risk_guardian_agent.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/liquidity_sniper.py",
+      "destination": "ncOS_consolidated/src/agents/liquidity_sniper.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/core_system_agent.py",
+      "destination": "ncOS_consolidated/src/agents/core_system_agent.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/smc_liquidity_trap.py",
+      "destination": "ncOS_consolidated/src/agents/smc_liquidity_trap.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/smc_master_agent.py",
+      "destination": "ncOS_consolidated/src/agents/smc_master_agent.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/rationalize_agents.py",
+      "destination": "ncOS_consolidated/src/agents/rationalize_agents.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/orderflow_anomaly.py",
+      "destination": "ncOS_consolidated/src/agents/orderflow_anomaly.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/broadcast_relay.py",
+      "destination": "ncOS_consolidated/src/agents/broadcast_relay.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/agent_profile_schemas.py",
+      "destination": "ncOS_consolidated/src/agents/agent_profile_schemas.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/smc_router.py",
+      "destination": "ncOS_consolidated/src/agents/smc_router.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/risk_guardian.py",
+      "destination": "ncOS_consolidated/src/agents/risk_guardian.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/ncos_divergence_strategy_agent.py",
+      "destination": "ncOS_consolidated/src/agents/ncos_divergence_strategy_agent.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/interaction_manager.py",
+      "destination": "ncOS_consolidated/src/agents/interaction_manager.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/performance_monitor.py",
+      "destination": "ncOS_consolidated/src/agents/performance_monitor.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/vector_memory_boot.py",
+      "destination": "ncOS_consolidated/src/agents/vector_memory_boot.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/__init__.py",
+      "destination": "ncOS_consolidated/src/agents/__init__.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/portfolio_manager.py",
+      "destination": "ncOS_consolidated/src/agents/portfolio_manager.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/ncos_base_agent.py",
+      "destination": "ncOS_consolidated/src/agents/ncos_base_agent.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/ncos_compliance_agent.py",
+      "destination": "ncOS_consolidated/src/agents/ncos_compliance_agent.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/market_maker.py",
+      "destination": "ncOS_consolidated/src/agents/market_maker.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/master_orchestrator.py",
+      "destination": "ncOS_consolidated/src/agents/master_orchestrator.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/enhanced_schemas.py",
+      "destination": "ncOS_consolidated/src/agents/enhanced_schemas.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/position_manager.py",
+      "destination": "ncOS_consolidated/src/agents/position_manager.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/micro_wyckoff_event.py",
+      "destination": "ncOS_consolidated/src/agents/micro_wyckoff_event.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/signal_processor.py",
+      "destination": "ncOS_consolidated/src/agents/signal_processor.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/session_state_manager.py",
+      "destination": "ncOS_consolidated/src/agents/session_state_manager.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/tmc_executor.py",
+      "destination": "ncOS_consolidated/src/agents/tmc_executor.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/wyckoff_phase_cycle.py",
+      "destination": "ncOS_consolidated/src/agents/wyckoff_phase_cycle.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/entry_executor_smc.py",
+      "destination": "ncOS_consolidated/src/agents/entry_executor_smc.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/risk_analyzer.py",
+      "destination": "ncOS_consolidated/src/agents/risk_analyzer.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/report_generator.py",
+      "destination": "ncOS_consolidated/src/agents/report_generator.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/knowledge_intelligence.py",
+      "destination": "ncOS_consolidated/src/agents/knowledge_intelligence.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/ncos_market_data_native_agent.py",
+      "destination": "ncOS_consolidated/src/agents/ncos_market_data_native_agent.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/market_data_captain.py",
+      "destination": "ncOS_consolidated/src/agents/market_data_captain.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/dimensional_fold.py",
+      "destination": "ncOS_consolidated/src/agents/dimensional_fold.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/ncos_liquidity_analysis_agent.py",
+      "destination": "ncOS_consolidated/src/agents/ncos_liquidity_analysis_agent.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/parquet_ingestor.py",
+      "destination": "ncOS_consolidated/src/agents/parquet_ingestor.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/protection_reentry.py",
+      "destination": "ncOS_consolidated/src/agents/protection_reentry.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/ncos_market_manipulation_agent.py",
+      "destination": "ncOS_consolidated/src/agents/ncos_market_manipulation_agent.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/vector_data_processor.py",
+      "destination": "ncOS_consolidated/src/agents/vector_data_processor.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/quantitative_analyst.py",
+      "destination": "ncOS_consolidated/src/agents/quantitative_analyst.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/session_sweep_reversal.py",
+      "destination": "ncOS_consolidated/src/agents/session_sweep_reversal.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/base.py",
+      "destination": "ncOS_consolidated/src/agents/base.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/zanflow_orchestrator.py",
+      "destination": "ncOS_consolidated/src/agents/zanflow_orchestrator.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/agents/drift_detection_agent.py",
+      "destination": "ncOS_consolidated/src/agents/drift_detection_agent.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/utils/data_enricher.py",
+      "destination": "ncOS_consolidated/src/core/data_enricher.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/utils/memory_manager.py",
+      "destination": "ncOS_consolidated/src/core/memory_manager.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/utils/pattern_recognition_engine.py",
+      "destination": "ncOS_consolidated/src/engines/pattern_recognition_engine.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/utils/vector_store.py",
+      "destination": "ncOS_consolidated/src/core/vector_store.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/utils/chart_engine.py",
+      "destination": "ncOS_consolidated/src/engines/chart_engine.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/utils/__init__.py",
+      "destination": "ncOS_consolidated/src/core/__init__.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/utils/circuit_breaker.py",
+      "destination": "ncOS_consolidated/src/core/circuit_breaker.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/utils/fvg_locator.py",
+      "destination": "ncOS_consolidated/src/core/fvg_locator.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/utils/chart_generator.py",
+      "destination": "ncOS_consolidated/src/core/chart_generator.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/models/__init__.py",
+      "destination": "ncOS_consolidated/src/models/__init__.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/docs/__init__.py",
+      "destination": "ncOS_consolidated/src/core/__init__.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/schemas/agent_profile_schemas.py",
+      "destination": "ncOS_consolidated/src/agents/agent_profile_schemas.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/schemas/__init__.py",
+      "destination": "ncOS_consolidated/src/core/__init__.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/schemas/module_configs.py",
+      "destination": "ncOS_consolidated/src/core/module_configs.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/dashboard/__init__.py",
+      "destination": "ncOS_consolidated/src/core/__init__.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/dashboard/zbar_journal_dashboard.py",
+      "destination": "ncOS_consolidated/src/core/zbar_journal_dashboard.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/dashboard/app.py",
+      "destination": "ncOS_consolidated/src/core/app.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/ncos_journal/__init__.py",
+      "destination": "ncOS_consolidated/src/core/__init__.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/ncos_journal/zbar/__init__.py",
+      "destination": "ncOS_consolidated/src/core/__init__.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/ncos_journal/core/__init__.py",
+      "destination": "ncOS_consolidated/src/core/__init__.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/ncos_journal/core/writers/__init__.py",
+      "destination": "ncOS_consolidated/src/core/__init__.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/ncos_journal/dashboard/app2.py",
+      "destination": "ncOS_consolidated/src/core/app2.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/ncos_journal/dashboard/__init__.py",
+      "destination": "ncOS_consolidated/src/core/__init__.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/ncos_journal/dashboard/app.py",
+      "destination": "ncOS_consolidated/src/core/app.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/ncos_journal/api/__init__.py",
+      "destination": "ncOS_consolidated/src/api/__init__.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/ncos_journal/api/zbar_routes.py",
+      "destination": "ncOS_consolidated/src/api/zbar_routes.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/ncos_journal/api/main.py",
+      "destination": "ncOS_consolidated/src/api/main.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/voice/__init__.py",
+      "destination": "ncOS_consolidated/src/core/__init__.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/engines/predictive.py",
+      "destination": "ncOS_consolidated/src/engines/predictive.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/engines/vector.py",
+      "destination": "ncOS_consolidated/src/engines/vector.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/engines/pattern_recognition_engine.py",
+      "destination": "ncOS_consolidated/src/engines/pattern_recognition_engine.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/engines/chart_engine.py",
+      "destination": "ncOS_consolidated/src/engines/chart_engine.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/engines/__init__.py",
+      "destination": "ncOS_consolidated/src/engines/__init__.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/engines/ncos_predictive_engine.py",
+      "destination": "ncOS_consolidated/src/engines/ncos_predictive_engine.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/engines/engine.py",
+      "destination": "ncOS_consolidated/src/engines/engine.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/engines/base.py",
+      "destination": "ncOS_consolidated/src/engines/base.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/engines/ncos_risk_engine.py",
+      "destination": "ncOS_consolidated/src/engines/ncos_risk_engine.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/scripts/add_structure.py",
+      "destination": "ncOS_consolidated/src/core/add_structure.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/scripts/quick_start_predictive.py",
+      "destination": "ncOS_consolidated/src/core/quick_start_predictive.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/scripts/zbar_client_demo.py",
+      "destination": "ncOS_consolidated/src/core/zbar_client_demo.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/scripts/__init__.py",
+      "destination": "ncOS_consolidated/src/core/__init__.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/scripts/integration_bootstrap_old.py",
+      "destination": "ncOS_consolidated/src/core/integration_bootstrap_old.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/scripts/integration_bootstrap.py",
+      "destination": "ncOS_consolidated/src/core/integration_bootstrap.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/production/production_logging.py",
+      "destination": "ncOS_consolidated/src/core/production_logging.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/production/monitoring.py",
+      "destination": "ncOS_consolidated/src/core/monitoring.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/production/health_integration.py",
+      "destination": "ncOS_consolidated/src/core/health_integration.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/production/__init__.py",
+      "destination": "ncOS_consolidated/src/core/__init__.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/production/production_config.py",
+      "destination": "ncOS_consolidated/src/core/production_config.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/api/journal_api.py",
+      "destination": "ncOS_consolidated/src/api/journal_api.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/api/__init__.py",
+      "destination": "ncOS_consolidated/src/api/__init__.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/api/data_retrieval_api.py",
+      "destination": "ncOS_consolidated/src/api/data_retrieval_api.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/api/plugin_api_backend.py",
+      "destination": "ncOS_consolidated/src/api/plugin_api_backend.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/api/smc_router_hardened.py",
+      "destination": "ncOS_consolidated/src/api/smc_router_hardened.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/api/voice_api_routes.py",
+      "destination": "ncOS_consolidated/src/api/voice_api_routes.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/api/ncos_zbar_api.py",
+      "destination": "ncOS_consolidated/src/api/ncos_zbar_api.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/api/main.py",
+      "destination": "ncOS_consolidated/src/api/main.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/data/__init__.py",
+      "destination": "ncOS_consolidated/src/core/__init__.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/data/zbar_journal_dashboard.py",
+      "destination": "ncOS_consolidated/src/core/zbar_journal_dashboard.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/services/refactored_snapshot_system.py",
+      "destination": "ncOS_consolidated/src/core/refactored_snapshot_system.py",
+      "status": "migrated"
+    },
+    {
+      "source": "/Users/tom/Documents/GitHub/ncOS_v21.7/services/__init__.py",
+      "destination": "ncOS_consolidated/src/core/__init__.py",
+      "status": "migrated"
+    }
+  ],
+  "errors_detail": []
+}

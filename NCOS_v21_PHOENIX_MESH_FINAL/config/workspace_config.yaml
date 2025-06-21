@@ -1,0 +1,131 @@
+workspace:
+  name: NCOS v21 Phoenix Mesh
+  version: '21.0'
+  created: '2025-06-21T17:00:16.137157'
+agents:
+  registry:
+    wyckoff_analyzer:
+      module: strategies.wyckoff.analyzer
+      class: WyckoffAnalyzer
+      role: strategy
+      capabilities:
+      - phase_detection
+      - volume_analysis
+      - micro_structure
+      memory_namespace: strategy.wyckoff
+      single_session_safe: true
+    liquidity_hunter:
+      module: strategies.liquidity.hunter
+      class: LiquidityHunter
+      role: strategy
+      capabilities:
+      - liquidity_detection
+      - sweep_analysis
+      memory_namespace: strategy.liquidity
+      single_session_safe: true
+    chart_engine:
+      module: visualization.chart_engine
+      class: NativeChartEngine
+      role: visualization
+      capabilities:
+      - render
+      - action_hooks
+      - export
+      memory_namespace: viz.charts
+      single_session_safe: true
+    data_ingestor:
+      module: data.ingestor
+      class: UnifiedDataIngestor
+      role: data_ingestion
+      capabilities:
+      - csv_enrichment
+      - parquet_processing
+      - real_time_feeds
+      memory_namespace: data.ingestion
+      single_session_safe: true
+    vector_optimizer:
+      module: memory.vector_optimizer
+      class: VectorOptimizer
+      role: memory_vector
+      capabilities:
+      - compression
+      - drift_detection
+      - token_optimization
+      memory_namespace: memory.vector
+      single_session_safe: true
+orchestration:
+  master:
+    class: MasterOrchestrator
+    module: orchestrators.master
+    config:
+      max_agents: 50
+      hot_swap_enabled: true
+      session_timeout: 3600
+      health_check_interval: 30
+  routing:
+    default_strategy: round_robin
+    fallback_enabled: true
+    retry_attempts: 3
+memory:
+  architecture:
+    L1_session:
+      type: in_memory
+      max_size_mb: 512
+      eviction_policy: LRU
+      token_budget: 8192
+    L2_vector:
+      type: vector_store
+      backend: faiss
+      compression_enabled: true
+      compression_ratio: 0.75
+    L3_persistent:
+      type: persistent
+      backend: sqlite
+      cache_size_mb: 2048
+      backup_enabled: true
+strategies:
+  wyckoff:
+    enabled: true
+    config_file: config/strategies/wyckoff.yaml
+    components:
+    - wyckoff_phase_engine
+    - micro_wyckoff_sniffer
+    - phase_detector_wyckoff_v1
+    - accum_engine
+  smc:
+    enabled: true
+    config_file: config/strategies/smc.yaml
+    components:
+    - entry_executor_smc
+    - poi_manager_smc
+data_pipeline:
+  sources:
+    primary:
+      type: api
+      endpoint: ${API_ENDPOINT}
+      auth: ${API_KEY}
+      rate_limit: 100
+    enrichment:
+      csv:
+        enabled: true
+        path: data/enriched
+      parquet:
+        enabled: true
+        compression: snappy
+monitoring:
+  metrics:
+    enabled: true
+    export_interval: 60
+    exporters:
+    - prometheus
+    - json
+  logging:
+    level: INFO
+    handlers:
+    - console
+    - file
+    file_path: logs/ncos.log
+  alerts:
+    token_usage_threshold: 0.8
+    memory_usage_threshold: 0.9
+    error_rate_threshold: 0.05

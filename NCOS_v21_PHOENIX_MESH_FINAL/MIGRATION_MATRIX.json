@@ -1,0 +1,62 @@
+{
+  "components": [
+    {
+      "current": "scattered wyckoff files (38)",
+      "target": "strategies/wyckoff/*",
+      "status": "ready",
+      "effort": "medium"
+    },
+    {
+      "current": "multiple schema files (56)",
+      "target": "schemas/unified_schemas.py",
+      "status": "ready",
+      "effort": "low"
+    },
+    {
+      "current": "individual agent configs",
+      "target": "config/agents.yaml",
+      "status": "ready",
+      "effort": "low"
+    },
+    {
+      "current": "scattered memory systems (28)",
+      "target": "memory/unified_manager.py",
+      "status": "planning",
+      "effort": "high"
+    }
+  ],
+  "timeline": {
+    "week_1": [
+      "Schema consolidation",
+      "Base orchestrator"
+    ],
+    "week_2": [
+      "Memory architecture",
+      "Session management"
+    ],
+    "week_3": [
+      "Wyckoff integration",
+      "Data pipeline"
+    ],
+    "week_4": [
+      "Vector optimization",
+      "Configuration"
+    ],
+    "week_5": [
+      "Charting engine",
+      "Action hooks"
+    ],
+    "week_6": [
+      "Token management",
+      "Monitoring"
+    ],
+    "week_7": [
+      "Testing",
+      "Optimization"
+    ],
+    "week_8": [
+      "Documentation",
+      "Deployment"
+    ]
+  }
+}

@@ -243,7 +243,7 @@ class PhoenixSessionController:
         self.state["analyses"] += 1
         return results
 
-    def chart(self, data: Optional[Union[str, pd.DataFrame]] = None,
+    def chart(self, data: Optional[Union[str, pd.DataFrame]] = None, 
               chart_type: Optional[str] = None) -> str:
         """Fast chart generation"""
         # Use config default if not specified
@@ -299,7 +299,7 @@ def phoenix_rise():
     print("NCOS Phoenix has risen!")
     print("Quick commands:")
     print("  - controller.quick_start()    # Initialize")
-    print("  - controller.analyze()        # Run analysis")
+    print("  - controller.analyze()        # Run analysis") 
     print("  - controller.chart()          # Generate chart")
     print("  - controller.get_status()     # Check status")
     return controller
