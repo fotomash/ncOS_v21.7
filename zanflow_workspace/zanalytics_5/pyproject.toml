@@ -1,0 +1,156 @@
+# pyproject.toml
+# Project configuration for Zanzibar Analytics
+
+[build-system]
+requires = ["setuptools>=61.0"] # Specify minimum setuptools version
+build-backend = "setuptools.build_meta"
+backend-path = ["."] # Tells build frontend where to find setuptools.build_meta
+
+[project]
+name = "zanzibar_analytics"
+version = "0.1.0-alpha" # Initial alpha version
+description = "Zanzibar Analytics: Modular Wyckoff/VSA/Delta Analysis Engine with Narrative Intelligence"
+readme = "README.md" # Path to your project's README file
+requires-python = ">=3.9" # Minimum Python version
+license = { text = "Proprietary" } # As per your decision
+authors = [
+    { name = "Tomasz Laskowski", email = "your_email@example.com" }, # Replace with actual email
+    # { name = "Gemini Co-pilot", email = "ai@copilot.com" } # Optional
+]
+keywords = ["trading", "quantitative", "finance", "wyckoff", "vsa", "delta", "smc", "algotrading", "market-microstructure", "narrative-analysis"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Financial and Insurance Industry",
+    "License :: Other/Proprietary License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Operating System :: OS Independent",
+    "Topic :: Office/Business :: Financial :: Investment",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+# Core dependencies - list essential packages currently in use or immediately planned
+dependencies = [
+    "pandas>=1.5.0",      # Data manipulation
+    "numpy>=1.23.0",      # Numerical operations
+    "PyYAML>=6.0",        # For config.yaml loading
+    "python-dateutil",    # For robust date parsing (often a pandas dep)
+    "pytz",               # For timezone handling
+    "chardet>=5.0.0",     # For encoding detection in csv_loader
+    # "scipy",            # Add if/when specific functions are used
+    # "statsmodels",      # Add if/when statistical models are directly used
+    # "scikit-learn",     # For ML components (add when ML phase starts)
+    # "spacy",            # For NLP in PMS/GMN (add when NLP implementation starts)
+    # "PyPDF2",           # For GMN PDF extraction (add when GMN parser is built)
+    # "requests",         # For GMN URL fetching / ACAP API (add when needed)
+    # "beautifulsoup4",   # For GMN web scraping (add when needed)
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",        # Testing framework
+    "pytest-cov",       # Test coverage reporting
+    "ruff",             # Fast linter & formatter
+    "pre-commit",       # For running linters/formatters before commits
+    "ipykernel",        # For Jupyter notebook support within venv
+    "jupyterlab",       # For local notebook development
+    "ipywidgets",       # For interactive elements in notebooks
+    # "mypy",             # Static type checking (consider for later)
+    # "pandas-stubs",     # Type hints for pandas (if using mypy)
+    # "types-PyYAML",
+    # "types-pytz",
+    # "types-python-dateutil",
+]
+docs = [ # For future documentation generation
+    "Sphinx>=5.0",
+    "sphinx-rtd-theme",
+    "myst-parser", # For Markdown support in Sphinx
+]
+
+[project.scripts]
+# Defines command-line scripts if your package provides executables
+# Example: This would create a 'zanzibar-pipeline' command in the venv's bin/
+# zanzibar-pipeline = "zanzibar.main_cli:main" # Assuming you rename run_test_pipeline.py to main_cli.py and have a main()
+# For now, we run with 'python run_test_pipeline.py', so this can be deferred.
+
+[project.urls]
+Homepage = "https://github.com/Fotomash/zanzibar-analytics" # Replace with your actual repo URL
+Repository = "https://github.com/Fotomash/zanzibar-analytics"
+# Bug-Tracker = "https://github.com/Fotomash/zanzibar-analytics/issues"
+
+# --- Tool-specific configurations ---
+
+[tool.setuptools]
+# If you need to explicitly include non-code files within your package
+# (e.g., default schemas, templates)
+# package-data = {"zanzibar" = ["config/schemas/*.json"]}
+
+[tool.setuptools.packages.find]
+where = ["."]  # Look for packages in the current directory (location of pyproject.toml)
+include = ["zanzibar*"]  # Include the 'zanzibar' package and its subpackages
+exclude = ["tests*", "docs*", "notebooks*", "data*", "logs*", "config_files_for_upload*"] # Exclude non-package directories
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+# -ra: show extra test summary info for all but pass
+# -q: quiet mode
+# --cov: enable coverage for 'zanzibar' package
+# --cov-report: show missing lines in terminal and generate XML for other tools
+addopts = "-ra -q --cov=zanzibar --cov-report=term-missing --cov-report=xml"
+testpaths = [
+    "tests", # Directory where tests are located
+]
+python_files = "test_*.py" # Test file naming convention
+python_classes = "Test*"    # Test class naming convention
+python_functions = "test_*" # Test function naming convention
+filterwarnings = [ # Suppress common warnings if they become too noisy
+    "ignore::DeprecationWarning",
+    # "ignore::UserWarning", # Be cautious with ignoring UserWarnings
+]
+
+[tool.ruff]
+# Ruff is an extremely fast Python linter and formatter, written in Rust.
+# It can replace Flake8, isort, pydocstyle, pyupgrade, and more.
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # Pyflakes (undefined names, unused imports/variables)
+    "I",  # isort (import sorting)
+    "C4", # flake8-comprehensions (unnecessary list/dict/set comprehensions)
+    "B",  # flake8-bugbear (potential bugs or design problems)
+    "UP", # pyupgrade (upgrade syntax to newer Python versions)
+    "RUF",# Ruff-specific rules
+    # Consider adding later:
+    # "ANN", # flake8-annotations (type annotation checks, can be strict)
+    # "D",  # pydocstyle (docstring style checks)
+]
+ignore = [
+    "E501", # Line too long (Ruff's formatter will handle this)
+    "B008", # Do not perform function calls in argument defaults (can be valid in some cases)
+]
+line-length = 100 # Or your preferred line length (e.g., 88 for Black compatibility)
+target-version = "py39" # Minimum Python version to target for syntax upgrades
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false # Add trailing commas where applicable
+line-ending = "auto" # Or "lf" for consistency
+
+[tool.ruff.lint.isort]
+known-first-party = ["zanzibar"] # Your project's top-level package
+force-sort-within-sections = true
+
+# For mypy static type checking (optional, but recommended for larger projects)
+# [tool.mypy]
+# python_version = "3.9"
+# warn_return_any = true
+# warn_unused_configs = true
+# ignore_missing_imports = true # Start with true, then gradually reduce
+# exclude = ['venv', '\.venv', 'docs', 'build', 'dist']
+# # Add paths to type stubs if needed
+# # mypy_path = "stubs"

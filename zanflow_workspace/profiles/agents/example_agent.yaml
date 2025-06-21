@@ -1,0 +1,52 @@
+agent_name: example_agent
+symbol_list:
+  - EURUSD
+  - GBPUSD
+
+context:
+  htf_periods:
+    - H4
+    - H1
+  bias_lookback: 10
+
+liquidity:
+  lt_sweep_tf: M5
+  inducement_window: 3
+  htf_pois:
+    - order_block
+    - imbalance
+
+structure:
+  lt_structure_tf: M5
+  swing_lookback: 5
+
+entry:
+  fvg_tf: M5
+  retracement_level: edge
+  equilibrium_ratio: 0.50
+  max_retrace_bars: 10
+
+risk:
+  min_rr: 2.0
+  sl_buffer_pips: 3.0
+  tp_targets: 1
+  tp_ratios:
+    - 2.0
+
+confluence:
+  session_kill_zones:
+    - [7, 9]
+    - [12, 14]
+  volume_threshold: 1.5
+  enable_fib: false
+  fib_levels:
+    - 0.382
+    - 0.618
+
+journal:
+  output_format: json
+  include_filtered: true
+  conviction_threshold: null
+  destination: null
+
+save_logs: false

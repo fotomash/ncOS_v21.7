@@ -1,0 +1,13 @@
+agent_name: wyckoff_breakout_rider
+strategy: phase_E_trend_joiner
+fractal_ratio: "1:6"
+min_rr: 2.5
+entry_zone: edge
+use_inducement_filter: false
+session_filter:
+  - New York
+volume_required: false
+confirmation:
+  type: BOS
+  swing_validated: true
+fallback_strategy: trendline_break_monitor

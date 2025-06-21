@@ -1,0 +1,91 @@
+# ZSI framework configuration
+version: "1.0.0"
+
+# Project configuration and metadata
+project:
+  name: Launch structural intelligence workspace
+  description: Business incubation platform for structural intelligence.
+  business_type: ${BUSINESS_TYPE:-generic_copilot}
+
+# API configuration
+api:
+  endpoints:
+    prefix: ${API_PREFIX:/api/v1} # Base path for all API routes (FastAPI, Lambda, etc.)
+    healthcheck: ${HEALTHCHECK_ROUTE:/healthz}
+    metrics: ${METRICS_ROUTE:/metrics}
+
+# Application modules and agent modules
+modules:
+  # Core scaffolding for MVP
+  - MVP_Scaffolding
+  # Revenue and monetization logic
+  - Revenue_Engine_Generation
+  # Market validation steps
+  - Market_Readiness_Check
+  # Stakeholder and user mapping
+  - Stakeholder_Mapping
+  # Backend orchestration service
+  - Backend_Orchestration_FastAPI
+  # Data persistence and memory
+  - Persistence_Layer_Integration
+agent_directory: ${AGENT_MODULES:-modules} # folder containing agent modules
+
+# Persistence layer configuration
+persistence:
+  # primary persistence engine
+  engine: ${PERSISTENCE_ENGINE:-generic_engine}
+  fallback: ${PERSISTENCE_FALLBACK:-local_storage}
+  config:
+    uri: ${PERSISTENCE_URI:-""}
+    credentials: ${PERSISTENCE_CREDENTIALS:-""}
+
+# Hosting environments configuration
+hosting:
+  development:
+    provider: ${DEV_HOSTING_PROVIDER:-railway}
+    framework: ${DEV_FRAMEWORK:-fastapi}
+    url: ${DEV_HOSTING_URL:-http://localhost:8000}
+  staging:
+    provider: ${STAGING_PROVIDER:-heroku}
+    framework: ${STAGING_FRAMEWORK:-fastapi}
+    url: ${STAGING_URL:-}
+  production:
+    provider: ${PROD_PROVIDER:-aws}
+    framework: ${PROD_FRAMEWORK:-lambda}
+    url: ${PROD_URL:-}
+    api_gateway: ${PROD_API_GATEWAY:-enabled}
+
+# Scaling infrastructure configuration
+scale:
+  provider: ${SCALE_PROVIDER:-kubernetes}
+  compute:
+    - ${SCALE_COMPUTE_1:-k8s_cluster}
+    - ${SCALE_COMPUTE_2:-lambda_functions}
+  databases:
+    - ${SCALE_DB_1:-dynamodb}
+    - ${SCALE_DB_2:-firestore}
+
+# Security settings
+security:
+  # CORS and authentication settings
+  cors_origins: ${CORS_ORIGINS:-*}
+  jwt_secret: ${JWT_SECRET:?required}
+
+# Logging configuration
+logging:
+  level: ${LOG_LEVEL:-INFO}
+  format: ${LOG_FORMAT:-json} # log format: json or plain
+
+frameworks:
+  - name: fastapi
+    version: ${FASTAPI_VERSION:-0.78.0}
+  - name: aws_lambda
+    version: ${LAMBDA_RUNTIME:-python3.9}
+  - name: docker
+    version: ${DOCKER_VERSION:-20.10}
+
+# ---
+# To add new hosting targets, persistence engines, or frameworks:
+# 1. Define environment variables in .env or CI/CD.
+# 2. Update this config under `hosting`, `persistence`, or `frameworks`.
+# 3. Reflect changes in your FastAPI settings loader and CI pipelines.

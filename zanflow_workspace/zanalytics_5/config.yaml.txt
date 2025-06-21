@@ -1,0 +1,59 @@
+# config/config.yaml
+# Configuration for the XAUUSD M1 TSV test run
+
+instrument:
+  symbol: XAUUSD
+  tick_size: 0.01 # Adjust if needed for Gold
+
+data_loader:
+  # Profile for MetaTrader TSV Export
+  profile_name: "metatrader_m1_tsv"
+  delimiter: "\t" # Tab separated
+  column_map:
+    timestamp: "<DATE> <TIME>" # Special key for combined columns
+    open: "<OPEN>"
+    high: "<HIGH>"
+    low: "<LOW>"
+    close: "<CLOSE>"
+    volume: "<VOL>" # Use VOL column for volume
+
+wyckoff_detector:
+  # Thresholds loaded from here
+  volume_lookback: 20
+  volume_extreme_factor: 2.5
+  volume_high_factor: 1.8
+  volume_low_factor: 0.7
+  volume_spring_ut_recovery_factor: 1.5
+  spread_lookback: 20
+  spread_wide_factor: 1.8
+  spread_narrow_factor: 0.7
+  trend_lookback: 10
+  close_location_high: 0.65
+  close_location_low: 0.35
+  spring_ut_penetration_ticks: 2
+  delta_thresholds:
+    strong_negative: -0.3
+    strong_positive: 0.3
+    neutral_threshold: 0.15
+
+wyckoff_state_machine:
+  # Basic transition map (can be expanded)
+  phase_transitions:
+    Unknown: ["PS", "SC", "PSY", "BC"] # Initial events determine schematic
+    Accumulation_A: ["AR_acc"]
+    Accumulation_B: ["ST_acc", "ST_Acc_Weak", "Spring", "Spring_Weak"] # Can stay in B on tests
+    Accumulation_C: ["Test", "LPS", "SOS"] # Test confirms C, LPS/SOS move to D
+    Accumulation_D: ["BU", "SOS", "LPS"] # BU/SOS confirm D, LPS can retest
+    Accumulation_E: ["LPS"] # Trend phase
+    Distribution_A: ["AR_dist"]
+    Distribution_B: ["ST_dist", "UT", "UT_Weak"]
+    Distribution_C: ["UTAD_Test", "LPSY", "SOW"]
+    Distribution_D: ["SOW", "LPSY"]
+    Distribution_E: ["LPSY"] # Trend phase
+  # Add other state machine settings if needed
+
+logging:
+  level: INFO # Set log level (DEBUG, INFO, WARNING, ERROR)
+  log_file: "logs/pipeline_run.log"
+
+

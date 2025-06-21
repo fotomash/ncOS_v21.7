@@ -1,0 +1,124 @@
+
+## 🧠 Wyckoff Point-and-Figure (P&F) Playbook for Zanzibar Inv Variant
+
+This playbook fuses the **Wyckoff Methodology** with the **Zanzibar Inversion Strategy**, creating a hybrid institutional framework. It includes CLI-ready integration, strategy profile formatting, and PineConnector prompt syntax. This document outlines:
+
+- Wyckoff P&F logic structure
+- CLI execution hooks
+- JSON strategy profile block
+- Institutional trading rules for Phase validation
+
+---
+
+### 📊 P&F Trading Logic Summary
+
+#### ✅ Conditions to Start a Count
+1. **Phase C completed**: Spring or Shakeout observed
+2. **LPS Confirmed**: Low of the reaction following SOS
+3. **SOS** present with clear widening spread + high volume
+
+#### 🔁 How to Count Horizontally
+- Use **LPS price level** as the horizontal line for column count
+- Count **columns from right to left**
+- **Never add partial phases** — only full phase blocks
+
+#### 🔎 Box/Reversal Settings
+| Context | Box Size | Reversal |
+|--------|----------|----------|
+| Intraday (GOLD, NASDAQ) | 1 pt | 3 box |
+| Swing Index (DOW, SPX) | 5 pt | 3 box |
+| Forex Majors | 0.5 pt | 3 box |
+
+---
+
+### 🧠 Institutional Execution Flow
+
+#### 🔹 Step-by-Step (Bar Chart + P&F Integration)
+```text
+Step 1: Identify TR via Wyckoff (Accum/Dist)
+Step 2: Confirm Phase A–E (SC/AR/ST → Spring → SOS → LPS)
+Step 3: Begin count from LPS price on P&F chart (right to left)
+Step 4: Segment into clean P&F phases (B, C, D, etc.)
+Step 5: Use volume and bar chart to refine validity
+Step 6: Project targets:
+    - Minimum Target: LPS price + (Box Size × Columns × Reversal)
+    - Max Target: Same count added from TR low and midpoint
+Step 7: Monitor bar chart price/volume behavior at those targets
+```
+
+#### 🔹 Use Bar Chart For:
+- Verifying **supply absorption** at LPS (low volume test)
+- Confirming **effort vs result** divergence
+- Validating markup conditions (volume expansion on SOS)
+
+---
+
+### 🧰 CLI Integration (Zanzibar)
+
+#### 🟢 File: `run_wyckoff_pf_analysis.py`
+```python
+# Hook for executing Wyckoff P&F count from LPS zone
+from wyckoff_pf_engine import run_pf_projection
+
+def execute(symbol, timeframe, lps_price, box_size, reversal, phase_count):
+    return run_pf_projection(symbol=symbol,
+                              lps_price=lps_price,
+                              box_size=box_size,
+                              reversal=reversal,
+                              phase_count=phase_count)
+```
+
+---
+
+### 📦 Strategy Profile JSON Template
+```json
+{
+  "variant": "Wyckoff",
+  "pf_enabled": true,
+  "box_size": 1,
+  "reversal": 3,
+  "apply_stepping_stone": true,
+  "start_phase": "C",
+  "count_trigger": "LPS",
+  "project_from": ["LPS", "TR Low", "Midpoint"],
+  "max_price_target_multiple": 3,
+  "volume_validation": true,
+  "supply_demand_cue": true,
+  "conservative_stop_placement": "below_spring"
+}
+```
+
+---
+
+### 📌 PineConnector Prompt Template
+```markdown
+Execute a Wyckoff Point-and-Figure based projection for GOLD on the 1H chart. Use:
+- Box Size = 1pt, Reversal = 3-box
+- Count from confirmed LPS (post-SOS)
+- Confirm Spring + Test prior
+- Validate supply/demand via bar chart
+- Project target from:
+  - LPS (conservative)
+  - TR low (aggressive)
+  - Midpoint (base case)
+- Strategy variant = Wyckoff + Inversion Hybrid
+```
+
+---
+
+### 📘 Additional Institutional Tips
+| Tip | Application |
+|-----|-------------|
+| Use bar chart volume | Validate Spring, SOS, and LPS integrity |
+| Only full P&F phases | Avoid fragmented cause → false targets |
+| LPS at SC level | Strongest anchor point for accumulation count |
+| Watch stepping-stone | Confirm long-term count via minor TRs |
+
+---
+
+### 📈 Chart Output Suggestions
+- Plot P&F projections as shaded zones: min-mid-max
+- Overlay LPS/Spring/SOS markers from bar chart
+- Use distinct color per projection origin (LPS, TR low, Mid)
+
+---

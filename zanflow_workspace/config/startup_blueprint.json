@@ -1,0 +1,79 @@
+{
+  "version": "${FRAMEWORK_VERSION}",
+  "project_name": "CareMatch MVP 1.0",
+  "description": "Voice-aware, agent-based service matching platform leveraging the Zanzibar Structured Intelligence (ZSI) framework for dynamic and scalable operations.",
+  "business_types": ["childcare", "home_cleaning", "elderly_care", "pet_care"],
+  "entry_mode": {
+    "freemium": true,
+    "pay_as_you_go": true
+  },
+  "launch_region": ["Poland", "UK"],
+  "environment": {
+    "development": {
+      "database": "local JSON",
+      "hosting_provider": "${DEV_HOSTING_PROVIDER:Railway.app}",
+      "logging_level": "DEBUG"
+    },
+    "production": {
+      "database": ["${DB_PROVIDER_1}", "${DB_PROVIDER_2}"],
+      "hosting_provider": "${PROD_HOSTING_PROVIDER}",
+      "logging_level": "ERROR"
+    }
+  },
+  "framework": {
+    "name": "Zanzibar Structured Intelligence v3",
+    "modules": ["zbot", "zse", "zbar"],
+    "flows": [
+      "daily_logging_flow",
+      "cheat_day_flow",
+      "workout_skip_flow",
+      "macro_adjustment_flow"
+    ],
+    "schemas": [
+      "intake_entry",
+      "supplement_log",
+      "activity_log",
+      "shopping_list"
+    ]
+  },
+  "architecture": {
+    "backend": "FastAPI",
+    "orchestrator": "core/orchestrator.py",
+    "memory_layer": "data/user_context.json",
+    "system_prompt": "system/system_prompt.md",
+    "agent_routing_logic": "system/agent_routing_logic.md",
+    "dynamic_agent_discovery": true,
+    "extensibility": {
+      "plugin_system": true,
+      "api_hooks": true
+    },
+    "hosting": {
+      "mvp": "${MVP_HOSTING_PROVIDER:Railway.app}",
+      "production": "${PROD_HOSTING_PROVIDER}"
+    },
+    "api_endpoints": {
+      "openapi": "${API_URL}/docs",
+      "health_check": "${API_URL}/health"
+    }
+  },
+  "persistence": {
+    "mvp": "local JSON",
+    "scale": ["Firebase Firestore", "DynamoDB"]
+  },
+  "security_considerations": {
+    "data_encryption": "AES-256 at rest and TLS 1.3 in transit",
+    "authentication": "OAuth 2.0 / JWT",
+    "access_control": "Role-based access control (RBAC)",
+    "compliance": ["GDPR", "CCPA"]
+  },
+  "tech_stack": {
+    "language": "Python 3.9+",
+    "llm": "OpenAI GPT-4",
+    "frontend": ["React Native", "Streamlit"],
+    "database": ["Firestore", "Supabase"],
+    "cli_tool": "ZSI-CLI v${FRAMEWORK_VERSION}"
+  },
+  "future_expansion": {
+    "notes": "Drop new agent modules in /modules and update business_types. Flows and schemas auto-discovered."
+  }
+}
