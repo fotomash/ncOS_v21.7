@@ -3,18 +3,16 @@ NCOS Predictive Engine
 Core module for predictive scoring and quality assessment of trading setups
 """
 
-import logging
-import numpy as np
-import pandas as pd
-from typing import Dict, Any, Optional, Tuple, List
-from datetime import datetime, timezone
-from pathlib import Path
 import json
+import logging
+from datetime import datetime
+from pathlib import Path
+from typing import Dict, Any, Optional, Tuple, List
+
 import yaml
 
 from ncos_predictive_schemas import (
-    PredictiveEngineConfig, FactorWeights, GradeThresholds,
-    ConflictDetectionConfig, PredictiveScorerConfig
+    PredictiveEngineConfig, PredictiveScorerConfig
 )
 
 logger = logging.getLogger(__name__)

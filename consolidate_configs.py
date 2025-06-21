@@ -4,13 +4,13 @@ ncOS Configuration Consolidator
 Consolidates 82 config files into a unified hierarchical structure
 """
 
-import os
-import yaml
 import json
-from pathlib import Path
-from collections import defaultdict
 import shutil
 from datetime import datetime
+from pathlib import Path
+
+import yaml
+
 
 class ConfigConsolidator:
     def __init__(self, project_root="ncOS_v21.7"):

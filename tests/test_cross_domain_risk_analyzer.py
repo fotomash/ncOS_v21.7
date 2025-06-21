@@ -1,12 +1,5 @@
 import unittest
 
-from ncos_risk_engine import (
-    RiskFactor,
-    add_cross_domain_risk_factor,
-    get_unified_risk_score,
-    get_mitigation_recommendations,
-)
-
 
 class TestCrossDomainRiskAnalyzerIntegration(unittest.TestCase):
     def setUp(self):

@@ -4,12 +4,11 @@ TMCExecutor Agent Implementation
 Trend-Momentum Confluence execution strategy
 """
 
-import json
-from typing import Dict, List, Any, Optional, Tuple
-from datetime import datetime, timedelta
-from dataclasses import dataclass, asdict
 import statistics
-import math
+from dataclasses import dataclass, asdict
+from datetime import datetime
+from typing import Dict, List, Any, Tuple
+
 
 @dataclass
 class TMCSignal:

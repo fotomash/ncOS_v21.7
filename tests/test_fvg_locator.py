@@ -1,4 +1,5 @@
 import unittest
+
 from fvg_locator import FVGLocator
 
 

@@ -4,11 +4,11 @@ MAZ2Executor Agent Implementation
 Mean-reversion Adaptive Zone v2 execution strategy
 """
 
-import json
-from typing import Dict, List, Any, Optional, Tuple
-from datetime import datetime, timedelta
-from dataclasses import dataclass, asdict
 import statistics
+from dataclasses import dataclass
+from datetime import datetime
+from typing import Dict, List, Any
+
 
 @dataclass
 class ExecutionOrder:

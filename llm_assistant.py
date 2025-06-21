@@ -4,22 +4,20 @@ ncOS Journal LLM Assistant
 Auto-starting AI assistant for trade journaling and analysis
 """
 
-import os
-import json
-import asyncio
 import logging
+import os
+from dataclasses import dataclass
 from datetime import datetime
 from typing import Dict, List, Optional, Any
-from dataclasses import dataclass
-from production.production_config import load_production_config
-from pathlib import Path
 
-import uvicorn
-from fastapi import FastAPI, HTTPException, WebSocket
-from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
 import httpx
+import uvicorn
+from fastapi import FastAPI, WebSocket
+from fastapi.middleware.cors import CORSMiddleware
 from openai import AsyncOpenAI
+from pydantic import BaseModel
+
+from production.production_config import load_production_config
 
 # Configure logging
 logging.basicConfig(

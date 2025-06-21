@@ -3,11 +3,11 @@ Health Check Integration for NCOS Agents
 Integrates monitoring into existing agents
 """
 
+import time
+from typing import Dict, Any
+
 from monitoring import health_monitor
 from production_logging import get_logger
-import time
-import asyncio
-from typing import Dict, Any
 
 logger = get_logger(__name__)
 

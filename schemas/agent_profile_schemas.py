@@ -1,5 +1,7 @@
 from typing import Dict, Any, List, Optional
+
 from pydantic import BaseModel, Field
+
 
 class AgentProfileSchema(BaseModel):
     """Schema for individual agent profile configuration."""

@@ -1,11 +1,11 @@
-from fastapi import FastAPI, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
-from datetime import datetime
-from typing import List, Optional
-from pydantic import BaseModel
 import json
-import os
+from datetime import datetime
 from pathlib import Path
+from typing import List, Optional
+
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 
 # Import ZBAR routes
 from .zbar_routes import router as zbar_router

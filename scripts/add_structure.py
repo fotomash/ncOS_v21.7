@@ -11,8 +11,9 @@ The script can also be executed directly. See ``main`` for CLI usage.
 from __future__ import annotations
 
 import argparse
-import pandas as pd
 from typing import Tuple
+
+import pandas as pd
 
 
 def calculate_fractals(df: pd.DataFrame, window: int = 2) -> pd.DataFrame:

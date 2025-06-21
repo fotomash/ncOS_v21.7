@@ -1,8 +1,8 @@
 import asyncio
 
-from agents.liquidity_sniper import LiquiditySniperAgent
-from agents.entry_executor_smc import EntryExecutorSMCAgent
 from agents.drift_detection_agent import DriftDetectionAgent
+from agents.entry_executor_smc import EntryExecutorSMCAgent
+from agents.liquidity_sniper import LiquiditySniperAgent
 
 
 class DummyOrchestrator:

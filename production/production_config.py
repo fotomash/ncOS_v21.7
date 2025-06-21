@@ -3,11 +3,13 @@ Production Configuration for NCOS v21
 Environment-specific settings with validation
 """
 
-import os
-from typing import Dict, Any, Optional
-from pydantic import BaseModel, Field, validator
-import yaml
 import json
+import os
+from typing import Dict, Optional
+
+import yaml
+from pydantic import BaseModel, Field, validator
+
 
 class LoggingConfig(BaseModel):
     """Logging configuration"""

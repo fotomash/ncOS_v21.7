@@ -1,6 +1,8 @@
 
-import requests
 import json
+
+import requests
+
 
 # Example: Execute ZBAR strategy with multi-timeframe data
 def test_zbar_execution():

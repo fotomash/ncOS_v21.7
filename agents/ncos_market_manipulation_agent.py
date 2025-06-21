@@ -1,9 +1,5 @@
-import asyncio
 import logging
-from pathlib import Path
 from typing import Any, Dict
-
-import pandas as pd
 
 
 class MarketManipulationAgent:

@@ -4,10 +4,10 @@ Extracts and calculates features for predictive scoring from market data
 """
 
 import logging
+from typing import Dict, Any, Optional
+
 import numpy as np
 import pandas as pd
-from typing import Dict, Any, Optional, List
-from datetime import datetime, timedelta
 import talib
 
 logger = logging.getLogger(__name__)

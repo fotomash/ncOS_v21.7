@@ -4,13 +4,13 @@ NCOS Agent Unit Test Suite
 Comprehensive testing for all 13 core agents
 """
 
-import unittest
 import json
-import os
-from datetime import datetime
-from typing import Dict, List, Any
-import tempfile
 import random
+import tempfile
+import unittest
+from datetime import datetime
+from typing import Dict, Any
+
 
 # Mock imports for testing (these would be actual imports in production)
 class MockAgent:

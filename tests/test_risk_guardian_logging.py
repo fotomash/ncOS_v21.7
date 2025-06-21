@@ -1,7 +1,7 @@
-import os
 import logging
-import types
+import os
 import sys
+import types
 
 import pytest
 

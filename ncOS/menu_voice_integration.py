@@ -5,7 +5,9 @@ existing references to :mod:`ncOS.menu_voice_integration` continue to work.
 """
 
 import sys as _sys
+
 from core import voice_tag_parser as _voice_impl
+
 _sys.modules.setdefault("voice_tag_parser", _voice_impl)
 from core import menu_voice_integration as _impl
 _sys.modules.setdefault("menu_voice_integration", _impl)

@@ -1,5 +1,6 @@
 """ncOS package"""
 
+from .menu_voice_integration import VoiceEnabledMenuSystem
 from .semantic_utils import (
     extract_and_validate_uploaded_archive,
     summarize_workspace_memory,
@@ -8,7 +9,7 @@ from .semantic_utils import (
     detect_and_recover_from_system_errors_automatically,
 )
 from .voice_tag_parser import VoiceTagParser, VoiceTag
-from .menu_voice_integration import VoiceEnabledMenuSystem
+
 
 # Optional heavy modules are imported lazily to avoid requiring their
 # dependencies during lightweight usage such as unit tests.

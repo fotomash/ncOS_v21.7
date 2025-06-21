@@ -4,11 +4,12 @@ NCOS v21.7.1 Market Data Native Agent
 Native market data processing with technical indicators and correlations
 """
 
-import pandas as pd
-import numpy as np
-from typing import Dict, List, Any, Optional
 from datetime import datetime
-import hashlib
+from typing import Dict, List, Any
+
+import numpy as np
+import pandas as pd
+
 
 class NCOSMarketDataNativeAgent:
     """NCOS Market Data Native Agent"""

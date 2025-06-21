@@ -2,14 +2,15 @@
 Standardized Error Handling and Logging Framework for ncOS
 """
 
-import logging
-import json
-import traceback
 import functools
-from datetime import datetime
-from typing import Any, Callable, Optional, Dict, Type
-from enum import Enum
+import json
+import logging
 import os
+import traceback
+from datetime import datetime
+from enum import Enum
+from typing import Any, Callable, Optional, Dict
+
 
 # Configure structured logging
 class StructuredFormatter(logging.Formatter):

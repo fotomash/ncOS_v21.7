@@ -3,14 +3,14 @@
 # Returns a status dictionary: {'status': 'ok', 'data': {...}} or {'status': 'error', 'message': ...}
 # Version: 1.1.0 (Using Provided API Key)
 
-import os
-import time
-import traceback
 import logging
-import pandas as pd
-import finnhub  # Ensure finnhub library is installed: pip install finnhub-python
-from datetime import datetime, timedelta, timezone
+import os
+import traceback
+from datetime import datetime, timezone
 from pathlib import Path  # For potential CSV saving
+
+import finnhub  # Ensure finnhub library is installed: pip install finnhub-python
+import pandas as pd
 
 logging.basicConfig(
     level=logging.INFO,

@@ -4,20 +4,19 @@ Validates all components after production hardening
 """
 
 import asyncio
-import pytest
 import json
 import os
-import sys
-from datetime import datetime, timedelta
-from typing import Dict, Any, List
 import tempfile
-import shutil
+from datetime import datetime, timedelta
+from typing import Dict, Any
 
-# Import all production components
-from utils.circuit_breaker import CircuitBreaker, CircuitBreakerConfig, CircuitOpenError
-from production_logging import configure_production_logging, get_logger
+import pytest
+
 from monitoring import health_monitor, MetricsCollector
 from production_config import load_production_config, ProductionConfig
+from production_logging import configure_production_logging, get_logger
+# Import all production components
+from utils.circuit_breaker import CircuitBreaker, CircuitBreakerConfig, CircuitOpenError
 
 # Test configuration
 TEST_CONFIG = {

@@ -1,13 +1,10 @@
 """SMC Master Agent - Smart Money Concepts analysis with memory tracking."""
 from __future__ import annotations
 
+import logging
 from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-import logging
-
-import pandas as pd
-import numpy as np
 
 from memory_manager import EnhancedMemoryManager
 

@@ -4,7 +4,6 @@ from __future__ import annotations
 
 from typing import Any, Dict
 
-
 _DEF_AGENT_INSTRUCTIONS = {
     "default": "Use available agents to process user commands with context-aware logic."
 }

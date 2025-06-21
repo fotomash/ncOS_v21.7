@@ -4,12 +4,13 @@ ParquetIngestor Agent Implementation
 Handles financial data ingestion from Parquet files with schema validation
 """
 
-import json
-import pandas as pd
-from typing import Dict, List, Any, Optional, Union
+import hashlib
 from datetime import datetime
 from pathlib import Path
-import hashlib
+from typing import Dict, List, Any, Union
+
+import pandas as pd
+
 
 class ParquetIngestor:
     """

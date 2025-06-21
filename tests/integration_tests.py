@@ -4,15 +4,13 @@ NCOS Integration Test Suite
 Tests for inter-agent communication and system workflows
 """
 
-import unittest
 import json
-import time
-from datetime import datetime
-from typing import Dict, List, Any, Optional
-import threading
 import queue
 import sys
+import unittest
+from datetime import datetime
 from pathlib import Path
+from typing import Dict, List, Any
 
 # Ensure project root is on the import path so integration
 # tests can import modules that live alongside this directory.

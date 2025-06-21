@@ -5,9 +5,10 @@ Fixed version with proper config fields
 
 import asyncio
 import logging
-from datetime import datetime
-from typing import Dict, Any, List, Optional
 from dataclasses import dataclass, field
+from datetime import datetime
+from typing import Dict, Any, Optional
+
 
 @dataclass
 class CoreSystemAgentConfig:

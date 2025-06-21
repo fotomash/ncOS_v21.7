@@ -3,14 +3,14 @@ ncOS Journal API - Phoenix Edition
 Focused on journaling without voice dependencies
 """
 
-from fastapi import FastAPI, HTTPException
+import json
+from datetime import datetime
+from pathlib import Path
+from typing import List, Optional, Dict, Any
+
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from datetime import datetime
-from typing import List, Optional, Dict, Any
-import json
-import os
-from pathlib import Path
 
 # Initialize FastAPI app
 app = FastAPI(

@@ -1,7 +1,8 @@
-import unittest
 import importlib.util
 import sys
 import types
+import unittest
+
 
 class TestVoiceTagParser(unittest.TestCase):
     @classmethod

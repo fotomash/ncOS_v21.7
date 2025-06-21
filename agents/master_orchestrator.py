@@ -23,10 +23,10 @@ Agents are registered at runtime and then referenced by name in the
 workflow definition. After initialization, ``execute_workflow`` can be
 used to process each step asynchronously.
 """
-import asyncio
 import logging
-from typing import Dict, Any, List
 from datetime import datetime
+from typing import Dict, Any
+
 
 class MasterOrchestrator:
     """Coordinate agent workflows.

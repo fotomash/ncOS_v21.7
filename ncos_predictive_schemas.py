@@ -3,8 +3,10 @@ NCOS Predictive Engine Schemas
 Pydantic models for predictive scoring, feature extraction, and data enrichment
 """
 
-from typing import Dict, Any, Optional, List, Literal
+from typing import Literal
+
 from pydantic import BaseModel, Field, validator
+
 
 class FactorWeights(BaseModel):
     """Defines the weights for various features used in maturity scoring."""

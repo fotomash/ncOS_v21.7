@@ -3,8 +3,8 @@
 from __future__ import annotations
 
 import logging
-from typing import Any, Dict, List
 from math import sqrt
+from typing import Any, Dict, List
 
 from agents.ncos_base_agent import NCOSBaseAgent
 

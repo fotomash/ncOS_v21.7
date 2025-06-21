@@ -4,11 +4,12 @@ NCOS v21.7.1 Liquidity Analysis Agent
 Advanced liquidity analysis with sweep detection and zone identification
 """
 
-import pandas as pd
-import numpy as np
-from typing import Dict, List, Any, Optional
 from datetime import datetime
 from enum import Enum
+from typing import Dict, List, Any
+
+import pandas as pd
+
 
 class LiquidityZoneType(Enum):
     DEMAND = "demand_zone"

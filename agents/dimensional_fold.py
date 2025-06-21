@@ -1,7 +1,7 @@
 """Dimensional Fold Agent"""
 import logging
 from typing import Dict, Any
-import json
+
 
 class DimensionalFold:
     def __init__(self, config: Dict[str, Any]):

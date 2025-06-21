@@ -4,10 +4,10 @@ NCOS v21 Universal Launcher
 Handles path setup and launches the system from any directory
 """
 
+import argparse
 import os
 import sys
-import subprocess
-import argparse
+
 import yaml
 
 # Fast mode toggle

@@ -4,8 +4,6 @@ Quick setup script for ncOS Journal v2.0
 Sets up the refactored journal system
 """
 
-import os
-import sys
 from pathlib import Path
 
 def setup_journal_system():

@@ -4,11 +4,11 @@ SMCRouter Agent Implementation
 Smart Market Classifier routing for multi-strategy execution
 """
 
-import json
-from typing import Dict, List, Any, Optional, Tuple, Callable
+import statistics
 from datetime import datetime
 from enum import Enum
-import statistics
+from typing import Dict, List, Any, Tuple
+
 
 class MarketRegime(Enum):
     """Market regime classifications"""

@@ -1,11 +1,10 @@
 # Refactored snapshot system for ncOS
-import os
-import json
 import gzip
+import json
 import logging
+import os
 import time
 from threading import Thread, Event
-import shutil
 
 # --- Setup basic logging ---
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')

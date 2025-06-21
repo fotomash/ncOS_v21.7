@@ -4,12 +4,13 @@ VectorMemoryBoot Agent Implementation
 Handles vector database initialization and persistence with single-session priority
 """
 
-import json
-import numpy as np
-from typing import Dict, List, Any, Optional, Tuple
-from datetime import datetime
-from dataclasses import dataclass, asdict
 import hashlib
+from dataclasses import dataclass
+from datetime import datetime
+from typing import Dict, List, Any, Tuple
+
+import numpy as np
+
 
 @dataclass
 class VectorEntry:

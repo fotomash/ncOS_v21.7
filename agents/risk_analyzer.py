@@ -1,6 +1,7 @@
 """Risk Analyzer Agent"""
 import logging
-from typing import Dict, Any, List
+from typing import Dict, Any
+
 
 class RiskAnalyzer:
     def __init__(self, config: Dict[str, Any]):

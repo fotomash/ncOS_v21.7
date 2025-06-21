@@ -1,15 +1,15 @@
-from fastapi import FastAPI, HTTPException, Query
-from fastapi.responses import FileResponse, JSONResponse
-from fastapi.middleware.cors import CORSMiddleware
-
-from ncOS.voice_api_routes import router as voice_router
-import yfinance as yf
-from datetime import datetime
-from pathlib import Path
 import json
 import os
-import requests
+from datetime import datetime
+from pathlib import Path
 
+import requests
+import yfinance as yf
+from fastapi import FastAPI, HTTPException, Query
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse, JSONResponse
+
+from ncOS.voice_api_routes import router as voice_router
 # Import your custom Finnhub client
 from ncos_plugin.finnhub_data_fetcher import finnhub_client
 

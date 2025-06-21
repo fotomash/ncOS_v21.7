@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-import os
 import json
-import yaml
 import shutil
-from pathlib import Path
 from datetime import datetime
-from typing import Dict, List, Any
+from pathlib import Path
+
+import yaml
+
 
 class ConfigurationConsolidator:
     def __init__(self, project_root: str):

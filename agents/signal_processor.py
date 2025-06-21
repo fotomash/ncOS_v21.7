@@ -1,6 +1,7 @@
 """Signal Processor Agent"""
 import logging
-from typing import Dict, Any, List
+from typing import Dict, Any
+
 
 class SignalProcessor:
     def __init__(self, config: Dict[str, Any]):

@@ -3,7 +3,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
-from typing import Any, Dict, Iterable, List, Sequence
+from typing import Any, Dict, List, Sequence
 
 import numpy as np
 import pandas as pd

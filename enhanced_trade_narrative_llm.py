@@ -3,12 +3,13 @@ Enhanced Trade Narrative LLM with Journal Integration
 Generates comprehensive trade narratives and insights
 """
 
-import json
 import logging
 import os
 from datetime import datetime
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List
+
 import requests
+
 from production.production_config import load_production_config
 
 logger = logging.getLogger(__name__)

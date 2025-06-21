@@ -4,12 +4,13 @@ Fixed version with proper config fields
 """
 
 import asyncio
-import logging
 import json
-from datetime import datetime, timedelta
-from typing import Dict, Any, List, Optional
+import logging
 from dataclasses import dataclass, field
+from datetime import datetime, timedelta
 from pathlib import Path
+from typing import Dict, Any, Optional
+
 
 @dataclass
 class SessionStateManagerConfig:

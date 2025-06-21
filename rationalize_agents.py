@@ -4,14 +4,13 @@ ncOS Agent Rationalization Tool
 Analyzes and consolidates 53 agents into ~25 optimized agents
 """
 
-import os
 import ast
-import yaml
 import json
-from pathlib import Path
-from datetime import datetime
-from collections import defaultdict
 import shutil
+from collections import defaultdict
+from datetime import datetime
+from pathlib import Path
+
 
 class AgentRationalizer:
     def __init__(self, project_root="ncOS_v21.7"):

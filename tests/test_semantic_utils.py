@@ -4,8 +4,6 @@ import shutil
 import tempfile
 from pathlib import Path
 
-import pytest
-
 from ncOS import (
     extract_and_validate_uploaded_archive,
     summarize_workspace_memory,

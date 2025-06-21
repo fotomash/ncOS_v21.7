@@ -1,11 +1,3 @@
-import os
-import shutil
-import tarfile
-import yaml
-import json
-from pathlib import Path
-from datetime import datetime
-
 # Create the master fix script
 fix_script = '''#!/usr/bin/env python3
 """

@@ -7,14 +7,16 @@ Extends your existing ZBAR pipeline with voice-triggered analysis
 import json
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, List, Any, Optional
-import pandas as pd
+from typing import Dict, List, Any
 
+import pandas as pd
+from engine import VectorEngine
 # Import your existing modules
 from zbar_agent import ZBARAgent
 from zbar_logger import ZBARLogger
+
 from voice_tag_parser import VoiceTagParser, VoiceTag
-from engine import VectorEngine
+
 
 class VoiceEnabledZBARAgent(ZBARAgent):
     """ZBAR Agent with voice command integration"""

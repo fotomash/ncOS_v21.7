@@ -4,12 +4,13 @@ Fixed version with proper config fields
 """
 
 import asyncio
-import logging
-from datetime import datetime
-from typing import Dict, Any, List, Optional
-from dataclasses import dataclass, field
-from pathlib import Path
 import json
+import logging
+from dataclasses import dataclass, field
+from datetime import datetime
+from pathlib import Path
+from typing import Dict, Any, List, Optional
+
 
 @dataclass
 class ReportGeneratorConfig:

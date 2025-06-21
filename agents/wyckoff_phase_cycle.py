@@ -1,7 +1,8 @@
 """WyckoffPhaseCycleAgent - Strategy agent skeleton"""
 import logging
-from typing import Dict, Any
 from dataclasses import dataclass, field
+from typing import Dict, Any
+
 
 @dataclass
 class WyckoffPhaseCycleAgentConfig:

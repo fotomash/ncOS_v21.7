@@ -2,10 +2,12 @@
 Enhanced Predictive Engine Schemas with comprehensive validation
 """
 
-from pydantic import BaseModel, Field, validator, root_validator
-from typing import Dict, List, Optional, Union, Any
 from datetime import datetime
 from enum import Enum
+from typing import Dict, List, Optional, Any
+
+from pydantic import BaseModel, Field, validator, root_validator
+
 
 class PredictionMode(str, Enum):
     STANDARD = "standard"

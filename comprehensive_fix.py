@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Comprehensive fix script for ncOS v21.7."""
 
+import shutil
 import subprocess
 from pathlib import Path
-import shutil
 
 
 def print_header(text: str) -> None:

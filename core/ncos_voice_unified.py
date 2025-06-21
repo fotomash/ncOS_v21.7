@@ -4,10 +4,12 @@ Unified Voice Integration for NCOS ZBAR System
 Brings together ZBAR agent and menu system with voice capabilities
 """
 
-from zbar_voice_integration import VoiceEnabledZBARAgent
-from menu_voice_integration import VoiceEnabledMenuSystem
-from typing import Dict, Any
 import asyncio
+from typing import Dict, Any
+
+from menu_voice_integration import VoiceEnabledMenuSystem
+from zbar_voice_integration import VoiceEnabledZBARAgent
+
 
 class NCOSVoiceSystem:
     """Unified voice system for NCOS"""

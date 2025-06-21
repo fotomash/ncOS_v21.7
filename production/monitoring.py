@@ -3,15 +3,14 @@ Production Monitoring and Health Check System
 Exposes metrics and health endpoints for external monitoring
 """
 
-from typing import Dict, Any, List, Optional
-from datetime import datetime, timedelta
-from dataclasses import dataclass, field
 import asyncio
-import json
-import time
-from collections import deque
-import psutil
 import logging
+from collections import deque
+from dataclasses import dataclass, field
+from datetime import datetime, timedelta
+from typing import Dict, Any, Optional
+
+import psutil
 
 logger = logging.getLogger(__name__)
 

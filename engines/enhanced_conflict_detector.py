@@ -3,13 +3,15 @@ Enhanced Conflict Detector with ncOS Journal Integration
 Identifies and logs potential conflicts between active trades and new setups
 """
 
+import json
 import logging
 import os
 from datetime import datetime
 from typing import Dict, Any, Optional, List
-from pydantic import BaseModel
-import json
+
 import requests
+from pydantic import BaseModel
+
 from production.production_config import load_production_config
 
 logger = logging.getLogger(__name__)

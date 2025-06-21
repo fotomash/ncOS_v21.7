@@ -3,10 +3,10 @@ ncOS Unified v5.0 - Market Maker Agent
 NYSE/NASDAQ-style market making with vector-native analysis
 """
 
-import numpy as np
-import pandas as pd
-from typing import Dict, List, Any
 from datetime import datetime
+from typing import Dict, List
+
+import numpy as np
 
 
 class MarketMaker:

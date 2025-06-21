@@ -1,6 +1,7 @@
 """Strategy Evaluator Agent"""
 import logging
-from typing import Dict, Any, List
+from typing import Dict, Any
+
 
 class StrategyEvaluator:
     def __init__(self, config: Dict[str, Any]):

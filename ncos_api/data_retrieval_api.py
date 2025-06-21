@@ -1,7 +1,8 @@
+import os
+
+import pandas as pd
 from fastapi import FastAPI, Query
 from fastapi.responses import JSONResponse
-import pandas as pd
-import os
 
 app = FastAPI(title="ZBAR Data Retrieval API", version="1.0")
 

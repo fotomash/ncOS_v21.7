@@ -2,15 +2,17 @@
 Test script for the Predictive Engine
 """
 
-import pandas as pd
-import numpy as np
 from datetime import datetime, timezone
+
+import numpy as np
+import pandas as pd
 import yaml
 
-from ncos_predictive_schemas import PredictiveEngineConfig
-from ncOS.ncos_predictive_engine import NCOSPredictiveEngine
-from ncOS.ncos_feature_extractor import FeatureExtractor
 from ncOS.ncos_data_enricher import DataEnricher
+from ncOS.ncos_feature_extractor import FeatureExtractor
+from ncOS.ncos_predictive_engine import NCOSPredictiveEngine
+from ncos_predictive_schemas import PredictiveEngineConfig
+
 
 def test_predictive_engine():
     """Test the predictive engine with sample data."""

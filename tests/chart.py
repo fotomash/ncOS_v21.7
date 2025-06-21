@@ -1,8 +1,8 @@
-from fastapi import FastAPI, Response
+from io import BytesIO
+
 import matplotlib.pyplot as plt
 import pandas as pd
-from io import BytesIO
-import datetime
+from fastapi import FastAPI, Response
 
 app = FastAPI()
 

@@ -4,11 +4,9 @@ Advanced Agent Configuration Generator
 Based on patterns from agent_profile_schemas.py and module_configs.py
 """
 
-import yaml
-import json
 from pathlib import Path
-from typing import Dict, List, Any, Optional
-from datetime import datetime
+
+import yaml
 
 # Agent templates based on your schema patterns
 AGENT_TEMPLATES = {

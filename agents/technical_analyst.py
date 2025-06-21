@@ -3,11 +3,11 @@ TechnicalAnalyst - NCOS v21 Agent
 Fixed version with proper config fields
 """
 
-import asyncio
 import logging
+from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Dict, Any, List, Optional
-from dataclasses import dataclass, field
+
 
 @dataclass
 class TechnicalAnalystConfig:

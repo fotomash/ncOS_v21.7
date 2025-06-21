@@ -4,17 +4,16 @@ Integrates the NCOS Predictive Engine for quality-based trade filtering
 """
 
 import logging
-import pandas as pd
-import numpy as np
-from datetime import datetime, timezone
-from typing import Dict, Any, Optional, List
+from typing import Dict, Any, Optional
 
-from ncos_base_agent import NCOSBaseAgent
-from ncos_risk_engine import calculate_sl_and_risk
-from ncOS.ncos_predictive_engine import NCOSPredictiveEngine
-from ncos_predictive_schemas import PredictiveEngineConfig
-from ncOS.ncos_feature_extractor import FeatureExtractor
+import pandas as pd
+
 from ncOS.ncos_data_enricher import DataEnricher
+from ncOS.ncos_feature_extractor import FeatureExtractor
+from ncOS.ncos_predictive_engine import NCOSPredictiveEngine
+from ncos_base_agent import NCOSBaseAgent
+from ncos_predictive_schemas import PredictiveEngineConfig
+from ncos_risk_engine import calculate_sl_and_risk
 
 logger = logging.getLogger(__name__)
 

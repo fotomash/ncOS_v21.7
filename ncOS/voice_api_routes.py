@@ -5,10 +5,12 @@ Endpoints are mounted under the ``/voice`` prefix.  The primary route for
 processing a spoken or typed command is ``POST /voice/command``.
 """
 
+from typing import Optional, Dict, Any, List
+
+import speech_recognition as sr
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
-from typing import Optional, Dict, Any, List
-import speech_recognition as sr
+
 from .menu_voice_integration import VoiceEnabledMenuSystem
 
 router = APIRouter(prefix="/voice", tags=["voice"])

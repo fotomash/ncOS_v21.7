@@ -4,12 +4,11 @@ Enhanced Risk Guardian Agent for ZANFLOW v18
 Advanced risk management with portfolio protection
 '''
 
-import pandas as pd
-import numpy as np
 from datetime import datetime
-from typing import Dict, List, Optional, Any
+from typing import Dict
 
 from production_logging import get_logger
+
 
 class RiskGuardianAgent:
     '''Advanced risk management agent with veto power'''

@@ -5,13 +5,13 @@ Comprehensive testing for all integrated components
 """
 
 import asyncio
-import pandas as pd
-import numpy as np
-from datetime import datetime
 import json
-import traceback
-from pathlib import Path
 import sys
+from datetime import datetime
+from pathlib import Path
+
+import numpy as np
+import pandas as pd
 
 # Ensure the project root is available on the import path so this
 # standalone test suite can import project modules when executed from

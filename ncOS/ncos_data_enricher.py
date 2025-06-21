@@ -4,10 +4,10 @@ Enriches market data with additional calculated features and indicators
 """
 
 import logging
+from typing import Dict, Any, Optional, Tuple
+
 import numpy as np
 import pandas as pd
-from typing import Dict, Any, Optional, Tuple
-from datetime import datetime
 import talib
 
 from ncos_predictive_schemas import DataEnricherConfig, SpreadTrackerConfig

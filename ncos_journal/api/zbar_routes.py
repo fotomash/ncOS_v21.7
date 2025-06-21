@@ -1,9 +1,10 @@
+import json
+from datetime import datetime
+from pathlib import Path
+from typing import List, Optional, Dict, Any
+
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
-from typing import List, Optional, Dict, Any
-from datetime import datetime
-import json
-from pathlib import Path
 
 router = APIRouter(prefix="/zbar", tags=["ZBAR"])
 

@@ -3,10 +3,11 @@ ncOS Unified v5.0 - Quantitative Analyst Agent
 Industry-standard quantitative analysis with vector-native pattern recognition
 """
 
+from datetime import datetime
+from typing import Dict, List
+
 import numpy as np
 import pandas as pd
-from typing import Dict, List, Any
-from datetime import datetime
 from scipy import stats
 from sklearn.cluster import KMeans
 from sklearn.metrics.pairwise import cosine_similarity

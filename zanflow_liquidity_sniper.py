@@ -4,10 +4,9 @@ Enhanced Liquidity Sniper Agent for ZANFLOW v18
 Integrates ZAnalytics 5 liquidity detection with precision targeting
 '''
 
-import pandas as pd
-import numpy as np
 from datetime import datetime
-from typing import Dict, List, Optional, Any
+from typing import Dict, List
+
 
 class LiquiditySniperAgent:
     '''Precision liquidity targeting agent with ZAnalytics integration'''

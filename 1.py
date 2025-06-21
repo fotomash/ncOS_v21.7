@@ -1,11 +1,12 @@
 # Fixed Configuration Consolidator for ncOS
-import os
 import json
-import yaml
 import shutil
-from pathlib import Path
 from datetime import datetime
-from typing import Dict, List, Any, Set
+from pathlib import Path
+from typing import Dict, List, Any
+
+import yaml
+
 
 class ConfigurationConsolidator:
     def __init__(self, project_root: str):
