@@ -42,7 +42,7 @@ except Exception:  # pragma: no cover - optional
 
 # --- Cross-Domain Risk Analyzer ---------------------------------------------
 try:
-    from cross_domain_risk_analyzer import CrossDomainRiskAnalyzer, RiskFactor
+    from engines.cross_domain_risk_analyzer import CrossDomainRiskAnalyzer, RiskFactor
     CROSS_DOMAIN_AVAILABLE = True
     _cross_domain_analyzer = CrossDomainRiskAnalyzer()
     logger.info("[RiskEngine] CrossDomainRiskAnalyzer initialized.")

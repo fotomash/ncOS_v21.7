@@ -14,7 +14,7 @@ import tempfile
 import shutil
 
 # Import all production components
-from circuit_breaker import CircuitBreaker, CircuitBreakerConfig, CircuitOpenError
+from utils.circuit_breaker import CircuitBreaker, CircuitBreakerConfig, CircuitOpenError
 from production_logging import configure_production_logging, get_logger
 from monitoring import health_monitor, MetricsCollector
 from production_config import load_production_config, ProductionConfig
