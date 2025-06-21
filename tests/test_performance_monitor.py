@@ -2,7 +2,12 @@ import types
 import asyncio
 import sys
 
-sys.modules.setdefault("yaml", types.ModuleType("yaml"))
+import pytest
+
+
+@pytest.fixture(autouse=True)
+def _mock_yaml(monkeypatch):
+    monkeypatch.setitem(sys.modules, "yaml", types.ModuleType("yaml"))
 
 from agents.performance_monitor import PerformanceMonitor
 
