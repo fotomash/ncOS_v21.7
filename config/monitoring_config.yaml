@@ -1,0 +1,9 @@
+_metadata:
+  source: ncOS_v21.7-main/config/general_config.yaml
+  category: monitoring
+  created: '2025-06-21T16:03:32.578510'
+  keys_count: 1
+logging:
+  description: logging configuration
+  settings: {}
+  version: '1.0'

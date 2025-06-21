@@ -1,0 +1,71 @@
+files:
+  backup_config.yaml:
+    category: backup
+    keys_count: 1
+    size: 221
+  bootstrap_config.yaml:
+    category: bootstrap
+    keys_count: 1
+    size: 2472
+  config_config.yaml:
+    category: config
+    keys_count: 28
+    size: 11150550
+  deployment_config.yaml:
+    category: deployment
+    keys_count: 2
+    size: 3793
+  engines_config.yaml:
+    category: engines
+    keys_count: 2
+    size: 213
+  general_config.yaml:
+    category: general
+    keys_count: 43
+    size: 11011814
+  manifest_config.yaml:
+    category: manifest
+    keys_count: 3
+    size: 40956
+  models_config.yaml:
+    category: models
+    keys_count: 6
+    size: 1807417
+  monitoring_config.yaml:
+    category: monitoring
+    keys_count: 1
+    size: 221
+  ncos_system_config.yaml:
+    category: ncos_system
+    keys_count: 1
+    size: 6434
+  testing_config.yaml:
+    category: testing
+    keys_count: 3
+    size: 64742
+  trigger_config.yaml:
+    category: trigger
+    keys_count: 2
+    size: 2753
+original_file: ncOS_v21.7-main/config/general_config.yaml
+split_date: '2025-06-21T16:03:32.623700'
+statistics:
+  categories: !!python/object/apply:collections.defaultdict
+    args:
+    - !!python/name:builtins.int ''
+    dictitems:
+      backup: 1
+      bootstrap: 1
+      config: 28
+      deployment: 2
+      engines: 2
+      general: 43
+      manifest: 3
+      models: 6
+      monitoring: 1
+      ncos_system: 1
+      testing: 3
+      trigger: 2
+  files_created: 12
+  original_size: 24089894
+  total_keys: 93
