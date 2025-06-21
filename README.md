@@ -107,7 +107,7 @@ python -m unittest test_phoenix.TestPhoenixIntegration
 ```
 
 ### License
-Proprietary - NCOS v21 Phoenix Mesh
+Proprietary - NCOS v21 Phoenix Mesh. See [LICENSE](LICENSE) for details.
 
 ### Support
 For support, contact the NCOS development team.
