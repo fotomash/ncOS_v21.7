@@ -13,17 +13,25 @@ NCOS v21 Phoenix Mesh is a high-performance, agent-based architecture for financ
 
 ### Quick Start
 
-1. **Install Dependencies**
+1. **Install Python 3.11.12**
+   If you use [pyenv](https://github.com/pyenv/pyenv), run:
+   ```bash
+   pyenv install 3.11.12
+   pyenv local 3.11.12
+   ```
+   Otherwise ensure Python `3.11.12` is available on your system.
+
+2. **Install Dependencies**
    ```bash
    pip install -r requirements.txt
    ```
 
-2. **Run Tests**
+3. **Run Tests**
    ```bash
    python main.py --test
    ```
 
-3. **Start Analysis**
+4. **Start Analysis**
    ```bash
    python main.py --analyze your_data.csv
    ```
@@ -99,7 +107,7 @@ python -m unittest test_phoenix.TestPhoenixIntegration
 ```
 
 ### License
-Proprietary - NCOS v21 Phoenix Mesh
+Proprietary - NCOS v21 Phoenix Mesh. See [LICENSE](LICENSE) for details.
 
 ### Support
 For support, contact the NCOS development team.
