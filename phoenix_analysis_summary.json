@@ -1,0 +1,19 @@
+{
+  "phoenix_directory": "ncOS_v21_extracted/ncOS_v21.7-main/NCOS_v21_PHOENIX_MESH_FINAL",
+  "found_documents": [
+    "NCOS_v21_ARCHITECTURE.md",
+    "MIGRATION_MATRIX.json",
+    "CONSOLIDATION_SUMMARY.json",
+    "QUICKSTART.md",
+    "DEPLOYMENT.md",
+    "Comprehensive Component Inventory.md"
+  ],
+  "subdirectories": {
+    "schemas": 1,
+    "config": 1,
+    "NCOS_v21_PHOENIX_MESH_CONSOLIDATED": 10,
+    "templates": 2
+  },
+  "analysis_timestamp": "2025-06-21 18:21:15",
+  "consolidated_dir_exists": true
+}

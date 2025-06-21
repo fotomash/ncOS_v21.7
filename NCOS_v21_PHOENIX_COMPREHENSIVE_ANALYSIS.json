@@ -1,0 +1,261 @@
+{
+  "system_name": "NCOS v21 Phoenix Mesh",
+  "analysis_timestamp": "2025-06-21T18:24:09.596167",
+  "executive_summary": {
+    "description": "Production-ready LLM-native runtime architecture for financial analysis",
+    "key_features": [
+      "38 Wyckoff financial analysis components",
+      "56 Pydantic models for type-safe configuration",
+      "Advanced vector memory optimization with 12 specialized systems",
+      "Native charting with extensible action hooks",
+      "Single-session constraints with token budget management"
+    ]
+  },
+  "architecture_components": {
+    "agents": {
+      "total_count": 28,
+      "categories": {
+        "strategy_agents": {
+          "count": 38,
+          "primary_focus": "Wyckoff methodology implementation",
+          "key_modules": [
+            "accumulation",
+            "distribution",
+            "markup",
+            "markdown",
+            "spring",
+            "test"
+          ]
+        },
+        "data_ingestion_agents": {
+          "count": 2,
+          "functions": [
+            "real-time data feeds",
+            "historical data processing"
+          ]
+        },
+        "visualization_agents": {
+          "count": 16,
+          "capabilities": [
+            "native charting",
+            "action hooks",
+            "interactive analysis"
+          ]
+        },
+        "memory_vector_agents": {
+          "count": 12,
+          "specializations": [
+            "compression",
+            "retrieval",
+            "optimization",
+            "token management"
+          ]
+        }
+      }
+    },
+    "orchestrators": {
+      "master_orchestrator": {
+        "responsibilities": [
+          "Session lifecycle management",
+          "Agent coordination and routing",
+          "Resource allocation",
+          "Error handling and recovery"
+        ],
+        "key_methods": [
+          "initialize_session",
+          "route_to_agent",
+          "manage_memory",
+          "coordinate_strategy"
+        ]
+      }
+    },
+    "schemas": {
+      "total_pydantic_models": 56,
+      "categories": {
+        "market_data": [
+          "MarketData",
+          "PriceLevel",
+          "OrderBook",
+          "Trade"
+        ],
+        "wyckoff_analysis": [
+          "WyckoffPhase",
+          "WyckoffEvent",
+          "AccumulationPhase",
+          "DistributionPhase"
+        ],
+        "risk_management": [
+          "RiskParams",
+          "RiskResult",
+          "PositionRisk",
+          "PortfolioRisk"
+        ],
+        "memory_management": [
+          "MemoryConfig",
+          "VectorMemory",
+          "TokenBudget",
+          "CompressionSettings"
+        ],
+        "agent_communication": [
+          "AgentConfig",
+          "AgentState",
+          "AgentMessage",
+          "RoutingDecision"
+        ]
+      }
+    },
+    "memory_systems": {
+      "total_count": 28,
+      "vector_systems": 12,
+      "standard_systems": 16,
+      "capabilities": [
+        "Token budget management",
+        "Context compression",
+        "Semantic retrieval",
+        "Session state persistence"
+      ]
+    }
+  },
+  "data_flow": {
+    "ingestion": {
+      "sources": [
+        "Market data feeds",
+        "Historical databases",
+        "User inputs"
+      ],
+      "processors": [
+        "Data validation",
+        "Normalization",
+        "Enrichment"
+      ]
+    },
+    "analysis_pipeline": [
+      {
+        "stage": "Data Reception",
+        "handler": "DataIngestionAgent",
+        "output": "Normalized market data"
+      },
+      {
+        "stage": "Wyckoff Analysis",
+        "handler": "WyckoffStrategyAgent",
+        "output": "Phase identification, key levels"
+      },
+      {
+        "stage": "Risk Assessment",
+        "handler": "RiskManagementAgent",
+        "output": "Risk metrics, position sizing"
+      },
+      {
+        "stage": "Visualization",
+        "handler": "ChartingAgent",
+        "output": "Interactive charts with annotations"
+      },
+      {
+        "stage": "Journaling",
+        "handler": "JournalAgent",
+        "output": "Trade logs, analysis history"
+      }
+    ],
+    "memory_flow": {
+      "input": "Raw context and data",
+      "compression": "Vector compression with semantic preservation",
+      "storage": "Distributed vector stores",
+      "retrieval": "Similarity-based context retrieval"
+    }
+  },
+  "configuration_strategy": {
+    "central_config": "workspace_config.yaml",
+    "key_sections": {
+      "agents": "Agent registry and capabilities",
+      "orchestration": "Routing rules and priorities",
+      "memory": "Token budgets and compression settings",
+      "strategies": "Wyckoff and SMC parameters",
+      "monitoring": "Metrics, logging, and alerts"
+    },
+    "hot_reload": "Configuration changes without restart",
+    "validation": "Pydantic models ensure type safety"
+  },
+  "operational_capabilities": {
+    "wyckoff_analysis": {
+      "phases": [
+        "Accumulation",
+        "Markup",
+        "Distribution",
+        "Markdown"
+      ],
+      "events": [
+        "Spring",
+        "Test",
+        "SOS",
+        "LPS",
+        "UTAD",
+        "SOW"
+      ],
+      "volume_analysis": [
+        "VSA",
+        "Volume profile",
+        "Delta analysis"
+      ]
+    },
+    "risk_management": {
+      "metrics": [
+        "VaR",
+        "Sharpe ratio",
+        "Maximum drawdown"
+      ],
+      "position_sizing": [
+        "Kelly criterion",
+        "Fixed fractional",
+        "Volatility-based"
+      ],
+      "stop_loss": [
+        "ATR-based",
+        "Structure-based",
+        "Time-based"
+      ]
+    },
+    "charting": {
+      "chart_types": [
+        "Candlestick",
+        "Volume profile",
+        "Market profile",
+        "Footprint"
+      ],
+      "overlays": [
+        "Wyckoff phases",
+        "Support/Resistance",
+        "Volume nodes"
+      ],
+      "interactivity": [
+        "Zoom",
+        "Pan",
+        "Annotate",
+        "Measure",
+        "Export"
+      ]
+    }
+  },
+  "deployment_model": {
+    "architecture": "Microservices with agent-based design",
+    "scalability": "Horizontal scaling of individual agents",
+    "persistence": "State management through vector memory",
+    "monitoring": "Comprehensive metrics and alerting"
+  },
+  "integration_points": {
+    "data_sources": [
+      "REST APIs",
+      "WebSocket feeds",
+      "Database connectors"
+    ],
+    "external_systems": [
+      "Trading platforms",
+      "Risk systems",
+      "Reporting tools"
+    ],
+    "user_interfaces": [
+      "Web dashboard",
+      "API endpoints",
+      "Chat interface"
+    ]
+  }
+}
