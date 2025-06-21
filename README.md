@@ -96,6 +96,9 @@ pytest
 - All agents are production-ready with circuit breakers
 - Logs are written to JSON format in the logs directory
 - `start_ncos.sh` and `status_ncos.sh` are created by `scripts/deploy.sh`; run the deployment before using them
+- The `__fixes/` folder contained early patch scripts. Use the root-level
+  versions of `core_enhanced_master_orchestrator.py`, `generate_advanced_configs.py`
+  and `setup_v21.7.1.py` as the authoritative copies.
 
 ---
 ### Market Manipulation Detection Module
