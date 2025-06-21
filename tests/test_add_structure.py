@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import unittest
 
-from confirmation_engine_smc import _find_ltf_swing_points, confirm_smc_entry
+from engines.confirmation_engine_smc import _find_ltf_swing_points, confirm_smc_entry
 
 
 class TestFractalDetection(unittest.TestCase):

@@ -11,3 +11,14 @@ numpy==2.3.0
 python-multipart==0.0.20
 matplotlib==3.10.3
 spacy==3.7.4
+# Additional dependencies added by repair script
+httpx>=0.24.0
+python-dotenv>=1.0.0
+asyncio>=3.4.3
+aiofiles>=23.0.0
+websockets>=11.0
+redis>=4.5.0
+celery>=5.2.0
+prometheus-client>=0.16.0
+structlog>=23.1.0
+tenacity>=8.2.0

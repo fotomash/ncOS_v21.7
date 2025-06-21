@@ -19,7 +19,7 @@ from memory_manager import EnhancedMemoryManager
 
 # Import our new engines
 from smc_analysis_engine import ncOScoreSMCEngine
-from enhanced_vector_engine import ncOScoreVectorEngine, BrownVectorStoreIntegration
+from engines.enhanced_vector_engine import ncOScoreVectorEngine, BrownVectorStoreIntegration
 from vector_store import VectorStore
 from liquidity_analysis_engine import ncOScoreLiquidityEngine
 from agents.performance_monitor import PerformanceMonitor

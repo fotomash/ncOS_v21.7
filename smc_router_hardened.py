@@ -4,7 +4,7 @@ from datetime import timedelta
 from typing import Any, Dict
 
 from agents.smc_router import SMCRouter as BaseSMCRouter
-from circuit_breaker import CircuitBreaker, CircuitBreakerConfig, CircuitOpenError
+from utils.circuit_breaker import CircuitBreaker, CircuitBreakerConfig, CircuitOpenError
 
 
 class SMCRouter(BaseSMCRouter):

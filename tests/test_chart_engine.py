@@ -3,7 +3,7 @@ import unittest
 import pandas as pd
 import numpy as np
 
-from chart_engine import ChartEngine
+from utils.chart_engine import ChartEngine
 
 
 class TestChartEngine(unittest.TestCase):

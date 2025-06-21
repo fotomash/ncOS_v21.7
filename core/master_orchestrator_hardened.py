@@ -4,7 +4,7 @@ from datetime import timedelta
 from typing import Any, Dict
 
 from agents.master_orchestrator import MasterOrchestrator as BaseMasterOrchestrator
-from circuit_breaker import (
+from utils.circuit_breaker import (
     CircuitBreaker,
     CircuitBreakerConfig,
     CircuitOpenError,
