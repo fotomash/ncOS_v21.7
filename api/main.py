@@ -15,7 +15,7 @@ from datetime import datetime
 import os
 
 # Import routers
-from voice_api_routes import router as voice_router
+from ncOS.voice_api_routes import router as voice_router
 from journal_api import router as journal_router
 
 # Configure logging

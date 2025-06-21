@@ -1,3 +1,4 @@
+
 import streamlit as st
 import pandas as pd
 import json
@@ -198,9 +199,9 @@ elif page == "ZBAR Analysis":
             pairs = sorted(filtered_df['symbol'].dropna().unique()) if 'symbol' in filtered_df else []
             avg_maturity = filtered_df["maturity_score"].mean() if "maturity_score" in filtered_df else None
             
-            recap_text = f"**{trades}** trades logged for this session\n\n"
+            recap_text = f"**{trades}** trades logged for this session\\n\\n"
             if pairs:
-                recap_text += f"Pairs: {', '.join(pairs)}\n\n"
+                recap_text += f"Pairs: {', '.join(pairs)}\\n\\n"
             if avg_maturity:
                 recap_text += f"Average maturity score: {avg_maturity:.2f}"
             
@@ -407,7 +408,7 @@ elif page == "New Entry":
                     # Also log to ZBAR journal
                     os.makedirs("data/journals", exist_ok=True)
                     with open(LOCAL_LOG_FILE, "a") as f:
-                        f.write(json.dumps(trade_data) + "\n")
+                        f.write(json.dumps(trade_data) + "\\n")
                     
                     if response.status_code == 200:
                         st.success("Trade logged successfully!")
@@ -531,3 +532,13 @@ st.sidebar.markdown("""
 """)
 st.sidebar.markdown("---")
 st.sidebar.markdown("ncOS Journal v2.0 - Phoenix")
+'''
+
+# Save the enhanced dashboard
+with open('ncos_journal/dashboard/app.py', 'w') as f:
+    f.write(enhanced_dashboard_content)
+
+print("Enhanced dashboard created with ZBAR integration!")
+
+# Create a ZBAR-specific module for the API
+zbar_api_content = '''
