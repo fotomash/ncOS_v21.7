@@ -1,0 +1,512 @@
+{
+  "config/ncos_config.yaml": {
+    "path": "config/ncos_config.yaml",
+    "category": "api",
+    "config": {
+      "system": {
+        "name": "ncOS",
+        "version": "21.7.0",
+        "environment": "production",
+        "log_level": "INFO"
+      },
+      "orchestration": {
+        "max_parallel_agents": 5,
+        "default_timeout": 300,
+        "retry_policy": {
+          "max_retries": 3,
+          "backoff_factor": 2,
+          "max_backoff": 60
+        }
+      },
+      "data": {
+        "journal_path": "logs/trade_journal.jsonl",
+        "backup_interval": 3600,
+        "max_journal_size": 104857600,
+        "archive_old_journals": true
+      },
+      "voice": {
+        "enabled": true,
+        "engine": "whisper",
+        "model": "base",
+        "wake_word": "ncos",
+        "language": "en"
+      },
+      "api": {
+        "host": "0.0.0.0",
+        "port": 8000,
+        "cors_origins": [
+          "http://localhost:8501"
+        ],
+        "api_key_required": false
+      },
+      "dashboard": {
+        "host": "localhost",
+        "port": 8501,
+        "auto_refresh": true,
+        "refresh_interval": 5
+      }
+    }
+  },
+  "config/system_config.yaml": {
+    "path": "config/system_config.yaml",
+    "category": "api",
+    "config": {
+      "api": {
+        "host": "0.0.0.0",
+        "port": 8001
+      },
+      "journal": {
+        "path": "logs/trade_journal.jsonl",
+        "backup_path": "logs/backup/",
+        "max_size_mb": 100
+      },
+      "voice": {
+        "confidence_threshold": 0.7,
+        "default_symbol": "XAUUSD",
+        "default_timeframe": "H4"
+      },
+      "zbar": {
+        "config_path": "config/zbar_config.yaml",
+        "auto_analyze": false
+      },
+      "dashboard": {
+        "port": 8501,
+        "refresh_interval": 5,
+        "theme": "dark"
+      }
+    }
+  },
+  "ncos_journal/config/default.yaml": {
+    "path": "ncos_journal/config/default.yaml",
+    "category": "api",
+    "config": {
+      "journal": {
+        "base_path": "./data/journals",
+        "writers": [
+          "csv",
+          "jsonl"
+        ],
+        "rotation": {
+          "enabled": true,
+          "size_mb": 100,
+          "retention_days": 90
+        }
+      },
+      "zbar": {
+        "min_confidence": 0.7,
+        "lookback_periods": 20
+      },
+      "api": {
+        "host": "localhost",
+        "port": 8000
+      },
+      "dashboard": {
+        "port": 8501
+      }
+    }
+  },
+  "ncos_plugin/ncos_openapi.json": {
+    "path": "ncos_plugin/ncos_openapi.json",
+    "category": "api",
+    "config": {
+      "openapi": "3.0.0",
+      "info": {
+        "title": "NCOS Live Market Data API",
+        "version": "21.7.2",
+        "description": "Provides live market data for stocks, crypto, and forex, powered by the NCOS system."
+      },
+      "paths": {
+        "/stock/quote": {
+          "get": {
+            "operationId": "getStockQuote",
+            "summary": "Get a real-time stock quote",
+            "parameters": [
+              {
+                "name": "ticker",
+                "in": "query",
+                "required": true,
+                "schema": {
+                  "type": "string"
+                }
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Stock data",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/crypto/quote": {
+          "get": {
+            "operationId": "getCryptoQuote",
+            "summary": "Get a real-time cryptocurrency price",
+            "parameters": [
+              {
+                "name": "symbol",
+                "in": "query",
+                "required": true,
+                "schema": {
+                  "type": "string"
+                }
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Crypto data",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "/forex/quote": {
+          "get": {
+            "operationId": "getForexQuote",
+            "summary": "Get a real-time forex exchange rate",
+            "parameters": [
+              {
+                "name": "pair",
+                "in": "query",
+                "required": true,
+                "schema": {
+                  "type": "string"
+                }
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Forex data",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "ncos_plugin/ncos_ai_plugin.json": {
+    "path": "ncos_plugin/ncos_ai_plugin.json",
+    "category": "api",
+    "config": {
+      "schema_version": "v1",
+      "name_for_human": "NCOS Live Market Data",
+      "name_for_model": "ncos_market_data_fetcher",
+      "description_for_human": "Fetch real-time market data (stocks, crypto, forex).",
+      "description_for_model": "Fetch live market data for stocks, crypto, and forex.",
+      "auth": {
+        "type": "none"
+      },
+      "api": {
+        "type": "openapi",
+        "url": "https://emerging-tiger-fair.ngrok-free.app/openapi.json"
+      },
+      "logo_url": "https://ncos.onrender.com/logo.png",
+      "contact_email": "support@ncos.dev",
+      "legal_info_url": "http://ncos.dev/legal",
+      "servers": [
+        {
+          "url": "https://emerging-tiger-fair.ngrok-free.app/openapi.json"
+        }
+      ]
+    }
+  },
+  "consolidated_config/api_consolidated.json": {
+    "path": "consolidated_config/api_consolidated.json",
+    "category": "api",
+    "config": {
+      "config/ncos_config.yaml": {
+        "path": "config/ncos_config.yaml",
+        "category": "api",
+        "config": {
+          "system": {
+            "name": "ncOS",
+            "version": "21.7.0",
+            "environment": "production",
+            "log_level": "INFO"
+          },
+          "orchestration": {
+            "max_parallel_agents": 5,
+            "default_timeout": 300,
+            "retry_policy": {
+              "max_retries": 3,
+              "backoff_factor": 2,
+              "max_backoff": 60
+            }
+          },
+          "data": {
+            "journal_path": "logs/trade_journal.jsonl",
+            "backup_interval": 3600,
+            "max_journal_size": 104857600,
+            "archive_old_journals": true
+          },
+          "voice": {
+            "enabled": true,
+            "engine": "whisper",
+            "model": "base",
+            "wake_word": "ncos",
+            "language": "en"
+          },
+          "api": {
+            "host": "0.0.0.0",
+            "port": 8000,
+            "cors_origins": [
+              "http://localhost:8501"
+            ],
+            "api_key_required": false
+          },
+          "dashboard": {
+            "host": "localhost",
+            "port": 8501,
+            "auto_refresh": true,
+            "refresh_interval": 5
+          }
+        }
+      },
+      "config/system_config.yaml": {
+        "path": "config/system_config.yaml",
+        "category": "api",
+        "config": {
+          "api": {
+            "host": "0.0.0.0",
+            "port": 8001
+          },
+          "journal": {
+            "path": "logs/trade_journal.jsonl",
+            "backup_path": "logs/backup/",
+            "max_size_mb": 100
+          },
+          "voice": {
+            "confidence_threshold": 0.7,
+            "default_symbol": "XAUUSD",
+            "default_timeframe": "H4"
+          },
+          "zbar": {
+            "config_path": "config/zbar_config.yaml",
+            "auto_analyze": false
+          },
+          "dashboard": {
+            "port": 8501,
+            "refresh_interval": 5,
+            "theme": "dark"
+          }
+        }
+      },
+      "ncos_journal/config/default.yaml": {
+        "path": "ncos_journal/config/default.yaml",
+        "category": "api",
+        "config": {
+          "journal": {
+            "base_path": "./data/journals",
+            "writers": [
+              "csv",
+              "jsonl"
+            ],
+            "rotation": {
+              "enabled": true,
+              "size_mb": 100,
+              "retention_days": 90
+            }
+          },
+          "zbar": {
+            "min_confidence": 0.7,
+            "lookback_periods": 20
+          },
+          "api": {
+            "host": "localhost",
+            "port": 8000
+          },
+          "dashboard": {
+            "port": 8501
+          }
+        }
+      },
+      "ncos_plugin/ncos_openapi.json": {
+        "path": "ncos_plugin/ncos_openapi.json",
+        "category": "api",
+        "config": {
+          "openapi": "3.0.0",
+          "info": {
+            "title": "NCOS Live Market Data API",
+            "version": "21.7.2",
+            "description": "Provides live market data for stocks, crypto, and forex, powered by the NCOS system."
+          },
+          "paths": {
+            "/stock/quote": {
+              "get": {
+                "operationId": "getStockQuote",
+                "summary": "Get a real-time stock quote",
+                "parameters": [
+                  {
+                    "name": "ticker",
+                    "in": "query",
+                    "required": true,
+                    "schema": {
+                      "type": "string"
+                    }
+                  }
+                ],
+                "responses": {
+                  "200": {
+                    "description": "Stock data",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "type": "object"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "/crypto/quote": {
+              "get": {
+                "operationId": "getCryptoQuote",
+                "summary": "Get a real-time cryptocurrency price",
+                "parameters": [
+                  {
+                    "name": "symbol",
+                    "in": "query",
+                    "required": true,
+                    "schema": {
+                      "type": "string"
+                    }
+                  }
+                ],
+                "responses": {
+                  "200": {
+                    "description": "Crypto data",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "type": "object"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "/forex/quote": {
+              "get": {
+                "operationId": "getForexQuote",
+                "summary": "Get a real-time forex exchange rate",
+                "parameters": [
+                  {
+                    "name": "pair",
+                    "in": "query",
+                    "required": true,
+                    "schema": {
+                      "type": "string"
+                    }
+                  }
+                ],
+                "responses": {
+                  "200": {
+                    "description": "Forex data",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "type": "object"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "ncos_plugin/ncos_ai_plugin.json": {
+        "path": "ncos_plugin/ncos_ai_plugin.json",
+        "category": "api",
+        "config": {
+          "schema_version": "v1",
+          "name_for_human": "NCOS Live Market Data",
+          "name_for_model": "ncos_market_data_fetcher",
+          "description_for_human": "Fetch real-time market data (stocks, crypto, forex).",
+          "description_for_model": "Fetch live market data for stocks, crypto, and forex.",
+          "auth": {
+            "type": "none"
+          },
+          "api": {
+            "type": "openapi",
+            "url": "https://emerging-tiger-fair.ngrok-free.app/openapi.json"
+          },
+          "logo_url": "https://ncos.onrender.com/logo.png",
+          "contact_email": "support@ncos.dev",
+          "legal_info_url": "http://ncos.dev/legal",
+          "servers": [
+            {
+              "url": "https://emerging-tiger-fair.ngrok-free.app/openapi.json"
+            }
+          ]
+        }
+      },
+      "ncos_journal/config.json": {
+        "path": "ncos_journal/config.json",
+        "category": "api",
+        "config": {
+          "journal": {
+            "data_dir": "data",
+            "formats": [
+              "csv",
+              "jsonl",
+              "parquet"
+            ],
+            "default_format": "jsonl"
+          },
+          "api": {
+            "host": "0.0.0.0",
+            "port": 8000
+          },
+          "dashboard": {
+            "port": 8501
+          }
+        }
+      }
+    }
+  },
+  "ncos_journal/config.json": {
+    "path": "ncos_journal/config.json",
+    "category": "api",
+    "config": {
+      "journal": {
+        "data_dir": "data",
+        "formats": [
+          "csv",
+          "jsonl",
+          "parquet"
+        ],
+        "default_format": "jsonl"
+      },
+      "api": {
+        "host": "0.0.0.0",
+        "port": 8000
+      },
+      "dashboard": {
+        "port": 8501
+      }
+    }
+  }
+}

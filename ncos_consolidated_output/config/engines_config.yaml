@@ -1,0 +1,410 @@
+PREDICTIVE_ENGINE_COMPLETE:
+  files_created:
+  - ncos_predictive_engine.py
+  - ncos_predictive_schemas.py
+  - ncos_feature_extractor.py
+  - ncos_data_enricher.py
+  - ncos_divergence_strategy_agent.py
+  - backtesting/engine.py
+  - grade_analysis_dashboard.py
+  - validate_predictive.py
+  - test_predictive_engine.py
+  - scripts/quick_start_predictive.py
+  - PREDICTIVE_ENGINE_GUIDE.md
+  - config/predictive_engine_config.yaml
+  - config/agents.yaml (updated)
+  key_features:
+  - 7-factor quality scoring
+  - A/B/C/D grade assignment
+  - Intelligent trade filtering
+  - Dynamic position sizing
+  - Conflict detection
+  - Performance analytics
+  phases_completed:
+  - components:
+    - ncos_predictive_engine.py
+    - ncos_predictive_schemas.py
+    - ncos_feature_extractor.py
+    - ncos_data_enricher.py
+    name: Core Implementation
+    phase: 1
+  - components:
+    - Enhanced DivergenceStrategyAgent
+    - Quality-based trade filtering
+    - Dynamic risk adjustment
+    name: Strategy Integration
+    phase: 2
+  - components:
+    - backtesting/engine.py
+    - grade_analysis_dashboard.py
+    - validate_predictive.py
+    name: Testing & Validation
+    phase: 3
+  project: NCOS Predictive Engine
+  quick_start: Run 'python scripts/quick_start_predictive.py' to begin
+  status: Complete
+  version: 1.0.0
+engines_consolidated:
+  config/predictive_engine_config.yaml:
+    category: engines
+    config:
+      data_enricher:
+        calculate_htf_alignment: true
+        calculate_spread_stability: true
+        calculate_tick_density: true
+        enabled: true
+        spread_tracker_config:
+          enabled: true
+          high_vol_baseline: 0.0008
+          stability_threshold: 0.3
+          window_size: 25
+      feature_extractor:
+        enabled: true
+        feature_cache_ttl_seconds: 300
+        use_cached_features: true
+      journaling:
+        enabled: true
+        log_all_evaluations: false
+        log_directory: logs/predictive_journal
+        log_format: json
+        min_maturity_score_to_log: 0.6
+      predictive_scorer:
+        conflict_detection_settings:
+          enabled: true
+          min_new_setup_maturity_for_conflict_alert: 0.7
+          suggest_review_trade_if_new_setup_maturity_above: 0.8
+        enabled: true
+        factor_weights:
+          choch_confirmation_score: 0.15
+          htf_bias_alignment: 0.2
+          idm_detected_clarity: 0.1
+          poi_validation_score: 0.2
+          spread_stability_score: 0.1
+          sweep_validation_strength: 0.15
+          tick_density_score: 0.1
+        grade_thresholds:
+          A: 0.85
+          B: 0.7
+          C: 0.55
+        min_score_to_emit_potential_entry: 0.65
+    path: config/predictive_engine_config.yaml
+  consolidated_config/engines_consolidated.json:
+    category: engines
+    config:
+      config/predictive_engine_config.yaml:
+        category: engines
+        config:
+          data_enricher:
+            calculate_htf_alignment: true
+            calculate_spread_stability: true
+            calculate_tick_density: true
+            enabled: true
+            spread_tracker_config:
+              enabled: true
+              high_vol_baseline: 0.0008
+              stability_threshold: 0.3
+              window_size: 25
+          feature_extractor:
+            enabled: true
+            feature_cache_ttl_seconds: 300
+            use_cached_features: true
+          journaling:
+            enabled: true
+            log_all_evaluations: false
+            log_directory: logs/predictive_journal
+            log_format: json
+            min_maturity_score_to_log: 0.6
+          predictive_scorer:
+            conflict_detection_settings:
+              enabled: true
+              min_new_setup_maturity_for_conflict_alert: 0.7
+              suggest_review_trade_if_new_setup_maturity_above: 0.8
+            enabled: true
+            factor_weights:
+              choch_confirmation_score: 0.15
+              htf_bias_alignment: 0.2
+              idm_detected_clarity: 0.1
+              poi_validation_score: 0.2
+              spread_stability_score: 0.1
+              sweep_validation_strength: 0.15
+              tick_density_score: 0.1
+            grade_thresholds:
+              A: 0.85
+              B: 0.7
+              C: 0.55
+            min_score_to_emit_potential_entry: 0.65
+        path: config/predictive_engine_config.yaml
+      docs/PREDICTIVE_ENGINE_COMPLETE.json:
+        category: engines
+        config:
+          files_created:
+          - ncos_predictive_engine.py
+          - ncos_predictive_schemas.py
+          - ncos_feature_extractor.py
+          - ncos_data_enricher.py
+          - ncos_divergence_strategy_agent.py
+          - backtesting/engine.py
+          - grade_analysis_dashboard.py
+          - validate_predictive.py
+          - test_predictive_engine.py
+          - scripts/quick_start_predictive.py
+          - PREDICTIVE_ENGINE_GUIDE.md
+          - config/predictive_engine_config.yaml
+          - config/agents.yaml (updated)
+          key_features:
+          - 7-factor quality scoring
+          - A/B/C/D grade assignment
+          - Intelligent trade filtering
+          - Dynamic position sizing
+          - Conflict detection
+          - Performance analytics
+          phases_completed:
+          - components:
+            - ncos_predictive_engine.py
+            - ncos_predictive_schemas.py
+            - ncos_feature_extractor.py
+            - ncos_data_enricher.py
+            name: Core Implementation
+            phase: 1
+          - components:
+            - Enhanced DivergenceStrategyAgent
+            - Quality-based trade filtering
+            - Dynamic risk adjustment
+            name: Strategy Integration
+            phase: 2
+          - components:
+            - backtesting/engine.py
+            - grade_analysis_dashboard.py
+            - validate_predictive.py
+            name: Testing & Validation
+            phase: 3
+          project: NCOS Predictive Engine
+          quick_start: Run 'python scripts/quick_start_predictive.py' to begin
+          status: Complete
+          version: 1.0.0
+        path: docs/PREDICTIVE_ENGINE_COMPLETE.json
+      docs/predictive_engine_phase1_summary.json:
+        category: engines
+        config:
+          configuration: config/predictive_engine_config.yaml
+          key_features:
+          - Multi-factor maturity scoring (7 factors)
+          - A/B/C/D grading system
+          - Conflict detection with active trades
+          - Predictive journaling with JSON/YAML support
+          - Data enrichment with technical indicators
+          - Spread stability tracking
+          - HTF alignment calculation
+          modules_created:
+          - ncos_predictive_schemas.py - Pydantic models for validation
+          - ncos_predictive_engine.py - Main orchestrator with scoring and journaling
+          - ncos_feature_extractor.py - Feature extraction from market data
+          - ncos_data_enricher.py - Data enrichment pipeline
+          next_phase: Phase 2 - Integration with DivergenceStrategyAgent
+          phase: Phase 1 - Core Infrastructure
+          status: Complete
+        path: docs/predictive_engine_phase1_summary.json
+      docs/predictive_engine_phase2_summary.json:
+        category: engines
+        config:
+          configuration:
+            grade_risk_multipliers:
+              A: 120% risk
+              B: 100% risk
+              C: 70% risk
+              D: No trade
+            min_grade_to_trade: B
+          enhancements:
+          - DivergenceStrategyAgent now uses Predictive Engine
+          - Quality-based trade filtering (only B-grade or better)
+          - Dynamic risk adjustment based on setup grade
+          - Comprehensive feature extraction from market data
+          - Conflict detection with active trades
+          - Detailed statistics tracking by grade
+          new_features:
+          - Simulated pattern detection context
+          - Grade-based position sizing multipliers
+          - Enhanced logging with quality metrics
+          - Trade metadata includes setup grade and score
+          phase: Phase 2 - Strategy Integration
+          status: Complete
+          testing: Run test_predictive_engine.py to verify functionality
+        path: docs/predictive_engine_phase2_summary.json
+    path: consolidated_config/engines_consolidated.json
+  docs/PREDICTIVE_ENGINE_COMPLETE.json:
+    category: engines
+    config:
+      files_created:
+      - ncos_predictive_engine.py
+      - ncos_predictive_schemas.py
+      - ncos_feature_extractor.py
+      - ncos_data_enricher.py
+      - ncos_divergence_strategy_agent.py
+      - backtesting/engine.py
+      - grade_analysis_dashboard.py
+      - validate_predictive.py
+      - test_predictive_engine.py
+      - scripts/quick_start_predictive.py
+      - PREDICTIVE_ENGINE_GUIDE.md
+      - config/predictive_engine_config.yaml
+      - config/agents.yaml (updated)
+      key_features:
+      - 7-factor quality scoring
+      - A/B/C/D grade assignment
+      - Intelligent trade filtering
+      - Dynamic position sizing
+      - Conflict detection
+      - Performance analytics
+      phases_completed:
+      - components:
+        - ncos_predictive_engine.py
+        - ncos_predictive_schemas.py
+        - ncos_feature_extractor.py
+        - ncos_data_enricher.py
+        name: Core Implementation
+        phase: 1
+      - components:
+        - Enhanced DivergenceStrategyAgent
+        - Quality-based trade filtering
+        - Dynamic risk adjustment
+        name: Strategy Integration
+        phase: 2
+      - components:
+        - backtesting/engine.py
+        - grade_analysis_dashboard.py
+        - validate_predictive.py
+        name: Testing & Validation
+        phase: 3
+      project: NCOS Predictive Engine
+      quick_start: Run 'python scripts/quick_start_predictive.py' to begin
+      status: Complete
+      version: 1.0.0
+    path: docs/PREDICTIVE_ENGINE_COMPLETE.json
+  docs/predictive_engine_phase1_summary.json:
+    category: engines
+    config:
+      configuration: config/predictive_engine_config.yaml
+      key_features:
+      - Multi-factor maturity scoring (7 factors)
+      - A/B/C/D grading system
+      - Conflict detection with active trades
+      - Predictive journaling with JSON/YAML support
+      - Data enrichment with technical indicators
+      - Spread stability tracking
+      - HTF alignment calculation
+      modules_created:
+      - ncos_predictive_schemas.py - Pydantic models for validation
+      - ncos_predictive_engine.py - Main orchestrator with scoring and journaling
+      - ncos_feature_extractor.py - Feature extraction from market data
+      - ncos_data_enricher.py - Data enrichment pipeline
+      next_phase: Phase 2 - Integration with DivergenceStrategyAgent
+      phase: Phase 1 - Core Infrastructure
+      status: Complete
+    path: docs/predictive_engine_phase1_summary.json
+  docs/predictive_engine_phase2_summary.json:
+    category: engines
+    config:
+      configuration:
+        grade_risk_multipliers:
+          A: 120% risk
+          B: 100% risk
+          C: 70% risk
+          D: No trade
+        min_grade_to_trade: B
+      enhancements:
+      - DivergenceStrategyAgent now uses Predictive Engine
+      - Quality-based trade filtering (only B-grade or better)
+      - Dynamic risk adjustment based on setup grade
+      - Comprehensive feature extraction from market data
+      - Conflict detection with active trades
+      - Detailed statistics tracking by grade
+      new_features:
+      - Simulated pattern detection context
+      - Grade-based position sizing multipliers
+      - Enhanced logging with quality metrics
+      - Trade metadata includes setup grade and score
+      phase: Phase 2 - Strategy Integration
+      status: Complete
+      testing: Run test_predictive_engine.py to verify functionality
+    path: docs/predictive_engine_phase2_summary.json
+predictive_engine_config:
+  data_enricher:
+    calculate_htf_alignment: true
+    calculate_spread_stability: true
+    calculate_tick_density: true
+    enabled: true
+    spread_tracker_config:
+      enabled: true
+      high_vol_baseline: 0.0008
+      stability_threshold: 0.3
+      window_size: 25
+  feature_extractor:
+    enabled: true
+    feature_cache_ttl_seconds: 300
+    use_cached_features: true
+  journaling:
+    enabled: true
+    log_all_evaluations: false
+    log_directory: logs/predictive_journal
+    log_format: json
+    min_maturity_score_to_log: 0.6
+  predictive_scorer:
+    conflict_detection_settings:
+      enabled: true
+      min_new_setup_maturity_for_conflict_alert: 0.7
+      suggest_review_trade_if_new_setup_maturity_above: 0.8
+    enabled: true
+    factor_weights:
+      choch_confirmation_score: 0.15
+      htf_bias_alignment: 0.2
+      idm_detected_clarity: 0.1
+      poi_validation_score: 0.2
+      spread_stability_score: 0.1
+      sweep_validation_strength: 0.15
+      tick_density_score: 0.1
+    grade_thresholds:
+      A: 0.85
+      B: 0.7
+      C: 0.55
+    min_score_to_emit_potential_entry: 0.65
+predictive_engine_phase1_summary:
+  configuration: config/predictive_engine_config.yaml
+  key_features:
+  - Multi-factor maturity scoring (7 factors)
+  - A/B/C/D grading system
+  - Conflict detection with active trades
+  - Predictive journaling with JSON/YAML support
+  - Data enrichment with technical indicators
+  - Spread stability tracking
+  - HTF alignment calculation
+  modules_created:
+  - ncos_predictive_schemas.py - Pydantic models for validation
+  - ncos_predictive_engine.py - Main orchestrator with scoring and journaling
+  - ncos_feature_extractor.py - Feature extraction from market data
+  - ncos_data_enricher.py - Data enrichment pipeline
+  next_phase: Phase 2 - Integration with DivergenceStrategyAgent
+  phase: Phase 1 - Core Infrastructure
+  status: Complete
+predictive_engine_phase2_summary:
+  configuration:
+    grade_risk_multipliers:
+      A: 120% risk
+      B: 100% risk
+      C: 70% risk
+      D: No trade
+    min_grade_to_trade: B
+  enhancements:
+  - DivergenceStrategyAgent now uses Predictive Engine
+  - Quality-based trade filtering (only B-grade or better)
+  - Dynamic risk adjustment based on setup grade
+  - Comprehensive feature extraction from market data
+  - Conflict detection with active trades
+  - Detailed statistics tracking by grade
+  new_features:
+  - Simulated pattern detection context
+  - Grade-based position sizing multipliers
+  - Enhanced logging with quality metrics
+  - Trade metadata includes setup grade and score
+  phase: Phase 2 - Strategy Integration
+  status: Complete
+  testing: Run test_predictive_engine.py to verify functionality

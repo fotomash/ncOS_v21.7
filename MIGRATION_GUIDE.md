@@ -1,79 +1,100 @@
-# Migration Guide for Existing NCOS Projects
+# ncOS Project Consolidation and Remapping Guide
 
-## Option 1: Side-by-Side Installation (Recommended for Testing)
+## Overview
+This guide explains the consolidation and remapping process for the ncOS project.
 
-Keep your existing NCOS separate and run voice journal alongside:
+## What This Does
 
-```bash
-your-workspace/
-├── ncos-v21/              # Your existing NCOS
-└── ncos_journal/    # New voice system
+### 1. **Backup Creation**
+- Creates a timestamped backup of your current project
+- Ensures you can revert if needed
+
+### 2. **Structure Reorganization**
+- Consolidates duplicate files
+- Creates a clean, modular structure
+- Organizes code by functionality
+
+### 3. **Configuration Consolidation**
+- Merges all configuration files
+- Creates category-based config files
+- Establishes a unified configuration system
+
+### 4. **Code Migration**
+- Moves Python files to appropriate modules
+- Maintains functionality while improving organization
+- Updates module structure
+
+## New Project Structure
+
+```
+ncOS_consolidated/
+├── src/                    # All source code
+│   ├── core/              # Core utilities and config
+│   ├── engines/           # Engine implementations
+│   ├── agents/            # Agent implementations
+│   ├── api/               # API and routes
+│   └── models/            # Data models
+├── config/                # All configuration files
+│   ├── settings.yaml      # Main settings
+│   ├── agents_config.yaml # Agent configurations
+│   ├── engines_config.yaml # Engine configurations
+│   └── api_config.yaml    # API configurations
+├── tests/                 # Test suite
+├── scripts/               # Utility scripts
+├── docs/                  # Documentation
+└── logs/                  # Log files
 ```
 
-## Option 2: Integrated Installation (For Production)
+## How to Use
 
-### Step 1: Backup Current System
-
-```bash
-cp -r your-ncos-project your-ncos-backup
-```
-
-### Step 2: Add Voice Components
-
-```bash
-# In your existing NCOS directory
-mkdir -p core/voice
-cp voice_tag_parser.py core/voice/
-cp zbar_voice_integration.py core/voice/
-cp menu_voice_integration.py core/voice/
-cp ncos_voice_unified.py core/voice/
-```
-
-### Step 3: Update Imports
-
-```python
-# In your main files, add:
-from core.voice.zbar_voice_integration import VoiceEnabledZBARAgent
-from core.voice.menu_voice_integration import VoiceEnabledMenuSystem
-```
-
-### Step 4: Extend API
-
-```python
-# In your existing API main.py
-from api.voice_api_routes import router as voice_router
-app.include_router(voice_router, prefix="/voice")
-```
-
-## File Mapping
-
-| New File                  | Where to Place | Purpose       |
-|---------------------------|----------------|---------------|
-| voice_tag_parser.py       | core/voice/    | NLP parsing   |
-| zbar_voice_integration.py | core/voice/    | ZBAR wrapper  |
-| menu_voice_integration.py | core/voice/    | Menu wrapper  |
-| voice_api_routes.py       | api/           | API endpoints |
-| zbar_journal_dashboard.py | dashboard/     | Streamlit UI  |
-| system_config.yaml        | config/        | Voice config  |
-
-## Testing Integration
-
-1. Start with voice standalone:
+1. **Run the Consolidation**:
    ```bash
-   python core/voice/ncos_voice_unified.py
+   python consolidate_and_remap.py
    ```
 
-2. Test voice commands:
-   ```
-   Voice> mark gold bullish h4
+2. **Review the Results**:
+   - Check `consolidation_report.json` for details
+   - Review `CONSOLIDATION_SUMMARY.md` for overview
+
+3. **Update Your Code**:
+   - Update import statements
+   - Test functionality
+   - Update documentation
+
+## Benefits
+
+1. **Cleaner Structure**: Organized by functionality
+2. **No Duplicates**: Single source of truth
+3. **Better Imports**: Clear module hierarchy
+4. **Unified Config**: One configuration system
+5. **Maintainable**: Easier to extend and modify
+
+## Post-Consolidation Tasks
+
+1. **Update Imports**:
+   ```python
+   # Old
+   from engines.predictive_engine import PredictiveEngine
+
+   # New
+   from src.engines.predictive import PredictiveEngine
    ```
 
-3. Verify journal creation:
+2. **Update Configuration Paths**:
+   ```python
+   # Old
+   config_path = "configs/engine_config.yaml"
+
+   # New
+   config_path = "config/engines_config.yaml"
+   ```
+
+3. **Run Tests**:
    ```bash
-   cat logs/trade_journal.jsonl
+   pytest tests/
    ```
 
-4. Check dashboard:
-   ```bash
-   streamlit run dashboard/zbar_journal_dashboard.py
-   ```
+4. **Update Documentation**:
+   - Update README.md
+   - Update API documentation
+   - Update deployment guides

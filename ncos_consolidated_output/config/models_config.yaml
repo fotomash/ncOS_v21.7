@@ -1,0 +1,1729 @@
+models_consolidated:
+  .venv/lib/python3.11/site-packages/flower/static/swagger.json:
+    category: models
+    config:
+      definitions: {}
+      info:
+        description: The flower API spec
+        title: Flower
+        version: 1.0.0-dev
+      parameters:
+        taskid:
+          description: The task id
+          in: path
+          name: taskid
+          required: true
+          type: string
+        taskname:
+          description: The task name
+          in: path
+          name: taskname
+          required: true
+          type: string
+        workername:
+          description: The worker name
+          in: path
+          name: workername
+          required: true
+          type: string
+      paths:
+        /api/queues/length:
+          get:
+            description: Get queue lengths
+            responses:
+              '200':
+                description: result
+        /api/task/abort/{taskid}:
+          post:
+            description: Abort a running task
+            parameters:
+            - $ref: '#/parameters/taskid'
+            responses:
+              '200':
+                description: result
+        /api/task/apply/{taskname}:
+          post:
+            description: Execute a task by name and wait results
+            parameters:
+            - $ref: '#/parameters/taskname'
+            - description: the dictionary of args and kwargs
+              in: body
+              name: args
+              schema:
+                properties:
+                  args:
+                    type: array
+                  kwargs:
+                    type: object
+                type: object
+            responses:
+              '200':
+                description: result
+        /api/task/async-apply/{taskname}:
+          post:
+            description: Execute a task
+            parameters:
+            - $ref: '#/parameters/taskname'
+            - description: the dictionary of args, kwargs, and apply-async options
+              in: body
+              name: args
+              schema:
+                properties:
+                  args:
+                    type: array
+                  kwargs:
+                    type: object
+                  options:
+                    type: object
+                type: object
+            responses:
+              '200':
+                description: result
+        /api/task/info/{taskid}:
+          get:
+            description: Get task info
+            parameters:
+            - $ref: '#/parameters/taskid'
+            responses:
+              '200':
+                description: result
+        /api/task/rate-limit/{taskname}:
+          post:
+            description: Change rate limit for a task
+            parameters:
+            - $ref: '#/parameters/taskname'
+            - description: the name of a worker
+              in: query
+              name: workername
+              required: true
+              type: string
+            - description: the rate limit to apply
+              format: int32
+              in: query
+              name: rateLimit
+              required: true
+              type: integer
+            responses:
+              '200':
+                description: result
+        /api/task/result/{taskid}:
+          get:
+            description: Get a task result
+            parameters:
+            - $ref: '#/parameters/taskid'
+            - description: how long to wait, in seconds, before the operation times
+                out
+              format: int32
+              in: query
+              name: timeout
+              required: false
+              type: integer
+            responses:
+              '200':
+                description: result
+        /api/task/revoke/{taskid}:
+          post:
+            description: Revoke a task
+            parameters:
+            - $ref: '#/parameters/taskid'
+            - description: terminate the task if it is running
+              in: query
+              name: terminate
+              required: false
+              type: boolean
+            responses:
+              '200':
+                description: result
+        /api/task/send-task/{taskname}:
+          post:
+            description: Execute a task by name (Doesn't require a task source)
+            parameters:
+            - $ref: '#/parameters/taskname'
+            - description: the dictionary of args, and kwargs
+              in: body
+              name: args
+              schema:
+                properties:
+                  args:
+                    type: array
+                  kwargs:
+                    type: object
+                type: object
+            responses:
+              '200':
+                description: result
+        /api/task/timeout/{taskname}:
+          post:
+            description: Change soft and hard time limits for a task
+            parameters:
+            - $ref: '#/parameters/taskname'
+            - description: the name of a worker
+              in: query
+              name: workername
+              required: true
+              type: string
+            - description: the soft timeout limit
+              format: int32
+              in: query
+              name: soft
+              required: false
+              type: integer
+            - description: the hard timeout limit
+              format: int32
+              in: query
+              name: hard
+              required: false
+              type: integer
+            responses:
+              '200':
+                description: result
+        /api/task/types:
+          get:
+            description: List (seen) task types
+            responses:
+              '200':
+                description: result
+        /api/tasks:
+          get:
+            description: List tasks
+            parameters:
+            - description: the maximum number of tasks
+              format: int32
+              in: query
+              name: limit
+              required: false
+              type: integer
+            - description: filter task by workername
+              in: query
+              name: workername
+              required: false
+              type: string
+            - description: filter task by taskname
+              in: query
+              name: taskname
+              required: false
+              type: string
+            - description: filter task by state
+              in: query
+              name: state
+              required: false
+              type: string
+            responses:
+              '200':
+                description: Result
+        /api/worker/pool/autoscale/{workername}:
+          post:
+            description: Autoscale a worker pool
+            parameters:
+            - $ref: '#/parameters/workername'
+            - description: minimum number of pool processes
+              format: int32
+              in: query
+              name: min
+              required: false
+              type: integer
+            - description: maximum number of pool processes
+              format: int32
+              in: query
+              name: max
+              required: false
+              type: integer
+            responses:
+              '200':
+                description: result
+        /api/worker/pool/grow/{workername}:
+          post:
+            description: Grow a worker's pool
+            parameters:
+            - $ref: '#/parameters/workername'
+            - description: number of pool processes to grow, default is 1
+              format: int32
+              in: query
+              name: n
+              required: false
+              type: integer
+            responses:
+              '200':
+                description: result
+        /api/worker/pool/restart/{workername}:
+          post:
+            description: Restart a worker's pool
+            parameters:
+            - $ref: '#/parameters/workername'
+            responses:
+              '200':
+                description: result
+        /api/worker/pool/shrink/{workername}:
+          post:
+            description: Shrink a worker's pool
+            parameters:
+            - $ref: '#/parameters/workername'
+            - description: number of pool processes to shrink, default is 1
+              format: int32
+              in: query
+              name: n
+              required: false
+              type: integer
+            responses:
+              '200':
+                description: result
+        /api/worker/queue/add-consumer/{workername}:
+          post:
+            description: Start consuming from a queue
+            parameters:
+            - $ref: '#/parameters/workername'
+            - description: the name of a queue
+              in: query
+              name: queue
+              required: true
+              type: string
+            responses:
+              '200':
+                description: result
+        /api/worker/queue/cancel-consumer/{workername}:
+          post:
+            description: Stop consuming from a queue
+            parameters:
+            - $ref: '#/parameters/workername'
+            - description: the name of a queue
+              in: query
+              name: queue
+              required: true
+              type: string
+            responses:
+              '200':
+                description: result
+        /api/worker/shutdown/{workername}:
+          post:
+            description: Shut down a worker
+            parameters:
+            - $ref: '#/parameters/workername'
+            responses:
+              '200':
+                description: result
+        /api/workers:
+          get:
+            description: List workers
+            parameters:
+            - description: run inspect to get updated list of workers
+              in: query
+              name: refresh
+              required: false
+              type: boolean
+            - description: get info for workername
+              in: query
+              name: workername
+              required: false
+              type: string
+            - description: only get worker status info
+              in: query
+              name: status
+              type: boolean
+            responses:
+              '200':
+                description: result
+      swagger: '2.0'
+      tags: []
+    path: .venv/lib/python3.11/site-packages/flower/static/swagger.json
+  .venv/lib/python3.11/site-packages/torch/_export/serde/schema.yaml:
+    category: models
+    config:
+      AOTInductorModelPickleData:
+        fields:
+          aot_inductor_model_is_cpu:
+            default: None
+            type: Optional[bool]
+          floating_point_input_dtype:
+            default: None
+            type: Optional[int]
+          floating_point_output_dtype:
+            default: None
+            type: Optional[int]
+          input_names:
+            type: List[str]
+          library_basename:
+            type: str
+          output_names:
+            type: List[str]
+        kind: struct
+      Argument:
+        fields:
+          as_bool:
+            type: bool
+          as_bools:
+            type: List[bool]
+          as_custom_obj:
+            type: CustomObjArgument
+          as_device:
+            type: Device
+          as_float:
+            type: float
+          as_floats:
+            type: List[float]
+          as_graph:
+            type: GraphArgument
+          as_int:
+            type: int
+          as_ints:
+            type: List[int]
+          as_layout:
+            type: Layout
+          as_memory_format:
+            type: MemoryFormat
+          as_none:
+            type: bool
+          as_operator:
+            type: str
+          as_optional_tensors:
+            type: List[OptionalTensorArgument]
+          as_scalar_type:
+            type: ScalarType
+          as_string:
+            type: str
+          as_strings:
+            type: List[str]
+          as_sym_bool:
+            type: SymBoolArgument
+          as_sym_bools:
+            type: List[SymBoolArgument]
+          as_sym_float:
+            type: SymFloatArgument
+          as_sym_floats:
+            type: List[SymFloatArgument]
+          as_sym_int:
+            type: SymIntArgument
+          as_sym_ints:
+            type: List[SymIntArgument]
+          as_tensor:
+            type: TensorArgument
+          as_tensors:
+            type: List[TensorArgument]
+        kind: union
+      ArgumentKind:
+        fields:
+          KEYWORD: 2
+          POSITIONAL: 1
+          UNKNOWN: 0
+        kind: enum
+      BufferMutationSpec:
+        fields:
+          arg:
+            type: TensorArgument
+          buffer_name:
+            type: str
+        kind: struct
+      ConstantValue:
+        fields:
+          as_bool:
+            type: bool
+          as_float:
+            type: float
+          as_int:
+            type: int
+          as_none:
+            type: bool
+          as_string:
+            type: str
+        kind: union
+      CustomObjArgument:
+        fields:
+          class_fqn:
+            type: str
+          name:
+            type: str
+        kind: struct
+      Device:
+        fields:
+          index:
+            default: None
+            type: Optional[int]
+          type:
+            type: str
+        kind: struct
+      ExportedProgram:
+        fields:
+          graph_module:
+            type: GraphModule
+          opset_version:
+            type: Dict[str, int]
+          range_constraints:
+            type: Dict[str, RangeConstraint]
+          schema_version:
+            type: SchemaVersion
+          torch_version:
+            default: <=2.4
+            type: str
+          verifiers:
+            default: '[]'
+            type: List[str]
+        kind: struct
+      ExternKernelNode:
+        fields:
+          name:
+            type: str
+          node:
+            type: Node
+        kind: struct
+      ExternKernelNodes:
+        fields:
+          nodes:
+            type: List[ExternKernelNode]
+        kind: struct
+      GradientToParameterSpec:
+        fields:
+          arg:
+            type: TensorArgument
+          parameter_name:
+            type: str
+        kind: struct
+      GradientToUserInputSpec:
+        fields:
+          arg:
+            type: TensorArgument
+          user_input_name:
+            type: str
+        kind: struct
+      Graph:
+        fields:
+          custom_obj_values:
+            default: '{}'
+            type: Dict[str, CustomObjArgument]
+          inputs:
+            type: List[Argument]
+          is_single_tensor_return:
+            default: 'False'
+            type: bool
+          nodes:
+            type: List[Node]
+          outputs:
+            type: List[Argument]
+          sym_bool_values:
+            type: Dict[str, SymBool]
+          sym_float_values:
+            default: '{}'
+            type: Dict[str, SymFloat]
+          sym_int_values:
+            type: Dict[str, SymInt]
+          tensor_values:
+            type: Dict[str, TensorMeta]
+        kind: struct
+      GraphArgument:
+        fields:
+          graph:
+            type: Graph
+          name:
+            type: str
+        kind: struct
+      GraphModule:
+        fields:
+          graph:
+            type: Graph
+          metadata:
+            default: '{}'
+            type: Dict[str, str]
+          module_call_graph:
+            type: List[ModuleCallEntry]
+          signature:
+            type: GraphSignature
+          treespec_namedtuple_fields:
+            default: '{}'
+            type: Dict[str, NamedTupleDef]
+        kind: struct
+      GraphSignature:
+        fields:
+          input_specs:
+            type: List[InputSpec]
+          output_specs:
+            type: List[OutputSpec]
+        kind: struct
+      InputSpec:
+        fields:
+          buffer:
+            type: InputToBufferSpec
+          constant_input:
+            type: InputToConstantInputSpec
+          custom_obj:
+            type: InputToCustomObjSpec
+          parameter:
+            type: InputToParameterSpec
+          tensor_constant:
+            type: InputToTensorConstantSpec
+          token:
+            type: InputTokenSpec
+          user_input:
+            type: UserInputSpec
+        kind: union
+      InputToBufferSpec:
+        fields:
+          arg:
+            type: TensorArgument
+          buffer_name:
+            type: str
+          persistent:
+            type: bool
+        kind: struct
+      InputToConstantInputSpec:
+        fields:
+          name:
+            type: str
+          value:
+            type: ConstantValue
+        kind: struct
+      InputToCustomObjSpec:
+        fields:
+          arg:
+            type: CustomObjArgument
+          custom_obj_name:
+            type: str
+        kind: struct
+      InputToParameterSpec:
+        fields:
+          arg:
+            type: TensorArgument
+          parameter_name:
+            type: str
+        kind: struct
+      InputToTensorConstantSpec:
+        fields:
+          arg:
+            type: TensorArgument
+          tensor_constant_name:
+            type: str
+        kind: struct
+      InputTokenSpec:
+        fields:
+          arg:
+            type: TokenArgument
+        kind: struct
+      Layout:
+        fields:
+          SparseBsc: 5
+          SparseBsr: 4
+          SparseCoo: 1
+          SparseCsc: 3
+          SparseCsr: 2
+          Strided: 7
+          Unknown: 0
+          _mkldnn: 6
+        kind: enum
+      LossOutputSpec:
+        fields:
+          arg:
+            type: TensorArgument
+        kind: struct
+      MemoryFormat:
+        fields:
+          ChannelsLast: 2
+          ChannelsLast3d: 3
+          ContiguousFormat: 1
+          PreserveFormat: 4
+          Unknown: 0
+        kind: enum
+      Model:
+        fields:
+          constantPaths:
+            type: Dict[str, str]
+          delegates:
+            type: Dict[str, Program]
+          deviceAllocationMap:
+            type: Dict[str, str]
+          name:
+            type: str
+          program:
+            type: Program
+          tensorPaths:
+            type: Dict[str, str]
+        kind: struct
+      ModuleCallEntry:
+        fields:
+          fqn:
+            type: str
+          signature:
+            default: None
+            type: Optional[ModuleCallSignature]
+        kind: struct
+      ModuleCallSignature:
+        fields:
+          forward_arg_names:
+            default: None
+            type: Optional[List[str]]
+          in_spec:
+            type: str
+          inputs:
+            type: List[Argument]
+          out_spec:
+            type: str
+          outputs:
+            type: List[Argument]
+        kind: struct
+      NamedArgument:
+        fields:
+          arg:
+            type: Argument
+          kind:
+            default: None
+            type: Optional[ArgumentKind]
+          name:
+            type: str
+        kind: struct
+      NamedTupleDef:
+        fields:
+          field_names:
+            type: List[str]
+        kind: struct
+      Node:
+        fields:
+          inputs:
+            type: List[NamedArgument]
+          is_hop_single_tensor_return:
+            default: None
+            type: Optional[bool]
+          metadata:
+            type: Dict[str, str]
+          outputs:
+            type: List[Argument]
+          target:
+            type: str
+        kind: struct
+      OptionalTensorArgument:
+        fields:
+          as_none:
+            type: bool
+          as_tensor:
+            type: TensorArgument
+        kind: union
+      OutputSpec:
+        fields:
+          buffer_mutation:
+            type: BufferMutationSpec
+          gradient_to_parameter:
+            type: GradientToParameterSpec
+          gradient_to_user_input:
+            type: GradientToUserInputSpec
+          loss_output:
+            type: LossOutputSpec
+          token:
+            type: OutputTokenSpec
+          user_input_mutation:
+            type: UserInputMutationSpec
+          user_output:
+            type: UserOutputSpec
+        kind: union
+      OutputTokenSpec:
+        fields:
+          arg:
+            type: TokenArgument
+        kind: struct
+      Program:
+        fields:
+          methods:
+            type: Dict[str, ExportedProgram]
+        kind: struct
+      RangeConstraint:
+        fields:
+          max_val:
+            type: Optional[int]
+          min_val:
+            type: Optional[int]
+        kind: struct
+      SCHEMA_VERSION:
+      - 8
+      - 7
+      ScalarType:
+        fields:
+          BFLOAT16: 13
+          BOOL: 12
+          BYTE: 1
+          CHAR: 2
+          COMPLEXDOUBLE: 11
+          COMPLEXFLOAT: 10
+          COMPLEXHALF: 9
+          DOUBLE: 8
+          FLOAT: 7
+          FLOAT8E4M3FN: 29
+          FLOAT8E5M2: 30
+          HALF: 6
+          INT: 4
+          LONG: 5
+          SHORT: 3
+          UINT16: 28
+          UNKNOWN: 0
+        kind: enum
+      SchemaVersion:
+        fields:
+          major:
+            type: int
+          minor:
+            type: int
+        kind: struct
+      SymBool:
+        fields:
+          as_bool:
+            type: bool
+          as_expr:
+            type: SymExpr
+        kind: union
+      SymBoolArgument:
+        fields:
+          as_bool:
+            type: bool
+          as_name:
+            type: str
+        kind: union
+      SymExpr:
+        fields:
+          expr_str:
+            type: str
+          hint:
+            default: None
+            type: Optional[SymExprHint]
+        kind: struct
+      SymExprHint:
+        fields:
+          as_bool:
+            type: bool
+          as_float:
+            type: float
+          as_int:
+            type: int
+        kind: union
+      SymFloat:
+        fields:
+          as_expr:
+            type: SymExpr
+          as_float:
+            type: float
+        kind: union
+      SymFloatArgument:
+        fields:
+          as_float:
+            type: float
+          as_name:
+            type: str
+        kind: union
+      SymInt:
+        fields:
+          as_expr:
+            type: SymExpr
+          as_int:
+            type: int
+        kind: union
+      SymIntArgument:
+        fields:
+          as_int:
+            type: int
+          as_name:
+            type: str
+        kind: union
+      TREESPEC_VERSION: 1
+      TensorArgument:
+        fields:
+          name:
+            type: str
+        kind: struct
+      TensorMeta:
+        fields:
+          device:
+            type: Device
+          dtype:
+            type: ScalarType
+          layout:
+            type: Layout
+          requires_grad:
+            type: bool
+          sizes:
+            type: List[SymInt]
+          storage_offset:
+            type: SymInt
+          strides:
+            type: List[SymInt]
+        kind: struct
+      TokenArgument:
+        fields:
+          name:
+            type: str
+        kind: struct
+      UserInputMutationSpec:
+        fields:
+          arg:
+            type: TensorArgument
+          user_input_name:
+            type: str
+        kind: struct
+      UserInputSpec:
+        fields:
+          arg:
+            type: Argument
+        kind: struct
+      UserOutputSpec:
+        fields:
+          arg:
+            type: Argument
+        kind: struct
+    path: .venv/lib/python3.11/site-packages/torch/_export/serde/schema.yaml
+  consolidated_config/models_consolidated.json:
+    category: models
+    config:
+      .venv/lib/python3.11/site-packages/flower/static/swagger.json:
+        category: models
+        config:
+          definitions: {}
+          info:
+            description: The flower API spec
+            title: Flower
+            version: 1.0.0-dev
+          parameters:
+            taskid:
+              description: The task id
+              in: path
+              name: taskid
+              required: true
+              type: string
+            taskname:
+              description: The task name
+              in: path
+              name: taskname
+              required: true
+              type: string
+            workername:
+              description: The worker name
+              in: path
+              name: workername
+              required: true
+              type: string
+          paths:
+            /api/queues/length:
+              get:
+                description: Get queue lengths
+                responses:
+                  '200':
+                    description: result
+            /api/task/abort/{taskid}:
+              post:
+                description: Abort a running task
+                parameters:
+                - $ref: '#/parameters/taskid'
+                responses:
+                  '200':
+                    description: result
+            /api/task/apply/{taskname}:
+              post:
+                description: Execute a task by name and wait results
+                parameters:
+                - $ref: '#/parameters/taskname'
+                - description: the dictionary of args and kwargs
+                  in: body
+                  name: args
+                  schema:
+                    properties:
+                      args:
+                        type: array
+                      kwargs:
+                        type: object
+                    type: object
+                responses:
+                  '200':
+                    description: result
+            /api/task/async-apply/{taskname}:
+              post:
+                description: Execute a task
+                parameters:
+                - $ref: '#/parameters/taskname'
+                - description: the dictionary of args, kwargs, and apply-async options
+                  in: body
+                  name: args
+                  schema:
+                    properties:
+                      args:
+                        type: array
+                      kwargs:
+                        type: object
+                      options:
+                        type: object
+                    type: object
+                responses:
+                  '200':
+                    description: result
+            /api/task/info/{taskid}:
+              get:
+                description: Get task info
+                parameters:
+                - $ref: '#/parameters/taskid'
+                responses:
+                  '200':
+                    description: result
+            /api/task/rate-limit/{taskname}:
+              post:
+                description: Change rate limit for a task
+                parameters:
+                - $ref: '#/parameters/taskname'
+                - description: the name of a worker
+                  in: query
+                  name: workername
+                  required: true
+                  type: string
+                - description: the rate limit to apply
+                  format: int32
+                  in: query
+                  name: rateLimit
+                  required: true
+                  type: integer
+                responses:
+                  '200':
+                    description: result
+            /api/task/result/{taskid}:
+              get:
+                description: Get a task result
+                parameters:
+                - $ref: '#/parameters/taskid'
+                - description: how long to wait, in seconds, before the operation
+                    times out
+                  format: int32
+                  in: query
+                  name: timeout
+                  required: false
+                  type: integer
+                responses:
+                  '200':
+                    description: result
+            /api/task/revoke/{taskid}:
+              post:
+                description: Revoke a task
+                parameters:
+                - $ref: '#/parameters/taskid'
+                - description: terminate the task if it is running
+                  in: query
+                  name: terminate
+                  required: false
+                  type: boolean
+                responses:
+                  '200':
+                    description: result
+            /api/task/send-task/{taskname}:
+              post:
+                description: Execute a task by name (Doesn't require a task source)
+                parameters:
+                - $ref: '#/parameters/taskname'
+                - description: the dictionary of args, and kwargs
+                  in: body
+                  name: args
+                  schema:
+                    properties:
+                      args:
+                        type: array
+                      kwargs:
+                        type: object
+                    type: object
+                responses:
+                  '200':
+                    description: result
+            /api/task/timeout/{taskname}:
+              post:
+                description: Change soft and hard time limits for a task
+                parameters:
+                - $ref: '#/parameters/taskname'
+                - description: the name of a worker
+                  in: query
+                  name: workername
+                  required: true
+                  type: string
+                - description: the soft timeout limit
+                  format: int32
+                  in: query
+                  name: soft
+                  required: false
+                  type: integer
+                - description: the hard timeout limit
+                  format: int32
+                  in: query
+                  name: hard
+                  required: false
+                  type: integer
+                responses:
+                  '200':
+                    description: result
+            /api/task/types:
+              get:
+                description: List (seen) task types
+                responses:
+                  '200':
+                    description: result
+            /api/tasks:
+              get:
+                description: List tasks
+                parameters:
+                - description: the maximum number of tasks
+                  format: int32
+                  in: query
+                  name: limit
+                  required: false
+                  type: integer
+                - description: filter task by workername
+                  in: query
+                  name: workername
+                  required: false
+                  type: string
+                - description: filter task by taskname
+                  in: query
+                  name: taskname
+                  required: false
+                  type: string
+                - description: filter task by state
+                  in: query
+                  name: state
+                  required: false
+                  type: string
+                responses:
+                  '200':
+                    description: Result
+            /api/worker/pool/autoscale/{workername}:
+              post:
+                description: Autoscale a worker pool
+                parameters:
+                - $ref: '#/parameters/workername'
+                - description: minimum number of pool processes
+                  format: int32
+                  in: query
+                  name: min
+                  required: false
+                  type: integer
+                - description: maximum number of pool processes
+                  format: int32
+                  in: query
+                  name: max
+                  required: false
+                  type: integer
+                responses:
+                  '200':
+                    description: result
+            /api/worker/pool/grow/{workername}:
+              post:
+                description: Grow a worker's pool
+                parameters:
+                - $ref: '#/parameters/workername'
+                - description: number of pool processes to grow, default is 1
+                  format: int32
+                  in: query
+                  name: n
+                  required: false
+                  type: integer
+                responses:
+                  '200':
+                    description: result
+            /api/worker/pool/restart/{workername}:
+              post:
+                description: Restart a worker's pool
+                parameters:
+                - $ref: '#/parameters/workername'
+                responses:
+                  '200':
+                    description: result
+            /api/worker/pool/shrink/{workername}:
+              post:
+                description: Shrink a worker's pool
+                parameters:
+                - $ref: '#/parameters/workername'
+                - description: number of pool processes to shrink, default is 1
+                  format: int32
+                  in: query
+                  name: n
+                  required: false
+                  type: integer
+                responses:
+                  '200':
+                    description: result
+            /api/worker/queue/add-consumer/{workername}:
+              post:
+                description: Start consuming from a queue
+                parameters:
+                - $ref: '#/parameters/workername'
+                - description: the name of a queue
+                  in: query
+                  name: queue
+                  required: true
+                  type: string
+                responses:
+                  '200':
+                    description: result
+            /api/worker/queue/cancel-consumer/{workername}:
+              post:
+                description: Stop consuming from a queue
+                parameters:
+                - $ref: '#/parameters/workername'
+                - description: the name of a queue
+                  in: query
+                  name: queue
+                  required: true
+                  type: string
+                responses:
+                  '200':
+                    description: result
+            /api/worker/shutdown/{workername}:
+              post:
+                description: Shut down a worker
+                parameters:
+                - $ref: '#/parameters/workername'
+                responses:
+                  '200':
+                    description: result
+            /api/workers:
+              get:
+                description: List workers
+                parameters:
+                - description: run inspect to get updated list of workers
+                  in: query
+                  name: refresh
+                  required: false
+                  type: boolean
+                - description: get info for workername
+                  in: query
+                  name: workername
+                  required: false
+                  type: string
+                - description: only get worker status info
+                  in: query
+                  name: status
+                  type: boolean
+                responses:
+                  '200':
+                    description: result
+          swagger: '2.0'
+          tags: []
+        path: .venv/lib/python3.11/site-packages/flower/static/swagger.json
+      .venv/lib/python3.11/site-packages/torch/_export/serde/schema.yaml:
+        category: models
+        config:
+          AOTInductorModelPickleData:
+            fields:
+              aot_inductor_model_is_cpu:
+                default: None
+                type: Optional[bool]
+              floating_point_input_dtype:
+                default: None
+                type: Optional[int]
+              floating_point_output_dtype:
+                default: None
+                type: Optional[int]
+              input_names:
+                type: List[str]
+              library_basename:
+                type: str
+              output_names:
+                type: List[str]
+            kind: struct
+          Argument:
+            fields:
+              as_bool:
+                type: bool
+              as_bools:
+                type: List[bool]
+              as_custom_obj:
+                type: CustomObjArgument
+              as_device:
+                type: Device
+              as_float:
+                type: float
+              as_floats:
+                type: List[float]
+              as_graph:
+                type: GraphArgument
+              as_int:
+                type: int
+              as_ints:
+                type: List[int]
+              as_layout:
+                type: Layout
+              as_memory_format:
+                type: MemoryFormat
+              as_none:
+                type: bool
+              as_operator:
+                type: str
+              as_optional_tensors:
+                type: List[OptionalTensorArgument]
+              as_scalar_type:
+                type: ScalarType
+              as_string:
+                type: str
+              as_strings:
+                type: List[str]
+              as_sym_bool:
+                type: SymBoolArgument
+              as_sym_bools:
+                type: List[SymBoolArgument]
+              as_sym_float:
+                type: SymFloatArgument
+              as_sym_floats:
+                type: List[SymFloatArgument]
+              as_sym_int:
+                type: SymIntArgument
+              as_sym_ints:
+                type: List[SymIntArgument]
+              as_tensor:
+                type: TensorArgument
+              as_tensors:
+                type: List[TensorArgument]
+            kind: union
+          ArgumentKind:
+            fields:
+              KEYWORD: 2
+              POSITIONAL: 1
+              UNKNOWN: 0
+            kind: enum
+          BufferMutationSpec:
+            fields:
+              arg:
+                type: TensorArgument
+              buffer_name:
+                type: str
+            kind: struct
+          ConstantValue:
+            fields:
+              as_bool:
+                type: bool
+              as_float:
+                type: float
+              as_int:
+                type: int
+              as_none:
+                type: bool
+              as_string:
+                type: str
+            kind: union
+          CustomObjArgument:
+            fields:
+              class_fqn:
+                type: str
+              name:
+                type: str
+            kind: struct
+          Device:
+            fields:
+              index:
+                default: None
+                type: Optional[int]
+              type:
+                type: str
+            kind: struct
+          ExportedProgram:
+            fields:
+              graph_module:
+                type: GraphModule
+              opset_version:
+                type: Dict[str, int]
+              range_constraints:
+                type: Dict[str, RangeConstraint]
+              schema_version:
+                type: SchemaVersion
+              torch_version:
+                default: <=2.4
+                type: str
+              verifiers:
+                default: '[]'
+                type: List[str]
+            kind: struct
+          ExternKernelNode:
+            fields:
+              name:
+                type: str
+              node:
+                type: Node
+            kind: struct
+          ExternKernelNodes:
+            fields:
+              nodes:
+                type: List[ExternKernelNode]
+            kind: struct
+          GradientToParameterSpec:
+            fields:
+              arg:
+                type: TensorArgument
+              parameter_name:
+                type: str
+            kind: struct
+          GradientToUserInputSpec:
+            fields:
+              arg:
+                type: TensorArgument
+              user_input_name:
+                type: str
+            kind: struct
+          Graph:
+            fields:
+              custom_obj_values:
+                default: '{}'
+                type: Dict[str, CustomObjArgument]
+              inputs:
+                type: List[Argument]
+              is_single_tensor_return:
+                default: 'False'
+                type: bool
+              nodes:
+                type: List[Node]
+              outputs:
+                type: List[Argument]
+              sym_bool_values:
+                type: Dict[str, SymBool]
+              sym_float_values:
+                default: '{}'
+                type: Dict[str, SymFloat]
+              sym_int_values:
+                type: Dict[str, SymInt]
+              tensor_values:
+                type: Dict[str, TensorMeta]
+            kind: struct
+          GraphArgument:
+            fields:
+              graph:
+                type: Graph
+              name:
+                type: str
+            kind: struct
+          GraphModule:
+            fields:
+              graph:
+                type: Graph
+              metadata:
+                default: '{}'
+                type: Dict[str, str]
+              module_call_graph:
+                type: List[ModuleCallEntry]
+              signature:
+                type: GraphSignature
+              treespec_namedtuple_fields:
+                default: '{}'
+                type: Dict[str, NamedTupleDef]
+            kind: struct
+          GraphSignature:
+            fields:
+              input_specs:
+                type: List[InputSpec]
+              output_specs:
+                type: List[OutputSpec]
+            kind: struct
+          InputSpec:
+            fields:
+              buffer:
+                type: InputToBufferSpec
+              constant_input:
+                type: InputToConstantInputSpec
+              custom_obj:
+                type: InputToCustomObjSpec
+              parameter:
+                type: InputToParameterSpec
+              tensor_constant:
+                type: InputToTensorConstantSpec
+              token:
+                type: InputTokenSpec
+              user_input:
+                type: UserInputSpec
+            kind: union
+          InputToBufferSpec:
+            fields:
+              arg:
+                type: TensorArgument
+              buffer_name:
+                type: str
+              persistent:
+                type: bool
+            kind: struct
+          InputToConstantInputSpec:
+            fields:
+              name:
+                type: str
+              value:
+                type: ConstantValue
+            kind: struct
+          InputToCustomObjSpec:
+            fields:
+              arg:
+                type: CustomObjArgument
+              custom_obj_name:
+                type: str
+            kind: struct
+          InputToParameterSpec:
+            fields:
+              arg:
+                type: TensorArgument
+              parameter_name:
+                type: str
+            kind: struct
+          InputToTensorConstantSpec:
+            fields:
+              arg:
+                type: TensorArgument
+              tensor_constant_name:
+                type: str
+            kind: struct
+          InputTokenSpec:
+            fields:
+              arg:
+                type: TokenArgument
+            kind: struct
+          Layout:
+            fields:
+              SparseBsc: 5
+              SparseBsr: 4
+              SparseCoo: 1
+              SparseCsc: 3
+              SparseCsr: 2
+              Strided: 7
+              Unknown: 0
+              _mkldnn: 6
+            kind: enum
+          LossOutputSpec:
+            fields:
+              arg:
+                type: TensorArgument
+            kind: struct
+          MemoryFormat:
+            fields:
+              ChannelsLast: 2
+              ChannelsLast3d: 3
+              ContiguousFormat: 1
+              PreserveFormat: 4
+              Unknown: 0
+            kind: enum
+          Model:
+            fields:
+              constantPaths:
+                type: Dict[str, str]
+              delegates:
+                type: Dict[str, Program]
+              deviceAllocationMap:
+                type: Dict[str, str]
+              name:
+                type: str
+              program:
+                type: Program
+              tensorPaths:
+                type: Dict[str, str]
+            kind: struct
+          ModuleCallEntry:
+            fields:
+              fqn:
+                type: str
+              signature:
+                default: None
+                type: Optional[ModuleCallSignature]
+            kind: struct
+          ModuleCallSignature:
+            fields:
+              forward_arg_names:
+                default: None
+                type: Optional[List[str]]
+              in_spec:
+                type: str
+              inputs:
+                type: List[Argument]
+              out_spec:
+                type: str
+              outputs:
+                type: List[Argument]
+            kind: struct
+          NamedArgument:
+            fields:
+              arg:
+                type: Argument
+              kind:
+                default: None
+                type: Optional[ArgumentKind]
+              name:
+                type: str
+            kind: struct
+          NamedTupleDef:
+            fields:
+              field_names:
+                type: List[str]
+            kind: struct
+          Node:
+            fields:
+              inputs:
+                type: List[NamedArgument]
+              is_hop_single_tensor_return:
+                default: None
+                type: Optional[bool]
+              metadata:
+                type: Dict[str, str]
+              outputs:
+                type: List[Argument]
+              target:
+                type: str
+            kind: struct
+          OptionalTensorArgument:
+            fields:
+              as_none:
+                type: bool
+              as_tensor:
+                type: TensorArgument
+            kind: union
+          OutputSpec:
+            fields:
+              buffer_mutation:
+                type: BufferMutationSpec
+              gradient_to_parameter:
+                type: GradientToParameterSpec
+              gradient_to_user_input:
+                type: GradientToUserInputSpec
+              loss_output:
+                type: LossOutputSpec
+              token:
+                type: OutputTokenSpec
+              user_input_mutation:
+                type: UserInputMutationSpec
+              user_output:
+                type: UserOutputSpec
+            kind: union
+          OutputTokenSpec:
+            fields:
+              arg:
+                type: TokenArgument
+            kind: struct
+          Program:
+            fields:
+              methods:
+                type: Dict[str, ExportedProgram]
+            kind: struct
+          RangeConstraint:
+            fields:
+              max_val:
+                type: Optional[int]
+              min_val:
+                type: Optional[int]
+            kind: struct
+          SCHEMA_VERSION:
+          - 8
+          - 7
+          ScalarType:
+            fields:
+              BFLOAT16: 13
+              BOOL: 12
+              BYTE: 1
+              CHAR: 2
+              COMPLEXDOUBLE: 11
+              COMPLEXFLOAT: 10
+              COMPLEXHALF: 9
+              DOUBLE: 8
+              FLOAT: 7
+              FLOAT8E4M3FN: 29
+              FLOAT8E5M2: 30
+              HALF: 6
+              INT: 4
+              LONG: 5
+              SHORT: 3
+              UINT16: 28
+              UNKNOWN: 0
+            kind: enum
+          SchemaVersion:
+            fields:
+              major:
+                type: int
+              minor:
+                type: int
+            kind: struct
+          SymBool:
+            fields:
+              as_bool:
+                type: bool
+              as_expr:
+                type: SymExpr
+            kind: union
+          SymBoolArgument:
+            fields:
+              as_bool:
+                type: bool
+              as_name:
+                type: str
+            kind: union
+          SymExpr:
+            fields:
+              expr_str:
+                type: str
+              hint:
+                default: None
+                type: Optional[SymExprHint]
+            kind: struct
+          SymExprHint:
+            fields:
+              as_bool:
+                type: bool
+              as_float:
+                type: float
+              as_int:
+                type: int
+            kind: union
+          SymFloat:
+            fields:
+              as_expr:
+                type: SymExpr
+              as_float:
+                type: float
+            kind: union
+          SymFloatArgument:
+            fields:
+              as_float:
+                type: float
+              as_name:
+                type: str
+            kind: union
+          SymInt:
+            fields:
+              as_expr:
+                type: SymExpr
+              as_int:
+                type: int
+            kind: union
+          SymIntArgument:
+            fields:
+              as_int:
+                type: int
+              as_name:
+                type: str
+            kind: union
+          TREESPEC_VERSION: 1
+          TensorArgument:
+            fields:
+              name:
+                type: str
+            kind: struct
+          TensorMeta:
+            fields:
+              device:
+                type: Device
+              dtype:
+                type: ScalarType
+              layout:
+                type: Layout
+              requires_grad:
+                type: bool
+              sizes:
+                type: List[SymInt]
+              storage_offset:
+                type: SymInt
+              strides:
+                type: List[SymInt]
+            kind: struct
+          TokenArgument:
+            fields:
+              name:
+                type: str
+            kind: struct
+          UserInputMutationSpec:
+            fields:
+              arg:
+                type: TensorArgument
+              user_input_name:
+                type: str
+            kind: struct
+          UserInputSpec:
+            fields:
+              arg:
+                type: Argument
+            kind: struct
+          UserOutputSpec:
+            fields:
+              arg:
+                type: Argument
+            kind: struct
+        path: .venv/lib/python3.11/site-packages/torch/_export/serde/schema.yaml
+    path: consolidated_config/models_consolidated.json

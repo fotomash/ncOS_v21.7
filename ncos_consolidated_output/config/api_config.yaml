@@ -1,0 +1,649 @@
+api_consolidated:
+  config/ncos_config.yaml:
+    category: api
+    config:
+      api:
+        api_key_required: false
+        cors_origins:
+        - http://localhost:8501
+        host: 0.0.0.0
+        port: 8000
+      dashboard:
+        auto_refresh: true
+        host: localhost
+        port: 8501
+        refresh_interval: 5
+      data:
+        archive_old_journals: true
+        backup_interval: 3600
+        journal_path: logs/trade_journal.jsonl
+        max_journal_size: 104857600
+      orchestration:
+        default_timeout: 300
+        max_parallel_agents: 5
+        retry_policy:
+          backoff_factor: 2
+          max_backoff: 60
+          max_retries: 3
+      system:
+        environment: production
+        log_level: INFO
+        name: ncOS
+        version: 21.7.0
+      voice:
+        enabled: true
+        engine: whisper
+        language: en
+        model: base
+        wake_word: ncos
+    path: config/ncos_config.yaml
+  config/system_config.yaml:
+    category: api
+    config:
+      api:
+        host: 0.0.0.0
+        port: 8001
+      dashboard:
+        port: 8501
+        refresh_interval: 5
+        theme: dark
+      journal:
+        backup_path: logs/backup/
+        max_size_mb: 100
+        path: logs/trade_journal.jsonl
+      voice:
+        confidence_threshold: 0.7
+        default_symbol: XAUUSD
+        default_timeframe: H4
+      zbar:
+        auto_analyze: false
+        config_path: config/zbar_config.yaml
+    path: config/system_config.yaml
+  consolidated_config/api_consolidated.json:
+    category: api
+    config:
+      config/ncos_config.yaml:
+        category: api
+        config:
+          api:
+            api_key_required: false
+            cors_origins:
+            - http://localhost:8501
+            host: 0.0.0.0
+            port: 8000
+          dashboard:
+            auto_refresh: true
+            host: localhost
+            port: 8501
+            refresh_interval: 5
+          data:
+            archive_old_journals: true
+            backup_interval: 3600
+            journal_path: logs/trade_journal.jsonl
+            max_journal_size: 104857600
+          orchestration:
+            default_timeout: 300
+            max_parallel_agents: 5
+            retry_policy:
+              backoff_factor: 2
+              max_backoff: 60
+              max_retries: 3
+          system:
+            environment: production
+            log_level: INFO
+            name: ncOS
+            version: 21.7.0
+          voice:
+            enabled: true
+            engine: whisper
+            language: en
+            model: base
+            wake_word: ncos
+        path: config/ncos_config.yaml
+      config/system_config.yaml:
+        category: api
+        config:
+          api:
+            host: 0.0.0.0
+            port: 8001
+          dashboard:
+            port: 8501
+            refresh_interval: 5
+            theme: dark
+          journal:
+            backup_path: logs/backup/
+            max_size_mb: 100
+            path: logs/trade_journal.jsonl
+          voice:
+            confidence_threshold: 0.7
+            default_symbol: XAUUSD
+            default_timeframe: H4
+          zbar:
+            auto_analyze: false
+            config_path: config/zbar_config.yaml
+        path: config/system_config.yaml
+      ncos_journal/config.json:
+        category: api
+        config:
+          api:
+            host: 0.0.0.0
+            port: 8000
+          dashboard:
+            port: 8501
+          journal:
+            data_dir: data
+            default_format: jsonl
+            formats:
+            - csv
+            - jsonl
+            - parquet
+        path: ncos_journal/config.json
+      ncos_journal/config/default.yaml:
+        category: api
+        config:
+          api:
+            host: localhost
+            port: 8000
+          dashboard:
+            port: 8501
+          journal:
+            base_path: ./data/journals
+            rotation:
+              enabled: true
+              retention_days: 90
+              size_mb: 100
+            writers:
+            - csv
+            - jsonl
+          zbar:
+            lookback_periods: 20
+            min_confidence: 0.7
+        path: ncos_journal/config/default.yaml
+      ncos_plugin/ncos_ai_plugin.json:
+        category: api
+        config:
+          api:
+            type: openapi
+            url: https://emerging-tiger-fair.ngrok-free.app/openapi.json
+          auth:
+            type: none
+          contact_email: support@ncos.dev
+          description_for_human: Fetch real-time market data (stocks, crypto, forex).
+          description_for_model: Fetch live market data for stocks, crypto, and forex.
+          legal_info_url: http://ncos.dev/legal
+          logo_url: https://ncos.onrender.com/logo.png
+          name_for_human: NCOS Live Market Data
+          name_for_model: ncos_market_data_fetcher
+          schema_version: v1
+          servers:
+          - url: https://emerging-tiger-fair.ngrok-free.app/openapi.json
+        path: ncos_plugin/ncos_ai_plugin.json
+      ncos_plugin/ncos_openapi.json:
+        category: api
+        config:
+          info:
+            description: Provides live market data for stocks, crypto, and forex,
+              powered by the NCOS system.
+            title: NCOS Live Market Data API
+            version: 21.7.2
+          openapi: 3.0.0
+          paths:
+            /crypto/quote:
+              get:
+                operationId: getCryptoQuote
+                parameters:
+                - in: query
+                  name: symbol
+                  required: true
+                  schema:
+                    type: string
+                responses:
+                  '200':
+                    content:
+                      application/json:
+                        schema:
+                          type: object
+                    description: Crypto data
+                summary: Get a real-time cryptocurrency price
+            /forex/quote:
+              get:
+                operationId: getForexQuote
+                parameters:
+                - in: query
+                  name: pair
+                  required: true
+                  schema:
+                    type: string
+                responses:
+                  '200':
+                    content:
+                      application/json:
+                        schema:
+                          type: object
+                    description: Forex data
+                summary: Get a real-time forex exchange rate
+            /stock/quote:
+              get:
+                operationId: getStockQuote
+                parameters:
+                - in: query
+                  name: ticker
+                  required: true
+                  schema:
+                    type: string
+                responses:
+                  '200':
+                    content:
+                      application/json:
+                        schema:
+                          type: object
+                    description: Stock data
+                summary: Get a real-time stock quote
+        path: ncos_plugin/ncos_openapi.json
+    path: consolidated_config/api_consolidated.json
+  ncos_journal/config.json:
+    category: api
+    config:
+      api:
+        host: 0.0.0.0
+        port: 8000
+      dashboard:
+        port: 8501
+      journal:
+        data_dir: data
+        default_format: jsonl
+        formats:
+        - csv
+        - jsonl
+        - parquet
+    path: ncos_journal/config.json
+  ncos_journal/config/default.yaml:
+    category: api
+    config:
+      api:
+        host: localhost
+        port: 8000
+      dashboard:
+        port: 8501
+      journal:
+        base_path: ./data/journals
+        rotation:
+          enabled: true
+          retention_days: 90
+          size_mb: 100
+        writers:
+        - csv
+        - jsonl
+      zbar:
+        lookback_periods: 20
+        min_confidence: 0.7
+    path: ncos_journal/config/default.yaml
+  ncos_plugin/ncos_ai_plugin.json:
+    category: api
+    config:
+      api:
+        type: openapi
+        url: https://emerging-tiger-fair.ngrok-free.app/openapi.json
+      auth:
+        type: none
+      contact_email: support@ncos.dev
+      description_for_human: Fetch real-time market data (stocks, crypto, forex).
+      description_for_model: Fetch live market data for stocks, crypto, and forex.
+      legal_info_url: http://ncos.dev/legal
+      logo_url: https://ncos.onrender.com/logo.png
+      name_for_human: NCOS Live Market Data
+      name_for_model: ncos_market_data_fetcher
+      schema_version: v1
+      servers:
+      - url: https://emerging-tiger-fair.ngrok-free.app/openapi.json
+    path: ncos_plugin/ncos_ai_plugin.json
+  ncos_plugin/ncos_openapi.json:
+    category: api
+    config:
+      info:
+        description: Provides live market data for stocks, crypto, and forex, powered
+          by the NCOS system.
+        title: NCOS Live Market Data API
+        version: 21.7.2
+      openapi: 3.0.0
+      paths:
+        /crypto/quote:
+          get:
+            operationId: getCryptoQuote
+            parameters:
+            - in: query
+              name: symbol
+              required: true
+              schema:
+                type: string
+            responses:
+              '200':
+                content:
+                  application/json:
+                    schema:
+                      type: object
+                description: Crypto data
+            summary: Get a real-time cryptocurrency price
+        /forex/quote:
+          get:
+            operationId: getForexQuote
+            parameters:
+            - in: query
+              name: pair
+              required: true
+              schema:
+                type: string
+            responses:
+              '200':
+                content:
+                  application/json:
+                    schema:
+                      type: object
+                description: Forex data
+            summary: Get a real-time forex exchange rate
+        /stock/quote:
+          get:
+            operationId: getStockQuote
+            parameters:
+            - in: query
+              name: ticker
+              required: true
+              schema:
+                type: string
+            responses:
+              '200':
+                content:
+                  application/json:
+                    schema:
+                      type: object
+                description: Stock data
+            summary: Get a real-time stock quote
+    path: ncos_plugin/ncos_openapi.json
+ncos_openapi:
+  info:
+    description: Provides live market data for stocks, crypto, and forex, powered
+      by the NCOS system.
+    title: NCOS Live Market Data API
+    version: 21.7.2
+  openapi: 3.0.0
+  paths:
+    /crypto/quote:
+      get:
+        operationId: getCryptoQuote
+        parameters:
+        - in: query
+          name: symbol
+          required: true
+          schema:
+            type: string
+        responses:
+          '200':
+            content:
+              application/json:
+                schema:
+                  type: object
+            description: Crypto data
+        summary: Get a real-time cryptocurrency price
+    /forex/quote:
+      get:
+        operationId: getForexQuote
+        parameters:
+        - in: query
+          name: pair
+          required: true
+          schema:
+            type: string
+        responses:
+          '200':
+            content:
+              application/json:
+                schema:
+                  type: object
+            description: Forex data
+        summary: Get a real-time forex exchange rate
+    /stock/quote:
+      get:
+        operationId: getStockQuote
+        parameters:
+        - in: query
+          name: ticker
+          required: true
+          schema:
+            type: string
+        responses:
+          '200':
+            content:
+              application/json:
+                schema:
+                  type: object
+            description: Stock data
+        summary: Get a real-time stock quote
+smcrouter_config:
+  settings: {}
+trigger_routes:
+  triggers:
+    analysis:
+      manipulation:
+        spread_detected:
+          actions:
+          - log_manipulation
+          - adjust_risk
+          - notify_trader
+          agents:
+          - MarketDataCaptain
+          - PortfolioManager
+          - RiskManager
+          conditions:
+          - spread_threshold_exceeded
+          - volume_spike
+          description: Spread manipulation detection
+      signal:
+        zbar_complete:
+          actions:
+          - validate_signal
+          - calculate_position
+          - prepare_order
+          agents:
+          - SignalProcessor
+          - PortfolioManager
+          conditions:
+          - signal_confidence_met
+          - risk_approved
+          description: ZBAR analysis completed
+    data:
+      tick:
+        xauusd:
+          actions:
+          - update_market_data
+          - check_signals
+          - update_spread
+          agents:
+          - MarketDataCaptain
+          - SignalProcessor
+          conditions:
+          - market_open
+          - valid_spread
+          description: XAUUSD tick data trigger
+    session:
+      trading:
+        end:
+          actions:
+          - save_state
+          - generate_report
+          - cleanup
+          agents:
+          - CoreSystemAgent
+          - PortfolioManager
+          conditions:
+          - market_close
+          - positions_flat
+          description: Trading session ended
+        start:
+          actions:
+          - initialize_agents
+          - load_market_state
+          - start_monitoring
+          agents:
+          - CoreSystemAgent
+          - MarketDataCaptain
+          - PortfolioManager
+          conditions:
+          - market_open
+          - system_ready
+          description: Trading session started
+    strategy:
+      divergence:
+        detected:
+          actions:
+          - analyze_divergence
+          - generate_signal
+          - assess_risk
+          agents:
+          - SignalProcessor
+          - RiskManager
+          conditions:
+          - divergence_confirmed
+          - volume_support
+          description: Divergence strategy trigger
+    voice:
+      command:
+        received:
+          actions:
+          - parse_command
+          - route_to_handler
+          - generate_response
+          agents:
+          - VoiceCommandAgent
+          conditions:
+          - wake_word_detected
+          - command_valid
+          description: Voice command received
+  version: 21.7.0
+trigger_routes_strategies:
+  strategy_triggers:
+    accumulation_signal:
+      actions:
+      - analyze_phase_transition
+      - update_market_context
+      conditions:
+      - accumulation_phase
+      - volume_confirmation
+      priority: 7
+      route_to:
+      - wyckoff_phase_cycle
+    engineered_liquidity_signal:
+      actions:
+      - analyze_trap_setup
+      - validate_risk_parameters
+      conditions:
+      - smc_signal_strength > 0.7
+      - liquidity_pool_identified
+      priority: 8
+      route_to:
+      - smc_liquidity_trap
+    liquidity_trap_detected:
+      actions:
+      - analyze_trap_setup
+      - validate_risk_parameters
+      conditions:
+      - smc_signal_strength > 0.7
+      - liquidity_pool_identified
+      priority: 8
+      route_to:
+      - smc_liquidity_trap
+      - risk_guardian
+    micro_wyckoff_signal:
+      actions:
+      - evaluate_tick_event
+      - prepare_precision_entry
+      conditions:
+      - tick_score > threshold
+      - micro_structure_valid
+      priority: 10
+      route_to:
+      - micro_wyckoff_event
+    orderflow_anomaly_detected:
+      actions:
+      - analyze_anomaly
+      - adjust_risk_parameters
+      conditions:
+      - volume_anomaly
+      - price_action_divergence
+      priority: 6
+      route_to:
+      - orderflow_anomaly
+      - risk_guardian
+    phase_transition_detected:
+      actions:
+      - analyze_phase_transition
+      - update_market_context
+      conditions:
+      - wyckoff_phase_change
+      - volume_confirmation
+      priority: 7
+      route_to:
+      - wyckoff_phase_cycle
+      - session_state_manager
+    reentry_opportunity:
+      actions:
+      - evaluate_reentry
+      - update_risk_profile
+      conditions:
+      - position_available
+      - reentry_criteria_met
+      priority: 5
+      route_to:
+      - protection_reentry
+    session_open:
+      actions:
+      - scan_for_sweeps
+      - prepare_reversal_setups
+      conditions:
+      - session_start_time
+      - volatility_threshold_met
+      priority: 9
+      route_to:
+      - session_sweep_reversal
+      - master_orchestrator
+    stop_loss_hit:
+      actions:
+      - evaluate_reentry
+      - update_risk_profile
+      conditions:
+      - position_closed
+      - reentry_criteria_met
+      priority: 5
+      route_to:
+      - protection_reentry
+      - risk_guardian
+    sweep_reversal_signal:
+      actions:
+      - analyze_reversal_signal
+      - confirm_session_state
+      conditions:
+      - sweep_detected
+      - session_context_valid
+      priority: 9
+      route_to:
+      - session_sweep_reversal
+    tick_event_scored:
+      actions:
+      - evaluate_tick_event
+      - prepare_precision_entry
+      conditions:
+      - tick_score > threshold
+      - micro_structure_valid
+      priority: 10
+      route_to:
+      - micro_wyckoff_event
+      - entry_executor_smc
+    volume_spike:
+      actions:
+      - analyze_volume_spike
+      - adjust_risk_parameters
+      conditions:
+      - high_volume_detected
+      - orderbook_imbalance
+      priority: 6
+      route_to:
+      - orderflow_anomaly

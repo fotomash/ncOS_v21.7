@@ -1,0 +1,9 @@
+Configuration Consolidation Errors
+==================================================
+
+Error loading config/trigger_routes.toml: Found invalid character in key name: ':'. Try quoting the key name. (line 1 column 18 char 17)
+
+Error loading .venv/lib/python3.11/site-packages/torchgen/packaged/ATen/templates/RegisterDispatchDefinitions.ini: File contains no section headers.
+file: PosixPath('.venv/lib/python3.11/site-packages/torchgen/packaged/ATen/templates/RegisterDispatchDefinitions.ini'), line: 1
+'${ns_prologue}\n'
+

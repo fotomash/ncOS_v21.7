@@ -1,0 +1,4 @@
+"""
+Exceptions module for core
+"""
+
