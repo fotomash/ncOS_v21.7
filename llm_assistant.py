@@ -11,6 +11,7 @@ import logging
 from datetime import datetime
 from typing import Dict, List, Optional, Any
 from dataclasses import dataclass
+from production.production_config import load_production_config
 from pathlib import Path
 
 import uvicorn
@@ -28,6 +29,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Configuration
+config = load_production_config(os.environ.get("NCOS_CONFIG_PATH"))
 @dataclass
 class LLMConfig:
     """LLM Assistant Configuration"""
@@ -36,7 +38,7 @@ class LLMConfig:
     temperature: float = 0.7
     max_tokens: int = 2000
     system_prompt_file: str = "llm_system_prompt.txt"
-    journal_api_url: str = "http://localhost:8000"
+    journal_api_url: str = config.api.journal
     
     def load_system_prompt(self) -> str:
         """Load system prompt from file"""

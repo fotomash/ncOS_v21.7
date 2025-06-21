@@ -4,6 +4,7 @@ Manages ISPTS pipeline execution with comprehensive logging
 """
 
 import logging
+import os
 import queue
 import threading
 from concurrent.futures import ThreadPoolExecutor
@@ -12,11 +13,13 @@ from typing import Dict, Any, List, Optional
 import json
 import requests
 from dataclasses import dataclass
+from production.production_config import load_production_config
 
 logger = logging.getLogger(__name__)
 
 # Journal API endpoint
-JOURNAL_API = "http://localhost:8000"
+CONFIG = load_production_config(os.environ.get("NCOS_CONFIG_PATH"))
+JOURNAL_API = CONFIG.api.journal
 
 @dataclass
 class PipelineStage:

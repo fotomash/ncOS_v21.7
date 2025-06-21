@@ -5,14 +5,17 @@ Generates comprehensive trade narratives and insights
 
 import json
 import logging
+import os
 from datetime import datetime
 from typing import Dict, Any, List, Optional
 import requests
+from production.production_config import load_production_config
 
 logger = logging.getLogger(__name__)
 
 # Journal API endpoint
-JOURNAL_API = "http://localhost:8000"
+CONFIG = load_production_config(os.environ.get("NCOS_CONFIG_PATH"))
+JOURNAL_API = CONFIG.api.journal
 
 class EnhancedTradeNarrativeLLM:
     """Enhanced narrative generator with journal integration"""

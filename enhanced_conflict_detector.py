@@ -4,16 +4,19 @@ Identifies and logs potential conflicts between active trades and new setups
 """
 
 import logging
+import os
 from datetime import datetime
 from typing import Dict, Any, Optional, List
 from pydantic import BaseModel
 import json
 import requests
+from production.production_config import load_production_config
 
 logger = logging.getLogger(__name__)
 
 # Journal API endpoint
-JOURNAL_API = "http://localhost:8000"
+CONFIG = load_production_config(os.environ.get("NCOS_CONFIG_PATH"))
+JOURNAL_API = CONFIG.api.journal
 
 class ConflictDetectionConfig(BaseModel):
     """Configuration for conflict detection"""

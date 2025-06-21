@@ -24,7 +24,8 @@ NCOS (Neural Computation Operating System) v21 is a production-ready financial d
 - Comprehensive risk management
 
 ## Environment Variables
-Ensure the following variables are set before starting the system:
+See [ENVIRONMENT_VARIABLES.md](ENVIRONMENT_VARIABLES.md) for the full list of
+supported variables and defaults. At a minimum you should provide API keys:
 ```
 export FINNHUB_API_KEY="<your-finnhub-key>"
 export TWELVE_DATA_API_KEY="<your-twelvedata-key>"

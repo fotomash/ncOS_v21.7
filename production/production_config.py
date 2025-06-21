@@ -37,6 +37,12 @@ class AgentConfig(BaseModel):
     max_retries: int = Field(default=3, ge=0, le=10)
     memory_limit_mb: Optional[int] = Field(default=None, ge=100, le=10000)
 
+class APIConfig(BaseModel):
+    """External service endpoints"""
+    journal: str = Field(default="http://localhost:8000")
+    dashboard: str = Field(default="http://localhost:8001")
+    llm: str = Field(default="http://localhost:8002")
+
 class ProductionConfig(BaseModel):
     """Main production configuration"""
     environment: str = Field(default="production", pattern="^(development|staging|production)$")
@@ -45,6 +51,7 @@ class ProductionConfig(BaseModel):
     logging: LoggingConfig = Field(default_factory=LoggingConfig)
     circuit_breaker: CircuitBreakerConfig = Field(default_factory=CircuitBreakerConfig)
     monitoring: MonitoringConfig = Field(default_factory=MonitoringConfig)
+    api: APIConfig = Field(default_factory=APIConfig)
     agents: Dict[str, AgentConfig] = Field(default_factory=dict)
 
     # Feature flags
@@ -84,7 +91,10 @@ def load_production_config(config_path: Optional[str] = None) -> ProductionConfi
         "NCOS_LOG_LEVEL": "logging.level",
         "NCOS_LOG_DIR": "logging.directory",
         "NCOS_MONITORING_PORT": "monitoring.port",
-        "NCOS_CIRCUIT_BREAKER_ENABLED": "features.circuit_breakers"
+        "NCOS_CIRCUIT_BREAKER_ENABLED": "features.circuit_breakers",
+        "NCOS_JOURNAL_API_URL": "api.journal",
+        "NCOS_DASHBOARD_API_URL": "api.dashboard",
+        "NCOS_LLM_API_URL": "api.llm",
     }
 
     for env_var, config_path in env_mappings.items():
@@ -133,6 +143,11 @@ monitoring:
   port: 9090
   retention_minutes: 60
   collection_interval: 10
+
+api:
+  journal: http://localhost:8000
+  dashboard: http://localhost:8001
+  llm: http://localhost:8002
 
 # Agent-specific configurations
 agents:

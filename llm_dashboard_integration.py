@@ -4,14 +4,18 @@ import requests
 import asyncio
 import websockets
 import json
+import os
 from datetime import datetime
+from production.production_config import load_production_config
+
+config = load_production_config(os.environ.get("NCOS_CONFIG_PATH"))
 
 class LLMIntegration:
     """Integration with ncOS LLM Assistant"""
-    
-    def __init__(self, llm_url="http://localhost:8002"):
-        self.llm_url = llm_url
-        self.ws_url = llm_url.replace("http", "ws") + "/ws"
+
+    def __init__(self, llm_url: str | None = None):
+        self.llm_url = llm_url or config.api.llm
+        self.ws_url = self.llm_url.replace("http", "ws") + "/ws"
         
     def chat(self, message: str, include_context: bool = True) -> dict:
         """Send message to LLM assistant"""
