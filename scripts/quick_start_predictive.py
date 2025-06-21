@@ -51,22 +51,21 @@ def main():
 
     if response.lower() == 'y':
         if run_command(
-            "python predictive_backtest.py",
+            "python -m backtesting.engine data/price_data.csv",
             "Step 2: Running Backtest Analysis"
         ):
             print("\n✅ Backtest complete!")
             print("\n📁 Generated files:")
-            print("  - predictive_backtest_results.json")
-            print("  - predictive_trades_log.csv")
-            print("  - predictive_backtest_analysis.png")
+            print("  - backtest_results.json")
+            print("  - trades.csv")
 
     # Step 3: Next steps
     print("\n" + "="*60)
     print("🎯 NEXT STEPS")
     print("="*60)
     print("\n1. Review Results:")
-    print("   - Check predictive_backtest_results.json for metrics")
-    print("   - View predictive_backtest_analysis.png for charts")
+    print("   - Check backtest_results.json for metrics")
+    print("   - Inspect trades.csv for executed trades")
 
     print("\n2. Launch Dashboard (requires streamlit):")
     print("   streamlit run grade_analysis_dashboard.py")
