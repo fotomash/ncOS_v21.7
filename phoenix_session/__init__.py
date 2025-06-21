@@ -1,1 +1,1 @@
-"""Phoenix Session Module"""
+"""Phoenix Session - High-Performance NCOS Module"""
