@@ -1,15 +1,17 @@
 import sys
-from unittest.mock import MagicMock, patch
 import unittest
+from unittest.mock import MagicMock, patch
 
-# Stub dependencies not available in the test environment
-sys.modules['spacy'] = MagicMock()
-sys.modules['yaml'] = MagicMock()
-sys.modules['requests'] = MagicMock()
-sys.modules['numpy'] = MagicMock()
-sys.modules['pandas'] = MagicMock()
-sys.modules['zbar_agent'] = MagicMock()
-sys.modules['zbar_logger'] = MagicMock()
+import pytest
+
+
+@pytest.fixture(autouse=True)
+def _mock_deps(monkeypatch):
+    monkeypatch.setitem(sys.modules, "spacy", MagicMock())
+    monkeypatch.setitem(sys.modules, "yaml", MagicMock())
+    monkeypatch.setitem(sys.modules, "requests", MagicMock())
+    monkeypatch.setitem(sys.modules, "zbar_agent", MagicMock())
+    monkeypatch.setitem(sys.modules, "zbar_logger", MagicMock())
 
 from ncOS.menu_voice_integration import VoiceEnabledMenuSystem
 
