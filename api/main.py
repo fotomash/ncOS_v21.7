@@ -12,6 +12,7 @@ import yaml
 from pathlib import Path
 import logging
 from datetime import datetime
+import os
 
 # Import routers
 from voice_api_routes import router as voice_router
@@ -200,7 +201,6 @@ async def shutdown_event():
 
 # Main entry point
 if __name__ == "__main__":
-    import os
 
     # Get host and port from config
     host = config["api"]["host"]
