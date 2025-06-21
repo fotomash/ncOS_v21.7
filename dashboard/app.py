@@ -5,14 +5,17 @@ ncOS Journal Dashboard - Phoenix Edition
 import streamlit as st
 import pandas as pd
 import json
+import os
 import requests
 from datetime import datetime, timedelta
 import plotly.express as px
 import plotly.graph_objects as go
 from typing import List, Dict, Any
+from production.production_config import load_production_config
 
 # Configuration
-API_URL = "http://localhost:8001"
+CONFIG = load_production_config(os.environ.get("NCOS_CONFIG_PATH"))
+API_URL = CONFIG.api.dashboard
 
 # Page config
 st.set_page_config(

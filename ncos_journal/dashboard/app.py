@@ -7,6 +7,7 @@ from datetime import datetime, timedelta
 import plotly.express as px
 import plotly.graph_objects as go
 from pathlib import Path
+from production.production_config import load_production_config
 
 # Page config
 st.set_page_config(
@@ -16,7 +17,8 @@ st.set_page_config(
 )
 
 # API endpoints
-API_URL = "http://localhost:8000"
+CONFIG = load_production_config(os.environ.get("NCOS_CONFIG_PATH"))
+API_URL = CONFIG.api.journal
 ZBAR_LOG_FILE = "/mnt/data/logs/trade_journal.jsonl"
 LOCAL_LOG_FILE = "data/journals/trade_journal.jsonl"
 
