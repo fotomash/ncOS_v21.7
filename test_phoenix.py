@@ -41,6 +41,10 @@ class TestPhoenixIntegration(unittest.TestCase):
         self.assertIsNotNone(self.integration)
         self.assertIsNotNone(self.integration.controller)
         self.assertTrue(self.integration.controller.config.fast_mode)
+        # Verify adapters registered via the controller
+        adapters = set(self.integration.controller.get_registered_adapters())
+        self.assertIn("wyckoff", adapters)
+        self.assertIn("charting", adapters)
         print("✅ Integration initialization test passed")
 
     def test_wyckoff_adapter_analysis(self):
@@ -76,6 +80,15 @@ class TestPhoenixIntegration(unittest.TestCase):
         self.assertIn("cache_stats", stats)
         self.assertEqual(stats["mode"], "optimized")
         print("✅ Performance stats test passed")
+
+    def test_controller_status(self):
+        """Ensure controller status includes adapter information."""
+        status = self.integration.controller.get_status()
+        self.assertIn("phoenix_session", status)
+        self.assertIn("adapters", status)
+        self.assertIn("wyckoff", status["adapters"])
+        self.assertIn("charting", status["adapters"])
+        print("✅ Controller status test passed")
 
     def test_token_optimization(self):
         """Test token optimization"""
@@ -150,6 +163,7 @@ def run_integration_tests():
     suite.addTest(TestPhoenixIntegration('test_chart_adapter_rendering'))
     suite.addTest(TestPhoenixIntegration('test_phoenix_rise'))
     suite.addTest(TestPhoenixIntegration('test_performance_stats'))
+    suite.addTest(TestPhoenixIntegration('test_controller_status'))
     suite.addTest(TestPhoenixIntegration('test_token_optimization'))
 
     # Add full integration test
