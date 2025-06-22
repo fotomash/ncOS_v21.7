@@ -62,3 +62,19 @@ class EnhancedCoreOrchestrator:
         for name, engine in self.engines.items():
             await engine.initialize()
             self.logger.info(f"✓ {name} engine initialized")
+
+    async def _setup_event_handlers(self):
+        """Placeholder for event subscription logic."""
+        return None
+
+    async def _monitor_performance(self):
+        """Placeholder for performance monitoring."""
+        while False:
+            await asyncio.sleep(1)
+
+    def score(self, features: Dict[str, float], context: Optional[Dict[str, Any]] = None):
+        """Expose predictive scoring for external callers."""
+        scorer = self.engines.get('predictive')
+        if scorer is None:
+            raise RuntimeError("Predictive engine not initialized")
+        return scorer.score(features, context)
