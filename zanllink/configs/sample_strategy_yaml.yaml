@@ -1,0 +1,12 @@
+# configs/sample_strategy.yaml
+
+strategy_name: "RSI Oversold Scanner 30T"
+description: "Scan 30-minute bars for RSI oversold events (<30) and log them"
+timeframe: "30T"
+data_source: "zanlink/state/BTCUSD_M1_20250617_to_20250622_bars_30T_enriched.csv"
+condition:
+  indicator: "rsi_14"
+  threshold: 30
+  direction: "below"
+
+output_file: "smc_events_30T.json"

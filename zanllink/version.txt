@@ -1,0 +1,22 @@
+# ZanLink Version Log
+
+## v0.1-alpha-core — Locked on 2025-06-22
+
+### ✅ Core Functionality
+- FastAPI service with `/events/{tf}` and `/macro/latest`
+- Structured JSON schemas for signals and macro context
+- Macro updater cron container
+- GPT/agent-compatible tagging system
+
+### 🧠 Intelligence
+- Strategy-driven micro signals (`strategy`, `tags`, `pair`)
+- Lightweight macro feed (`flags`, `bias`, `relevant_to`)
+- Real-time dashboards via Streamlit UI
+
+### ⚙️ Infrastructure
+- Docker + docker-compose for orchestration
+- `.env` for key configuration
+- `launch.sh` unified runner script
+- `test_api_endpoints.py` validation suite
+
+Next milestone: `v0.2-memory` (vector memory + GPT integration)

@@ -1,0 +1,22 @@
+# docker-compose.yml
+
+version: '3.9'
+
+services:
+  zanlink-api:
+    build: .
+    container_name: zanlink-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./zanlink:/app/zanlink
+    restart: always
+
+  macro-cron:
+    image: python:3.11-slim
+    container_name: macro-cron
+    volumes:
+      - ./zanlink:/app/zanlink
+    working_dir: /app
+    command: ["bash", "-c", "while true; do python zanlink/core/fetch_macro.py; sleep 900; done"]
+    restart: always
