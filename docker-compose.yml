@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  ncos-app:
+    build: .
+    container_name: ncos-app
+    env_file:
+      - .env
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: ncos
+      DB_USER: ncos_user
+      DB_PASSWORD: ncos_pass
+      VECTOR_HOST: vectorstore
+      VECTOR_PORT: 6333
+    ports:
+      - "8008:8008"
+    depends_on:
+      - db
+      - vectorstore
+
+  db:
+    image: postgres:15
+    container_name: ncos-db
+    environment:
+      POSTGRES_DB: ncos
+      POSTGRES_USER: ncos_user
+      POSTGRES_PASSWORD: ncos_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  vectorstore:
+    image: qdrant/qdrant:latest
+    container_name: ncos-vectorstore
+    ports:
+      - "6333:6333"
+    volumes:
+      - vector_data:/qdrant/storage
+
+volumes:
+  db_data:
+  vector_data:
