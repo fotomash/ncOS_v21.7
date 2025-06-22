@@ -1,0 +1,170 @@
+# Trade Journalist Agent Profile
+id: "trade_journalist"
+name: "Trade Journalist"
+description: "Records and analyzes trade execution and performance"
+version: "1.0.0"
+type: "analysis"
+
+capabilities:
+  - name: "record_trade"
+    description: "Records details of a trade execution"
+    parameters:
+      symbol:
+        type: "string"
+        description: "Symbol traded"
+        required: true
+      direction:
+        type: "string"
+        description: "Trade direction (buy/sell)"
+        required: true
+      entry_price:
+        type: "number"
+        description: "Entry price"
+        required: true
+      stop_loss:
+        type: "number"
+        description: "Stop loss price"
+        required: true
+      take_profit:
+        type: "number"
+        description: "Take profit price"
+        required: true
+      position_size:
+        type: "number"
+        description: "Position size"
+        required: true
+      execution_time:
+        type: "string"
+        description: "Execution timestamp"
+        required: true
+      strategy:
+        type: "string"
+        description: "Strategy used"
+        required: true
+    output_schema:
+      type: "object"
+      properties:
+        trade_id:
+          type: "string"
+          description: "Unique trade identifier"
+        recorded:
+          type: "boolean"
+          description: "Whether the trade was recorded successfully"
+        journal_entry:
+          type: "object"
+          description: "Complete journal entry"
+  
+  - name: "generate_performance_report"
+    description: "Generates a performance report for a time period"
+    parameters:
+      start_date:
+        type: "string"
+        description: "Start date for the report"
+        required: true
+      end_date:
+        type: "string"
+        description: "End date for the report"
+        required: true
+      include_metrics:
+        type: "array"
+        description: "Metrics to include in the report"
+        required: false
+    output_schema:
+      type: "object"
+      properties:
+        total_trades:
+          type: "integer"
+          description: "Total number of trades"
+        win_rate:
+          type: "number"
+          description: "Win rate percentage"
+        profit_factor:
+          type: "number"
+          description: "Profit factor"
+        average_rrr:
+          type: "number"
+          description: "Average risk-reward ratio"
+        net_profit:
+          type: "number"
+          description: "Net profit/loss"
+        drawdown:
+          type: "number"
+          description: "Maximum drawdown"
+        best_strategy:
+          type: "string"
+          description: "Best performing strategy"
+        improvement_suggestions:
+          type: "array"
+          description: "Suggestions for improvement"
+
+triggers:
+  - name: "trade_executed"
+    type: "system"
+    priority: 80
+    condition: "event.type == 'trade_executed'"
+  
+  - name: "trade_closed"
+    type: "system"
+    priority: 80
+    condition: "event.type == 'trade_closed'"
+  
+  - name: "report_request"
+    type: "request"
+    priority: 70
+    condition: "true"
+  
+  - name: "daily_summary"
+    type: "schedule"
+    priority: 60
+    condition: "time == '23:59 UTC'"
+
+memory_access:
+  - namespace: "trading_signals.journal"
+    tier: "L2_vector"
+    access_type: "read_write"
+    ttl_seconds: 2592000  # 30 days
+  
+  - namespace: "system.reports"
+    tier: "L3_persistent"
+    access_type: "read_write"
+    ttl_seconds: null
+
+token_budget: 1500
+timeout_seconds: 45
+max_consecutive_errors: 3
+auto_recovery: true
+dependencies: ["entry_executor"]
+
+config:
+  journal_fields:
+    - "symbol"
+    - "direction"
+    - "entry_price"
+    - "exit_price"
+    - "stop_loss"
+    - "take_profit"
+    - "position_size"
+    - "pnl"
+    - "execution_time"
+    - "exit_time"
+    - "strategy"
+    - "setup_type"
+    - "timeframe"
+    - "notes"
+    - "screenshots"
+  report_types:
+    - "daily"
+    - "weekly"
+    - "monthly"
+    - "custom"
+  metrics:
+    - "win_rate"
+    - "profit_factor"
+    - "average_rrr"
+    - "expectancy"
+    - "sharpe_ratio"
+    - "drawdown"
+  export_formats:
+    - "csv"
+    - "json"
+    - "html"

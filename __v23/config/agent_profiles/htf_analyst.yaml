@@ -1,0 +1,115 @@
+# Higher Timeframe Analyst Agent Profile
+id: "htf_analyst"
+name: "Higher Timeframe Analyst"
+description: "Analyzes higher timeframe structure and validates trading setups"
+version: "1.0.0"
+type: "analysis"
+
+capabilities:
+  - name: "analyze_market_structure"
+    description: "Analyzes market structure across multiple timeframes"
+    parameters:
+      symbol:
+        type: "string"
+        description: "Symbol to analyze"
+        required: true
+      timeframes:
+        type: "array"
+        description: "List of timeframes to analyze (e.g., H1, H4, D1)"
+        required: true
+    output_schema:
+      type: "object"
+      properties:
+        trend_direction:
+          type: "string"
+          description: "Trend direction across timeframes"
+        structure_points:
+          type: "array"
+          description: "Key structure points (highs, lows, breaks)"
+        confluence_zones:
+          type: "array"
+          description: "Areas with multi-timeframe confluence"
+  
+  - name: "validate_poi"
+    description: "Validates points of interest for trading opportunities"
+    parameters:
+      symbol:
+        type: "string"
+        description: "Symbol to analyze"
+        required: true
+      poi:
+        type: "object"
+        description: "Point of interest to validate"
+        required: true
+      timeframe:
+        type: "string"
+        description: "Timeframe for validation"
+        required: true
+    output_schema:
+      type: "object"
+      properties:
+        valid:
+          type: "boolean"
+          description: "Whether the POI is valid"
+        strength:
+          type: "integer"
+          description: "Strength score (1-10)"
+        reasons:
+          type: "array"
+          description: "Reasons for the validation result"
+        alternative_pois:
+          type: "array"
+          description: "Alternative POIs if the original is invalid"
+
+triggers:
+  - name: "new_htf_candle"
+    type: "market"
+    priority: 85
+    condition: "event.timeframe in ['H4', 'D1', 'W1']"
+  
+  - name: "structure_break"
+    type: "market"
+    priority: 90
+    condition: "event.type == 'structure_break'"
+  
+  - name: "validate_setup_request"
+    type: "request"
+    priority: 80
+    condition: "true"
+
+memory_access:
+  - namespace: "market_data.structure"
+    tier: "L2_vector"
+    access_type: "read_write"
+    ttl_seconds: 86400
+  
+  - namespace: "trading_signals.poi"
+    tier: "L2_vector"
+    access_type: "read_write"
+    ttl_seconds: 3600
+
+token_budget: 1500
+timeout_seconds: 45
+max_consecutive_errors: 3
+auto_recovery: true
+dependencies: ["macro_analyser"]
+
+config:
+  structure_types:
+    - "swing_high"
+    - "swing_low"
+    - "higher_high"
+    - "lower_low"
+    - "equal_high"
+    - "equal_low"
+    - "orderblock"
+    - "breaker"
+    - "fvg"
+  validation_methods:
+    - "price_action"
+    - "volume_analysis"
+    - "time_analysis"
+  scoring_weights:
+    timeframe_alignment: 0.4
+    volume_confirmation: 0.3
+    price_action: 0.3

@@ -1,0 +1,66 @@
+# NCOS v11.5 Phoenix-Mesh Main Configuration
+system_name: "NCOS Phoenix-Mesh"
+system_version: "11.5.0"
+log_level: "INFO"
+
+# Paths
+agent_profiles_dir: "config/agent_profiles"
+workspace_dir: "./workspace"
+
+# Token budget configuration
+token_budget:
+  total: 8000
+  reserve_percentage: 0.2
+  warning_threshold: 0.8
+  critical_threshold: 0.95
+
+# Memory configuration
+memory:
+  vector_db_type: "faiss"
+  connection_string: null
+  vector_dimension: 768
+  similarity_threshold: 0.75
+  max_items_per_query: 50
+  cache_size_mb: 100
+  snapshot_dir: "./snapshots"
+  snapshot_interval_seconds: 300
+  namespaces:
+    market_data:
+      description: "Market data and analysis"
+      ttl_seconds: 86400
+    trading_signals:
+      description: "Trading signals and strategies"
+      ttl_seconds: 3600
+    system:
+      description: "System state and configuration"
+      ttl_seconds: null
+
+# Snapshot configuration
+snapshot_interval_seconds: 300
+
+# Agents
+agents:
+  - id: "macro_analyser"
+    profile_path: "macro_analyser.yaml"
+    enabled: true
+    
+  - id: "htf_analyst"
+    profile_path: "htf_analyst.yaml"
+    enabled: true
+    
+  - id: "risk_manager"
+    profile_path: "risk_manager.yaml"
+    enabled: true
+    
+  - id: "entry_executor"
+    profile_path: "entry_executor.yaml"
+    enabled: true
+    
+  - id: "trade_journalist"
+    profile_path: "trade_journalist.yaml"
+    enabled: true
+
+# Advanced settings
+debug_mode: false
+hot_reload: false
+performance_monitoring: true
