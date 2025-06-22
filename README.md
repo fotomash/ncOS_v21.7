@@ -37,22 +37,8 @@ NCOS v21 Phoenix Mesh is a high-performance, agent-based architecture for financ
 
    # Quick analysis
    result = await phoenix.analyze(data)
-print(f"Phase: {result['phase']}")
-```
-
-### Docker Compose Setup
-
-1. Copy the environment template:
-   ```bash
-   cp .env.template .env
+   print(f"Phase: {result['phase']}")
    ```
-
-2. Start all services:
-   ```bash
-   docker-compose up --build
-   ```
-
-The API will be available at <http://localhost:8008>.
 
 ### Architecture
 
