@@ -224,7 +224,7 @@ kubectl apply -f k8s/service.yaml
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the NCOS v21 Phoenix Mesh Proprietary License - see the LICENSE file for details.
 
 ## 🆘 Support
 
