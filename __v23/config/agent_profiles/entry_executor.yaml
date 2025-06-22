@@ -1,17 +1,21 @@
-# Risk Manager Agent Profile
-id: "risk_manager"
-name: "Risk Manager"
-description: "Manages position sizing and risk parameters for trades"
+# Entry Executor Agent Profile
+id: "entry_executor"
+name: "Entry Executor"
+description: "Executes trade entries and manages order placement"
 version: "1.0.0"
-type: "strategy"
+type: "execution"
 
 capabilities:
-  - name: "calculate_position_size"
-    description: "Calculates optimal position size based on risk parameters"
+  - name: "submit_order"
+    description: "Submits a trade order with risk parameters"
     parameters:
       symbol:
         type: "string"
         description: "Symbol to trade"
+        required: true
+      direction:
+        type: "string"
+        description: "Trade direction (buy/sell)"
         required: true
       entry_price:
         type: "number"
@@ -21,109 +25,84 @@ capabilities:
         type: "number"
         description: "Stop loss price"
         required: true
-      account_balance:
+      take_profit:
         type: "number"
-        description: "Current account balance"
+        description: "Take profit price"
         required: true
-      risk_percentage:
+      position_size:
         type: "number"
-        description: "Risk percentage (default: 1%)"
+        description: "Position size"
+        required: true
+    output_schema:
+      type: "object"
+      properties:
+        order_id:
+          type: "string"
+          description: "Unique order identifier"
+        submitted:
+          type: "boolean"
+          description: "Whether the order was submitted"
+
+  - name: "cancel_order"
+    description: "Cancels an existing order"
+    parameters:
+      order_id:
+        type: "string"
+        description: "Identifier of the order"
+        required: true
+    output_schema:
+      type: "object"
+      properties:
+        cancelled:
+          type: "boolean"
+          description: "Whether the order was cancelled"
+
+  - name: "adjust_order"
+    description: "Adjusts stop loss or take profit of an order"
+    parameters:
+      order_id:
+        type: "string"
+        description: "Identifier of the order"
+        required: true
+      stop_loss:
+        type: "number"
+        description: "New stop loss price"
+        required: false
+      take_profit:
+        type: "number"
+        description: "New take profit price"
         required: false
     output_schema:
       type: "object"
       properties:
-        position_size:
-          type: "number"
-          description: "Calculated position size"
-        risk_amount:
-          type: "number"
-          description: "Amount risked in account currency"
-        risk_reward_ratio:
-          type: "number"
-          description: "Risk-reward ratio"
-        max_position_size:
-          type: "number"
-          description: "Maximum position size based on margin"
-  
-  - name: "optimize_stop_loss"
-    description: "Optimizes stop loss placement based on market volatility"
-    parameters:
-      symbol:
-        type: "string"
-        description: "Symbol to trade"
-        required: true
-      entry_price:
-        type: "number"
-        description: "Entry price"
-        required: true
-      initial_stop:
-        type: "number"
-        description: "Initial stop loss price"
-        required: true
-      timeframe:
-        type: "string"
-        description: "Timeframe for analysis"
-        required: true
-    output_schema:
-      type: "object"
-      properties:
-        optimized_stop:
-          type: "number"
-          description: "Optimized stop loss price"
-        buffer_pips:
-          type: "number"
-          description: "Buffer added in pips"
-        volatility_measure:
-          type: "number"
-          description: "Current volatility measure"
-        confidence:
-          type: "number"
-          description: "Confidence in the stop loss (1-10)"
+        updated:
+          type: "boolean"
+          description: "Whether the order was updated"
 
 triggers:
-  - name: "new_trade_signal"
+  - name: "precision_entry"
     type: "system"
-    priority: 95
-    condition: "event.type == 'trade_signal'"
-  
-  - name: "risk_check_request"
-    type: "request"
     priority: 90
+    condition: "event.type == 'entry_signal'"
+
+  - name: "order_update_request"
+    type: "request"
+    priority: 80
     condition: "true"
-  
-  - name: "volatility_spike"
-    type: "market"
-    priority: 95
-    condition: "event.volatility_change > 0.5"
 
 memory_access:
-  - namespace: "trading_signals.risk"
-    tier: "L1_session"
+  - namespace: "execution.orders"
+    tier: "L2_vector"
     access_type: "read_write"
-    ttl_seconds: 3600
-  
-  - namespace: "system.account"
-    tier: "L1_session"
-    access_type: "read"
-    ttl_seconds: null
+    ttl_seconds: 604800
 
-token_budget: 1000
+token_budget: 800
 timeout_seconds: 30
 max_consecutive_errors: 3
 auto_recovery: true
-dependencies: ["htf_analyst"]
+dependencies: ["risk_manager"]
 
 config:
-  default_risk_percentage: 1.0
-  max_risk_percentage: 2.0
-  min_risk_reward_ratio: 1.5
-  preferred_risk_reward_ratio: 2.0
-  volatility_multipliers:
-    low: 1.0
-    medium: 1.5
-    high: 2.0
-  max_exposure_percentage: 5.0
-  fallback_strategies:
-    - "reduce_position_size"
-    - "widen_stop_loss"
-    - "cancel_trade"
+  default_sl_buffer: 0.0
+  default_tp_buffer: 0.0
+  max_orders_per_day: 10
