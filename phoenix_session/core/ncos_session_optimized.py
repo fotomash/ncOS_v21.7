@@ -122,7 +122,10 @@ class PhoenixSessionController:
 
     def __init__(self, config: Optional[OptimizedConfig] = None):
         # Initialize with optimized config
-        self.config = config or OptimizedConfig()
+        if isinstance(config, dict):
+            self.config = OptimizedConfig(**config)
+        else:
+            self.config = config or OptimizedConfig()
 
         # Lazy loading of engines
         self._wyckoff = None
@@ -140,6 +143,9 @@ class PhoenixSessionController:
         self.executor = ThreadPoolExecutor(max_workers=self.config.max_workers)
 
         print("Phoenix Session Controller initialized in FAST mode")
+
+        # Adapter registry
+        self.adapters = {}
 
     @property
     def wyckoff(self):
@@ -259,14 +265,43 @@ class PhoenixSessionController:
 
         # Generate chart
         chart_html = self.charter.create_chart(df, chart_type)
+        output_file = Path("chart_output.html")
+        output_file.write_text(chart_html)
         self.state["charts"] += 1
 
-        return chart_html
+        return str(output_file)
 
     def batch_analyze(self, file_list: List[str]) -> List[Dict[str, Any]]:
         """Parallel batch analysis"""
         futures = [self.executor.submit(self.analyze, f) for f in file_list]
         return [f.result() for f in futures]
+
+    def connect_adapter(self, name: str, adapter: Any) -> None:
+        """Register an adapter for later use."""
+        self.adapters[name] = adapter
+
+    def get_performance_stats(self) -> Dict[str, Any]:
+        """Return lightweight performance metrics."""
+        cache_stats = {
+            "wyckoff_cache": len(self.wyckoff._cache) if self._wyckoff else 0
+        }
+        return {
+            "mode": "optimized",
+            "fast_mode": self.config.fast_mode,
+            "cache_stats": cache_stats,
+        }
+
+    def optimize_tokens(self, text: str, budget: int) -> str:
+        """Compress or truncate text to fit within the token budget."""
+        char_budget = budget * 4  # Rough 4 chars per token
+        if len(text) <= char_budget:
+            return text
+
+        marker = "[optimized]"
+        keep_len = (char_budget - len(marker)) // 2
+        head = text[:keep_len]
+        tail = text[-keep_len:]
+        return f"{head}{marker}{tail}"
 
     def get_status(self) -> Dict[str, Any]:
         """Quick status check"""

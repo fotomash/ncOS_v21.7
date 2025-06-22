@@ -8,6 +8,7 @@ from .adapters.chart_adapter import ChartAdapter
 class PhoenixIntegration:
     def __init__(self, ncos_config: Optional[Dict[str, Any]] = None):
         self.phoenix = NCOSPhoenixController(ncos_config)
+        self.controller = self.phoenix
 
         # In a real scenario, you'd pass the actual legacy engines here
         self.wyckoff_adapter = WyckoffAdapter(self.phoenix, legacy_wyckoff_engine=None)
