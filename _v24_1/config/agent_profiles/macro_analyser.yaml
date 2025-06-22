@@ -1,0 +1,104 @@
+# Macroeconomic Analyser Agent Profile
+id: "macro_analyser"
+name: "Macroeconomic Analyser"
+description: "Analyses macroeconomic factors and market context to provide bias and sentiment"
+version: "1.0.0"
+type: "analysis"
+
+capabilities:
+  - name: "analyze_market_context"
+    description: "Analyses overall market context and provides macroeconomic bias"
+    parameters:
+      timeframe:
+        type: "string"
+        description: "Timeframe for analysis (e.g., D1, W1)"
+        required: true
+      symbols:
+        type: "array"
+        description: "List of symbols to analyze"
+        required: true
+    output_schema:
+      type: "object"
+      properties:
+        market_phase:
+          type: "string"
+          description: "Current market phase (e.g., accumulation, distribution, markup, markdown)"
+        bias:
+          type: "string"
+          description: "Overall market bias (bullish, bearish, neutral)"
+        key_levels:
+          type: "array"
+          description: "Key price levels to watch"
+        sentiment:
+          type: "string"
+          description: "Market sentiment (risk-on, risk-off, mixed)"
+  
+  - name: "correlate_asset_movements"
+    description: "Identifies correlations between different assets"
+    parameters:
+      primary_symbol:
+        type: "string"
+        description: "Primary symbol to analyze"
+        required: true
+      correlation_symbols:
+        type: "array"
+        description: "Symbols to correlate with the primary symbol"
+        required: true
+      timeframe:
+        type: "string"
+        description: "Timeframe for correlation analysis"
+        required: true
+    output_schema:
+      type: "object"
+      properties:
+        correlations:
+          type: "array"
+          description: "Array of correlation data"
+        leading_indicators:
+          type: "array"
+          description: "Symbols that lead the primary symbol"
+        lagging_indicators:
+          type: "array"
+          description: "Symbols that lag behind the primary symbol"
+
+triggers:
+  - name: "market_open"
+    type: "time"
+    priority: 90
+    condition: "session_state.market_open == true"
+  
+  - name: "daily_analysis"
+    type: "schedule"
+    priority: 80
+    condition: "time == '00:00 UTC'"
+  
+  - name: "news_event"
+    type: "event"
+    priority: 95
+    condition: "session_state.news_impact >= 'high'"
+
+memory_access:
+  - namespace: "market_data.macro"
+    tier: "L2_vector"
+    access_type: "read_write"
+    ttl_seconds: 86400
+  
+  - namespace: "system.market_phase"
+    tier: "L1_session"
+    access_type: "read_write"
+    ttl_seconds: null
+
+token_budget: 2000
+timeout_seconds: 60
+max_consecutive_errors: 3
+auto_recovery: true
+dependencies: []
+
+config:
+  use_external_data: true
+  data_sources:
+    - "economic_calendar"
+    - "central_bank_statements"
+    - "market_news"
+  analysis_depth: "comprehensive"
+  correlation_threshold: 0.7

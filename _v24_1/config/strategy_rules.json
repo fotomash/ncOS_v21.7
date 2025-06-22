@@ -1,0 +1,34 @@
+{
+  "Inv": [
+    {
+      "source": "structure",
+      "metric": "choch_detected",
+      "condition": "equals",
+      "value": true
+    }
+  ],
+  "MAZ2": [
+    {
+      "source": "smc",
+      "metric": "fvg_quality",
+      "condition": ">=",
+      "value": 0.7
+    }
+  ],
+  "TMC": [
+    {
+      "source": "structure",
+      "metric": "bos_detected",
+      "condition": "equals",
+      "value": true
+    }
+  ],
+  "Mentfx": [
+    {
+      "source": "confluence",
+      "metric": "rsi_confluence",
+      "condition": ">=",
+      "value": 0.7
+    }
+  ]
+}

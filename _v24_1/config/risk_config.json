@@ -1,0 +1,7 @@
+{
+  "default_risk": {
+    "account_size": 10000,
+    "risk_percent": 1.0,
+    "tp_rr": 3.0
+  }
+}
