@@ -82,8 +82,11 @@ class TestPhoenixIntegration(unittest.TestCase):
         long_text = "A" * 20000  # 5000 tokens
         optimized = self.integration.controller.optimize_tokens(long_text, budget=1000)
         # Should be roughly 4000 chars for 1000 tokens
-        self.assertLess(len(optimized), 4100)
+        self.assertLessEqual(len(optimized), 4000)
         self.assertIn("[optimized]", optimized)
+
+        short_text = "B" * 100
+        self.assertEqual(self.integration.controller.optimize_tokens(short_text, budget=1000), short_text)
         print("✅ Token optimization test passed")
 
 class TestFullIntegration(unittest.TestCase):

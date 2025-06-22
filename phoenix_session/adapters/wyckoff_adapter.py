@@ -7,15 +7,15 @@ class WyckoffAdapter:
         self.legacy_wyckoff = legacy_wyckoff_engine
         self.config = phoenix_controller.config
 
-    def analyze(self, data, use_legacy=False) -> Dict[str, Any]:
-        """
-        Analyze data using either Phoenix or legacy engine.
-        """
+    async def analyze(self, data, use_legacy=False) -> Dict[str, Any]:
+        """Analyze data using either Phoenix or legacy engine."""
         if self.config.fast_mode and not use_legacy:
-            # Use the high-speed Phoenix engine
-            return self.phoenix.analyze(data)
+            analysis = self.phoenix.analyze(data)
+            return {
+                "phase": analysis.get("wyckoff", {}).get("phase", "Unknown"),
+                "engine": "phoenix_fast",
+            }
         elif self.legacy_wyckoff:
-            # Fallback to the original, deep-analysis engine
             print("Legacy Wyckoff analysis not implemented in this adapter.")
             return {"phase": "Legacy Undetermined", "confidence": 0.0}
         else:
