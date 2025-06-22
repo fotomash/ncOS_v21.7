@@ -8,7 +8,7 @@ __title__ = "NCOS Phoenix Mesh"
 __description__ = "Neural Cognitive Operating System - Complete AI Trading Ecosystem"
 __author__ = "NCOS Team"
 __author_email__ = "team@ncos.ai"
-__license__ = "MIT"
+__license__ = "Proprietary - NCOS v21 Phoenix Mesh"
 __copyright__ = "Copyright 2025 NCOS Team"
 __url__ = "https://github.com/ncos/phoenix-mesh"
 

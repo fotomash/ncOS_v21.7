@@ -3,7 +3,7 @@ name = "ncos-v21"
 version = "0.1.0"
 description = "NCOS v21 Phoenix Mesh"
 authors = ["NCOS Team <ncos@example.com>"]
-license = "MIT"
+license = "Proprietary - NCOS v21 Phoenix Mesh"
 readme = "README.md"
 packages = [{include = "src"}, {include = "phoenix_session"}]
 
